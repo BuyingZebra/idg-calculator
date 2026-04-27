@@ -1,3 +1,6 @@
+/* ========================= */
+/* BASE */
+/* ========================= */
 body {
   font-family: Arial, sans-serif;
   background: #0f172a;
@@ -12,13 +15,13 @@ h1 {
 
 .section {
   margin-bottom: 20px;
-  max-width: 900px;       /* keeps layout readable on large screens */
+  max-width: 900px;
   margin-left: auto;
   margin-right: auto;
 }
 
 /* ========================= */
-/* ROW LAYOUT */
+/* ROW LAYOUT (SHARED) */
 /* ========================= */
 .row {
   display: flex;
@@ -34,8 +37,8 @@ h1 {
 }
 
 .row input {
-  flex: 1.2;              /* input slightly larger than label */
-  min-width: 120px;       /* protects mobile usability */
+  flex: 1.2;
+  min-width: 120px;
   width: 100%;
 
   padding: 12px;
@@ -45,7 +48,7 @@ h1 {
 }
 
 /* ========================= */
-/* BUTTONS */
+/* BUTTONS (SHARED) */
 /* ========================= */
 .button-row {
   display: flex;
@@ -70,7 +73,7 @@ h1 {
 }
 
 /* ========================= */
-/* TABLES */
+/* RESULTS TABLE (B + C) */
 /* ========================= */
 .results-table {
   width: 100%;
@@ -81,19 +84,108 @@ h1 {
 .results-table th,
 .results-table td {
   border: 1px solid #444;
-  padding: 8px;
 }
 
 .results-table th {
   background: #1e293b;
+  padding: 8px;
 }
 
+.results-table td {
+  padding: 4px;
+}
+
+/* totals */
 .total-row {
   background: #334155;
 }
 
 .grand-total {
   background: #475569;
+}
+
+/* inputs inside results tables */
+.results-table input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: none;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* ========================= */
+/* SECTION A - INSPECTION GRID */
+/* ========================= */
+#inspectionTable {
+  table-layout: fixed;
+}
+
+/* grid borders */
+#inspectionTable th,
+#inspectionTable td {
+  border: 1px solid #444;
+}
+
+/* header */
+#inspectionTable th {
+  background: #1e293b;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 6px 4px;
+}
+
+/* alternating rows */
+#inspectionTable tbody tr:nth-child(odd) {
+  background: transparent;
+}
+
+#inspectionTable tbody tr:nth-child(even) {
+  background: #1e293b;
+}
+
+/* body text */
+#inspectionTable tbody td {
+  color: white;
+  font-size: 14px;
+}
+
+/* consistent row height */
+#inspectionTable td {
+  height: 32px;
+  padding: 0;
+}
+
+/* inputs fill cells */
+#inspectionTable td input {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  border: none;
+  box-sizing: border-box;
+
+  text-align: center;
+  font-size: 14px;
+  background: transparent;
+  color: white;
+}
+
+/* ========================= */
+/* HEADER WRAP */
+/* ========================= */
+.th-wrap {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  white-space: normal;
+  word-break: break-word;
+  line-height: 1.1;
 }
 
 /* ========================= */

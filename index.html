@@ -14,10 +14,55 @@
 <!-- ========================= -->
 <!-- INSPECTION DETAIL A -->
 <!-- ========================= -->
-<div class="section">
+<div class="section" id="sectionA">
   <h2>Inspection Detail A.</h2>
 
-  <!-- INPUTS -->
+  <!-- Hailed Weight -->
+  <div class="row">
+    <span>Actual / Hailed Weight (Lbs.)</span>
+    <input id="hailedWeight" type="number">
+  </div>
+
+  <!-- Row Controls -->
+  <div class="button-row">
+    <button onclick="SectionA.addRow()">Add</button>
+    <button class="clear-btn" onclick="SectionA.removeLastRow()">Remove</button>
+  </div>
+
+  <!-- Sample Table -->
+  <table class="results-table" id="inspectionTable">
+    <thead>
+      <tr>
+        <th><div class="th-wrap">Gross Lbs. Graded</div></th>
+        <th><div class="th-wrap">Temp °C</div></th>
+        <th><div class="th-wrap">Premium</div></th>
+        <th><div class="th-wrap">Standard</div></th>
+        <th><div class="th-wrap">Critically Weak</div></th>
+        <th><div class="th-wrap">Soft Shell</div></th>
+        <th><div class="th-wrap">Dead</div></th>
+        <th><div class="th-wrap">&lt; 3.74"</div></th>
+        <th><div class="th-wrap">Barn. / Tubeworm</div></th>
+      </tr>
+    </thead>
+    <tbody id="inspectionBody"></tbody>
+  </table>
+
+  <!-- Populate -->
+  <div class="button-row">
+    <button onclick="populateAll()">Calculate Graded Lbs.</button>
+  </div>
+
+  <!-- Results -->
+  <h3>Dockside Graded - Net Pounds</h3>
+  <div id="samplingResults"></div>
+</div>
+
+<!-- ========================= -->
+<!-- INSPECTION DETAIL B -->
+<!-- ========================= -->
+<div class="section" id="sectionB">
+  <h2>Inspection Detail B.</h2>
+
   <div class="row"><span>Premium</span><input class="cat" data-name="Premium" type="number"></div>
   <div class="row"><span>Standard</span><input class="cat" data-name="Standard" type="number"></div>
 
@@ -25,27 +70,24 @@
   <div class="row"><span>Soft Shell</span><input class="cat" data-name="Soft Shell" type="number"></div>
   <div class="row"><span>Dead</span><input class="cat" data-name="Dead" type="number"></div>
   <div class="row"><span>Less than 3.74"</span><input class="cat" data-name="Undersize" type="number"></div>
-  <div class="row"><span>Barn./Tubeworm</span><input class="cat" data-name="Barnacles" type="number"></div>
+  <div class="row"><span>Barn. / Tubeworm</span><input class="cat" data-name="Barnacles" type="number"></div>
 
-  <!-- SUB-HEADING (moved here) -->
   <h3>Dockside Grading Summary</h3>
 
-  <!-- RESULTS -->
   <div id="results"></div>
 
   <div class="button-row">
-    <button onclick="calculate()">Calculate</button>
+    <button onclick="SectionB.calculate()">Calculate</button>
     <button class="clear-btn" onclick="clearForm()">Clear</button>
   </div>
 </div>
 
 <!-- ========================= -->
-<!-- INSPECTION DETAIL B -->
+<!-- INSPECTION DETAIL C -->
 <!-- ========================= -->
-<div class="section">
-  <h2>Inspection Detail B.</h2>
+<div class="section" id="sectionC">
+  <h2>Inspection Detail C.</h2>
 
-  <!-- INPUTS -->
   <div class="row">
     <span>Gross Pounds Landed</span>
     <input id="grossWeight" type="number">
@@ -61,14 +103,12 @@
     <input id="grossSample" type="number" step="1">
   </div>
 
-  <!-- SUB-HEADING (moved here) -->
   <h3>Landed Pounds Summary</h3>
 
-  <!-- RESULTS -->
   <div id="landedResults"></div>
 
   <div class="button-row">
-    <button onclick="calculateLanded()">Calculate</button>
+    <button onclick="SectionC.calculate()">Calculate</button>
     <button class="clear-btn" onclick="clearLanded()">Clear</button>
   </div>
 </div>
@@ -78,7 +118,7 @@
 <!-- MODAL -->
 <div id="formulaModal" class="modal">
   <div class="modal-content">
-    <span class="close" onclick="closeModal()">×</span>
+    <span class="close" onclick="SectionB.closeModal()">×</span>
     <div id="formulaText"></div>
   </div>
 </div>
