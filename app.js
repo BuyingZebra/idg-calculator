@@ -1,323 +1,239 @@
 /* ========================= */
-/* SECTION A (Inspection Detail A) */
+/* FORMULA LIBRARY (EXPLICIT) */
+/* ========================= */
+
+const FormulaLibrary = {
+
+  percentPremium: {
+    calc: (p, total) => total > 0 ? (p / total) * 100 : 0,
+    display: {
+      title: "% Premium",
+      formula: "A ÷ B × 100",
+      variables: {
+        A: "Premium Weight",
+        B: "Total Net Lbs. Graded"
+      }
+    }
+  },
+
+  percentStandard: {
+    calc: (s, total) => total > 0 ? (s / total) * 100 : 0,
+    display: {
+      title: "% Standard",
+      formula: "A ÷ B × 100",
+      variables: {
+        A: "Standard Weight",
+        B: "Total Net Lbs. Graded"
+      }
+    }
+  },
+
+  percentOther: {
+    calc: (v, total) => total > 0 ? (v / total) * 100 : 0,
+    display: {
+      title: "% of Net Lbs.",
+      formula: "A ÷ B × 100",
+      variables: {
+        A: "Category Weight",
+        B: "Total Net Lbs. Graded"
+      }
+    }
+  },
+
+  sizePremium: {
+    calc: (p, s) => (p + s) > 0 ? (p / (p + s)) * 100 : 0,
+    display: {
+      title: "% Premium by Size",
+      formula: "A ÷ (Premium + Standard) × 100",
+      variables: {
+        A: "Premium Weight"
+      }
+    }
+  },
+
+  sizeStandard: {
+    calc: (p, s) => (p + s) > 0 ? (s / (p + s)) * 100 : 0,
+    display: {
+      title: "% Standard by Size",
+      formula: "A ÷ (Premium + Standard) × 100",
+      variables: {
+        A: "Standard Weight"
+      }
+    }
+  },
+
+  totalNet: {
+    calc: (p, s, cw, ss, d, u, b) => p + s + cw + ss + d + u + b,
+    display: {
+      title: "Total Net Lbs. Graded",
+      formula: "Sum of all category weights",
+      variables: {}
+    }
+  },
+
+  totalReject: {
+    calc: (total, ps) => total - ps,
+    display: {
+      title: "Total Reject",
+      formula: "Total Net - (Premium + Standard)",
+      variables: {}
+    }
+  },
+
+  percentCrab: {
+    calc: (totalNet, grossGraded) =>
+      grossGraded > 0 ? (totalNet / grossGraded) * 100 : 0,
+    display: {
+      title: "Percentage of Crab",
+      formula: "A ÷ B × 100",
+      variables: {
+        A: "Net Lbs. Graded",
+        B: "Gross Lbs. Graded"
+      }
+    }
+  },
+
+  netLanded: {
+    calc: (gross, percent) => Math.round(gross * (percent / 100)),
+    display: {
+      title: "Net Pounds Landed",
+      formula: "A × (B ÷ 100)",
+      variables: {
+        A: "Gross Pounds Landed",
+        B: "% Crab"
+      }
+    }
+  },
+
+  barnacleWeight: {
+    calc: (net, barnPercent) =>
+      Math.round(net * 0.24 * (barnPercent / 100)),
+    display: {
+      title: "Barnacle Weight",
+      formula: "(A × 0.24 × B) ÷ 100",
+      variables: {
+        A: "Net Pounds Landed",
+        B: "Barnacle %"
+      }
+    }
+  },
+
+  netLess: {
+    calc: (net, barn) => net - barn,
+    display: {
+      title: "Net Pounds (Less Barnacles)",
+      formula: "A - B",
+      variables: {
+        A: "Net Pounds Landed",
+        B: "Barnacle Weight"
+      }
+    }
+  },
+
+  avgPan: {
+    calc: (gross, pans) => pans > 0 ? (gross / pans) : 0,
+    display: {
+      title: "Average Weight per Pan",
+      formula: "A ÷ B",
+      variables: {
+        A: "Gross Pounds Landed",
+        B: "Total # of Pans"
+      }
+    }
+  }
+
+};
+
+
+/* ========================= */
+/* GLOBAL STATE */
+/* ========================= */
+
+let gradingData = null;
+
+
+/* ========================= */
+/* MODAL SYSTEM */
+/* ========================= */
+
+function showFormula(key) {
+  const f = FormulaLibrary[key]?.display;
+  if (!f) return;
+
+  let html = `<strong>${f.title}</strong><br><br>${f.formula}<br><br>`;
+
+  for (let v in f.variables) {
+    html += `${v} = ${f.variables[v]}<br>`;
+  }
+
+  document.getElementById("formulaText").innerHTML = html;
+  document.getElementById("formulaModal").style.display = "block";
+}
+
+function closeFormula() {
+  document.getElementById("formulaModal").style.display = "none";
+}
+
+
+/* ========================= */
+/* SECTION A */
 /* ========================= */
 
 const SectionA = {
 
-  /* ------------------------- */
-  /* ROW MANAGEMENT */
-  /* ------------------------- */
-  addRow: function () {
-    const tbody = document.getElementById("inspectionBody");
-
-    const row = document.createElement("tr");
-
-    row.innerHTML = `
-      <td><input type="number" step="0.1"></td>
-      <td><input type="number" step="0.1"></td>
-      <td><input type="number" step="0.1"></td>
-      <td><input type="number" step="0.1"></td>
-      <td><input type="number" step="0.1"></td>
-      <td><input type="number" step="0.1"></td>
-      <td><input type="number" step="0.1"></td>
-      <td><input type="number" step="0.1"></td>
-      <td><input type="number" step="0.1"></td>
-    `;
-
-    tbody.appendChild(row);
+  getCategories() {
+    const inputs = document.querySelectorAll(".cat");
+    let data = {};
+    inputs.forEach(i => data[i.dataset.name] = parseFloat(i.value) || 0);
+    return data;
   },
 
-  removeLastRow: function () {
-    const tbody = document.getElementById("inspectionBody");
+  calculate() {
 
-    if (tbody.rows.length === 0) return;
+    const c = this.getCategories();
 
-    const lastRow = tbody.rows[tbody.rows.length - 1];
-    const inputs = lastRow.querySelectorAll("input");
+    const p = c["Premium"] || 0;
+    const s = c["Standard"] || 0;
+    const cw = c["Critical Weak"] || 0;
+    const ss = c["Soft Shell"] || 0;
+    const d = c["Dead"] || 0;
+    const u = c["Undersize"] || 0;
+    const b = c["Barnacles"] || 0;
 
-    const hasData = Array.from(inputs).some(input => input.value !== "");
+    const total = FormulaLibrary.totalNet.calc(p, s, cw, ss, d, u, b);
 
-    if (hasData) {
-      const confirmDelete = confirm("This row contains data. Are you sure you want to remove it?");
-      if (!confirmDelete) return;
-    }
+    // Individual percentages
+    const pctP = FormulaLibrary.percentPremium.calc(p, total);
+    const pctS = FormulaLibrary.percentStandard.calc(s, total);
+    const pctCW = FormulaLibrary.percentOther.calc(cw, total);
+    const pctSS = FormulaLibrary.percentOther.calc(ss, total);
+    const pctD = FormulaLibrary.percentOther.calc(d, total);
+    const pctU = FormulaLibrary.percentOther.calc(u, total);
+    const pctB = FormulaLibrary.percentOther.calc(b, total);
 
-    tbody.deleteRow(-1);
-  },
+    // Size %
+    const sizeP = FormulaLibrary.sizePremium.calc(p, s);
+    const sizeS = FormulaLibrary.sizeStandard.calc(p, s);
 
-  /* ------------------------- */
-  /* DATA EXTRACTION */
-  /* ------------------------- */
-  getRowElements: function () {
-    return Array.from(document.querySelectorAll("#inspectionBody tr"));
-  },
+    // 🔹 SUMS
+    const percentSum = pctP + pctS + pctCW + pctSS + pctD + pctU + pctB;
 
-  /* ------------------------- */
-  /* CORE CALCULATIONS */
-  /* ------------------------- */
-  calculateTotals: function () {
-    const rows = this.getRowElements();
+    const rejectWeight = cw + ss + d + u + b;
+    const rejectPercent = pctCW + pctSS + pctD + pctU + pctB;
 
-    let totals = {
-      Premium: 0,
-      Standard: 0,
-      "Critical Weak": 0,
-      "Soft Shell": 0,
-      Dead: 0,
-      Undersize: 0,
-      Barnacles: 0
-    };
+    const sizeSum = sizeP + sizeS;
 
-    let totalGross = 0;
-    let tempCount = 0;
-    let tempAbove4 = 0;
+    const rows = [
+      ["Premium", p, pctP, sizeP, "percentPremium", "sizePremium"],
+      ["Standard", s, pctS, sizeS, "percentStandard", "sizeStandard"],
+      ["Critical Weak", cw, pctCW, null, "percentOther"],
+      ["Soft Shell", ss, pctSS, null, "percentOther"],
+      ["Dead", d, pctD, null, "percentOther"],
+      ["Less than 3.74\"", u, pctU, null, "percentOther"],
+      ["Barn. / Tubeworm", b, pctB, null, "percentOther"]
+    ];
 
-    rows.forEach(row => {
-      const inputs = row.querySelectorAll("input");
-
-      const gross = parseFloat(inputs[0].value) || 0;
-      const rawTemp = inputs[1].value;
-      const temp = parseFloat(rawTemp);
-
-      totalGross += gross;
-
-      totals.Premium += parseFloat(inputs[2].value) || 0;
-      totals.Standard += parseFloat(inputs[3].value) || 0;
-      totals["Critical Weak"] += parseFloat(inputs[4].value) || 0;
-      totals["Soft Shell"] += parseFloat(inputs[5].value) || 0;
-      totals.Dead += parseFloat(inputs[6].value) || 0;
-      totals.Undersize += parseFloat(inputs[7].value) || 0;
-      totals.Barnacles += parseFloat(inputs[8].value) || 0;
-
-      /* Temperature logic (FIXED) */
-      if (rawTemp !== "") {
-        tempCount++;
-
-        if (!isNaN(temp) && temp > 4) {
-          tempAbove4++;
-        }
-      }
-    });
-
-    const totalNet =
-      totals.Premium +
-      totals.Standard +
-      totals["Critical Weak"] +
-      totals["Soft Shell"] +
-      totals.Dead +
-      totals.Undersize +
-      totals.Barnacles;
-
-    const premiumStandard = totals.Premium + totals.Standard;
-
-    return {
-      totals,
-      totalGross,
-      totalNet,
-      premiumStandard,
-      tempCount,
-      tempAbove4
-    };
-  },
-
-  /* ------------------------- */
-  /* SAMPLING PLAN */
-  /* ------------------------- */
-  calculateSamplingPlan: function () {
-    const weight = parseFloat(document.getElementById("hailedWeight").value) || 0;
-
-    return weight > 0
-      ? Math.round((weight / 45) * 0.05)
-      : 0;
-  },
-
-  /* ------------------------- */
-  /* RENDER RESULTS */
-  /* ------------------------- */
-  renderResults: function (data) {
-    document.getElementById("samplingResults").innerHTML = `
-      <table class="results-table">
-        <thead>
-          <tr>
-            <th>Category</th>
-            <th>Results</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <span class="info" onclick="SectionB.showFormula('samplingplan')">
-                # Samples from Sampling Plan
-              </span>
-            </td>
-            <td>${data.samples}</td>
-          </tr>
-          <tr>
-            <td># > 4°C</td>
-            <td>${data.tempAbove4}</td>
-          </tr>
-          <tr>
-            <td># Temp</td>
-            <td>${data.tempCount}</td>
-          </tr>
-          <tr>
-            <td>Total Gross Lbs. Graded</td>
-            <td>${data.totalGross.toFixed(1)}</td>
-          </tr>
-          <tr class="total-row">
-            <td><strong>Total Premium & Standard</strong></td>
-            <td><strong>${data.premiumStandard.toFixed(1)}</strong></td>
-          </tr>
-          <tr class="grand-total">
-            <td><strong>Total Net Lbs. Graded</strong></td>
-            <td><strong>${data.totalNet.toFixed(1)}</strong></td>
-          </tr>
-        </tbody>
-      </table>
-    `;
-  },
-
-  /* ------------------------- */
-  /* MAIN PROCESS */
-  /* ------------------------- */
-  process: function () {
-    const calc = this.calculateTotals();
-    const samples = this.calculateSamplingPlan();
-
-    this.renderResults({
-      samples,
-      tempCount: calc.tempCount,
-      tempAbove4: calc.tempAbove4,
-      premiumStandard: calc.premiumStandard,
-      totalNet: calc.totalNet,
-      totalGross: calc.totalGross
-    });
-
-    return {
-      totals: calc.totals,
-      totalGross: calc.totalGross,
-      samples: samples
-    };
-  }
-};
-
-/* ========================= */
-/* SECTION B (Inspection Detail B) */
-/* ========================= */
-
-const SectionB = {
-
-  /* ------------------------- */
-  /* CATEGORY COLLECTION (UNCHANGED) */
-  /* ------------------------- */
-  getCategories: function () {
-    return Array.from(document.querySelectorAll(".cat")).map(input => ({
-      name: input.dataset.name,
-      weight: parseFloat(input.value) || 0
-    }));
-  },
-
-  /* ------------------------- */
-  /* APPLY DATA FROM SECTION A */
-  /* ------------------------- */
-  applyTotals: function (totals) {
-    document.querySelectorAll(".cat").forEach(input => {
-      const key = input.dataset.name;
-      if (totals[key] !== undefined) {
-        input.value = totals[key].toFixed(1);
-      }
-    });
-  },
-
-  /* ------------------------- */
-  /* CALCULATION (UNCHANGED LOGIC) */
-  /* ------------------------- */
-  calculate: function () {
-    const categories = this.getCategories();
-
-    let total = 0;
-    let marketable = 0;
-    let reject = 0;
-    let barnacles = 0;
-
-    categories.forEach(cat => {
-      total += cat.weight;
-
-      if (cat.name === "Premium" || cat.name === "Standard") {
-        marketable += cat.weight;
-      } else {
-        reject += cat.weight;
-      }
-
-      if (cat.name === "Barnacles") {
-        barnacles = cat.weight;
-      }
-    });
-
-    window.totalSample = total;
-    window.barnaclePercent = total > 0 ? (barnacles / total) * 100 : 0;
-
-    this.displayResults(categories, total, marketable, reject, barnacles);
-  },
-
-  /* ------------------------- */
-  /* DISPLAY RESULTS (UNCHANGED) */
-  /* ------------------------- */
-  displayResults: function (results, total, marketable, reject, barnacles) {
-    const container = document.getElementById("results");
-
-    let rows = "";
-    let percentSum = 0;
-
-    let premium = 0;
-    let standard = 0;
-
-    results.forEach(r => {
-      if (r.name === "Premium") premium = r.weight;
-      if (r.name === "Standard") standard = r.weight;
-    });
-
-    const sizeTotal = premium + standard;
-    let sizeSum = 0;
-
-    results.forEach(r => {
-      const pct = total > 0 ? (r.weight / total) * 100 : 0;
-      percentSum += pct;
-
-      let sizeDisplay = "-";
-
-      if (r.name === "Premium" || r.name === "Standard") {
-        const sizePct = sizeTotal > 0 ? (r.weight / sizeTotal) * 100 : 0;
-        sizeSum += sizePct;
-        sizeDisplay = `${sizePct.toFixed(2)}%`;
-      }
-
-      let key = "";
-      if (r.name === "Premium") key = "premium";
-      else if (r.name === "Standard") key = "standard";
-      else if (r.name === "Critical Weak") key = "criticalweak";
-      else if (r.name === "Soft Shell") key = "softshell";
-      else if (r.name === "Dead") key = "dead";
-      else if (r.name === "Undersize") key = "undersize";
-      else if (r.name === "Barnacles") key = "barnacles";
-
-      let displayName = r.name;
-      if (r.name === "Undersize") displayName = 'Less than 3.74"';
-      if (r.name === "Barnacles") displayName = "Barn. / Tubeworm";
-
-      rows += `
-        <tr>
-          <td><span class="info" onclick="SectionB.showFormula('${key}')">${displayName}</span></td>
-          <td>${r.weight.toFixed(1)}</td>
-          <td>${pct.toFixed(2)}%</td>
-          <td>${sizeDisplay}</td>
-        </tr>
-      `;
-    });
-
-    const rejectPercent = total > 0 ? (reject / total) * 100 : 0;
-
-    container.innerHTML = `
+    let html = `
       <table class="results-table">
         <thead>
           <tr>
@@ -328,182 +244,106 @@ const SectionB = {
           </tr>
         </thead>
         <tbody>
-          ${rows}
-          <tr class="total-row">
-            <td><strong><span class="info" onclick="SectionB.showFormula('totalreject')">Total Reject</span></strong></td>
-            <td>${reject.toFixed(1)}</td>
-            <td>${rejectPercent.toFixed(2)}%</td>
-            <td>-</td>
-          </tr>
-          <tr class="grand-total">
-            <td><strong><span class="info" onclick="SectionB.showFormula('grandtotal')">Grand Total (Less Total Reject)</span></strong></td>
-            <td>${total.toFixed(1)}</td>
-            <td>100.00%</td>
-            <td>${sizeSum.toFixed(2)}%</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div style="margin-top:10px; color:#22c55e; font-weight:bold;">
-        ✔ Total % = ${percentSum.toFixed(2)}%
-      </div>
-
-      <div style="color:#22c55e; font-weight:bold;">
-        ✔ Size % = ${sizeSum.toFixed(2)}%
-      </div>
     `;
-  },
 
-  /* ------------------------- */
-  /* FORMULAS (RESTORED + COMPLETE) */
-  /* ------------------------- */
-  formulas: {
-    premium: [
-      "% of Net Lbs.\n\nA ÷ B × 100\n\nA = Net Lbs. Graded (Premium)\nB = Total Net Lbs. Graded (All Categories)",
-      "% by Size\n\nA ÷ B × 100\n\nA = Net Lbs. Graded (Premium)\nB = Total Net Lbs. Graded (Premium + Standard)"
-    ],
-    standard: [
-      "% of Net Lbs.\n\nA ÷ B × 100\n\nA = Net Lbs. Graded (Standard)\nB = Total Net Lbs. Graded (All Categories)",
-      "% by Size\n\nA ÷ B × 100\n\nA = Net Lbs. Graded (Standard)\nB = Total Net Lbs. Graded (Premium + Standard)"
-    ],
-    criticalweak: [
-      "% of Net Lbs.\n\nA ÷ B × 100\n\nA = Net Lbs. Graded (Critical Weak)\nB = Total Net Lbs. Graded (All Categories)"
-    ],
-    softshell: [
-      "% of Net Lbs.\n\nA ÷ B × 100\n\nA = Net Lbs. Graded (Soft Shell)\nB = Total Net Lbs. Graded (All Categories)"
-    ],
-    dead: [
-      "% of Net Lbs.\n\nA ÷ B × 100\n\nA = Net Lbs. Graded (Dead)\nB = Total Net Lbs. Graded (All Categories)"
-    ],
-    undersize: [
-      "% of Net Lbs.\n\nA ÷ B × 100\n\nA = Net Lbs. Graded (Less than 3.74\")\nB = Total Net Lbs. Graded (All Categories)"
-    ],
-    barnacles: [
-      "% of Net Lbs.\n\nA ÷ B × 100\n\nA = Net Lbs. Graded (Barn. / Tubeworm)\nB = Total Net Lbs. Graded (All Categories)"
-    ],
-    totalreject: [
-      "% of Net Lbs.\n\nA ÷ B × 100\n\nA = Total Net Lbs. Graded (All Reject Categories)\nB = Total Net Lbs. Graded (All Categories)"
-    ],
-    grandtotal: [
-      "% of Net Lbs.\n\nAlways 100%",
-      "% by Size\n\nPremium + Standard = 100%"
-    ],
-    samplingplan: [
-      "# Sample from Sampling Plan\n\nA ÷ 45 × 5%\n\nA = Hailed Weight (Lbs.)"
-    ]
-  },
+    rows.forEach(r => {
+      html += `
+        <tr>
+          <td>${r[0]}</td>
+          <td>${r[1].toFixed(1)}</td>
+          <td onclick="showFormula('${r[4]}')" class="info">${r[2].toFixed(2)}%</td>
+          <td ${r[3] !== null ? `onclick="showFormula('${r[5]}')" class="info"` : ""}>
+            ${r[3] !== null ? r[3].toFixed(2) + "%" : "-"}
+          </td>
+        </tr>
+      `;
+    });
 
-  /* ------------------------- */
-  /* FORMULA MODAL (UNCHANGED) */
-  /* ------------------------- */
-  showFormula: function (key) {
-    const list = this.formulas[key] || ["No formula available"];
+    html += `
+      <tr class="total-row">
+        <td onclick="showFormula('totalReject')" class="info"><strong>Total Reject</strong></td>
+        <td>${rejectWeight.toFixed(1)}</td>
+        <td>${rejectPercent.toFixed(2)}%</td>
+        <td>-</td>
+      </tr>
 
-    document.getElementById("formulaText").innerHTML =
-      list.map(f => {
-        const lines = f.split("\n");
+      <tr class="grand-total">
+        <td onclick="showFormula('totalNet')" class="info"><strong>Total Net Lbs. Graded</strong></td>
+        <td>${total.toFixed(1)}</td>
+        <td>${percentSum.toFixed(2)}%</td>
+        <td>${sizeSum.toFixed(2)}%</td>
+      </tr>
+    `;
 
-        return `
-          <div style="margin-bottom:16px;">
-            <strong>${lines[0]}</strong><br>
-            ${lines.slice(1).join("<br>")}
-          </div>
-        `;
-      }).join("");
+    html += `
+        </tbody>
+        </table>
+    `;
 
-    document.getElementById("formulaModal").style.display = "block";
-  },
+    document.getElementById("results").innerHTML = html;
 
-  closeModal: function () {
-    document.getElementById("formulaModal").style.display = "none";
+    return {
+      totalNet: total,
+      barnaclePercent: pctB
+    };
   }
 };
 
+
 /* ========================= */
-/* SECTION C (Inspection Detail C) */
+/* SECTION B */
 /* ========================= */
 
-const SectionC = {
+const SectionB = {
 
-  /* ------------------------- */
-  /* APPLY DATA FROM SECTION A */
-  /* ------------------------- */
-  setGrossSample: function (value) {
-    document.getElementById("grossSample").value = value.toFixed(1);
-  },
+  calculate() {
 
-  /* ------------------------- */
-  /* CALCULATION (UNCHANGED LOGIC) */
-  /* ------------------------- */
-  calculate: function () {
-    const gross = Math.round(parseFloat(document.getElementById("grossWeight").value) || 0);
-    const pans = parseFloat(document.getElementById("pans").value) || 0;
-    const grossSample = parseFloat(document.getElementById("grossSample").value) || 0;
+    if (!gradingData) {
+      alert("Complete Dockside Grading first.");
+      return;
+    }
 
-    const netSample = window.totalSample || 0;
+    const gross = +document.getElementById("grossWeight").value || 0;
+    const pans = +document.getElementById("pans").value || 0;
+    const graded = +document.getElementById("grossSample").value || 0;
 
-    if (gross === 0) return;
+    const total = gradingData.totalNet;
+    const barnP = gradingData.barnaclePercent;
 
-    const percentCrab = grossSample > 0
-      ? (netSample / grossSample) * 100
-      : 0;
+    const pct = FormulaLibrary.percentCrab.calc(total, graded);
+    const net = FormulaLibrary.netLanded.calc(gross, pct);
+    const barn = FormulaLibrary.barnacleWeight.calc(net, barnP);
+    const netLess = FormulaLibrary.netLess.calc(net, barn);
+    const avg = FormulaLibrary.avgPan.calc(gross, pans);
 
-    const net = Math.round(gross * (percentCrab / 100));
-
-    const barnPercent = window.barnaclePercent || 0;
-
-    const barnacles = Math.round(net * 0.24 * (barnPercent / 100));
-
-    const netLessBarnacles = net - barnacles;
-
-    const avgPan = pans > 0 ? (net / pans) : 0;
-
-    this.renderResults({
-      gross,
-      percentCrab,
-      net,
-      barnacles,
-      netLessBarnacles,
-      avgPan
-    });
-  },
-
-  /* ------------------------- */
-  /* RENDER RESULTS (UNCHANGED) */
-  /* ------------------------- */
-  renderResults: function (data) {
     document.getElementById("landedResults").innerHTML = `
       <table class="results-table">
-        <thead>
-          <tr>
-            <th>Category</th>
-            <th>Results</th>
-          </tr>
-        </thead>
         <tbody>
+          <tr><td>Gross Pounds Landed</td><td>${gross}</td></tr>
+
           <tr>
-            <td>Gross Pounds Landed</td>
-            <td>${data.gross}</td>
+            <td onclick="showFormula('percentCrab')" style="cursor:pointer;">Percentage of Crab</td>
+            <td>${pct.toFixed(2)}%</td>
           </tr>
+
           <tr>
-            <td><span class="info" onclick="SectionB.showFormula('percentcrab')">Percentage of Crab</span></td>
-            <td>${data.percentCrab.toFixed(2)}%</td>
+            <td onclick="showFormula('netLanded')" style="cursor:pointer;">Net Pounds Landed</td>
+            <td>${net}</td>
           </tr>
+
           <tr>
-            <td><span class="info" onclick="SectionB.showFormula('net')">Net Pounds Landed</span></td>
-            <td>${data.net}</td>
+            <td onclick="showFormula('barnacleWeight')" style="cursor:pointer;">Barnacle Weight</td>
+            <td>${barn}</td>
           </tr>
+
           <tr>
-            <td><span class="info" onclick="SectionB.showFormula('barnacleweight')">Barnacle Weight</span></td>
-            <td>${data.barnacles}</td>
+            <td onclick="showFormula('netLess')" style="cursor:pointer;">Net Pounds (Less Barnacles)</td>
+            <td>${netLess}</td>
           </tr>
-          <tr class="total-row">
-            <td><strong><span class="info" onclick="SectionB.showFormula('netlessbarnacles')">Net Pounds (Less Barnacles)</span></strong></td>
-            <td><strong>${data.netLessBarnacles}</strong></td>
-          </tr>
-          <tr class="grand-total">
-            <td><strong><span class="info" onclick="SectionB.showFormula('avgpan')">Average Weight/Pan</span></strong></td>
-            <td><strong>${data.avgPan.toFixed(1)}</strong></td>
+
+          <tr>
+            <td onclick="showFormula('avgPan')" style="cursor:pointer;">Average Weight/Pan</td>
+            <td>${avg.toFixed(1)}</td>
           </tr>
         </tbody>
       </table>
@@ -511,26 +351,40 @@ const SectionC = {
   }
 };
 
-function populateAll() {
-  const dataA = SectionA.process();
 
-  // Populate Section B ONLY (no calculation)
-  SectionB.applyTotals(dataA.totals);
+/* ========================= */
+/* CONTROLLER */
+/* ========================= */
 
-  // Populate Section C ONLY (no calculation)
-  SectionC.setGrossSample(dataA.totalGross);
-
-  // NO automatic calculations
+function runGrading() {
+  gradingData = SectionA.calculate();
 }
 
-/* ========================= */
-/* INIT */
-/* ========================= */
-window.onload = function () {
 
-  // Default rows in Section A
-  for (let i = 0; i < 3; i++) {
-    SectionA.addRow();
-  }
+/* ========================= */
+/* CLEAR */
+/* ========================= */
 
-};
+function clearForm() {
+  document.querySelectorAll(".cat").forEach(i => i.value = "");
+  document.getElementById("results").innerHTML = "";
+  gradingData = null;
+}
+
+function clearLanded() {
+  document.getElementById("grossWeight").value = "";
+  document.getElementById("pans").value = "";
+  document.getElementById("grossSample").value = "";
+  document.getElementById("landedResults").innerHTML = "";
+}
+
+
+/* ========================= */
+/* SERVICE WORKER */
+/* ========================= */
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./service-worker.js");
+  });
+}
