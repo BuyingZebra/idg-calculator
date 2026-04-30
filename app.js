@@ -318,6 +318,12 @@ const SectionB = {
 
     document.getElementById("landedResults").innerHTML = `
       <table class="results-table">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Results</th>
+          </tr>
+        </thead>
         <tbody>
           <tr><td>Gross Pounds Landed</td><td>${gross}</td></tr>
 
@@ -336,14 +342,18 @@ const SectionB = {
             <td>${barn}</td>
           </tr>
 
-          <tr>
-            <td onclick="showFormula('netLess')" style="cursor:pointer;">Net Pounds (Less Barnacles)</td>
-            <td>${netLess}</td>
+          <tr class="total-row">
+            <td onclick="showFormula('netLess')" style="cursor:pointer;">
+              <strong>Net Pounds (Less Barnacles)</strong>
+            </td>
+            <td><strong>${netLess}</strong></td>
           </tr>
 
-          <tr>
-            <td onclick="showFormula('avgPan')" style="cursor:pointer;">Average Weight/Pan</td>
-            <td>${avg.toFixed(1)}</td>
+          <tr class="grand-total">
+            <td onclick="showFormula('avgPan')" style="cursor:pointer;">
+              <strong>Average Weight/Pan</strong>
+            </td>
+            <td><strong>${avg.toFixed(1)}</strong></td>
           </tr>
         </tbody>
       </table>
@@ -392,18 +402,15 @@ if ("serviceWorker" in navigator) {
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("./service-worker.js").then(reg => {
 
-    reg.onupdatefound = () => {
+    reg.addEventListener("updatefound", () => {
       const newWorker = reg.installing;
 
-      newWorker.onstatechange = () => {
-        if (newWorker.state === "installed") {
-          if (navigator.serviceWorker.controller) {
-            // new version available → reload automatically
-            window.location.reload();
-          }
+      newWorker.addEventListener("statechange", () => {
+        if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
+          window.location.reload();
         }
-      };
-    };
+      });
+    });
 
   });
 }
