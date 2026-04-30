@@ -407,9 +407,15 @@ if ("serviceWorker" in navigator) {
 
       newWorker.addEventListener("statechange", () => {
         if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
+          // optional early reload (can keep or remove)
           window.location.reload();
         }
       });
+    });
+
+    // 🔥 THIS is the important one
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      window.location.reload();
     });
 
   });
