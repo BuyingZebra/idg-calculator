@@ -388,3 +388,22 @@ if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("./service-worker.js");
   });
 }
+
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("./service-worker.js").then(reg => {
+
+    reg.onupdatefound = () => {
+      const newWorker = reg.installing;
+
+      newWorker.onstatechange = () => {
+        if (newWorker.state === "installed") {
+          if (navigator.serviceWorker.controller) {
+            // new version available → reload automatically
+            window.location.reload();
+          }
+        }
+      };
+    };
+
+  });
+}
