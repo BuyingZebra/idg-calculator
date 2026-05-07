@@ -1,80 +1,221 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
   <title>IDG Calculator</title>
 
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- iOS App Mode -->
+  <meta
+    name="apple-mobile-web-app-capable"
+    content="yes"
+  >
+
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent"
+  >
+
+  <meta
+    name="apple-mobile-web-app-title"
+    content="IDG"
+  >
+
+  <!-- App Icons -->
+  <link
+    rel="apple-touch-icon"
+    href="icon-192.png"
+  >
+
+  <!-- Theme -->
+  <meta
+    name="theme-color"
+    content="#0f172a"
+  >
+
+  <!-- Styles -->
   <link rel="stylesheet" href="style.css" />
+
 </head>
+
 <body>
 
-<h1>IDG Calculator</h1>
+  <h1>IDG Calculator</h1>
 
-<!-- ========================= -->
-<!-- SECTION A (DOCKSIDE GRADING SUMMARY) -->
-<!-- ========================= -->
-<div class="section" id="sectionA">
-  <h2>Dockside Grading Summary</h2>
+  <!-- ========================= -->
+  <!-- SECTION A (DOCKSIDE GRADING SUMMARY) -->
+  <!-- ========================= -->
 
-  <div class="row"><span>Premium</span><input class="cat" data-name="Premium" type="number"></div>
-  <div class="row"><span>Standard</span><input class="cat" data-name="Standard" type="number"></div>
+  <div class="section" id="sectionA">
 
-  <div class="row"><span>Critical Weak</span><input class="cat" data-name="Critical Weak" type="number"></div>
-  <div class="row"><span>Soft Shell</span><input class="cat" data-name="Soft Shell" type="number"></div>
-  <div class="row"><span>Dead</span><input class="cat" data-name="Dead" type="number"></div>
-  <div class="row"><span>Less than 3.74"</span><input class="cat" data-name="Undersize" type="number"></div>
-  <div class="row"><span>Barn. / Tubeworm</span><input class="cat" data-name="Barnacles" type="number"></div>
+    <h2>Dockside Grading Summary</h2>
 
-  <h3>Results</h3>
+    <div class="row">
+      <span>Premium</span>
+      <input
+        class="cat"
+        data-key="premium"
+        type="number"
+      >
+    </div>
 
-  <div id="results"></div>
+    <div class="row">
+      <span>Standard</span>
+      <input
+        class="cat"
+        data-key="standard"
+        type="number"
+      >
+    </div>
 
-  <div class="button-row">
-    <button onclick="runGrading()">Calculate</button>
-    <button class="clear-btn" onclick="clearForm()">Clear</button>
+    <div class="row">
+      <span>Critical Weak</span>
+      <input
+        class="cat"
+        data-key="critical_weak"
+        type="number"
+      >
+    </div>
+
+    <div class="row">
+      <span>Soft Shell</span>
+      <input
+        class="cat"
+        data-key="soft_shell"
+        type="number"
+      >
+    </div>
+
+    <div class="row">
+      <span>Dead</span>
+      <input
+        class="cat"
+        data-key="dead"
+        type="number"
+      >
+    </div>
+
+    <div class="row">
+      <span>Less than 3.74"</span>
+      <input
+        class="cat"
+        data-key="under_sized"
+        type="number"
+      >
+    </div>
+
+    <div class="row">
+      <span>Barn. / Tubeworm</span>
+      <input
+        class="cat"
+        data-key="barnacle_tubeworm"
+        type="number"
+      >
+    </div>
+
+    <h3>Results</h3>
+
+    <div id="results"></div>
+
+    <div class="button-row">
+
+      <button onclick="section_a.calculate()">
+        Calculate
+      </button>
+
+      <button
+        class="clear-btn"
+        onclick="section_a_clear_data()"
+      >
+        Clear
+      </button>
+
+    </div>
+
   </div>
-</div>
 
-<!-- ========================= -->
-<!-- SECTION B (LANDED POUNDS SUMMARY) -->
-<!-- ========================= -->
-<div class="section" id="sectionB">
-  <h2>Landed Pounds Summary</h2>
+  <!-- ========================= -->
+  <!-- SECTION B (LANDED POUNDS SUMMARY) -->
+  <!-- ========================= -->
 
-  <div class="row">
-    <span>Gross Pounds Landed</span>
-    <input id="grossWeight" type="number">
+  <div class="section" id="sectionB">
+
+    <h2>Landed Pounds Summary</h2>
+
+    <div class="row">
+      <span>Gross Pounds Landed</span>
+      <input id="grossWeight" type="number">
+    </div>
+
+    <div class="row">
+      <span>Total # of Pans</span>
+      <input id="pans" type="number">
+    </div>
+
+    <div class="row">
+      <span>Gross Lbs. Graded</span>
+      <input
+        id="grossSample"
+        type="number"
+        step="1"
+      >
+    </div>
+
+    <h3>Results</h3>
+
+    <div id="landedResults"></div>
+
+    <div class="button-row">
+
+      <button onclick="section_b.calculate()">
+        Calculate
+      </button>
+
+      <button
+        class="clear-btn"
+        onclick="section_b_clear_data()"
+      >
+        Clear
+      </button>
+
+    </div>
+
   </div>
 
-  <div class="row">
-    <span>Total # of Pans</span>
-    <input id="pans" type="number">
+  <!-- FORMULA MODAL -->
+
+  <div id="formulaModal" class="modal">
+
+    <div class="modal-content">
+
+      <span
+        class="close"
+        onclick="helper_disable()"
+      >
+        ×
+      </span>
+
+      <div id="formulaText"></div>
+
+    </div>
+
   </div>
 
-  <div class="row">
-    <span>Gross Lbs. Graded</span>
-    <input id="grossSample" type="number" step="1">
-  </div>
+  <!-- SCRIPTS -->
 
-  <h3>Results</h3>
-
-  <div id="landedResults"></div>
-
-  <div class="button-row">
-    <button onclick="SectionB.calculate()">Calculate</button>
-    <button class="clear-btn" onclick="clearLanded()">Clear</button>
-  </div>
-</div>
-
-<script src="app.js"></script>
+  <script src="dictionary.js"></script>
+  <script src="app.js"></script>
 
 </body>
-</html>
 
-<div id="formulaModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeFormula()">×</span>
-    <div id="formulaText"></div>
-  </div>
-</div>
+</html>

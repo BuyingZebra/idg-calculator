@@ -1,397 +1,604 @@
-/* ========================= */
-/* FORMULA LIBRARY (EXPLICIT) */
-/* ========================= */
-
-const FormulaLibrary = {
-
-  percentPremium: {
-    calc: (p, total) => total > 0 ? (p / total) * 100 : 0,
-    display: {
-      title: "% Premium",
-      formula: "A ÷ B × 100",
-      variables: {
-        A: "Premium Weight",
-        B: "Total Net Lbs. Graded"
-      }
-    }
-  },
-
-  percentStandard: {
-    calc: (s, total) => total > 0 ? (s / total) * 100 : 0,
-    display: {
-      title: "% Standard",
-      formula: "A ÷ B × 100",
-      variables: {
-        A: "Standard Weight",
-        B: "Total Net Lbs. Graded"
-      }
-    }
-  },
-
-  percentOther: {
-    calc: (v, total) => total > 0 ? (v / total) * 100 : 0,
-    display: {
-      title: "% of Net Lbs.",
-      formula: "A ÷ B × 100",
-      variables: {
-        A: "Category Weight",
-        B: "Total Net Lbs. Graded"
-      }
-    }
-  },
-
-  sizePremium: {
-    calc: (p, s) => (p + s) > 0 ? (p / (p + s)) * 100 : 0,
-    display: {
-      title: "% Premium by Size",
-      formula: "A ÷ (Premium + Standard) × 100",
-      variables: {
-        A: "Premium Weight"
-      }
-    }
-  },
-
-  sizeStandard: {
-    calc: (p, s) => (p + s) > 0 ? (s / (p + s)) * 100 : 0,
-    display: {
-      title: "% Standard by Size",
-      formula: "A ÷ (Premium + Standard) × 100",
-      variables: {
-        A: "Standard Weight"
-      }
-    }
-  },
-
-  totalNet: {
-    calc: (p, s, cw, ss, d, u, b) => p + s + cw + ss + d + u + b,
-    display: {
-      title: "Total Net Lbs. Graded",
-      formula: "Sum of all category weights",
-      variables: {}
-    }
-  },
-
-  totalReject: {
-    calc: (total, ps) => total - ps,
-    display: {
-      title: "Total Reject",
-      formula: "Total Net - (Premium + Standard)",
-      variables: {}
-    }
-  },
-
-  percentCrab: {
-    calc: (totalNet, grossGraded) =>
-      grossGraded > 0 ? (totalNet / grossGraded) * 100 : 0,
-    display: {
-      title: "Percentage of Crab",
-      formula: "A ÷ B × 100",
-      variables: {
-        A: "Net Lbs. Graded",
-        B: "Gross Lbs. Graded"
-      }
-    }
-  },
-
-  netLanded: {
-    calc: (gross, percent) => Math.round(gross * (percent / 100)),
-    display: {
-      title: "Net Pounds Landed",
-      formula: "A × (B ÷ 100)",
-      variables: {
-        A: "Gross Pounds Landed",
-        B: "% Crab"
-      }
-    }
-  },
-
-  barnacleWeight: {
-    calc: (net, barnPercent) =>
-      Math.round(net * 0.24 * (barnPercent / 100)),
-    display: {
-      title: "Barnacle Weight",
-      formula: "(A × 0.24 × B) ÷ 100",
-      variables: {
-        A: "Net Pounds Landed",
-        B: "Barnacle %"
-      }
-    }
-  },
-
-  netLess: {
-    calc: (net, barn) => net - barn,
-    display: {
-      title: "Net Pounds (Less Barnacles)",
-      formula: "A - B",
-      variables: {
-        A: "Net Pounds Landed",
-        B: "Barnacle Weight"
-      }
-    }
-  },
-
-  avgPan: {
-    calc: (gross, pans) => pans > 0 ? (gross / pans) : 0,
-    display: {
-      title: "Average Weight per Pan",
-      formula: "A ÷ B",
-      variables: {
-        A: "Gross Pounds Landed",
-        B: "Total # of Pans"
-      }
-    }
-  }
-
-};
-
-
-/* ========================= */
-/* GLOBAL STATE */
-/* ========================= */
+/* Global State */
+/* ---------------------------------------------------------------------------------------------------- */
 
 let gradingData = null;
 
+/* Helper Windows (Modal) */
+/* ---------------------------------------------------------------------------------------------------- */
 
-/* ========================= */
-/* MODAL SYSTEM */
-/* ========================= */
+function helper_enable(section, key) {
 
-function showFormula(key) {
-  const f = FormulaLibrary[key]?.display;
+  const f = math[section]?.[key];
+
   if (!f) return;
 
-  let html = `<strong>${f.title}</strong><br><br>${f.formula}<br><br>`;
+  let html = `
+    <strong>${f.title}</strong><br><br>
+    ${f.formula}<br><br>
+  `;
 
   for (let v in f.variables) {
     html += `${v} = ${f.variables[v]}<br>`;
   }
 
+  html += `<br>${f.help}`;
+
   document.getElementById("formulaText").innerHTML = html;
+
   document.getElementById("formulaModal").style.display = "block";
 }
 
-function closeFormula() {
+function helper_disable() {
   document.getElementById("formulaModal").style.display = "none";
 }
 
+/* Section A Functions */
+/* ---------------------------------------------------------------------------------------------------- */
 
-/* ========================= */
-/* SECTION A */
-/* ========================= */
+function section_a_source_data() {
 
-const SectionA = {
+  const inputs = document.querySelectorAll(".cat");
 
-  getCategories() {
-    const inputs = document.querySelectorAll(".cat");
-    let data = {};
-    inputs.forEach(i => data[i.dataset.name] = parseFloat(i.value) || 0);
-    return data;
-  },
+  const data = {};
 
-  calculate() {
+  inputs.forEach(i => {
 
-    const c = this.getCategories();
+    data[i.dataset.key] = parseFloat(i.value) || 0;
 
-    const p = c["Premium"] || 0;
-    const s = c["Standard"] || 0;
-    const cw = c["Critical Weak"] || 0;
-    const ss = c["Soft Shell"] || 0;
-    const d = c["Dead"] || 0;
-    const u = c["Undersize"] || 0;
-    const b = c["Barnacles"] || 0;
+  });
 
-    const total = FormulaLibrary.totalNet.calc(p, s, cw, ss, d, u, b);
-
-    // Individual percentages
-    const pctP = FormulaLibrary.percentPremium.calc(p, total);
-    const pctS = FormulaLibrary.percentStandard.calc(s, total);
-    const pctCW = FormulaLibrary.percentOther.calc(cw, total);
-    const pctSS = FormulaLibrary.percentOther.calc(ss, total);
-    const pctD = FormulaLibrary.percentOther.calc(d, total);
-    const pctU = FormulaLibrary.percentOther.calc(u, total);
-    const pctB = FormulaLibrary.percentOther.calc(b, total);
-
-    // Size %
-    const sizeP = FormulaLibrary.sizePremium.calc(p, s);
-    const sizeS = FormulaLibrary.sizeStandard.calc(p, s);
-
-    // 🔹 SUMS
-    const percentSum = pctP + pctS + pctCW + pctSS + pctD + pctU + pctB;
-
-    const rejectWeight = cw + ss + d + u + b;
-    const rejectPercent = pctCW + pctSS + pctD + pctU + pctB;
-
-    const sizeSum = sizeP + sizeS;
-
-    const rows = [
-      ["Premium", p, pctP, sizeP, "percentPremium", "sizePremium"],
-      ["Standard", s, pctS, sizeS, "percentStandard", "sizeStandard"],
-      ["Critical Weak", cw, pctCW, null, "percentOther"],
-      ["Soft Shell", ss, pctSS, null, "percentOther"],
-      ["Dead", d, pctD, null, "percentOther"],
-      ["Less than 3.74\"", u, pctU, null, "percentOther"],
-      ["Barn. / Tubeworm", b, pctB, null, "percentOther"]
-    ];
-
-    let html = `
-      <table class="results-table">
-        <thead>
-          <tr>
-            <th>Grade</th>
-            <th>Net Lbs. Graded</th>
-            <th>% of Net Lbs.</th>
-            <th>% by Size</th>
-          </tr>
-        </thead>
-        <tbody>
-    `;
-
-    rows.forEach(r => {
-      html += `
-        <tr>
-          <td>${r[0]}</td>
-          <td>${r[1].toFixed(1)}</td>
-          <td onclick="showFormula('${r[4]}')" class="info">${r[2].toFixed(2)}%</td>
-          <td ${r[3] !== null ? `onclick="showFormula('${r[5]}')" class="info"` : ""}>
-            ${r[3] !== null ? r[3].toFixed(2) + "%" : "-"}
-          </td>
-        </tr>
-      `;
-    });
-
-    html += `
-      <tr class="total-row">
-        <td onclick="showFormula('totalReject')" class="info"><strong>Total Reject</strong></td>
-        <td>${rejectWeight.toFixed(1)}</td>
-        <td>${rejectPercent.toFixed(2)}%</td>
-        <td>-</td>
-      </tr>
-
-      <tr class="grand-total">
-        <td onclick="showFormula('totalNet')" class="info"><strong>Total Net Lbs. Graded</strong></td>
-        <td>${total.toFixed(1)}</td>
-        <td>${percentSum.toFixed(2)}%</td>
-        <td>${sizeSum.toFixed(2)}%</td>
-      </tr>
-    `;
-
-    html += `
-        </tbody>
-        </table>
-    `;
-
-    document.getElementById("results").innerHTML = html;
-
-    return {
-      totalNet: total,
-      barnaclePercent: pctB
-    };
-  }
-};
-
-
-/* ========================= */
-/* SECTION B */
-/* ========================= */
-
-const SectionB = {
-
-  calculate() {
-
-    if (!gradingData) {
-      alert("Complete Dockside Grading first.");
-      return;
-    }
-
-    const gross = +document.getElementById("grossWeight").value || 0;
-    const pans = +document.getElementById("pans").value || 0;
-    const graded = +document.getElementById("grossSample").value || 0;
-
-    const total = gradingData.totalNet;
-    const barnP = gradingData.barnaclePercent;
-
-    const pct = FormulaLibrary.percentCrab.calc(total, graded);
-    const net = FormulaLibrary.netLanded.calc(gross, pct);
-    const barn = FormulaLibrary.barnacleWeight.calc(net, barnP);
-    const netLess = FormulaLibrary.netLess.calc(net, barn);
-    const avg = FormulaLibrary.avgPan.calc(gross, pans);
-
-    document.getElementById("landedResults").innerHTML = `
-      <table class="results-table">
-        <thead>
-          <tr>
-            <th>Category</th>
-            <th>Results</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>Gross Pounds Landed</td><td>${gross}</td></tr>
-
-          <tr>
-            <td onclick="showFormula('percentCrab')" style="cursor:pointer;">Percentage of Crab</td>
-            <td>${pct.toFixed(2)}%</td>
-          </tr>
-
-          <tr>
-            <td onclick="showFormula('netLanded')" style="cursor:pointer;">Net Pounds Landed</td>
-            <td>${net}</td>
-          </tr>
-
-          <tr>
-            <td onclick="showFormula('barnacleWeight')" style="cursor:pointer;">Barnacle Weight</td>
-            <td>${barn}</td>
-          </tr>
-
-          <tr class="total-row">
-            <td onclick="showFormula('netLess')" style="cursor:pointer;">
-              <strong>Net Pounds (Less Barnacles)</strong>
-            </td>
-            <td><strong>${netLess}</strong></td>
-          </tr>
-
-          <tr class="grand-total">
-            <td onclick="showFormula('avgPan')" style="cursor:pointer;">
-              <strong>Average Weight/Pan</strong>
-            </td>
-            <td><strong>${avg.toFixed(1)}</strong></td>
-          </tr>
-        </tbody>
-      </table>
-    `;
-  }
-};
-
-
-/* ========================= */
-/* CONTROLLER */
-/* ========================= */
-
-function runGrading() {
-  gradingData = SectionA.calculate();
+  return data;
 }
 
+function section_a_process_data(data) {
 
-/* ========================= */
-/* CLEAR */
-/* ========================= */
+  const formulas = math.section_a_math;
 
-function clearForm() {
-  document.querySelectorAll(".cat").forEach(i => i.value = "");
+  const runtime_data = {
+
+    premium: data.premium || 0,
+    standard: data.standard || 0,
+    critical_weak: data.critical_weak || 0,
+    soft_shell: data.soft_shell || 0,
+    dead: data.dead || 0,
+    under_sized: data.under_sized || 0,
+    barnacle_tubeworm: data.barnacle_tubeworm || 0
+
+  };
+
+  const execution_order = [
+
+    "total_net_lbs_graded",
+
+    "total_reject",
+
+    "percent_premium",
+    "percent_standard",
+    "percent_critical_weak",
+    "percent_soft_shell",
+    "percent_dead",
+    "percent_under_sized",
+    "percent_barnacle_tubeworm",
+
+    "percent_size_premium",
+    "percent_size_standard",
+
+    "percent_reject",
+    "percent_lbs_graded"
+
+  ];
+
+  run_formula_sequence(
+    formulas,
+    runtime_data,
+    execution_order
+  );
+
+  return {
+
+    total_net_lbs_graded:
+      runtime_data.total_net_lbs_graded,
+
+    rows: [
+
+      [
+        "Premium",
+        runtime_data.premium,
+        runtime_data.percent_premium,
+        runtime_data.percent_size_premium,
+        ["section_a_math", "percent_premium"],
+        ["section_a_math", "percent_size_premium"]
+      ],
+
+      [
+        "Standard",
+        runtime_data.standard,
+        runtime_data.percent_standard,
+        runtime_data.percent_size_standard,
+        ["section_a_math", "percent_standard"],
+        ["section_a_math", "percent_size_standard"]
+      ],
+
+      [
+        "Critical Weak",
+        runtime_data.critical_weak,
+        runtime_data.percent_critical_weak,
+        null,
+        ["section_a_math", "percent_critical_weak"]
+      ],
+
+      [
+        "Soft Shell",
+        runtime_data.soft_shell,
+        runtime_data.percent_soft_shell,
+        null,
+        ["section_a_math", "percent_soft_shell"]
+      ],
+
+      [
+        "Dead",
+        runtime_data.dead,
+        runtime_data.percent_dead,
+        null,
+        ["section_a_math", "percent_dead"]
+      ],
+
+      [
+        "Less than 3.74\"",
+        runtime_data.under_sized,
+        runtime_data.percent_under_sized,
+        null,
+        ["section_a_math", "percent_under_sized"]
+      ],
+
+      [
+        "Barn. / Tubeworm",
+        runtime_data.barnacle_tubeworm,
+        runtime_data.percent_barnacle_tubeworm,
+        null,
+        ["section_a_math", "percent_barnacle_tubeworm"]
+      ]
+    ],
+
+    total_reject:
+      runtime_data.total_reject,
+
+    percent_reject:
+
+      round_percent(
+        runtime_data.percent_critical_weak
+      ) +
+
+      round_percent(
+        runtime_data.percent_soft_shell
+      ) +
+
+      round_percent(
+        runtime_data.percent_dead
+      ) +
+
+      round_percent(
+        runtime_data.percent_under_sized
+      ) +
+
+      round_percent(
+        runtime_data.percent_barnacle_tubeworm
+      ),
+
+    percent_lbs_graded:
+
+      round_percent(
+        runtime_data.percent_premium
+      ) +
+
+      round_percent(
+        runtime_data.percent_standard
+      ) +
+
+      round_percent(
+        runtime_data.percent_critical_weak
+      ) +
+
+      round_percent(
+        runtime_data.percent_soft_shell
+      ) +
+
+      round_percent(
+        runtime_data.percent_dead
+      ) +
+
+      round_percent(
+        runtime_data.percent_under_sized
+      ) +
+
+      round_percent(
+        runtime_data.percent_barnacle_tubeworm
+      ),
+
+    percent_size_total:
+
+      round_percent(
+        runtime_data.percent_size_premium
+      ) +
+
+      round_percent(
+        runtime_data.percent_size_standard
+      ),
+
+    percent_barnacle_tubeworm:
+      runtime_data.percent_barnacle_tubeworm
+  };
+}
+
+function section_a_format_data(data) {
+
+  let html = `
+    <table class="results-table">
+      <thead>
+        <tr>
+          <th>Grade</th>
+          <th>Net Lbs. Graded</th>
+          <th>% of Net Lbs.</th>
+          <th>% by Size</th>
+        </tr>
+      </thead>
+      <tbody>
+  `;
+
+  data.rows.forEach(r => {
+
+    html += `
+      <tr>
+
+        <td>${r[0]}</td>
+
+        <td>${r[1].toFixed(1)}</td>
+
+        <td
+          onclick="helper_enable('${r[4][0]}', '${r[4][1]}')"
+          class="info"
+        >
+          ${r[2].toFixed(2)}%
+        </td>
+
+        <td
+          ${
+            r[3] !== null
+              ? `onclick="helper_enable('${r[5][0]}', '${r[5][1]}')" class="info"`
+              : ""
+          }
+        >
+          ${r[3] !== null ? r[3].toFixed(2) + "%" : "-"}
+        </td>
+
+      </tr>
+    `;
+  });
+
+  html += `
+    <tr class="total-row">
+
+      <td
+        onclick="helper_enable('section_a_math', 'total_reject')"
+        class="info"
+      >
+        <strong>Total Reject</strong>
+      </td>
+
+      <td>${data.total_reject.toFixed(1)}</td>
+
+      <td>${data.percent_reject.toFixed(2)}%</td>
+
+      <td>-</td>
+
+    </tr>
+
+    <tr class="grand-total">
+
+      <td
+        onclick="helper_enable('section_a_math', 'total_net_lbs_graded')"
+        class="info"
+      >
+        <strong>Total Net Lbs. Graded</strong>
+      </td>
+
+      <td>${data.total_net_lbs_graded.toFixed(1)}</td>
+
+      <td>${data.percent_lbs_graded.toFixed(2)}%</td>
+
+      <td>${data.percent_size_total.toFixed(2)}%</td>
+
+    </tr>
+  `;
+
+  html += "</tbody></table>";
+
+  document.getElementById("results").innerHTML = html;
+}
+
+function section_a_clear_data() {
+
+  document
+    .querySelectorAll(".cat")
+    .forEach(i => i.value = "");
+
   document.getElementById("results").innerHTML = "";
+
   gradingData = null;
 }
 
-function clearLanded() {
+const section_a = {
+
+  calculate() {
+
+    const input = section_a_source_data();
+
+    const result = section_a_process_data(input);
+
+    // preserve your existing global dependency
+    gradingData = result;
+
+    section_a_format_data(result);
+  }
+};
+
+/* Section B Functions */
+/* ---------------------------------------------------------------------------------------------------- */
+
+function section_b_source_data() {
+
+  return {
+    gross: +document.getElementById("grossWeight").value || 0,
+    pans: +document.getElementById("pans").value || 0,
+    graded: +document.getElementById("grossSample").value || 0
+  };
+}
+
+function section_b_process_data(data) {
+
+  if (!gradingData || !gradingData.total_net_lbs_graded) {
+
+    return {
+      error: "Complete Dockside Grading first."
+    };
+  }
+
+  const formulas = math.section_b_math;
+
+  const execution_order = [
+
+    "percent_crab",
+    "net_pounds_landed",
+    "barnacle_weight",
+    "net_pounds_less_barnacles",
+    "average_pan_weight"
+
+  ];
+
+  const runtime_data = {
+
+    gross_pounds_landed:
+      data.gross || 0,
+
+    total_number_of_pans:
+      data.pans || 0,
+
+    total_gross_lbs_graded:
+      data.graded || 0,
+
+    total_net_lbs_graded:
+      gradingData.total_net_lbs_graded || 0,
+
+    percent_barnacle_tubeworm:
+      gradingData.percent_barnacle_tubeworm || 0
+
+  };
+
+  run_formula_sequence(
+    formulas,
+    runtime_data,
+    execution_order
+  );
+
+  return {
+
+    gross_pounds_landed:
+      runtime_data.gross_pounds_landed,
+
+    percent_crab:
+      runtime_data.percent_crab,
+
+    net_pounds_landed:
+      runtime_data.net_pounds_landed,
+
+    barnacle_weight:
+      runtime_data.barnacle_weight,
+
+    net_pounds_less_barnacles:
+      runtime_data.net_pounds_less_barnacles,
+
+    average_pan_weight:
+      runtime_data.average_pan_weight
+  };
+}
+
+function section_b_format_data(data) {
+
+  if (data.error) {
+
+    alert(data.error);
+
+    return;
+  }
+
+  document.getElementById("landedResults").innerHTML = `
+
+    <table class="results-table">
+
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Results</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr>
+
+          <td>Gross Pounds Landed</td>
+
+          <td>${data.gross_pounds_landed}</td>
+
+        </tr>
+
+        <tr>
+
+          <td
+            onclick="helper_enable('section_b_math', 'percent_crab')"
+            class="info"
+          >
+            % of Crab
+          </td>
+
+          <td>${data.percent_crab.toFixed(2)}%</td>
+
+        </tr>
+
+        <tr>
+
+          <td
+            onclick="helper_enable('section_b_math', 'net_pounds_landed')"
+            class="info"
+          >
+            Net Pounds Landed
+          </td>
+
+          <td>${data.net_pounds_landed}</td>
+
+        </tr>
+
+        <tr>
+
+          <td
+            onclick="helper_enable('section_b_math', 'barnacle_weight')"
+            class="info"
+          >
+            Barnacle Weight
+          </td>
+
+          <td>${data.barnacle_weight}</td>
+
+        </tr>
+
+        <tr class="total-row">
+
+          <td
+            onclick="helper_enable('section_b_math', 'net_pounds_less_barnacles')"
+            class="info"
+          >
+            <strong>Net Pounds (Less Barnacles)</strong>
+          </td>
+
+          <td>
+            <strong>${data.net_pounds_less_barnacles}</strong>
+          </td>
+
+        </tr>
+
+        <tr class="grand-total">
+
+          <td
+            onclick="helper_enable('section_b_math', 'average_pan_weight')"
+            class="info"
+          >
+            <strong>Average Weight / Pan</strong>
+          </td>
+
+          <td>
+            <strong>${data.average_pan_weight.toFixed(1)}</strong>
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+  `;
+}
+
+function section_b_clear_data() {
   document.getElementById("grossWeight").value = "";
   document.getElementById("pans").value = "";
   document.getElementById("grossSample").value = "";
   document.getElementById("landedResults").innerHTML = "";
 }
 
+const section_b = {
 
-/* ========================= */
-/* SERVICE WORKER */
-/* ========================= */
+  calculate() {
+
+    const input = section_b_source_data();
+
+    const result = section_b_process_data(input);
+
+    section_b_format_data(result);
+  }
+};
+
+/* Formula Helper Functions */
+/* ---------------------------------------------------------------------------------------------------- */
+
+function run_formula(
+  formula_key,
+  formulas,
+  runtime_data
+) {
+
+  const formula = formulas[formula_key];
+
+  const dependencies = {};
+
+  formula.depends_on.forEach(key => {
+
+    dependencies[key] =
+      runtime_data[key] || 0;
+
+  });
+
+  return formula.calculate(dependencies);
+}
+
+function run_formula_sequence(
+  formulas,
+  runtime_data,
+  execution_order = []
+) {
+
+  execution_order.forEach(
+    formula_key => {
+
+      runtime_data[formula_key] =
+        run_formula(
+          formula_key,
+          formulas,
+          runtime_data
+        );
+
+    }
+  );
+}
+
+function round_percent(value) {
+
+  return parseFloat(
+    value.toFixed(2)
+  );
+
+}
+
+/* Service Worker Content */
+/* ---------------------------------------------------------------------------------------------------- */
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
