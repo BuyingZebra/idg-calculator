@@ -53,7 +53,7 @@
   <h1>IDG Calculator</h1>
 
   <!-- ========================= -->
-  <!-- SECTION A (DOCKSIDE GRADING SUMMARY) -->
+  <!-- SECTION A -->
   <!-- ========================= -->
 
   <div class="section" id="sectionA">
@@ -65,7 +65,8 @@
       <input
         class="cat"
         data-key="premium"
-        type="number"
+        type="text"
+        inputmode="decimal"
       >
     </div>
 
@@ -74,7 +75,8 @@
       <input
         class="cat"
         data-key="standard"
-        type="number"
+        type="text"
+        inputmode="decimal"
       >
     </div>
 
@@ -83,7 +85,8 @@
       <input
         class="cat"
         data-key="critical_weak"
-        type="number"
+        type="text"
+        inputmode="decimal"
       >
     </div>
 
@@ -92,7 +95,8 @@
       <input
         class="cat"
         data-key="soft_shell"
-        type="number"
+        type="text"
+        inputmode="decimal"
       >
     </div>
 
@@ -101,7 +105,8 @@
       <input
         class="cat"
         data-key="dead"
-        type="number"
+        type="text"
+        inputmode="decimal"
       >
     </div>
 
@@ -110,7 +115,8 @@
       <input
         class="cat"
         data-key="under_sized"
-        type="number"
+        type="text"
+        inputmode="decimal"
       >
     </div>
 
@@ -119,13 +125,64 @@
       <input
         class="cat"
         data-key="barnacle_tubeworm"
-        type="number"
+        type="text"
+        inputmode="decimal"
       >
     </div>
 
-    <h3>Results</h3>
+    <div class="row">
+      <span>Gross Lbs. Graded</span>
+      <input
+      class="cat"
+      data-key="gross_lbs_graded"
+      id="grossSample"
+      type="text"
+      inputmode="decimal"
+    >
+    </div>
 
-    <div id="results"></div>
+    <!-- RESULTS -->
+
+    <div class="results-section">
+
+      <div
+        class="results-toggle"
+        onclick="toggle_results('resultsContent', 'resultsArrow')"
+      >
+
+        <div
+          id="resultsArrow"
+          class="toggle-icon-stack"
+        >
+
+          <img
+            class="toggle-icon icon-on"
+            src="./icons/radial_button_checked.svg"
+          >
+
+          <img
+            class="toggle-icon icon-off"
+            src="./icons/radial_button_unchecked.svg"
+          >
+
+        </div>
+
+        <h3>Results</h3>
+
+      </div>
+
+      <div
+        id="resultsContent"
+        class="results-content"
+      >
+
+        <div id="results"></div>
+
+      </div>
+
+    </div>
+
+    <!-- BUTTONS -->
 
     <div class="button-row">
 
@@ -145,7 +202,7 @@
   </div>
 
   <!-- ========================= -->
-  <!-- SECTION B (LANDED POUNDS SUMMARY) -->
+  <!-- SECTION B -->
   <!-- ========================= -->
 
   <div class="section" id="sectionB">
@@ -154,26 +211,67 @@
 
     <div class="row">
       <span>Gross Pounds Landed</span>
-      <input id="grossWeight" type="number">
+      <input
+      class="section-b-input"
+      data-key="gross_pounds_landed"
+      id="grossWeight"
+      type="text"
+      inputmode="decimal"
+    >
     </div>
 
     <div class="row">
       <span>Total # of Pans</span>
-      <input id="pans" type="number">
-    </div>
-
-    <div class="row">
-      <span>Gross Lbs. Graded</span>
       <input
-        id="grossSample"
-        type="number"
-        step="1"
-      >
+      class="section-b-input"
+      data-key="total_number_of_pans"
+      id="pans"
+      type="number"
+    >
     </div>
 
-    <h3>Results</h3>
+    <!-- RESULTS -->
 
-    <div id="landedResults"></div>
+    <div class="results-section">
+
+      <div
+        class="results-toggle"
+        onclick="toggle_results('landedResultsContent', 'landedResultsArrow')"
+      >
+
+        <div
+          id="landedResultsArrow"
+          class="toggle-icon-stack"
+        >
+
+          <img
+            class="toggle-icon icon-on"
+            src="./icons/radial_button_checked.svg"
+          >
+
+          <img
+            class="toggle-icon icon-off"
+            src="./icons/radial_button_unchecked.svg"
+          >
+
+        </div>
+
+        <h3>Results</h3>
+
+      </div>
+
+      <div
+        id="landedResultsContent"
+        class="results-content"
+      >
+
+        <div id="landedResults"></div>
+
+      </div>
+
+    </div>
+
+    <!-- BUTTONS -->
 
     <div class="button-row">
 

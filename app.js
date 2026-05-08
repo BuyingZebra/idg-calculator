@@ -3,6 +3,13 @@
 
 let gradingData = null;
 
+/* Calculation Synchronization */
+/* ---------------------------------------------------------------------------------------------------- */
+
+let section_a_state = "";
+let section_b_synced_state = "";
+let section_b_active = false;
+
 /* Helper Windows (Modal) */
 /* ---------------------------------------------------------------------------------------------------- */
 
@@ -56,13 +63,29 @@ function section_a_process_data(data) {
 
   const runtime_data = {
 
-    premium: data.premium || 0,
-    standard: data.standard || 0,
-    critical_weak: data.critical_weak || 0,
-    soft_shell: data.soft_shell || 0,
-    dead: data.dead || 0,
-    under_sized: data.under_sized || 0,
-    barnacle_tubeworm: data.barnacle_tubeworm || 0
+    premium:
+      data.premium || 0,
+
+    standard:
+      data.standard || 0,
+
+    critical_weak:
+      data.critical_weak || 0,
+
+    soft_shell:
+      data.soft_shell || 0,
+
+    dead:
+      data.dead || 0,
+
+    under_sized:
+      data.under_sized || 0,
+
+    barnacle_tubeworm:
+      data.barnacle_tubeworm || 0,
+
+    gross_lbs_graded:
+      data.gross_lbs_graded || 0
 
   };
 
@@ -158,6 +181,7 @@ function section_a_process_data(data) {
         null,
         ["section_a_math", "percent_barnacle_tubeworm"]
       ]
+
     ],
 
     total_reject:
@@ -226,7 +250,11 @@ function section_a_process_data(data) {
       ),
 
     percent_barnacle_tubeworm:
-      runtime_data.percent_barnacle_tubeworm
+      runtime_data.percent_barnacle_tubeworm,
+
+    gross_lbs_graded:
+      runtime_data.gross_lbs_graded
+
   };
 }
 
@@ -320,25 +348,54 @@ function section_a_clear_data() {
 
   document
     .querySelectorAll(".cat")
-    .forEach(i => i.value = "");
+    .forEach(input => {
 
-  document.getElementById("results").innerHTML = "";
+      input.value = "";
 
-  gradingData = null;
+    });
+
+  initialize_results();
+
 }
 
 const section_a = {
 
   calculate() {
 
-    const input = section_a_source_data();
+    const input =
+      section_a_source_data();
 
-    const result = section_a_process_data(input);
+    section_a_state =
+      build_section_a_state(input);
 
-    // preserve your existing global dependency
+    if (
+      section_b_synced_state &&
+      section_b_data_is_stale()
+    ) {
+
+      document.getElementById("formulaText").innerHTML = `
+
+        <strong>Recalculation Recommended</strong><br><br>
+
+        The Landed Pounds Summary uses values from the Dockside Grading Summary.<br><br>
+
+        Dockside data has changed since the last Landed Pounds calculation.<br><br>
+
+        Re-calculation is recommended to ensure accurate results.
+
+      `;
+
+      document.getElementById("formulaModal").style.display = "block";
+
+    }
+
+    const result =
+      section_a_process_data(input);
+
     gradingData = result;
 
     section_a_format_data(result);
+
   }
 };
 
@@ -347,21 +404,50 @@ const section_a = {
 
 function section_b_source_data() {
 
-  return {
-    gross: +document.getElementById("grossWeight").value || 0,
-    pans: +document.getElementById("pans").value || 0,
-    graded: +document.getElementById("grossSample").value || 0
-  };
+  const inputs =
+    document.querySelectorAll(".section-b-input");
+
+  const data = {};
+
+  inputs.forEach(input => {
+
+    data[input.dataset.key] =
+      parseFloat(input.value) || 0;
+
+  });
+
+  return data;
+}
+
+function build_section_a_state(data) {
+
+  return JSON.stringify({
+
+    premium:
+      data.premium || 0,
+
+    standard:
+      data.standard || 0,
+
+    critical_weak:
+      data.critical_weak || 0,
+
+    soft_shell:
+      data.soft_shell || 0,
+
+    dead:
+      data.dead || 0,
+
+    under_sized:
+      data.under_sized || 0,
+
+    barnacle_tubeworm:
+      data.barnacle_tubeworm || 0
+
+  });
 }
 
 function section_b_process_data(data) {
-
-  if (!gradingData || !gradingData.total_net_lbs_graded) {
-
-    return {
-      error: "Complete Dockside Grading first."
-    };
-  }
 
   const formulas = math.section_b_math;
 
@@ -378,13 +464,13 @@ function section_b_process_data(data) {
   const runtime_data = {
 
     gross_pounds_landed:
-      data.gross || 0,
+      data.gross_pounds_landed || 0,
 
     total_number_of_pans:
-      data.pans || 0,
+      data.total_number_of_pans || 0,
 
     total_gross_lbs_graded:
-      data.graded || 0,
+      gradingData.gross_lbs_graded || 0,
 
     total_net_lbs_graded:
       gradingData.total_net_lbs_graded || 0,
@@ -528,21 +614,45 @@ function section_b_format_data(data) {
 }
 
 function section_b_clear_data() {
-  document.getElementById("grossWeight").value = "";
-  document.getElementById("pans").value = "";
-  document.getElementById("grossSample").value = "";
-  document.getElementById("landedResults").innerHTML = "";
+
+  document
+    .querySelectorAll(".section-b-input")
+    .forEach(input => {
+
+      input.value = "";
+
+    });
+
+  initialize_results();
+
+}
+
+function section_b_data_is_stale() {
+
+  return (
+    section_a_state !==
+    section_b_synced_state
+  );
+
 }
 
 const section_b = {
 
   calculate() {
 
-    const input = section_b_source_data();
+    const input =
+      section_b_source_data();
 
-    const result = section_b_process_data(input);
+    const result =
+      section_b_process_data(input);
 
     section_b_format_data(result);
+
+    section_b_synced_state =
+      section_a_state;
+
+    section_b_active = true;
+
   }
 };
 
@@ -597,8 +707,129 @@ function round_percent(value) {
 
 }
 
+function toggle_results(contentId, iconId) {
+
+  const content =
+    document.getElementById(contentId);
+
+  const icon =
+    document.getElementById(iconId);
+
+  const collapsing =
+    !content.classList.contains("collapsed");
+
+  content.classList.toggle("collapsed");
+
+  if (collapsing) {
+
+    icon.classList.add("collapsed");
+
+  } else {
+
+    icon.classList.remove("collapsed");
+
+  }
+}
+
+function format_input_display(input, metadata) {
+
+  if (!metadata?.unit) return;
+
+  const raw =
+    input.value.replace(/[^\d.]/g, "");
+
+  if (!raw) {
+    input.value = "";
+    return;
+  }
+
+  input.value =
+    `${raw} ${metadata.unit}`;
+}
+
+function unformat_input_display(input) {
+
+  input.value =
+    input.value.replace(/[^\d.]/g, "");
+
+}
+
+function initialize_inputs() {
+
+  document
+    .querySelectorAll(".cat")
+    .forEach(input => {
+
+      const key =
+        input.dataset.key;
+
+      const metadata =
+        math_data.section_a_math_data[key];
+
+      if (!metadata) return;
+
+      input.placeholder = metadata.unit
+        ? `${Number(metadata.default).toFixed(metadata.decimals)} ${metadata.unit}`
+        : Number(metadata.default).toFixed(metadata.decimals);
+
+      input.addEventListener("focus", () => {
+
+        unformat_input_display(input);
+
+      });
+
+      input.addEventListener("blur", () => {
+
+        format_input_display(input, metadata);
+
+      });
+
+    });
+
+  document
+    .querySelectorAll(".section-b-input")
+    .forEach(input => {
+
+      const key =
+        input.dataset.key;
+
+      const metadata =
+        math_data.section_b_math_data[key];
+
+      if (!metadata) return;
+
+      input.placeholder = metadata.unit
+        ? `${Number(metadata.default).toFixed(metadata.decimals)} ${metadata.unit}`
+        : Number(metadata.default).toFixed(metadata.decimals);
+
+      input.addEventListener("focus", () => {
+
+        unformat_input_display(input);
+
+      });
+
+      input.addEventListener("blur", () => {
+
+        format_input_display(input, metadata);
+
+      });
+
+    });
+}
+
+function initialize_results() {
+
+  section_a.calculate();
+
+  section_b.calculate();
+
+}
+
 /* Service Worker Content */
 /* ---------------------------------------------------------------------------------------------------- */
+
+initialize_inputs();
+initialize_results();
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {

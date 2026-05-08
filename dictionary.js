@@ -3,14 +3,61 @@
 
 const section_a_math_data = {
 
-    premium: {},
-    standard: {},
-    critical_weak: {},
-    soft_shell: {},
-    dead: {},
-    under_sized: {},
-    barnacle_tubeworm: {},
-    gross_pounds_graded: {}
+    premium: {
+      label: "Premium",
+      default: 0,
+      unit: "lbs",
+      decimals: 1
+    },
+
+    standard: {
+      label: "Standard",
+      default: 0,
+      unit: "lbs",
+      decimals: 1
+    },
+
+    critical_weak: {
+      label: "Critical Weak",
+      default: 0,
+      unit: "lbs",
+      decimals: 1
+    },
+
+    soft_shell: {
+      label: "Soft Shell",
+      default: 0,
+      unit: "lbs",
+      decimals: 1
+    },
+
+    dead: {
+      label: "Dead",
+      default: 0,
+      unit: "lbs",
+      decimals: 1
+    },
+
+    under_sized: {
+      label: "Less than 3.74\"",
+      default: 0,
+      unit: "lbs",
+      decimals: 1
+    },
+
+    barnacle_tubeworm: {
+      label: "Barn. / Tubeworm",
+      default: 0,
+      unit: "lbs",
+      decimals: 1
+    },
+
+    gross_lbs_graded: {
+      label: "Gross Lbs. Graded",
+      default: 0,
+      unit: "lbs",
+      decimals: 1
+    }
 
 };
 
@@ -404,9 +451,26 @@ const section_a_math = {
 
 const section_b_math_data = {
 
-    gross_pounds_landed: {},
-    total_number_of_pans: {},
-    total_gross_lbs_graded: {}
+    gross_pounds_landed: {
+      label: "Gross Pounds Landed",
+      default: 0,
+      unit: "lbs",
+      decimals: 1
+    },
+
+    total_number_of_pans: {
+      label: "Total Number of Pans",
+      default: 0,
+      unit: null,
+      decimals: 0
+    },
+
+    total_gross_lbs_graded: {
+      label: "Gross Pounds Graded",
+      default: 0,
+      unit: "lbs",
+      decimals: 1
+    }
 
 };
 
