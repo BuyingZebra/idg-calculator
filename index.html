@@ -3,316 +3,443 @@
 
 <head>
 
-  <meta charset="UTF-8" />
+<meta charset="UTF-8">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  />
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
 
-  <title>IDG Calculator</title>
+<title>IDG Calculator</title>
 
-  <!-- PWA -->
-  <link rel="manifest" href="manifest.json">
+<!-- ========================================================= -->
+<!-- PWA -->
+<!-- ========================================================= -->
 
-  <!-- iOS App Mode -->
-  <meta
-    name="apple-mobile-web-app-capable"
-    content="yes"
-  >
+<link rel="manifest" href="manifest.json">
 
-  <meta
-    name="apple-mobile-web-app-status-bar-style"
-    content="black-translucent"
-  >
+<meta
+name="theme-color"
+content="#0f172a"
+>
 
-  <meta
-    name="apple-mobile-web-app-title"
-    content="IDG"
-  >
+<meta
+name="apple-mobile-web-app-capable"
+content="yes"
+>
 
-  <!-- App Icons -->
-  <link
-    rel="apple-touch-icon"
-    href="icon-192.png"
-  >
+<meta
+name="apple-mobile-web-app-status-bar-style"
+content="black-translucent"
+>
 
-  <!-- Theme -->
-  <meta
-    name="theme-color"
-    content="#0f172a"
-  >
+<meta
+name="apple-mobile-web-app-title"
+content="IDG"
+>
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="style.css" />
+<link
+rel="apple-touch-icon"
+href="icon-192.png"
+>
+
+<!-- ========================================================= -->
+<!-- STYLES -->
+<!-- ========================================================= -->
+
+<link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
 
-  <h1>IDG Calculator</h1>
+<!-- ========================================================= -->
+<!-- APP SHELL -->
+<!-- ========================================================= -->
 
-  <!-- ========================= -->
-  <!-- SECTION A -->
-  <!-- ========================= -->
+<div class="app-shell">
 
-  <div class="section" id="sectionA">
+<main class="workflow-viewport">
 
-    <h2>Dockside Grading Summary</h2>
+<!-- ========================================================= -->
+<!-- PAGE RAIL -->
+<!-- ========================================================= -->
 
-    <div class="row">
-      <span>Premium</span>
-      <input
-        class="cat"
-        data-key="premium"
-        type="text"
-        inputmode="decimal"
-      >
-    </div>
+<div
+class="workflow-rail"
+id="workflowRail"
+>
 
-    <div class="row">
-      <span>Standard</span>
-      <input
-        class="cat"
-        data-key="standard"
-        type="text"
-        inputmode="decimal"
-      >
-    </div>
+<!-- ========================================================= -->
+<!-- PAGE 1 -->
+<!-- ========================================================= -->
 
-    <div class="row">
-      <span>Critical Weak</span>
-      <input
-        class="cat"
-        data-key="critical_weak"
-        type="text"
-        inputmode="decimal"
-      >
-    </div>
+<section class="workflow-page">
 
-    <div class="row">
-      <span>Soft Shell</span>
-      <input
-        class="cat"
-        data-key="soft_shell"
-        type="text"
-        inputmode="decimal"
-      >
-    </div>
+<div class="workflow-card">
 
-    <div class="row">
-      <span>Dead</span>
-      <input
-        class="cat"
-        data-key="dead"
-        type="text"
-        inputmode="decimal"
-      >
-    </div>
+<!-- HEADER -->
 
-    <div class="row">
-      <span>Less than 3.74"</span>
-      <input
-        class="cat"
-        data-key="under_sized"
-        type="text"
-        inputmode="decimal"
-      >
-    </div>
+<div class="workflow-card-header">
 
-    <div class="row">
-      <span>Barn. / Tubeworm</span>
-      <input
-        class="cat"
-        data-key="barnacle_tubeworm"
-        type="text"
-        inputmode="decimal"
-      >
-    </div>
+<div class="workflow-card-title-group">
 
-    <div class="row">
-      <span>Gross Lbs. Graded</span>
-      <input
-      class="cat"
-      data-key="gross_lbs_graded"
-      id="grossSample"
-      type="text"
-      inputmode="decimal"
-    >
-    </div>
+<img
+class="workflow-card-icon"
+src="./icons/checkbook.svg"
+alt="Dockside"
+>
 
-    <!-- RESULTS -->
+<div class="workflow-card-heading">
 
-    <div class="results-section">
+<h2>
+Dockside Grading Summary
+</h2>
 
-      <div
-        class="results-toggle"
-        onclick="toggle_results('resultsContent', 'resultsArrow')"
-      >
+<p>
+Grade sample quality & percentages
+</p>
 
-        <div
-          id="resultsArrow"
-          class="toggle-icon-stack"
-        >
+</div>
 
-          <img
-            class="toggle-icon icon-on"
-            src="./icons/radial_button_checked.svg"
-          >
+</div>
 
-          <img
-            class="toggle-icon icon-off"
-            src="./icons/radial_button_unchecked.svg"
-          >
+</div>
 
-        </div>
+<!-- BODY -->
 
-        <h3>Results</h3>
+<div class="workflow-card-body">
 
-      </div>
+<div class="section-content">
 
-      <div
-        id="resultsContent"
-        class="results-content"
-      >
+<!-- INPUTS -->
 
-        <div id="results"></div>
+<div class="row">
+<span>Premium</span>
+<input
+class="cat"
+data-key="premium"
+type="text"
+inputmode="decimal"
+>
+</div>
 
-      </div>
+<div class="row">
+<span>Standard</span>
+<input
+class="cat"
+data-key="standard"
+type="text"
+inputmode="decimal"
+>
+</div>
 
-    </div>
+<div class="row">
+<span>Critical Weak</span>
+<input
+class="cat"
+data-key="critical_weak"
+type="text"
+inputmode="decimal"
+>
+</div>
 
-    <!-- BUTTONS -->
+<div class="row">
+<span>Soft Shell</span>
+<input
+class="cat"
+data-key="soft_shell"
+type="text"
+inputmode="decimal"
+>
+</div>
 
-    <div class="button-row">
+<div class="row">
+<span>Dead</span>
+<input
+class="cat"
+data-key="dead"
+type="text"
+inputmode="decimal"
+>
+</div>
 
-      <button onclick="section_a.calculate()">
-        Calculate
-      </button>
+<div class="row">
+<span>Less than 3.74"</span>
+<input
+class="cat"
+data-key="under_sized"
+type="text"
+inputmode="decimal"
+>
+</div>
 
-      <button
-        class="clear-btn"
-        onclick="section_a_clear_data()"
-      >
-        Clear
-      </button>
+<div class="row">
+<span>Barn. / Tubeworm</span>
+<input
+class="cat"
+data-key="barnacle_tubeworm"
+type="text"
+inputmode="decimal"
+>
+</div>
 
-    </div>
+<div class="row">
+<span>Gross Lbs. Graded</span>
+<input
+class="cat"
+data-key="gross_lbs_graded"
+id="grossSample"
+type="text"
+inputmode="decimal"
+>
+</div>
 
-  </div>
+<!-- BUTTONS -->
 
-  <!-- ========================= -->
-  <!-- SECTION B -->
-  <!-- ========================= -->
+<div class="button-row">
 
-  <div class="section" id="sectionB">
+<button onclick="section_a.calculate()">
+Calculate
+</button>
 
-    <h2>Landed Pounds Summary</h2>
+<button
+class="clear-btn"
+onclick="section_a_clear_data()"
+>
+Clear
+</button>
 
-    <div class="row">
-      <span>Gross Pounds Landed</span>
-      <input
-      class="section-b-input"
-      data-key="gross_pounds_landed"
-      id="grossWeight"
-      type="text"
-      inputmode="decimal"
-    >
-    </div>
+</div>
 
-    <div class="row">
-      <span>Total # of Pans</span>
-      <input
-      class="section-b-input"
-      data-key="total_number_of_pans"
-      id="pans"
-      type="number"
-    >
-    </div>
+<!-- RESULTS -->
 
-    <!-- RESULTS -->
+<div class="results-section">
 
-    <div class="results-section">
+<div
+class="results-toggle"
+onclick="toggle_results('resultsContent','resultsArrow')"
+>
 
-      <div
-        class="results-toggle"
-        onclick="toggle_results('landedResultsContent', 'landedResultsArrow')"
-      >
+<div
+id="resultsArrow"
+class="toggle-icon-stack"
+>
 
-        <div
-          id="landedResultsArrow"
-          class="toggle-icon-stack"
-        >
+<img
+class="toggle-icon icon-on"
+src="./icons/visibility.svg"
+alt="Open"
+>
 
-          <img
-            class="toggle-icon icon-on"
-            src="./icons/radial_button_checked.svg"
-          >
+<img
+class="toggle-icon icon-off"
+src="./icons/visibility_off.svg"
+alt="Closed"
+>
 
-          <img
-            class="toggle-icon icon-off"
-            src="./icons/radial_button_unchecked.svg"
-          >
+</div>
 
-        </div>
+<h3>
+Check Results
+</h3>
 
-        <h3>Results</h3>
+</div>
 
-      </div>
+<div
+id="resultsContent"
+class="results-content"
+>
 
-      <div
-        id="landedResultsContent"
-        class="results-content"
-      >
+<div class="results-inner">
+<div id="results"></div>
+</div>
 
-        <div id="landedResults"></div>
+</div>
 
-      </div>
+</div>
 
-    </div>
+</div>
 
-    <!-- BUTTONS -->
+</div>
 
-    <div class="button-row">
+</div>
 
-      <button onclick="section_b.calculate()">
-        Calculate
-      </button>
+</section>
 
-      <button
-        class="clear-btn"
-        onclick="section_b_clear_data()"
-      >
-        Clear
-      </button>
+<!-- ========================================================= -->
+<!-- PAGE 2 -->
+<!-- ========================================================= -->
 
-    </div>
+<section class="workflow-page">
 
-  </div>
+<div class="workflow-card">
 
-  <!-- FORMULA MODAL -->
+<!-- HEADER -->
 
-  <div id="formulaModal" class="modal">
+<div class="workflow-card-header">
 
-    <div class="modal-content">
+<div class="workflow-card-title-group">
 
-      <span
-        class="close"
-        onclick="helper_disable()"
-      >
-        ×
-      </span>
+<img
+class="workflow-card-icon"
+src="./icons/receipt_long.svg"
+alt="Inspection"
+>
 
-      <div id="formulaText"></div>
+<div class="workflow-card-heading">
 
-    </div>
+<h2>
+Inspection Summary
+</h2>
 
-  </div>
+<p>
+Calculate landed crab estimates
+</p>
 
-  <!-- SCRIPTS -->
+</div>
 
-  <script src="dictionary.js"></script>
-  <script src="app.js"></script>
+</div>
+
+</div>
+
+<!-- BODY -->
+
+<div class="workflow-card-body">
+
+<div class="section-content">
+
+<!-- INPUTS -->
+
+<div class="row">
+<span>Gross Pounds Landed</span>
+<input
+class="section-b-input"
+data-key="gross_pounds_landed"
+id="grossWeight"
+type="text"
+inputmode="decimal"
+>
+</div>
+
+<div class="row">
+<span>Total # of Pans</span>
+<input
+class="section-b-input"
+data-key="total_number_of_pans"
+id="pans"
+type="number"
+>
+</div>
+
+<!-- BUTTONS -->
+
+<div class="button-row">
+
+<button onclick="section_b.calculate()">
+Calculate
+</button>
+
+<button
+class="clear-btn"
+onclick="section_b_clear_data()"
+>
+Clear
+</button>
+
+</div>
+
+<!-- RESULTS -->
+
+<div class="results-section">
+
+<div
+class="results-toggle"
+onclick="toggle_results('landedResultsContent','landedResultsArrow')"
+>
+
+<div
+id="landedResultsArrow"
+class="toggle-icon-stack"
+>
+
+<img
+class="toggle-icon icon-on"
+src="./icons/visibility.svg"
+alt="Open"
+>
+
+<img
+class="toggle-icon icon-off"
+src="./icons/visibility_off.svg"
+alt="Closed"
+>
+
+</div>
+
+<h3>
+Check Results
+</h3>
+
+</div>
+
+<div
+id="landedResultsContent"
+class="results-content"
+>
+
+<div class="results-inner">
+<div id="landedResults"></div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+</main>
+
+</div>
+
+<!-- ========================================================= -->
+<!-- FORMULA MODAL -->
+<!-- ========================================================= -->
+
+<div
+id="formulaModal"
+class="modal"
+>
+
+<div class="modal-content">
+
+<span
+class="close"
+onclick="helper_disable()"
+>
+×
+</span>
+
+<div id="formulaText"></div>
+
+</div>
+
+</div>
+
+<!-- ========================================================= -->
+<!-- SCRIPTS -->
+<!-- ========================================================= -->
+
+<script src="dictionary.js"></script>
+<script src="app.js"></script>
 
 </body>
 
