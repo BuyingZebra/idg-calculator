@@ -5,20 +5,28 @@
 :root{
 --bg-main:#0b1120;
 --bg-secondary:#0f172a;
+
 --bg-card:#111827;
 --bg-card-alt:#1e293b;
+
 --border:#334155;
+
 --text-main:#f8fafc;
 --text-soft:#94a3b8;
+
 --green:#22c55e;
 --green-hover:#16a34a;
+
 --red:#ef4444;
 --red-hover:#dc2626;
+
 --shadow:0 10px 30px rgba(0,0,0,.28);
 --shadow-active:0 20px 60px rgba(0,0,0,.45);
+
 --radius-card:28px;
 --radius-input:16px;
 --radius-btn:18px;
+
 --transition:280ms cubic-bezier(.22,.8,.22,1);
 }
 
@@ -33,19 +41,31 @@ box-sizing:border-box;
 -webkit-tap-highlight-color:transparent;
 }
 
+/* ========================================================= */
+/* DOCUMENT */
+/* ========================================================= */
+
 html,
 body{
 width:100%;
 height:100%;
+
 overflow:hidden;
+
 font-family:Arial,sans-serif;
+
 background:
 linear-gradient(
 to bottom,
 var(--bg-main),
 var(--bg-secondary)
 );
+
+background-color:
+var(--bg-secondary);
+
 color:var(--text-main);
+
 touch-action:pan-y;
 }
 
@@ -58,8 +78,18 @@ overscroll-behavior:none;
 /* ========================================================= */
 
 .app-shell{
+
 width:100%;
+
+min-height:100dvh;
 height:100svh;
+
+background:
+linear-gradient(
+to bottom,
+var(--bg-main),
+var(--bg-secondary)
+);
 
 padding-top:
 env(safe-area-inset-top);
@@ -79,7 +109,9 @@ overflow:hidden;
 .workflow-viewport{
 width:100%;
 height:100%;
+
 overflow:hidden;
+
 position:relative;
 }
 
@@ -89,17 +121,23 @@ position:relative;
 
 .workflow-rail{
 display:flex;
+
 width:200vw;
 height:100%;
+
 transition:transform var(--transition);
+
 will-change:transform;
 }
 
 .workflow-page{
 width:100vw;
 height:100%;
+
 flex-shrink:0;
+
 padding:14px;
+
 overflow:hidden;
 }
 
@@ -110,8 +148,10 @@ overflow:hidden;
 .workflow-card{
 width:100%;
 height:100%;
+
 display:flex;
 flex-direction:column;
+
 overflow:hidden;
 
 border-radius:var(--radius-card);
@@ -158,14 +198,18 @@ backdrop-filter:blur(12px);
 .workflow-card-title-group{
 display:flex;
 align-items:center;
+
 gap:14px;
+
 min-width:0;
 }
 
 .workflow-card-icon{
 width:28px;
 height:28px;
+
 opacity:.9;
+
 flex-shrink:0;
 }
 
@@ -181,8 +225,10 @@ line-height:1.1;
 
 .workflow-card-heading p{
 margin-top:4px;
+
 font-size:13px;
 line-height:1.3;
+
 color:var(--text-soft);
 }
 
@@ -212,6 +258,7 @@ display:none;
 .section-content{
 display:flex;
 flex-direction:column;
+
 padding:18px;
 }
 
@@ -222,26 +269,31 @@ padding:18px;
 .row{
 display:flex;
 align-items:center;
+
 gap:16px;
+
 margin-top:12px;
 }
 
 .row span{
 flex:1;
+
 font-size:15px;
 font-weight:500;
 line-height:1.3;
+
 color:var(--text-soft);
 }
 
 .row input{
 flex:1.1;
-min-width:120px;
+
 width:100%;
+min-width:120px;
 
 height:48px;
 
-padding:12px;
+padding:0 14px;
 
 font-size:18px;
 color:white;
@@ -290,8 +342,11 @@ padding-top:28px;
 .results-toggle{
 display:flex;
 align-items:center;
+
 gap:10px;
+
 cursor:pointer;
+
 user-select:none;
 }
 
@@ -301,7 +356,9 @@ font-size:18px;
 
 .results-content{
 height:auto;
+
 overflow:hidden;
+
 transition:height .4s ease;
 }
 
@@ -319,6 +376,7 @@ padding:16px 0;
 
 .toggle-icon-stack{
 position:relative;
+
 width:26px;
 height:26px;
 }
@@ -361,14 +419,18 @@ visibility:visible;
 
 .results-table{
 width:100%;
+
 border-collapse:collapse;
+
 overflow:hidden;
+
 border-radius:16px;
 }
 
 .results-table th,
 .results-table td{
 padding:10px;
+
 font-size:14px;
 
 border:
@@ -377,16 +439,21 @@ border:
 
 .results-table th{
 font-weight:700;
+
 text-align:left;
-background:var(--bg-card-alt);
+
+background:
+var(--bg-card-alt);
 }
 
 .results-table tbody tr{
-background:rgba(255,255,255,.015);
+background:
+rgba(255,255,255,.015);
 }
 
 .results-table tbody tr:nth-child(even){
-background:rgba(255,255,255,.03);
+background:
+rgba(255,255,255,.03);
 }
 
 .total-row{
@@ -403,6 +470,7 @@ background:#334155!important;
 
 .info{
 cursor:pointer;
+
 transition:color .2s ease;
 }
 
@@ -416,7 +484,9 @@ color:var(--green);
 
 .button-row{
 display:flex;
+
 gap:12px;
+
 padding:18px 0 10px;
 }
 
@@ -507,8 +577,11 @@ var(--shadow-active);
 
 .close{
 float:right;
+
 cursor:pointer;
+
 font-size:26px;
+
 opacity:.8;
 }
 
@@ -539,13 +612,17 @@ font-size:14px;
 }
 
 .row input{
-padding:14px;
+height:52px;
+
+padding:0 14px;
+
 font-size:17px;
 }
 
 .results-table th,
 .results-table td{
 padding:8px;
+
 font-size:12px;
 }
 
