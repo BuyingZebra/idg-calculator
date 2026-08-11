@@ -1,408 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>IDG Dockside Grading Training Tool</title>
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0, viewport-fit=cover"
->
+<meta name="theme-color" content="#0f172a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="IDG Training">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./assets/icons/app-192.png">
 
-<title>IDG Calculator</title>
+<link rel="stylesheet" href="./ui/shell.css">
+<link rel="stylesheet" href="./ui/animations.css">
+<link rel="stylesheet" href="./ui/navigation.css">
 
-<!-- ========================================================= -->
-<!-- PWA -->
-<!-- ========================================================= -->
-
-<link rel="manifest" href="manifest.json">
-
-<meta
-name="theme-color"
-content="#0f172a"
->
-
-<meta
-name="apple-mobile-web-app-capable"
-content="yes"
->
-
-<meta
-name="apple-mobile-web-app-status-bar-style"
-content="black-translucent"
->
-
-<meta
-name="apple-mobile-web-app-title"
-content="IDG"
->
-
-<link
-rel="apple-touch-icon"
-href="icon-192.png"
->
-
-<!-- ========================================================= -->
-<!-- STYLES -->
-<!-- ========================================================= -->
-
-<link rel="stylesheet" href="style.css">
-
+<link rel="stylesheet" href="./ui/modules.css">
 </head>
 
 <body>
 
-<!-- ========================================================= -->
-<!-- APP SHELL -->
-<!-- ========================================================= -->
+<div id="appShell">
 
-<div class="app-shell">
-
-<main class="workflow-viewport">
-
-<!-- ========================================================= -->
-<!-- PAGE RAIL -->
-<!-- ========================================================= -->
-
-<div
-class="workflow-rail"
-id="workflowRail"
->
-
-<!-- ========================================================= -->
-<!-- PAGE 1 -->
-<!-- ========================================================= -->
-
-<section class="workflow-page">
-
-<div class="workflow-card">
-
-<!-- HEADER -->
-
-<div class="workflow-card-header">
-
-<div class="workflow-card-title-group">
-
-<img
-class="workflow-card-icon"
-src="./icons/checkbook.svg"
-alt="Dockside"
->
-
-<div class="workflow-card-heading">
-
-<h2>
-Dockside Grading Summary
-</h2>
-
-<p>
-Grade sample quality & percentages
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- BODY -->
-
-<div class="workflow-card-body">
-
-<div class="section-content">
-
-<!-- INPUTS -->
-
-<div class="row">
-<span>Premium</span>
-<input
-class="cat"
-data-key="premium"
-type="text"
-inputmode="decimal"
->
-</div>
-
-<div class="row">
-<span>Standard</span>
-<input
-class="cat"
-data-key="standard"
-type="text"
-inputmode="decimal"
->
-</div>
-
-<div class="row">
-<span>Critical Weak</span>
-<input
-class="cat"
-data-key="critical_weak"
-type="text"
-inputmode="decimal"
->
-</div>
-
-<div class="row">
-<span>Soft Shell</span>
-<input
-class="cat"
-data-key="soft_shell"
-type="text"
-inputmode="decimal"
->
-</div>
-
-<div class="row">
-<span>Dead</span>
-<input
-class="cat"
-data-key="dead"
-type="text"
-inputmode="decimal"
->
-</div>
-
-<div class="row">
-<span>Less than 3.74"</span>
-<input
-class="cat"
-data-key="under_sized"
-type="text"
-inputmode="decimal"
->
-</div>
-
-<div class="row">
-<span>Barn. / Tubeworm</span>
-<input
-class="cat"
-data-key="barnacle_tubeworm"
-type="text"
-inputmode="decimal"
->
-</div>
-
-<div class="row">
-<span>Gross Lbs. Graded</span>
-<input
-class="cat"
-data-key="gross_lbs_graded"
-id="grossSample"
-type="text"
-inputmode="decimal"
->
-</div>
-
-<!-- BUTTONS -->
-
-<div class="button-row">
-
-<button onclick="section_a.calculate()">
-Calculate
-</button>
+<header id="appHeader">
 
 <button
-class="clear-btn"
-onclick="section_a_clear_data()"
->
-Clear
+id="headerBackButton"
+aria-label="Back">
+←
 </button>
 
-</div>
-
-<!-- RESULTS -->
-
-<div class="results-section">
+<div id="headerTitleViewport">
 
 <div
-class="results-toggle"
-onclick="toggle_results('resultsContent','resultsArrow')"
->
+id="headerTitleCurrent"
+class="headerTitle">
 
-<div
-id="resultsArrow"
-class="toggle-icon-stack"
->
-
-<img
-class="toggle-icon icon-on"
-src="./icons/visibility.svg"
-alt="Open"
->
-
-<img
-class="toggle-icon icon-off"
-src="./icons/visibility_off.svg"
-alt="Closed"
->
-
-</div>
-
-<h3>
-Check Results
-</h3>
+Dockside Grading Tool
 
 </div>
 
 <div
-id="resultsContent"
-class="results-content"
->
-
-<div class="results-inner">
-<div id="results"></div>
-</div>
+id="headerTitleIncoming"
+class="headerTitle">
 
 </div>
 
 </div>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ========================================================= -->
-<!-- PAGE 2 -->
-<!-- ========================================================= -->
-
-<section class="workflow-page">
-
-<div class="workflow-card">
-
-<!-- HEADER -->
-
-<div class="workflow-card-header">
-
-<div class="workflow-card-title-group">
-
-<img
-class="workflow-card-icon"
-src="./icons/receipt_long.svg"
-alt="Inspection"
->
-
-<div class="workflow-card-heading">
-
-<h2>
-Inspection Summary
-</h2>
-
-<p>
-Calculate landed crab estimates
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- BODY -->
-
-<div class="workflow-card-body">
-
-<div class="section-content">
-
-<!-- INPUTS -->
-
-<div class="row">
-<span>Gross Pounds Landed</span>
-<input
-class="section-b-input"
-data-key="gross_pounds_landed"
-id="grossWeight"
-type="text"
-inputmode="decimal"
->
-</div>
-
-<div class="row">
-<span>Total # of Pans</span>
-<input
-class="section-b-input"
-data-key="total_number_of_pans"
-id="pans"
-type="number"
->
-</div>
-
-<!-- BUTTONS -->
-
-<div class="button-row">
-
-<button onclick="section_b.calculate()">
-Calculate
-</button>
 
 <button
-class="clear-btn"
-onclick="section_b_clear_data()"
->
-Clear
+id="headerHelpButton"
+aria-label="Help">
+?
 </button>
 
-</div>
+</header>
 
-<!-- RESULTS -->
+<div id="pageViewport">
 
-<div class="results-section">
+<div id="pageTrack">
 
-<div
-class="results-toggle"
-onclick="toggle_results('landedResultsContent','landedResultsArrow')"
->
+<main id="appMain">
 
-<div
-id="landedResultsArrow"
-class="toggle-icon-stack"
->
+<aside id="timelineContainer" aria-label="Inspection progress">
+    <div id="timelineLine" aria-hidden="true"></div>
+    <div id="timelineProgress" aria-hidden="true"></div>
 
-<img
-class="toggle-icon icon-on"
-src="./icons/visibility.svg"
-alt="Open"
->
+    <button class="timelineItem active" data-step="0" type="button" aria-label="Inspection Detail" aria-current="step">
+        <span class="timelineNode"><span class="timelineNodeIcon" data-icon="grading"></span></span>
+    </button>
 
-<img
-class="toggle-icon icon-off"
-src="./icons/visibility_off.svg"
-alt="Closed"
->
+    <button class="timelineItem" data-step="1" type="button" aria-label="Inspection Summary">
+        <span class="timelineNode"><span class="timelineNodeIcon" data-icon="inspection"></span></span>
+    </button>
 
-</div>
+    <button class="timelineItem" data-step="2" type="button" aria-label="Activity Slip">
+        <span class="timelineNode"><span class="timelineNodeIcon" data-icon="activity"></span></span>
+    </button>
+</aside>
 
-<h3>
-Check Results
-</h3>
+<section id="contentContainer">
+    <div id="contentViewport">
+        <div id="contentTrack">
 
-</div>
+            <div class="contentPage active" data-step="0">
+                <div class="cardPreview">
+                    <div class="previewHero">
+                        <div class="contentIcon" data-icon="grading"></div>
+                        <div>
+                            <h2 class="contentTitle">Inspection Detail</h2>
+                            <p class="contentBody">Grade sample quality &amp; percentages</p>
+                        </div>
+                    </div>
 
-<div
-id="landedResultsContent"
-class="results-content"
->
+                    <div class="previewDivider"></div>
 
-<div class="results-inner">
-<div id="landedResults"></div>
-</div>
+                    <div class="previewInfo">
+                        <div class="previewInfoLabel">Progress</div>
+                        <div class="previewInfoRow">
+                            <span>Form status</span>
+                            <strong>Not evaluated</strong>
+                        </div>
+                        <div class="previewInfoRow">
+                            <span>Completion</span>
+                            <strong>Rules pending</strong>
+                        </div>
+                    </div>
 
-</div>
+                    <button class="previewStatus pending" type="button" data-debug-complete="0" aria-pressed="false">
+                        <span class="previewStatusDot"></span>
+                        <div><strong>Ready to use</strong><small>Completion rules will be added after we define them.</small></div>
+                    </button>
 
-</div>
+                    <div class="previewActions">
+                        <button class="previewPrimary" type="button" data-open-step="0">Start / Continue</button>
+                        <button class="previewSecondary" type="button" data-review-step="0">Review Form</button>
+                    </div>
+                </div>
+            </div>
 
-</div>
+            <div class="contentPage" data-step="1">
+                <div class="cardPreview">
+                    <div class="previewHero">
+                        <div class="contentIcon" data-icon="inspection"></div>
+                        <div>
+                            <h2 class="contentTitle">Inspection Summary</h2>
+                            <p class="contentBody">Sampling plan &amp; landed pounds summary</p>
+                        </div>
+                    </div>
 
-</div>
+                    <div class="previewDivider"></div>
 
-</div>
+                    <div class="previewInfo">
+                        <div class="previewInfoLabel">Progress</div>
+                        <div class="previewInfoRow">
+                            <span>Form status</span>
+                            <strong>Not evaluated</strong>
+                        </div>
+                        <div class="previewInfoRow">
+                            <span>Completion</span>
+                            <strong>Rules pending</strong>
+                        </div>
+                    </div>
 
+                    <button class="previewStatus pending" type="button" data-debug-complete="1" aria-pressed="false">
+                        <span class="previewStatusDot"></span>
+                        <div><strong>Ready to use</strong><small>Completion rules will be added after we define them.</small></div>
+                    </button>
+
+                    <div class="previewActions">
+                        <button class="previewPrimary" type="button" data-open-step="1">Start / Continue</button>
+                        <button class="previewSecondary" type="button" data-review-step="1">Review Form</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contentPage" data-step="2">
+                <div class="cardPreview">
+                    <div class="previewHero">
+                        <div class="contentIcon" data-icon="activity"></div>
+                        <div>
+                            <h2 class="contentTitle">Activity Slip</h2>
+                            <p class="contentBody">Travel, wait &amp; inspection time</p>
+                        </div>
+                    </div>
+
+                    <div class="previewDivider"></div>
+
+                    <div class="previewInfo">
+                        <div class="previewInfoLabel">Progress</div>
+                        <div class="previewInfoRow">
+                            <span>Activity status</span>
+                            <strong>Not evaluated</strong>
+                        </div>
+                        <div class="previewInfoRow">
+                            <span>Completion</span>
+                            <strong>Rules pending</strong>
+                        </div>
+                    </div>
+
+                    <button class="previewStatus pending" type="button" data-debug-complete="2" aria-pressed="false">
+                        <span class="previewStatusDot"></span>
+                        <div><strong>Ready to use</strong><small>Completion rules will be added after we define them.</small></div>
+                    </button>
+
+                    <div class="previewActions">
+                        <button class="previewPrimary" type="button" data-open-step="2">Start / Continue</button>
+                        <button class="previewSecondary" type="button" data-review-step="2">Review Form</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </section>
+
+</main>
+
+<main id="workspaceMain">
+
+<div id="workspaceWindow">
+
+<div id="workspaceContent">
+
+<div id="workspacePlaceholder">
+Select a card to load a workspace.
+</div>
+
+</div>
 
 </div>
 
@@ -410,37 +216,40 @@ class="results-content"
 
 </div>
 
-<!-- ========================================================= -->
-<!-- FORMULA MODAL -->
-<!-- ========================================================= -->
+</div>
 
-<div
-id="formulaModal"
-class="modal"
->
-
-<div class="modal-content">
-
-<span
-class="close"
-onclick="helper_disable()"
->
-×
-</span>
-
-<div id="formulaText"></div>
+<footer id="appFooter" aria-label="Application footer"></footer>
 
 </div>
 
-</div>
 
-<!-- ========================================================= -->
-<!-- SCRIPTS -->
-<!-- ========================================================= -->
+<dialog id="formulaDialog" class="formulaDialog">
+    <div class="formulaDialogHeader">
+        <h3 id="formulaDialogTitle">Calculation</h3>
+        <button id="formulaDialogClose" class="formulaDialogClose" type="button" aria-label="Close">×</button>
+    </div>
+    <div id="formulaDialogBody" class="formulaDialogBody"></div>
+</dialog>
 
-<script src="dictionary.js"></script>
-<script src="app.js"></script>
+<script src="./modules/inspection-detail/inspection-detail.math.js"></script>
+<script src="./modules/inspection-summary/inspection-summary.math.js"></script>
+<script src="./app/state.js"></script>
+<script src="./ui/formula-helper.js"></script>
+<script src="./modules/inspection-detail/inspection-detail.js"></script>
+<script src="./modules/inspection-summary/inspection-summary.js"></script>
+<script src="./modules/activity-slip/activity-slip.js"></script>
+<script src="./ui/icons.js"></script>
+<script src="./app/navigation.js"></script>
+
+<script>
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./service-worker.js", { scope: "./" })
+            .then(registration => console.log("Offline service worker ready:", registration.scope))
+            .catch(error => console.error("Service worker registration failed:", error));
+    });
+}
+</script>
 
 </body>
-
 </html>

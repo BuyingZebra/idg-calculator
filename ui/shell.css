@@ -1,0 +1,223 @@
+@font-face{
+    font-family:"Inter";
+    src:url("../assets/fonts/Inter/Inter-VariableFont_opsz,wght.ttf")
+        format("truetype");
+    font-weight:100 900;
+    font-style:normal;
+}
+
+@font-face{
+    font-family:"Noto Sans";
+    src:url("../assets/fonts/Noto_Sans/NotoSans-VariableFont_wdth,wght.ttf")
+        format("truetype");
+    font-weight:100 900;
+    font-style:normal;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+
+:root{
+  --og-bg:#0f172a;
+  --og-panel:#1e293b;
+  --og-panel-deep:#182235;
+  --og-input:#334155;
+  --og-header:#273449;
+  --og-row:#202c3f;
+  --og-row-alt:#263347;
+  --og-border:#475569;
+  --og-text:#f8fafc;
+  --og-muted:#cbd5e1;
+  --og-subtle:#94a3b8;
+  --og-danger:#ef4444;
+}
+
+:root{
+    /* Outer screen spacing is viewport-relative so the composition scales
+       with available screen size rather than a fixed device pixel count. */
+    --screen-pad-x:2.5vw;
+    --screen-pad-y:1.25vh;
+}
+
+html,
+body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+
+body{
+    display:flex;
+    justify-content:center;
+
+    font-family:
+        "Inter",
+        "Noto Sans",
+        sans-serif;
+
+    background:var(--og-bg);
+}
+
+#appShell{
+    width:100%;
+    max-width:1080px;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+#appHeader{
+    height:80px;
+    display:grid;
+    grid-template-columns:60px 1fr 60px;
+    align-items:center;
+    border-bottom:1px solid var(--og-border);
+    flex-shrink:0;
+    padding:0 10px;
+}
+
+#headerBackButton,
+#headerHelpButton{
+    width:44px;
+    height:44px;
+    border:none;
+    background:none;
+    font-size:24px;
+    font-weight:600;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+#headerBackButton{
+    visibility:hidden;
+}
+
+#headerTitleViewport{
+    position:relative;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+
+.headerTitle{
+    position:absolute;
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:1.1rem;
+    font-weight:700;
+
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+
+    transition:transform 0.8s ease;
+}
+
+#headerTitleCurrent{
+    transform:translateX(0);
+}
+
+#headerTitleIncoming{
+    transform:translateX(100%);
+}
+
+#appFooter{
+    height:80px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-top:1px solid var(--og-border);
+    flex-shrink:0;
+}
+
+#pageViewport{
+    flex:1;
+    overflow:hidden;
+    position:relative;
+}
+
+#pageTrack{
+    width:200%;
+    height:100%;
+    display:flex;
+    transition:transform 0.8s ease;
+}
+
+#appMain{
+    width:50%;
+    height:100%;
+    display:flex;
+    overflow:hidden;
+    flex-shrink:0;
+}
+
+#workspaceMain{
+    width:50%;
+    height:100%;
+    padding:var(--screen-pad-y) var(--screen-pad-x);
+    display:flex;
+    flex-shrink:0;
+}
+
+#workspaceWindow{
+    width:100%;
+    height:100%;
+
+    background:var(--og-panel);
+
+    border:1px solid var(--og-border);
+
+    border-radius:18px;
+
+    position:relative;
+    overflow:auto;
+}
+
+#workspaceContent{
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:20px;
+    padding:40px;
+}
+
+#workspacePlaceholder{
+    font-size:20px;
+    text-align:center;
+}
+
+.workspaceTitle{
+    margin:0;
+    text-align:center;
+    font-size:1.5em;
+    font-weight:bold;
+}
+
+.workspaceBody{
+    margin:0;
+    text-align:center;
+    max-width:80%;
+}
+body,#appShell{color:var(--og-text);}
+#appHeader,#appFooter{background:var(--og-bg);color:var(--og-text);}
+#headerBackButton,#headerHelpButton{color:var(--og-text);}
+
+
+/* v29: footer intentionally reserved for a future app-level control. */
+#appFooter:empty{height:clamp(34px,5vh,54px);}

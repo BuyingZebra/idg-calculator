@@ -1,0 +1,825 @@
+/* Workspace modules: original calculator-inspired mobile composition,
+   inside the newer animated shell. Neutral white/grey/black palette. */
+#workspaceContent{align-items:stretch;justify-content:flex-start;padding:0;}
+.workspaceModule{width:100%;margin:0;display:flex;flex-direction:column;gap:0;}
+.moduleCard{width:100%;border:0;background:transparent;border-radius:0;overflow:visible;}
+.moduleCardHeader{display:flex;align-items:center;gap:14px;padding:20px 22px;border-bottom:1px solid var(--og-border);background:var(--og-header);}
+.moduleCardIcon{width:42px;height:42px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
+.moduleCardIcon svg{width:100%;height:100%;}
+.moduleCardTitle{margin:0;font-size:1.35rem;line-height:1.15;}
+.moduleCardSubtitle{margin:4px 0 0;color:var(--og-muted);font-size:.94rem;}
+.moduleCardBody{padding:22px;background:var(--og-panel);}
+.inputList{display:flex;flex-direction:column;gap:clamp(5px,1.4vw,7px);}
+.formRow{display:grid;grid-template-columns:minmax(0,1fr) minmax(150px,45%);gap:18px;align-items:center;min-height:58px;}
+.formRow label{font-size:1rem;color:var(--og-muted);}
+.numberField{height:52px;display:flex;align-items:center;border:1px solid var(--og-border);border-radius:18px;background:var(--og-input);overflow:hidden;}
+.numberField:focus-within{
+  border-color:#00c968;
+  outline:none;
+  box-shadow:
+    inset 0 0 0 2px #00c968,
+    0 0 0 3px rgba(0,201,104,.20),
+    0 0 12px rgba(0,201,104,.32);
+}
+.numberField input{width:100%;min-width:0;border:0;outline:0;background:transparent;padding:0 5px 0 15px;font:inherit;font-size:1.05rem;color:var(--og-text);}
+.fieldUnit{padding-right:14px;white-space:nowrap;color:var(--og-muted);}
+.moduleActions{display:flex;justify-content:flex-end;margin-top:18px;}
+.clearButton{border:1px solid var(--og-danger);border-radius:18px;background:var(--og-danger);padding:10px 18px;font:inherit;font-weight:650;cursor:pointer;}
+.resultsHeading{display:flex;align-items:center;gap:10px;margin:28px 0 14px;font-size:1.15rem;font-weight:750;}
+.resultsHeadingIcon{font-size:1.35rem;line-height:1;}
+.resultsTableWrap{border:1px solid var(--og-border);border-radius:18px;overflow:hidden;background:var(--og-panel-deep);}
+.resultsTable{width:100%;border-collapse:collapse;table-layout:fixed;font-size:.92rem;}
+.resultsTable th,.resultsTable td{padding:clamp(5px,1.2vw,7px) clamp(5px,1vw,8px);border-right:1px solid var(--og-border);border-bottom:1px solid var(--og-border);text-align:left;vertical-align:middle;}
+.resultsTable th:last-child,.resultsTable td:last-child{border-right:0;}
+.resultsTable tr:last-child td{border-bottom:0;}
+.resultsTable thead th{background:var(--og-header);font-weight:750;}
+.resultsTable .summaryRow td{background:var(--og-row-alt);font-weight:700;}
+.resultsTable .grandRow td{background:var(--og-input);font-weight:750;}
+.resultCellButton{width:100%;border:0;background:transparent;padding:0;font:inherit;color:inherit;text-align:left;cursor:pointer;text-decoration:none;}
+.resultCellButton:hover,.resultCellButton:focus-visible{text-decoration:underline;text-underline-offset:3px;}
+.inspectionResults{margin-top:6px;}
+.sectionLabel{margin:24px 0 9px;font-size:.92rem;font-weight:750;text-transform:uppercase;letter-spacing:.04em;color:var(--og-muted);}
+.activityPlaceholder{min-height:260px;border:0;background:transparent;border-radius:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;font-size:1.05rem;}
+
+/* Formula help follows the clean hierarchy of the original app. */
+.formulaDialog{width:min(90vw,560px);max-height:82vh;overflow:auto;border:1px solid var(--og-border);border-radius:18px;padding:0;background:var(--og-panel);color:var(--og-text);box-shadow:0 18px 60px rgba(0,0,0,.18);position:fixed;top:50%;left:50%;right:auto;bottom:auto;margin:0;transform:translate(-50%,-50%);}
+.formulaDialog::backdrop{background:rgba(0,0,0,.58);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);}
+.formulaDialogHeader{padding:22px 24px 8px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;background:transparent;}
+.formulaDialogHeader h3{margin:0;font-size:1.25rem;line-height:1.2;}
+.formulaDialogClose{border:0;background:transparent;font-size:30px;line-height:1;cursor:pointer;padding:0 2px;color:var(--og-muted);}
+.formulaDialogBody{padding:14px 24px 26px;line-height:1.55;font-size:1rem;}
+.formulaEquation{font-size:1.22rem;margin:0 0 24px;}
+.formulaVariables{margin:0 0 24px;white-space:pre-line;}
+.formulaCurrent{margin:0 0 22px;padding-top:16px;border-top:1px solid var(--og-border);}
+.formulaNote{margin:0;}
+
+@media(max-width:620px){
+ #workspaceContent{padding:0;}
+ .moduleCardHeader{padding:17px 16px;gap:11px;}
+ .moduleCardIcon{width:36px;height:36px;}
+ .moduleCardTitle{font-size:1.18rem;}
+ .moduleCardSubtitle{font-size:.86rem;}
+ .moduleCardBody{padding:18px 16px 20px;}
+ .formRow{grid-template-columns:minmax(0,1fr) minmax(132px,48%);gap:12px;min-height:56px;}
+ .numberField{height:50px;border-radius:18px;}
+ .resultsTable{font-size:.78rem;}
+ .resultsTable th,.resultsTable td{padding:clamp(4px,1.1vw,5px) clamp(3px,.9vw,5px);}
+ .gradingTable th:nth-child(1){width:40%;}.gradingTable th:nth-child(2){width:20%;}.gradingTable th:nth-child(3){width:20%;}.gradingTable th:nth-child(4){width:20%;}
+ .gradingTable th:first-child,.gradingTable td:first-child{white-space:nowrap;}
+ .formulaDialogHeader{padding:20px 20px 6px;}.formulaDialogBody{padding:14px 20px 24px;}
+}
+
+
+/* Inspection Summary uses a simpler label/value results grid. */
+.inspectionModule .resultsTable th:first-child,
+.inspectionModule .resultsTable td:first-child {
+  width: 70%;
+}
+
+.inspectionModule .resultsTable th:last-child,
+.inspectionModule .resultsTable td:last-child {
+  width: 30%;
+}
+
+.moduleCardHeader,.moduleCardBody{color:var(--og-text);}
+.numberField input{color:var(--og-text);}
+.numberField input::placeholder{color:var(--og-subtle);}
+.clearButton{color:var(--og-text);}
+.resultsTable{color:var(--og-text);}
+.resultsTable tbody tr td{background:var(--og-row);}
+.resultsTable tbody tr:nth-child(even) td{background:var(--og-row-alt);}
+.resultsTable .summaryRow td{background:var(--og-row-alt);}
+.resultsTable .grandRow td{background:var(--og-input);}
+.resultCellButton{color:inherit;}
+.formulaDialog{background:var(--og-panel);color:var(--og-text);border-color:var(--og-border);}
+.formulaDialogClose{color:var(--og-muted);}
+
+/* Inspection Summary mirrors the two result sections on the paper form. */
+.inspectionDataSheet + .inspectionDataSheet{
+  margin-top:clamp(10px,2vw,16px);
+}
+.inspectionDataSheet .sectionLabel{
+  margin-top:0;
+}
+.inspectionResultsTable thead th{
+  /* Preserve a two-line header footprint even when the label itself is short. */
+  line-height:1.2;
+}
+
+
+/* Data-sheet alignment:
+   labels stay left-aligned and vertically centered;
+   displayed numeric/result values are centered in both axes. */
+.resultsTable th,
+.resultsTable td {
+  vertical-align: middle;
+}
+
+.resultsTable th {
+  text-align: left;
+}
+
+.resultsTable td:first-child {
+  text-align: left;
+}
+
+.resultsTable td:not(:first-child) {
+  text-align: center;
+}
+
+.resultsTable td:not(:first-child) .resultCellButton {
+  text-align: center;
+}
+
+/* Data-sheet titles replace the generic "Live Results" label. */
+.dataSheetHeading {
+  color: var(--og-text);
+}
+
+.dataSheetHeading .resultsHeadingIcon {
+  color: var(--og-text);
+}
+
+/* Inspection Summary contains two distinct sheets with visible separation. */
+.inspectionResults {
+  margin-top: 0;
+}
+
+.inspectionDataSheet + .inspectionDataSheet {
+  margin-top: clamp(18px, 3.2vw, 28px);
+}
+
+.inspectionDataSheet .resultsHeading {
+  margin-top: 0;
+  margin-bottom: 14px;
+}
+
+.inspectionDataSheet + .inspectionDataSheet .resultsHeading {
+  margin-top: 0;
+}
+
+/* Keep the inspection header footprint intentionally two lines tall. */
+.inspectionResultsTable thead th {
+  height: 2.4em;
+  vertical-align: middle;
+  text-align: left;
+}
+
+
+/* v13 refinement: vertically center all data-sheet column headers,
+   including the intentionally two-line Inspection Summary headers. */
+.resultsTable thead th {
+  vertical-align: middle;
+}
+
+/* Clear acts as the visual end of each input section. */
+.moduleActions {
+  justify-content: center;
+  margin-top: clamp(14px, 2.5vw, 20px);
+  padding-bottom: clamp(16px, 3vw, 24px);
+  border-bottom: 1px solid var(--og-border);
+}
+
+.clearButton {
+  width: min(46%, 240px);
+  min-width: 150px;
+  text-align: center;
+}
+
+/* Give the first data-sheet title breathing room after the divider. */
+.moduleActions + .resultsHeading,
+.moduleActions + .inspectionResults {
+  margin-top: clamp(16px, 3vw, 24px);
+}
+
+/* Inspection's first title lives inside its live-results container. */
+.moduleActions + .inspectionResults .inspectionDataSheet:first-child .resultsHeading {
+  margin-top: 0;
+}
+
+
+/* v14: selected workspace labels remain centered at every viewport size. */
+.moduleCardHeader{
+  position:relative;
+  justify-content:center;
+  text-align:center;
+}
+
+.moduleCardHeader > div:last-child{
+  flex:1 1 auto;
+  text-align:center;
+  padding-right:56px;
+}
+
+.moduleCardIcon{
+  margin-left:0;
+}
+@media(max-width:620px){
+  .moduleCardHeader > div:last-child{
+    padding-right:47px;
+  }
+}
+
+
+/* v15 helper interaction: selected result text turns green while its explanation is open. */
+.resultCellButton.formulaSelected{
+  color:#00c968;
+  text-decoration:none;
+}
+
+/* Keep the page colour intact: no dark fade, only a strong backdrop blur. */
+.formulaDialog::backdrop{
+  background:transparent;
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  transition:backdrop-filter .42s ease,-webkit-backdrop-filter .42s ease;
+}
+
+/* The helper lands centered, but enters/exits using the app's rightward motion language. */
+.formulaDialog{
+  opacity:0;
+  transform:translate(calc(100vw + 50%), -50%);
+  transition:transform .42s ease, opacity .22s ease;
+}
+
+.formulaDialog.formulaOpen{
+  opacity:1;
+  transform:translate(-50%,-50%);
+}
+
+.formulaDialog.formulaClosing{
+  opacity:1;
+  transform:translate(calc(100vw + 50%), -50%);
+}
+
+@media (prefers-reduced-motion: reduce){
+  .formulaDialog,
+  .formulaDialog::backdrop{
+    transition:none;
+  }
+}
+
+
+/* v16: synchronize helper motion and backdrop blur with the app's
+   0.8s card/workspace transition. The backdrop begins unblurred so
+   iOS/Safari has an actual filter value to animate from. */
+.formulaDialog::backdrop{
+  background:transparent;
+  backdrop-filter:blur(0px);
+  -webkit-backdrop-filter:blur(0px);
+  transition:
+    backdrop-filter .8s ease,
+    -webkit-backdrop-filter .8s ease;
+}
+
+.formulaDialog.formulaOpen::backdrop{
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+}
+
+.formulaDialog.formulaClosing::backdrop{
+  backdrop-filter:blur(0px);
+  -webkit-backdrop-filter:blur(0px);
+}
+
+.formulaDialog{
+  opacity:0;
+  transform:translate(calc(100vw + 50%), -50%);
+  transition:
+    transform .8s ease,
+    opacity .8s ease;
+}
+
+.formulaDialog.formulaOpen{
+  opacity:1;
+  transform:translate(-50%,-50%);
+}
+
+.formulaDialog.formulaClosing{
+  opacity:0;
+  transform:translate(calc(100vw + 50%), -50%);
+}
+
+
+/* v17 formula teaching colours. Green remains reserved for active/selected UI;
+   red remains reserved for destructive actions. */
+.formulaVarA{color:#60a5fa;font-weight:750;}
+.formulaVarB{color:#fb923c;font-weight:750;}
+.formulaValue{font-weight:750;}
+.formulaVariableLine{margin:.22em 0;}
+.formulaEquation .formulaVar{font-size:inherit;}
+
+
+/* v20 Activity Slip blockout — uses the same card/input/data-sheet language
+   as Inspection Detail and Inspection Summary. */
+.activitySection + .activitySection{
+  margin-top:clamp(20px,4vw,34px);
+  padding-top:clamp(18px,3vw,26px);
+  border-top:1px solid var(--og-border);
+}
+.activitySectionLabel{
+  margin:0 0 clamp(8px,1.8vw,12px);
+  color:var(--og-text);
+}
+.activitySelectField{
+  height:52px;
+  display:flex;
+  align-items:center;
+  border:1px solid var(--og-border);
+  border-radius:18px;
+  background:var(--og-input);
+  overflow:hidden;
+}
+.activitySelectField:focus-within{
+  border-color:#00c968;
+  box-shadow:inset 0 0 0 2px #00c968,0 0 0 3px rgba(0,201,104,.20),0 0 12px rgba(0,201,104,.32);
+}
+.activitySelectField select{
+  width:100%;
+  height:100%;
+  border:0;
+  outline:0;
+  background:transparent;
+  color:var(--og-text);
+  padding:0 14px;
+  font:inherit;
+}
+.activitySelectField option{color:#111;background:#fff;}
+.activityRoutePreview{
+  margin-top:clamp(10px,2vw,14px);
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  border:1px solid var(--og-border);
+  border-radius:18px;
+  overflow:hidden;
+  background:var(--og-panel-deep);
+}
+.activityRoutePreview>div{
+  padding:clamp(10px,2vw,14px);
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  align-items:center;
+  text-align:center;
+}
+.activityRoutePreview>div+div{border-left:1px solid var(--og-border);}
+.activityRoutePreview span{font-size:.82rem;color:var(--og-muted);}
+.activityRoutePreview strong{font-size:1rem;color:var(--og-text);}
+.activityToggleRow{
+  min-height:58px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+.activityToggleRow>div{display:flex;flex-direction:column;gap:4px;}
+.activityToggleRow strong{font-size:1rem;}
+.activityToggleRow span{font-size:.84rem;color:var(--og-muted);}
+.activityAddButton{
+  min-width:104px;
+  border:1px solid var(--og-border);
+  border-radius:18px;
+  background:var(--og-input);
+  color:var(--og-text);
+  padding:10px 16px;
+  font:inherit;
+  cursor:pointer;
+}
+.activityAddButton[aria-pressed="true"]{
+  border-color:#00c968;
+  color:#00c968;
+}
+.activityResults{margin-top:0;}
+.activityResultsTable th:first-child,.activityResultsTable td:first-child{width:70%;}
+.activityResultsTable th:last-child,.activityResultsTable td:last-child{width:30%;}
+.activityTimeField input{padding-right:15px;}
+
+@media(max-width:620px){
+  .activitySelectField{height:50px;}
+  .activityRoutePreview>div{padding:10px 6px;}
+  .activityToggleRow{align-items:flex-start;}
+  .activityAddButton{min-width:92px;}
+}
+
+
+/* v21 functional Activity Slip */
+.activityLoading{
+  min-height:220px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--og-muted);
+  text-align:center;
+}
+.activityAllowances{
+  margin-top:clamp(10px,2vw,14px);
+  border-top:1px solid var(--og-border);
+}
+.activityAllowanceRow{
+  min-height:52px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  border-bottom:1px solid var(--og-border);
+  color:var(--og-muted);
+}
+.activityAllowanceActions{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  white-space:nowrap;
+}
+.activityAllowanceButton{
+  border:0;
+  background:transparent;
+  color:var(--og-muted);
+  font:inherit;
+  cursor:pointer;
+  padding:8px 4px;
+}
+.activityAllowanceButton.active{
+  color:#00c968;
+  font-weight:700;
+}
+.activityAllowanceButton.activeRemove{
+  color:var(--og-text);
+}
+.activityActionDivider{color:var(--og-border);}
+.activityDepartureToggleRow{
+  min-height:58px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+.activityDepartureToggleRow>div{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+.activityDepartureToggleRow strong{color:var(--og-text);}
+.activityDepartureToggleRow span{font-size:.84rem;color:var(--og-muted);}
+.activitySwitch{
+  position:relative;
+  display:block;
+  width:58px;
+  height:32px;
+  flex:0 0 auto;
+}
+.activitySwitch input{
+  position:absolute;
+  opacity:0;
+  pointer-events:none;
+}
+.activitySwitchTrack{
+  position:absolute;
+  inset:0;
+  border:1px solid var(--og-border);
+  border-radius:18px;
+  background:var(--og-input);
+  transition:background .25s ease,border-color .25s ease;
+}
+.activitySwitchThumb{
+  position:absolute;
+  width:24px;
+  height:24px;
+  left:3px;
+  top:3px;
+  border-radius:50%;
+  background:var(--og-muted);
+  transition:transform .25s ease,background .25s ease;
+}
+.activitySwitch input:checked + .activitySwitchTrack{
+  border-color:#00c968;
+}
+.activitySwitch input:checked + .activitySwitchTrack .activitySwitchThumb{
+  transform:translateX(26px);
+  background:#00c968;
+}
+.activityDepartureInputs{
+  margin-top:clamp(8px,1.8vw,12px);
+}
+.activityDepartureNote{
+  margin:8px 0 0;
+  color:var(--og-subtle);
+  font-size:.82rem;
+  line-height:1.4;
+}
+.activityDataSheet + .activityDataSheet{
+  margin-top:clamp(18px,3.2vw,28px);
+}
+.activityResultsTable th:first-child,
+.activityResultsTable td:first-child{width:70%;}
+.activityResultsTable th:last-child,
+.activityResultsTable td:last-child{width:30%;}
+.activityTimeField input{
+  color:var(--og-text);
+  color-scheme:dark;
+}
+.activityTimeField input::-webkit-calendar-picker-indicator{
+  filter:invert(1);
+  opacity:.8;
+}
+@media(max-width:620px){
+  .activityAllowanceRow{min-height:48px;}
+  .activityDepartureToggleRow{align-items:flex-start;}
+}
+
+
+/* v22 Activity Slip refinement */
+.activitySegmented{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  width:min(220px,48vw);
+  border:1px solid var(--og-border);
+  border-radius:18px;
+  background:var(--og-input);
+  overflow:hidden;
+}
+
+.activitySegmentButton{
+  position:relative;
+  border:0;
+  background:transparent;
+  color:var(--og-muted);
+  min-height:42px;
+  padding:8px 12px;
+  font:inherit;
+  cursor:pointer;
+}
+
+.activitySegmentButton + .activitySegmentButton{
+  border-left:1px solid var(--og-border);
+}
+
+.activitySegmentZero.selected{
+  color:var(--og-text);
+  box-shadow:inset 0 0 0 2px var(--og-danger);
+}
+
+.activitySegmentFifteen.selected{
+  color:var(--og-text);
+  box-shadow:inset 0 0 0 2px #00c968;
+}
+
+.activityReturnToggleRow{
+  min-height:58px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+
+.activityReturnToggleRow>div{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+
+.activityReturnToggleRow strong{
+  color:var(--og-text);
+}
+
+.activityReturnToggleRow span{
+  color:var(--og-muted);
+  font-size:.84rem;
+}
+
+.activityReturnInputs{
+  margin-top:clamp(10px,2vw,14px);
+  transition:opacity .25s ease;
+}
+
+.activityReturnInputs.disabled{
+  opacity:.38;
+}
+
+.activityDataSheetDisabled{
+  opacity:.36;
+  filter:grayscale(.35);
+}
+
+.activitySlipTable{
+  table-layout:fixed;
+}
+
+.activitySlipTable th:nth-child(1),
+.activitySlipTable td:nth-child(1){
+  width:34%;
+  text-align:left;
+}
+
+.activitySlipTable th:nth-child(2),
+.activitySlipTable td:nth-child(2),
+.activitySlipTable th:nth-child(3),
+.activitySlipTable td:nth-child(3){
+  width:20%;
+  text-align:center;
+}
+
+.activitySlipTable th:nth-child(4),
+.activitySlipTable td:nth-child(4){
+  width:26%;
+  text-align:center;
+}
+
+.activitySlipTable thead th{
+  vertical-align:middle;
+}
+
+@media(max-width:620px){
+  .activitySegmented{
+    width:min(210px,52vw);
+  }
+
+  .activitySegmentButton{
+    min-height:40px;
+    padding:7px 8px;
+  }
+
+  .activitySlipTable{
+    font-size:.72rem;
+  }
+
+  .activitySlipTable th,
+  .activitySlipTable td{
+    padding-left:3px;
+    padding-right:3px;
+  }
+
+  .activityReturnToggleRow{
+    align-items:flex-start;
+  }
+}
+
+
+/* v23 Activity Slip: persistent travel lookup + work-only clear */
+.activityTravelSection{
+  padding-top:0;
+}
+.activityWorkSection{
+  margin-top:clamp(20px,4vw,34px);
+  padding-top:clamp(18px,3vw,26px);
+  border-top:1px solid var(--og-border);
+}
+.activityAdjustments{
+  margin-top:clamp(12px,2.2vw,16px);
+  border-top:1px solid var(--og-border);
+}
+.activityAdjustmentRow{
+  min-height:58px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  border-bottom:1px solid var(--og-border);
+}
+.activityAdjustmentCopy{
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+}
+.activityAdjustmentCopy strong{
+  color:var(--og-text);
+  font-size:.95rem;
+}
+.activityAdjustmentCopy span{
+  color:var(--og-muted);
+  font-size:.80rem;
+}
+.activityAllowanceToggle{
+  min-width:104px;
+  min-height:38px;
+  border:1px solid var(--og-border);
+  border-radius:18px;
+  background:var(--og-input);
+  color:var(--og-text);
+  padding:7px 15px;
+  font:inherit;
+  cursor:pointer;
+  transition:border-color .2s ease,box-shadow .2s ease,color .2s ease;
+}
+.activityAllowanceToggle.enabled{
+  color:#55aaff;
+  border-color:#55aaff;
+  box-shadow:inset 0 0 0 2px #55aaff;
+}
+.activityWorkActions{
+  margin-top:clamp(14px,2.5vw,20px);
+  margin-bottom:0;
+}
+.activityReturnSection{
+  margin-top:clamp(20px,4vw,34px);
+  padding-top:clamp(18px,3vw,26px);
+  border-top:1px solid var(--og-border);
+}
+@media(max-width:620px){
+  .activityAdjustmentRow{min-height:54px;}
+  .activityAllowanceToggle{min-width:96px;}
+}
+
+
+/* v26: Work Activity is one uninterrupted visual section. */
+.activityWorkSection .inputList{margin-bottom:0;}
+
+.activityAdjustments{
+  margin-top:0 !important;
+  border-top:0 !important;
+}
+
+.activityAdjustmentRow{
+  border-top:0 !important;
+  border-bottom:0 !important;
+  min-height:52px;
+}
+
+.activityAdjustmentRow + .activityAdjustmentRow{
+  border-top:0 !important;
+}
+
+.activityWorkActions{
+  margin-top:0 !important;
+  padding-top:0 !important;
+  border-top:0 !important;
+}
+
+.activityWorkActions::before,
+.activityWorkActions::after{
+  display:none !important;
+  content:none !important;
+}
+
+
+/* v27: no unconfirmed setup/cleaning allowance.
+   Work Activity is inputs -> Clear, then one divider before Return Travel. */
+.activityWorkActions{
+  margin-top:clamp(12px,2vw,16px) !important;
+  padding:0 !important;
+  border:0 !important;
+}
+.activityWorkSection{
+  border-bottom:0 !important;
+  padding-bottom:0 !important;
+}
+.activityReturnSection{
+  border-top:1px solid var(--og-border) !important;
+  box-shadow:none !important;
+}
+.activityReturnSection::before,
+.activityReturnSection::after,
+.activityWorkSection::after,
+.activityWorkActions::before,
+.activityWorkActions::after{
+  display:none !important;
+  content:none !important;
+}
+
+
+/* v29 visual identity: informational/module icons use the new blue accent.
+   Green remains reserved for active selections and future completion states. */
+.moduleCardIcon,
+.resultsHeadingIcon{
+  color:#3b82f6 !important;
+}
+.moduleCardIcon svg,
+.resultsHeadingIcon svg{
+  fill:currentColor;
+}
+
+
+/* v30 review overlay: same helper motion/blur, wider body for tables only. */
+.formulaDialog.reviewDialogMode{
+  width:min(94vw,760px);
+  max-height:min(82vh,820px);
+  overflow:auto;
+}
+.reviewOnlyResults{
+  width:100%;
+}
+.reviewOnlyResults .resultsHeading:first-child{
+  margin-top:0;
+}
+.reviewOnlyResults .resultsTableWrap{
+  width:100%;
+}
+
+/* Searchable Activity Slip location fields keep the existing visual language. */
+.activitySearchField input{
+  width:100%;
+  height:100%;
+  min-width:0;
+  border:0;
+  outline:0;
+  background:transparent;
+  color:var(--og-text);
+  padding:0 14px;
+  font:inherit;
+}
+.activitySearchField input::placeholder{
+  color:var(--og-subtle);
+}
+.activitySearchField input:disabled{
+  color:var(--og-subtle);
+  opacity:.75;
+}

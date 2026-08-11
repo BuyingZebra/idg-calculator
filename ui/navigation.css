@@ -1,0 +1,410 @@
+/* v29 Home: icon-only 20/80 progress timeline + contextual review card */
+
+#timelineContainer{
+    width:20%;
+    min-width:72px;
+    padding:var(--screen-pad-y) 0;
+    border-right:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    align-items:center;
+    position:relative;
+}
+
+#timelineLine,
+#timelineProgress{
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    top:0;
+    bottom:auto;
+    height:0;
+    width:3px;
+    border-radius:999px;
+    pointer-events:none;
+}
+
+#timelineLine{
+    background:#3b82f6;
+}
+#timelineProgress{
+    bottom:auto;
+    height:0;
+    background:#22c55e;
+    transition:height .9s ease;
+}
+
+.timelineItem{
+    width:64px;
+    height:64px;
+    padding:0;
+    border:0;
+    background:transparent;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    position:relative;
+    z-index:2;
+    -webkit-tap-highlight-color:transparent;
+}
+
+.timelineNode{
+    width:48px;
+    height:48px;
+    border:3px solid var(--og-border);
+    border-radius:50%;
+    background:var(--og-bg);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:border-color .3s ease,box-shadow .3s ease,background .3s ease;
+}
+
+.timelineNodeIcon{
+    width:25px;
+    height:25px;
+    display:flex;
+    color:var(--og-subtle);
+    transition:color .3s ease;
+}
+
+.timelineNodeIcon svg{width:100%;height:100%;fill:currentColor;}
+
+.timelineItem.active .timelineNode{
+    border-color:#3b82f6;
+    box-shadow:0 0 0 4px rgba(59,130,246,.15);
+}
+.timelineItem.active .timelineNodeIcon{color:#3b82f6;}
+
+.timelineItem.complete .timelineNode{
+    border-color:#22c55e;
+    background:rgba(34,197,94,.08);
+}
+.timelineItem.complete .timelineNodeIcon{color:#22c55e;}
+
+
+/* Contextual card */
+#contentContainer{
+    width:80%;
+    padding:var(--screen-pad-y) var(--screen-pad-x);
+    min-height:0;
+    display:flex;
+}
+
+#contentViewport{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    position:relative;
+}
+
+#contentTrack{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    transition:transform .8s ease;
+}
+
+.contentPage{
+    position:absolute;
+    left:0;
+    width:100%;
+    height:100%;
+    background:var(--og-panel);
+    border:1px solid var(--og-border);
+    border-radius:18px;
+    overflow:hidden;
+    color:var(--og-text);
+}
+.contentPage[data-step="0"]{top:0;}
+.contentPage[data-step="1"]{top:calc(100% + 2%);}
+.contentPage[data-step="2"]{top:calc(200% + 4%);}
+
+.cardPreview{
+    width:100%;
+    height:100%;
+    padding:clamp(18px,4vw,42px);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:clamp(16px,3vh,28px);
+}
+
+.previewHero{
+    display:flex;
+    align-items:center;
+    gap:clamp(14px,3vw,28px);
+}
+
+.contentIcon{
+    width:clamp(64px,12vw,112px);
+    height:clamp(64px,12vw,112px);
+    flex:0 0 auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#3b82f6;
+}
+.contentIcon svg{width:100%;height:100%;fill:currentColor;}
+
+.contentTitle{
+    margin:0 0 7px;
+    font-size:clamp(1.35rem,3vw,2rem);
+    font-weight:750;
+}
+.contentBody{
+    margin:0;
+    color:var(--og-muted);
+    font-size:clamp(.9rem,1.7vw,1.05rem);
+    line-height:1.45;
+}
+
+.previewDivider{height:1px;background:var(--og-border);width:100%;}
+
+.previewInfo{display:flex;flex-direction:column;gap:0;}
+.previewInfoLabel{
+    color:#60a5fa;
+    font-size:.8rem;
+    font-weight:800;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    margin-bottom:4px;
+}
+.previewInfoRow{
+    min-height:44px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    border-bottom:1px solid rgba(71,85,105,.65);
+    color:var(--og-muted);
+}
+.previewInfoRow strong{color:var(--og-text);font-weight:650;text-align:right;}
+
+.previewStatus{
+    border:1px solid var(--og-border);
+    border-radius:14px;
+    padding:13px 14px;
+    display:flex;
+    align-items:flex-start;
+    gap:11px;
+    background:var(--og-panel-deep);
+}
+.previewStatusDot{
+    width:13px;height:13px;border-radius:50%;
+    border:2px solid var(--og-subtle);
+    margin-top:3px;flex:0 0 auto;
+}
+.previewStatus strong{display:block;font-size:.92rem;}
+.previewStatus small{display:block;color:var(--og-muted);margin-top:3px;line-height:1.35;}
+
+.previewActions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-top:auto;
+}
+.previewActions button{
+    min-height:48px;
+    border-radius:14px;
+    font:inherit;
+    font-weight:700;
+    cursor:pointer;
+}
+.previewPrimary{
+    border:1px solid #3b82f6;
+    background:#2563eb;
+    color:#fff;
+}
+.previewSecondary{
+    border:1px solid var(--og-border);
+    background:transparent;
+    color:var(--og-text);
+}
+
+@media(max-width:620px){
+    #timelineContainer{width:20%;min-width:66px;}
+    #contentContainer{width:80%;}
+    .timelineItem{width:54px;height:54px;}
+    .timelineNode{width:42px;height:42px;border-width:2px;}
+    .timelineNodeIcon{width:22px;height:22px;}
+    #timelineLine,#timelineProgress{
+        top:calc(var(--screen-pad-y) + 27px);
+        bottom:calc(var(--screen-pad-y) + 27px);
+        width:2px;
+    }
+    .cardPreview{padding:18px 15px;gap:16px;}
+    .previewHero{flex-direction:column;text-align:center;gap:10px;}
+    .contentIcon{width:72px;height:72px;}
+    .contentTitle{font-size:1.25rem;}
+    .contentBody{font-size:.82rem;}
+    .previewInfoRow{min-height:38px;font-size:.78rem;gap:8px;}
+    .previewInfoLabel{font-size:.7rem;}
+    .previewStatus{padding:10px 11px;}
+    .previewStatus strong{font-size:.8rem;}
+    .previewStatus small{font-size:.7rem;}
+    .previewActions{grid-template-columns:1fr;}
+    .previewActions button{min-height:43px;font-size:.82rem;}
+}
+
+
+/* v30 temporary debug completion toggle. Wording remains unchanged. */
+.previewStatus{
+  width:100%;
+  text-align:left;
+  font:inherit;
+  color:inherit;
+  cursor:pointer;
+}
+.previewStatus.complete{
+  border-color:#22c55e;
+  background:rgba(34,197,94,.10);
+}
+.previewStatus.complete .previewStatusDot{
+  border-color:#22c55e;
+  background:#22c55e;
+  box-shadow:inset 0 0 0 3px var(--og-panel-deep);
+}
+.previewStatus.complete strong{
+  color:#4ade80;
+}
+.timelineItem.complete .timelineNode{
+  border-color:#22c55e;
+}
+.timelineItem.complete .timelineNodeIcon{
+  color:#22c55e;
+}
+.timelineItem.active.complete .timelineNode{
+  box-shadow:0 0 0 4px rgba(34,197,94,.14);
+}
+
+
+/* v31 timeline completion model:
+   blue line = active workflow; green overlay appears only when ALL steps are complete. */
+.timelineItem.complete .timelineNode{
+    border-color:#22c55e !important;
+    background:var(--og-bg) !important;
+    box-shadow:0 0 0 4px rgba(34,197,94,.12) !important;
+}
+.timelineItem.complete .timelineNodeIcon{
+    color:#22c55e !important;
+}
+.timelineItem.active:not(.complete) .timelineNode{
+    border-color:#3b82f6 !important;
+    box-shadow:0 0 0 4px rgba(59,130,246,.15) !important;
+}
+.timelineItem.active:not(.complete) .timelineNodeIcon{
+    color:#3b82f6 !important;
+}
+
+
+/* v32 home refinement */
+#timelineContainer{
+    overflow:hidden;
+}
+#timelineLine,
+#timelineProgress{
+    border-radius:999px;
+}
+
+
+/* v33 home balance */
+#timelineContainer{
+    padding-left:var(--screen-pad-x);
+    padding-right:0;
+}
+
+#timelineLine,
+#timelineProgress{
+    left:calc(50% + (var(--screen-pad-x) / 2));
+}
+
+.timelineItem{
+    left:calc(var(--screen-pad-x) / 2);
+}
+
+/* Selected step is always visually larger, regardless of pending/active/complete state. */
+.timelineNode{
+    transform:scale(1);
+    transform-origin:center;
+    transition:
+        transform .28s ease,
+        border-color .3s ease,
+        box-shadow .3s ease,
+        background .3s ease;
+}
+
+.timelineItem.active .timelineNode{
+    transform:scale(1.14);
+}
+
+/* Green completion overlay uses the same top/bottom bounds as the blue line.
+   Scale animation prevents it from extending past the final node. */
+#timelineProgress{
+    transform:translateX(-50%);
+    transition:height .9s cubic-bezier(.22,.61,.36,1);
+}
+
+@media(max-width:620px){
+    #timelineContainer{
+        padding-left:var(--screen-pad-x);
+    }
+
+    #timelineLine,
+    #timelineProgress{
+        left:calc(50% + (var(--screen-pad-x) / 2));
+    }
+
+    .timelineItem{
+        left:calc(var(--screen-pad-x) / 2);
+    }
+
+    .timelineItem.active .timelineNode{
+        transform:scale(1.12);
+    }
+}
+
+
+/* v34 timeline geometry:
+   JS places the line exactly through the node centres.
+   Nodes never move laterally; active emphasis scales around their own centre. */
+#timelineContainer{
+    padding-left:0 !important;
+    padding-right:0 !important;
+}
+
+.timelineItem{
+    left:auto !important;
+    transform:none !important;
+}
+
+.timelineNode{
+    transform:scale(1);
+    transform-origin:50% 50%;
+    will-change:transform;
+    transition:
+        transform .34s cubic-bezier(.22,.61,.36,1),
+        border-color .3s ease,
+        box-shadow .3s ease,
+        background .3s ease;
+}
+
+.timelineItem.active .timelineNode{
+    transform:scale(1.14);
+}
+
+.timelineItem.active.complete .timelineNode,
+.timelineItem.complete.active .timelineNode{
+    transform:scale(1.14);
+}
+
+@media(max-width:620px){
+    .timelineItem.active .timelineNode,
+    .timelineItem.active.complete .timelineNode,
+    .timelineItem.complete.active .timelineNode{
+        transform:scale(1.12);
+    }
+}
