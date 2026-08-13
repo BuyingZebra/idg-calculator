@@ -7,7 +7,7 @@ const inspectionFormulaDefinitions = {
     percentCrab: {
         title: "% of Crab",
         formula: "Total Net Lbs. Graded ÷ Gross Lbs. Graded × 100",
-        note: "Total Net Lbs. Graded comes from Grading Summary. Gross Lbs. Graded is the Gross Graded input from Grading Summary."
+        note: "Total Net Lbs. Graded is automatically summed from the Inspection Detail grade-category inputs. Gross Lbs. Graded is the first Inspection Detail input."
     },
     netPoundsLanded: {
         title: "Net Pounds Landed",
@@ -39,6 +39,8 @@ function calculateInspectionSummary(inputs, gradingInputs, gradingResults) {
         : 0;
 
     const netPoundsLanded = Math.round(inputs.grossLanded * (percentCrab / 100));
+    const landedDifference = Math.max(0, inputs.grossLanded - netPoundsLanded);
+    const iceWaterPercent = Math.max(0, 100 - percentCrab);
 
     const barnacleWeight = Math.round(
         netPoundsLanded * 0.24 * (gradingResults.barnacleTubewormPercent / 100)
@@ -54,6 +56,8 @@ function calculateInspectionSummary(inputs, gradingInputs, gradingResults) {
         numberOfSamples: calculateNumberOfSamples(inputs.hailedWeight),
         percentCrab,
         netPoundsLanded,
+        landedDifference,
+        iceWaterPercent,
         barnacleWeight,
         netPoundsLessBarnacles,
         averagePanWeight

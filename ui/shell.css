@@ -34,6 +34,89 @@
   --og-muted:#cbd5e1;
   --og-subtle:#94a3b8;
   --og-danger:#ef4444;
+
+  /* ================================================================
+     Global design tokens — v70
+     One source of truth for repeated visual language.
+     Existing values are preserved exactly.
+     ================================================================ */
+
+  /* Semantic accent colours */
+  --accent-blue:#3b82f6;
+  --accent-blue-strong:#2563eb;
+  --accent-blue-label:#60a5fa;
+  --accent-green:#22c55e;
+  --accent-green-light:#4ade80;
+  --accent-orange:#ff9f0a;
+  --accent-orange-alt:#f59e0b;
+  --accent-red:#ef4444;
+  --color-white:#fff;
+
+  /* Transparent state/surface colours */
+  --accent-blue-glow:rgba(59,130,246,.15);
+  --accent-green-bg:rgba(34,197,94,.08);
+  --accent-green-bg-strong:rgba(34,197,94,.10);
+  --accent-green-ring:rgba(34,197,94,.12);
+  --accent-green-ring-strong:rgba(34,197,94,.14);
+  --surface-overlay:rgba(15,23,42,.28);
+  --surface-overlay-light:rgba(15,23,42,.20);
+  --surface-ring:rgba(148,163,184,.12);
+  --surface-ring-light:rgba(148,163,184,.08);
+  --warning-border:rgba(245,158,11,.72);
+  --warning-bg:rgba(245,158,11,.08);
+
+  /* Shared geometry */
+  --radius-card:18px;
+  --radius-control:14px;
+  --radius-pill:999px;
+  --border-thin:1px;
+
+  /* Interaction sizes */
+  --touch-target-min:44px;
+
+  /* ================================================================
+     Shared card system — v71
+     These govern repeating patterns across home cards.
+     Individual cards may override content-specific visualization only.
+     ================================================================ */
+
+  /* Card frame */
+  --card-pad-x:3cqw;
+  --card-pad-y:3cqw;
+  --card-section-gap:8cqw;
+  --card-overview-content-gap:4cqw;
+  --card-header-gap:4cqw;
+
+  /* Shared card typography */
+  --card-title-size:clamp(1.70rem,7.2cqw,2rem);
+  --card-subtitle-size:clamp(.92rem,3.9cqw,1.02rem);
+  --card-step-title-size:clamp(.95rem,4cqw,1.05rem);
+  --card-body-size:clamp(.84rem,3.45cqw,.94rem);
+  --card-overview-title-size:clamp(.86rem,3.55cqw,.98rem);
+  --card-button-size:clamp(.92rem,3.8cqw,1.02rem);
+
+  /* Shared component sizing */
+  --card-header-icon-size:16cqw;
+  --card-step-icon-size:9cqw;
+  --card-step-gap:3cqw;
+  --card-button-gap:3cqw;
+  --card-button-min-height:var(--touch-target-min);
+
+  /* Summary metric tile system */
+  --metric-tile-pad-x:3cqw;
+  --metric-tile-pad-y:3cqw;
+  --metric-tile-icon-size:9cqw;
+  --metric-tile-value-size:var(--detail-data-label-size, clamp(.84rem,3.45cqw,.94rem));
+  --metric-tile-label-size:clamp(.715rem, calc(3.45cqw - .125rem), .815rem);
+  --metric-tile-content-gap:1.5cqw;
+
+  /* Shared separator rhythm */
+  --card-divider-gap:3.5cqw;
+
+
+  /* Shared component geometry */
+  --card-step-radius:var(--radius-control);
+  --card-button-radius:var(--radius-control);
 }
 
 :root{

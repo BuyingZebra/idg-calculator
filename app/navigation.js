@@ -89,6 +89,7 @@ function hideWorkspace(){
         "translateX(0)";
 
     hideHeaderBackButton();
+    refreshHomePreview();
 
 }
 
@@ -309,9 +310,6 @@ function setWorkspaceContent(content){
     workspaceContent.innerHTML = content;
 }
 
-function getCurrentWorkspace(){
-    return currentWorkspace;
-}
 
 
 /* ===== Timeline navigation ===== */
@@ -426,6 +424,115 @@ function updateDebugCompletionUI(){
     requestAnimationFrame(updateTimelineGeometry);
 }
 
+
+function refreshInspectionDetailPreview(){
+    if(typeof appState==="undefined" || !appState.inspectionDetail) return;
+
+    const results=appState.inspectionDetail.results || {};
+    const values={
+        premium:Number(results.premiumPercent || 0),
+        standard:Number(results.standardPercent || 0),
+        reject:Number(results.rejectPercent || 0)
+    };
+
+    Object.entries(values).forEach(([key,value])=>{
+        const safe=Math.max(0,Math.min(100,Number.isFinite(value)?value:0));
+        const donut=document.querySelector(`[data-home-donut="${key}"]`);
+        const label=document.querySelector(`[data-home-percent="${key}"]`);
+        if(donut) donut.style.setProperty("--percent",String(safe));
+        if(label) label.innerHTML=`<span class="donutPercentNumber">${safe.toFixed(2)}</span><span class="donutPercentUnit">%</span>`;
+    });
+
+    const comments=document.querySelector("[data-inspection-comments]");
+    if(comments){
+        const dead=Number(results.deadPercent || 0);
+        const rejects=Number(results.rejectPercent || 0);
+        const reasons=[];
+
+        if(dead>4) reasons.push(`dead is ${dead.toFixed(2)}% (> 4%)`);
+        if(rejects>20) reasons.push(`total rejects are ${rejects.toFixed(2)}% (> 20%)`);
+
+        if(reasons.length){
+            comments.textContent=`Department of Fisheries notification required: ${reasons.join(" and ")}.`;
+            comments.classList.add("notificationRequired");
+        }else{
+            comments.textContent="No comments.";
+            comments.classList.remove("notificationRequired");
+        }
+    }
+}
+
+function refreshInspectionSummaryPreview(){
+    if(typeof appState==="undefined" || !appState.inspectionSummary) return;
+
+    const inputs=appState.inspectionSummary.inputs || {};
+    const results=appState.inspectionSummary.results || {};
+    const gradingInputs=(appState.inspectionDetail && appState.inspectionDetail.inputs) || {};
+    const gradingResults=(appState.inspectionDetail && appState.inspectionDetail.results) || {};
+
+    const samples=Math.max(0,Number(results.numberOfSamples || 0));
+    const gross=Math.max(0,Number(inputs.grossLanded || 0));
+    const net=Math.max(0,Number(results.netPoundsLanded || 0));
+    const hailed=Math.max(0,Number(inputs.actualHailedWeight || inputs.hailedWeight || results.actualHailedWeight || results.hailedWeight || 0));
+    const grossGraded=Math.max(0,Number(gradingInputs.grossGraded || 0));
+    const netGraded=Math.max(0,Number(gradingResults.totalNetLbsGraded || 0));
+    const premiumBySize=Math.max(0,Math.min(100,Number(gradingResults.premiumBySize || 0)));
+    const standardBySize=Math.max(0,Math.min(100,Number(gradingResults.standardBySize || 0)));
+    const premiumWeight=Math.max(0,Number(gradingInputs.premium || 0));
+    const standardWeight=Math.max(0,Number(gradingInputs.standard || 0));
+
+    // Inspection Summary math is the single source of truth:
+    // % Crab comes from Net Graded ÷ Gross Graded.
+    const percentCrab=Math.max(0,Math.min(100,Number(results.percentCrab || 0)));
+
+    // A zero crab percentage means grading data has not produced a usable
+    // ratio yet. Do not present that empty state as 100% debris.
+    const hasCrabData=percentCrab>0;
+    const debrisPercent=hasCrabData
+        ? Math.max(0,Math.min(100,100-percentCrab))
+        : 0;
+
+    const difference=hasCrabData
+        ? Math.max(0,Number(results.landedDifference || 0))
+        : 0;
+
+    const setText=(selector,value)=>{
+        const el=document.querySelector(selector);
+        if(el) el.textContent=value;
+    };
+
+    setText("[data-summary-samples]",String(samples));
+    setText("[data-summary-net-landed]",net.toLocaleString(undefined,{maximumFractionDigits:1}));
+    const crabSummary=document.querySelector("[data-summary-crab-percent]");
+    if(crabSummary){
+        crabSummary.innerHTML=`<span class="summaryMetricNumber">${percentCrab.toFixed(2)}</span><span class="summaryMetricUnit">%</span>`;
+    }
+    const landedDifference=(hailed>0 && gross>0) ? Math.abs(hailed-gross) : 0;
+    setText("[data-summary-hailed-weight]",hailed.toLocaleString(undefined,{maximumFractionDigits:1}));
+    setText("[data-summary-gross-landed]",gross.toLocaleString(undefined,{maximumFractionDigits:1}));
+    setText("[data-summary-landed-difference]",landedDifference.toLocaleString(undefined,{maximumFractionDigits:1}));
+    const premiumSizeDetail=document.querySelector("[data-summary-premium-size]");
+    if(premiumSizeDetail){
+        premiumSizeDetail.innerHTML=`<span class="sizePercentNumber">${premiumBySize.toFixed(2)}</span><span class="sizePercentUnit">%</span>`;
+    }
+
+    const standardSizeDetail=document.querySelector("[data-summary-standard-size]");
+    if(standardSizeDetail){
+        standardSizeDetail.innerHTML=`<span class="sizePercentNumber">${standardBySize.toFixed(2)}</span><span class="sizePercentUnit">%</span>`;
+    }
+
+    const premiumBar=document.querySelector("[data-summary-premium-bar]");
+    if(premiumBar) premiumBar.style.width=(premiumBySize>0 || standardBySize>0) ? `${premiumBySize}%` : "0%";
+
+    const standardBar=document.querySelector("[data-summary-standard-bar]");
+    if(standardBar) standardBar.style.width=(premiumBySize>0 || standardBySize>0) ? `${standardBySize}%` : "0%";
+}
+
+function refreshHomePreview(){
+    refreshInspectionDetailPreview();
+    refreshInspectionSummaryPreview();
+}
+
 function initializeContent(){
     document.querySelectorAll("[data-open-step]").forEach(button=>{
         button.addEventListener("click",(event)=>{
@@ -455,6 +562,7 @@ function initializeContent(){
     });
 
     updateDebugCompletionUI();
+    refreshHomePreview();
 }
 
 document.addEventListener(

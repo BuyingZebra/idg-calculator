@@ -2,7 +2,7 @@ const gradingFormulaDefinitions = {
     totalNetLbsGraded: {
         title: "Total Net Lbs. Graded",
         formula: "Premium + Standard + Critical Weak + Soft Shell + Dead + Undersize + Barnacle/Tubeworm",
-        note: "Adds the individual graded crab weights. Gross Graded is recorded separately and is not part of this sum."
+        note: "Automatically adds all individual graded crab weights. Gross Lbs. Graded is recorded separately."
     },
     totalReject: {
         title: "Total Reject",
@@ -90,8 +90,6 @@ function calculateGradingSummary(inputs) {
     const premiumBySize = safePercent(inputs.premium, sizeTotal);
     const standardBySize = safePercent(inputs.standard, sizeTotal);
 
-    // Preserve the original paperwork behaviour: totals are sums of the displayed
-    // category percentages rounded to two decimals.
     const rejectPercent =
         round2(criticalWeakPercent) +
         round2(softShellPercent) +

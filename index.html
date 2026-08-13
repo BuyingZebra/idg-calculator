@@ -85,109 +85,188 @@ aria-label="Help">
         <div id="contentTrack">
 
             <div class="contentPage active" data-step="0">
-                <div class="cardPreview">
-                    <div class="previewHero">
-                        <div class="contentIcon" data-icon="grading"></div>
+                <div class="cardPreview appCard">
+                    <div class="previewHero cardHeader">
+                        <div class="contentIcon cardHeaderIcon" data-icon="grading"></div>
                         <div>
-                            <h2 class="contentTitle">Inspection Detail</h2>
-                            <p class="contentBody">Grade sample quality &amp; percentages</p>
+                            <h2 class="contentTitle cardTitle">Inspection Detail</h2>
+                            <p class="contentBody cardSubtitle">detail overview</p>
                         </div>
                     </div>
 
-                    <div class="previewDivider"></div>
+                    <div class="previewDivider cardDivider inspectionHeaderDivider"></div>
 
-                    <div class="previewInfo">
-                        <div class="previewInfoLabel">Progress</div>
-                        <div class="previewInfoRow">
-                            <span>Form status</span>
-                            <strong>Not evaluated</strong>
-                        </div>
-                        <div class="previewInfoRow">
-                            <span>Completion</span>
-                            <strong>Rules pending</strong>
-                        </div>
-                    </div>
-
-                    <button class="previewStatus pending" type="button" data-debug-complete="0" aria-pressed="false">
-                        <span class="previewStatusDot"></span>
-                        <div><strong>Ready to use</strong><small>Completion rules will be added after we define them.</small></div>
+                    <button class="previewStatus cardStepStatus pending" type="button" data-debug-complete="0" aria-pressed="false">
+                        <span class="previewStatusIcon cardStepIcon" data-icon="grading" aria-hidden="true"></span>
+                        <span class="previewStatusText cardStepText">
+                            <strong>Step Complete</strong>
+                            <small>Net weights were exactly the same as the monitor</small>
+                        </span>
                     </button>
 
-                    <div class="previewActions">
-                        <button class="previewPrimary" type="button" data-open-step="0">Start / Continue</button>
-                        <button class="previewSecondary" type="button" data-review-step="0">Review Form</button>
+                    <section class="gradeOverview" aria-label="Inspection overview">
+                        <div class="gradeOverviewTitle cardOverviewTitle">Detail Overview</div>
+                        <div class="gradeDonutGrid">
+                            <div class="gradeMetric gradeMetricPremium">
+                                <div class="gradeDonut" data-home-donut="premium">
+                                    <span data-home-percent="premium">0.00%</span>
+                                </div>
+                                <div class="gradeLegend"><span class="gradeLegendDot"></span><span>Premium</span></div>
+                            </div>
+                            <div class="gradeMetric gradeMetricStandard">
+                                <div class="gradeDonut" data-home-donut="standard">
+                                    <span data-home-percent="standard">0.00%</span>
+                                </div>
+                                <div class="gradeLegend"><span class="gradeLegendDot"></span><span>Standard</span></div>
+                            </div>
+                            <div class="gradeMetric gradeMetricReject">
+                                <div class="gradeDonut" data-home-donut="reject">
+                                    <span data-home-percent="reject">0.00%</span>
+                                </div>
+                                <div class="gradeLegend"><span class="gradeLegendDot"></span><span>Rejects</span></div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="inspectionComments detailBySizeSection" aria-label="Premium versus standard by size">
+                        <div class="detailBySizePanel">
+                            <div class="bySizeRow bySizePremiumRow">
+                                <div class="bySizeLabel">
+                                    <span>By Size Premium:</span>
+                                    <strong data-summary-premium-size><span class="sizePercentNumber">0.00</span><span class="sizePercentUnit">%</span></strong>
+                                </div>
+                                <div class="bySizeTrack" aria-label="By Size Premium">
+                                    <div class="bySizeFill bySizePremiumFill" data-summary-premium-bar></div>
+                                </div>
+                            </div>
+
+                            <div class="bySizeRow bySizeStandardRow">
+                                <div class="bySizeLabel">
+                                    <span>By Size Standard:</span>
+                                    <strong data-summary-standard-size><span class="sizePercentNumber">0.00</span><span class="sizePercentUnit">%</span></strong>
+                                </div>
+                                <div class="bySizeTrack" aria-label="By Size Standard">
+                                    <div class="bySizeFill bySizeStandardFill" data-summary-standard-bar></div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <div class="cardFooter">
+                        <div class="previewDivider cardDivider inspectionActionDivider"></div>
+
+                                            <div class="previewActions cardActions">
+                        <button class="previewPrimary cardPrimaryAction" type="button" data-open-step="0">Edit Form</button>
+                        <button class="previewSecondary cardSecondaryAction" type="button" data-review-step="0">Review Form</button>
+                    </div>
                     </div>
                 </div>
             </div>
 
             <div class="contentPage" data-step="1">
-                <div class="cardPreview">
-                    <div class="previewHero">
-                        <div class="contentIcon" data-icon="inspection"></div>
+                <div class="cardPreview appCard">
+                    <div class="previewHero cardHeader">
+                        <div class="contentIcon cardHeaderIcon" data-icon="inspection"></div>
                         <div>
-                            <h2 class="contentTitle">Inspection Summary</h2>
-                            <p class="contentBody">Sampling plan &amp; landed pounds summary</p>
+                            <h2 class="contentTitle cardTitle">Inspection Summary</h2>
+                            <p class="contentBody cardSubtitle">summary overview</p>
                         </div>
                     </div>
 
-                    <div class="previewDivider"></div>
+<div class="previewDivider cardDivider summaryHeaderDivider"></div>
 
-                    <div class="previewInfo">
-                        <div class="previewInfoLabel">Progress</div>
-                        <div class="previewInfoRow">
-                            <span>Form status</span>
-                            <strong>Not evaluated</strong>
-                        </div>
-                        <div class="previewInfoRow">
-                            <span>Completion</span>
-                            <strong>Rules pending</strong>
-                        </div>
-                    </div>
-
-                    <button class="previewStatus pending" type="button" data-debug-complete="1" aria-pressed="false">
-                        <span class="previewStatusDot"></span>
-                        <div><strong>Ready to use</strong><small>Completion rules will be added after we define them.</small></div>
+                    <button class="previewStatus cardStepStatus pending" type="button" data-debug-complete="1" aria-pressed="false">
+                        <span class="previewStatusIcon cardStepIcon" data-icon="grading" aria-hidden="true"></span>
+                        <span class="previewStatusText cardStepText">
+                            <strong>Step Complete</strong>
+                            <small>Net weights were exactly the same as the monitor</small>
+                        </span>
                     </button>
 
-                    <div class="previewActions">
-                        <button class="previewPrimary" type="button" data-open-step="1">Start / Continue</button>
-                        <button class="previewSecondary" type="button" data-review-step="1">Review Form</button>
+                    <section class="summaryOverview" aria-label="Inspection overview">
+                        <div class="summaryOverviewTitle cardOverviewTitle">Summary Overview</div>
+
+                        <div class="summaryDifferenceFocus" aria-label="Landing weight comparison">
+                            <div class="summaryDifferenceTop">
+                                <div class="summaryDifferenceWeight summaryDifferenceHailed">
+                                    <span>Hailed Weight</span>
+                                    <strong><span data-summary-hailed-weight>0</span> <span class="summaryDifferenceUnit">lbs</span></strong>
+                                </div>
+
+                                <div class="summaryDifferenceWeight summaryDifferenceGross">
+                                    <span>Gross Lbs. Landed</span>
+                                    <strong><span data-summary-gross-landed>0</span> <span class="summaryDifferenceUnit">lbs</span></strong>
+                                </div>
+                            </div>
+
+                            <div class="summaryDifferencePrimary">
+                                <div class="summaryDifferenceValue">
+                                    <strong data-summary-landed-difference>0</strong>
+                                    <span>lbs</span>
+                                </div>
+                                <small>Difference</small>
+                            </div>
+                        </div>
+
+                        <div class="summaryMetricGrid">
+                            <div class="summaryMetric metricTile summaryMetricNet">
+                                <div class="summaryMetricIcon metricTileIcon" data-icon="inspection"></div>
+                                <strong class="summaryMetricValue metricTileValue summaryMetricValueNet" data-summary-net-landed>0</strong>
+                                <span>Net Lbs.<br>Landed</span>
+                            </div>
+
+                            <div class="summaryMetric metricTile summaryMetricSamples">
+                                <div class="summaryMetricIcon metricTileIcon" data-icon="grading"></div>
+                                <strong class="summaryMetricValue metricTileValue summaryMetricValueSamples" data-summary-samples>2</strong>
+                                <span>Number of<br>Samples</span>
+                            </div>
+
+                            <div class="summaryMetric metricTile summaryMetricCrab">
+                                <div class="summaryMetricIcon metricTileIcon" data-icon="inspection"></div>
+                                <strong class="summaryMetricValue metricTileValue summaryMetricValueCrab" data-summary-crab-percent><span class="summaryMetricNumber">0.00</span><span class="summaryMetricUnit">%</span></strong>
+                                <span>Percentage<br>of Crab</span>
+                            </div>
+                        </div>
+
+                    </section>
+
+                    <div class="cardFooter">
+                        <div class="previewDivider cardDivider summaryActionDivider"></div>
+
+                                            <div class="previewActions cardActions">
+                        <button class="previewPrimary cardPrimaryAction" type="button" data-open-step="1">Edit Form</button>
+                        <button class="previewSecondary cardSecondaryAction" type="button" data-review-step="1">Review Form</button>
+                    </div>
                     </div>
                 </div>
             </div>
 
             <div class="contentPage" data-step="2">
-                <div class="cardPreview">
-                    <div class="previewHero">
-                        <div class="contentIcon" data-icon="activity"></div>
+                <div class="cardPreview appCard">
+                    <div class="previewHero cardHeader">
+                        <div class="contentIcon cardHeaderIcon" data-icon="activity"></div>
                         <div>
-                            <h2 class="contentTitle">Activity Slip</h2>
-                            <p class="contentBody">Travel, wait &amp; inspection time</p>
+                            <h2 class="contentTitle cardTitle">Activity Slip</h2>
+                            <p class="contentBody cardSubtitle">Travel, wait &amp; inspection time</p>
                         </div>
                     </div>
 
-                    <div class="previewDivider"></div>
-
-                    <div class="previewInfo">
-                        <div class="previewInfoLabel">Progress</div>
-                        <div class="previewInfoRow">
-                            <span>Activity status</span>
-                            <strong>Not evaluated</strong>
-                        </div>
-                        <div class="previewInfoRow">
-                            <span>Completion</span>
-                            <strong>Rules pending</strong>
-                        </div>
-                    </div>
-
-                    <button class="previewStatus pending" type="button" data-debug-complete="2" aria-pressed="false">
-                        <span class="previewStatusDot"></span>
-                        <div><strong>Ready to use</strong><small>Completion rules will be added after we define them.</small></div>
+<div class="previewDivider cardDivider"></div>
+                    <button class="previewStatus cardStepStatus pending" type="button" data-debug-complete="2" aria-pressed="false">
+                        <span class="previewStatusIcon cardStepIcon" data-icon="grading" aria-hidden="true"></span>
+                        <span class="previewStatusText cardStepText">
+                            <strong>Step Complete</strong>
+                            <small>Net weights were exactly the same as the monitor</small>
+                        </span>
                     </button>
 
-                    <div class="previewActions">
-                        <button class="previewPrimary" type="button" data-open-step="2">Start / Continue</button>
-                        <button class="previewSecondary" type="button" data-review-step="2">Review Form</button>
+                    <div class="cardFooter">
+                        <div class="previewDivider cardDivider activityActionDivider"></div>
+
+                                            <div class="previewActions cardActions">
+                        <button class="previewPrimary cardPrimaryAction" type="button" data-open-step="2">Edit Form</button>
+                        <button class="previewSecondary cardSecondaryAction" type="button" data-review-step="2">Review Form</button>
+                    </div>
                     </div>
                 </div>
             </div>

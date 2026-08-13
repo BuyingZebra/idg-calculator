@@ -1,3 +1,10 @@
+/* ================================================================
+   DESIGN SYSTEM NOTE (v70)
+   Global colors, surfaces, radii, border thickness and touch-target
+   sizes live in ui/shell.css :root. Component CSS should reference
+   those tokens rather than introduce duplicate literal values.
+   ================================================================ */
+
 /* v29 Home: icon-only 20/80 progress timeline + contextual review card */
 
 #timelineContainer{
@@ -21,17 +28,17 @@
     bottom:auto;
     height:0;
     width:3px;
-    border-radius:999px;
+    border-radius:var(--radius-pill);
     pointer-events:none;
 }
 
 #timelineLine{
-    background:#3b82f6;
+    background:var(--accent-blue);
 }
 #timelineProgress{
     bottom:auto;
     height:0;
-    background:#22c55e;
+    background:var(--accent-green);
     transition:height .9s ease;
 }
 
@@ -73,16 +80,16 @@
 .timelineNodeIcon svg{width:100%;height:100%;fill:currentColor;}
 
 .timelineItem.active .timelineNode{
-    border-color:#3b82f6;
-    box-shadow:0 0 0 4px rgba(59,130,246,.15);
+    border-color:var(--accent-blue);
+    box-shadow:0 0 0 4px var(--accent-blue-glow);
 }
-.timelineItem.active .timelineNodeIcon{color:#3b82f6;}
+.timelineItem.active .timelineNodeIcon{color:var(--accent-blue);}
 
 .timelineItem.complete .timelineNode{
-    border-color:#22c55e;
-    background:rgba(34,197,94,.08);
+    border-color:var(--accent-green);
+    background:var(--accent-green-bg);
 }
-.timelineItem.complete .timelineNodeIcon{color:#22c55e;}
+.timelineItem.complete .timelineNodeIcon{color:var(--accent-green);}
 
 
 /* Contextual card */
@@ -114,8 +121,8 @@
     width:100%;
     height:100%;
     background:var(--og-panel);
-    border:1px solid var(--og-border);
-    border-radius:18px;
+    border:var(--border-thin) solid var(--og-border);
+    border-radius:var(--radius-card);
     overflow:hidden;
     color:var(--og-text);
 }
@@ -146,7 +153,7 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    color:#3b82f6;
+    color:var(--accent-blue);
 }
 .contentIcon svg{width:100%;height:100%;fill:currentColor;}
 
@@ -162,42 +169,19 @@
     line-height:1.45;
 }
 
-.previewDivider{height:1px;background:var(--og-border);width:100%;}
+.previewDivider{height:var(--border-thin);background:var(--og-border);width:100%;}
 
-.previewInfo{display:flex;flex-direction:column;gap:0;}
-.previewInfoLabel{
-    color:#60a5fa;
-    font-size:.8rem;
-    font-weight:800;
-    letter-spacing:.06em;
-    text-transform:uppercase;
-    margin-bottom:4px;
-}
-.previewInfoRow{
-    min-height:44px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:18px;
-    border-bottom:1px solid rgba(71,85,105,.65);
-    color:var(--og-muted);
-}
-.previewInfoRow strong{color:var(--og-text);font-weight:650;text-align:right;}
 
 .previewStatus{
-    border:1px solid var(--og-border);
-    border-radius:14px;
+    border:var(--border-thin) solid var(--og-border);
+    border-radius:var(--radius-control);
     padding:13px 14px;
     display:flex;
     align-items:flex-start;
     gap:11px;
     background:var(--og-panel-deep);
 }
-.previewStatusDot{
-    width:13px;height:13px;border-radius:50%;
-    border:2px solid var(--og-subtle);
-    margin-top:3px;flex:0 0 auto;
-}
+
 .previewStatus strong{display:block;font-size:.92rem;}
 .previewStatus small{display:block;color:var(--og-muted);margin-top:3px;line-height:1.35;}
 
@@ -209,18 +193,18 @@
 }
 .previewActions button{
     min-height:48px;
-    border-radius:14px;
+    border-radius:var(--radius-control);
     font:inherit;
     font-weight:700;
     cursor:pointer;
 }
 .previewPrimary{
-    border:1px solid #3b82f6;
-    background:#2563eb;
-    color:#fff;
+    border:var(--border-thin) solid var(--accent-blue);
+    background:var(--accent-blue-strong);
+    color:var(--color-white);
 }
 .previewSecondary{
-    border:1px solid var(--og-border);
+    border:var(--border-thin) solid var(--og-border);
     background:transparent;
     color:var(--og-text);
 }
@@ -241,8 +225,6 @@
     .contentIcon{width:72px;height:72px;}
     .contentTitle{font-size:1.25rem;}
     .contentBody{font-size:.82rem;}
-    .previewInfoRow{min-height:38px;font-size:.78rem;gap:8px;}
-    .previewInfoLabel{font-size:.7rem;}
     .previewStatus{padding:10px 11px;}
     .previewStatus strong{font-size:.8rem;}
     .previewStatus small{font-size:.7rem;}
@@ -260,44 +242,40 @@
   cursor:pointer;
 }
 .previewStatus.complete{
-  border-color:#22c55e;
-  background:rgba(34,197,94,.10);
+  border-color:var(--accent-green);
+  background:var(--accent-green-bg-strong);
 }
-.previewStatus.complete .previewStatusDot{
-  border-color:#22c55e;
-  background:#22c55e;
-  box-shadow:inset 0 0 0 3px var(--og-panel-deep);
-}
+.previewStatus.complete 
 .previewStatus.complete strong{
-  color:#4ade80;
+  color:var(--accent-green-light);
 }
 .timelineItem.complete .timelineNode{
-  border-color:#22c55e;
+  border-color:var(--accent-green);
 }
 .timelineItem.complete .timelineNodeIcon{
-  color:#22c55e;
+  color:var(--accent-green);
 }
 .timelineItem.active.complete .timelineNode{
-  box-shadow:0 0 0 4px rgba(34,197,94,.14);
+  box-shadow:0 0 0 4px var(--accent-green-ring-strong);
 }
 
 
 /* v31 timeline completion model:
    blue line = active workflow; green overlay appears only when ALL steps are complete. */
 .timelineItem.complete .timelineNode{
-    border-color:#22c55e !important;
+    border-color:var(--accent-green) !important;
     background:var(--og-bg) !important;
-    box-shadow:0 0 0 4px rgba(34,197,94,.12) !important;
+    box-shadow:0 0 0 4px var(--accent-green-ring) !important;
 }
 .timelineItem.complete .timelineNodeIcon{
-    color:#22c55e !important;
+    color:var(--accent-green) !important;
 }
 .timelineItem.active:not(.complete) .timelineNode{
-    border-color:#3b82f6 !important;
-    box-shadow:0 0 0 4px rgba(59,130,246,.15) !important;
+    border-color:var(--accent-blue) !important;
+    box-shadow:0 0 0 4px var(--accent-blue-glow) !important;
 }
 .timelineItem.active:not(.complete) .timelineNodeIcon{
-    color:#3b82f6 !important;
+    color:var(--accent-blue) !important;
 }
 
 
@@ -307,7 +285,7 @@
 }
 #timelineLine,
 #timelineProgress{
-    border-radius:999px;
+    border-radius:var(--radius-pill);
 }
 
 
@@ -407,4 +385,2873 @@
     .timelineItem.complete.active .timelineNode{
         transform:scale(1.12);
     }
+}
+
+
+/* ===== v35 dashboard card refinement =====
+   Progress rows removed. Inspection Detail now presents a three-gauge
+   grade overview. Completion remains a separate user-confirmed state. */
+
+.cardPreview{
+    justify-content:flex-start;
+}
+
+.previewHero{
+    justify-content:center;
+}
+
+.gradeOverview{
+    width:100%;
+}
+
+.gradeOverviewTitle{
+    color:var(--accent-blue-label);
+    font-size:.8rem;
+    font-weight:800;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    margin-bottom:18px;
+}
+
+.gradeDonutGrid{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:clamp(12px,2vw,24px);
+    align-items:start;
+}
+
+.gradeMetric{
+    --metric-color:var(--accent-blue);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    min-width:0;
+    gap:12px;
+}
+
+.gradeMetricPremium{--metric-color:var(--accent-blue);}
+.gradeMetricStandard{--metric-color:var(--accent-orange-alt);}
+.gradeMetricReject{--metric-color:var(--accent-red);}
+
+.gradeDonut{
+    --percent:0;
+    width:clamp(92px,13vw,138px);
+    aspect-ratio:1;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    position:relative;
+    background:
+        conic-gradient(
+            var(--metric-color) calc(var(--percent) * 1%),
+            rgba(51,65,85,.72) 0
+        );
+    box-shadow:inset 0 0 0 1px var(--surface-ring);
+}
+
+.gradeDonut::after{
+    content:"";
+    position:absolute;
+    inset:13%;
+    border-radius:50%;
+    background:var(--og-panel);
+    box-shadow:inset 0 0 0 1px var(--surface-ring-light);
+}
+
+.gradeDonut span{
+    position:relative;
+    z-index:1;
+    color:var(--metric-color);
+    font-weight:800;
+    font-size:clamp(.9rem,2vw,1.2rem);
+    font-variant-numeric:tabular-nums;
+}
+
+.gradeLegend{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    color:var(--og-text);
+    font-size:clamp(.72rem,1.45vw,.92rem);
+    white-space:nowrap;
+}
+
+.gradeLegendDot{
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    flex:0 0 auto;
+    background:var(--metric-color);
+    box-shadow:0 0 0 3px color-mix(in srgb,var(--metric-color) 15%,transparent);
+}
+
+/* Completion is green; chart colors carry grade meaning independently. */
+.previewStatus{
+    margin-top:auto;
+}
+
+
+
+.previewStatus.complete .previewStatusDot::after{
+    content:"";
+    position:absolute;
+    width:5px;
+    height:3px;
+    left:2px;
+    top:2px;
+    border-left:2px solid var(--color-white);
+    border-bottom:2px solid var(--color-white);
+    transform:rotate(-45deg);
+}
+
+/* Actions stay side-by-side on phone and desktop. */
+.previewActions{
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
+}
+
+@media(max-width:620px){
+    .cardPreview{
+        padding:18px 14px;
+        gap:14px;
+    }
+
+    .gradeOverviewTitle{
+        font-size:.68rem;
+        margin-bottom:13px;
+    }
+
+    .gradeDonutGrid{
+        gap:7px;
+    }
+
+    .gradeDonut{
+        width:min(21vw,82px);
+    }
+
+    .gradeDonut::after{
+        inset:14%;
+    }
+
+    .gradeDonut span{
+        font-size:clamp(.68rem,2.7vw,.88rem);
+    }
+
+    .gradeLegend{
+        gap:5px;
+        font-size:clamp(.58rem,2.25vw,.72rem);
+    }
+
+    .gradeLegendDot{
+        width:9px;
+        height:9px;
+    }
+
+    .previewActions{
+        grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
+        gap:8px;
+    }
+
+    .previewActions button{
+        min-width:0;
+        padding:0 8px;
+        font-size:.76rem;
+    }
+}
+
+
+/* ===== v36 Inspection Detail composition pass ===== */
+
+/* Only the Inspection Detail home card uses the new natural vertical flow. */
+.contentPage[data-step="0"] .cardPreview{
+    justify-content:flex-start;
+    gap:clamp(18px,2.6vh,30px);
+}
+
+/* Keep the title/icon block deliberate and centered. */
+.contentPage[data-step="0"] .previewHero{
+    margin-bottom:0;
+}
+
+/* Grade Overview becomes its own divider:
+   -------- GRADE OVERVIEW -------- */
+.contentPage[data-step="0"] .gradeOverviewTitle{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    width:100%;
+    margin:0 0 clamp(16px,2vh,24px);
+    color:var(--accent-blue-label);
+    text-align:center;
+    white-space:nowrap;
+}
+
+.contentPage[data-step="0"] .gradeOverviewTitle::before,
+.contentPage[data-step="0"] .gradeOverviewTitle::after{
+    content:"";
+    height:var(--border-thin);
+    flex:1 1 auto;
+    background:var(--og-border);
+}
+
+/* Larger gauges on roomy screens, preserving current mobile sizing. */
+.contentPage[data-step="0"] .gradeDonut{
+    width:clamp(108px,14vw,160px);
+}
+
+.contentPage[data-step="0"] .gradeDonutGrid{
+    gap:clamp(14px,2.2vw,28px);
+}
+
+/* Do not push the completion state or buttons to the bottom.
+   Their position now follows the charts naturally. */
+.contentPage[data-step="0"] .previewStatus{
+    margin-top:clamp(10px,2vh,22px);
+}
+
+.contentPage[data-step="0"] .previewActions{
+    margin-top:0;
+}
+
+/* Any unused card height stays below the controls instead of between sections. */
+.contentPage[data-step="0"] .cardPreview::after{
+    content:"";
+    flex:1 1 auto;
+    min-height:0;
+}
+
+/* Keep horizontal actions consistent. */
+.contentPage[data-step="0"] .previewActions{
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
+}
+
+/* Desktop gets a little more breathing room inside the card,
+   but the content remains grouped instead of being stretched apart. */
+@media(min-width:900px){
+    .contentPage[data-step="0"] .cardPreview{
+        padding-top:clamp(28px,4vh,46px);
+        padding-bottom:clamp(24px,3vh,38px);
+    }
+
+    .contentPage[data-step="0"] .gradeOverview{
+        margin-top:2px;
+    }
+}
+
+/* Mobile: retain compact donut sizing and tighten the composition. */
+@media(max-width:620px){
+    .contentPage[data-step="0"] .cardPreview{
+        gap:15px;
+    }
+
+    .contentPage[data-step="0"] .gradeOverviewTitle{
+        gap:10px;
+        margin-bottom:13px;
+    }
+
+    .contentPage[data-step="0"] .gradeDonut{
+        width:min(21vw,82px);
+    }
+
+    .contentPage[data-step="0"] .previewStatus{
+        margin-top:12px;
+    }
+
+    .contentPage[data-step="0"] .previewActions{
+        margin-top:2px;
+    }
+}
+
+
+/* ===== v37 Inspection Detail parent-relative spacing ===== */
+.contentPage[data-step="0"] .cardPreview{
+    container-type:size;
+    padding:
+        clamp(12px,3.2cqh,40px)
+        clamp(12px,3.2cqw,42px);
+    gap:0;
+    justify-content:flex-start;
+}
+
+.contentPage[data-step="0"] .previewHero{
+    margin:0;
+}
+
+.contentPage[data-step="0"] .previewStatus{
+    margin-top:clamp(12px,5cqh,48px);
+    padding:
+        clamp(9px,1.6cqh,15px)
+        clamp(12px,2.2cqw,20px);
+    gap:clamp(8px,1.8cqw,14px);
+}
+
+.contentPage[data-step="0"] .gradeOverview{
+    width:100%;
+    margin-top:clamp(18px,10cqh,88px);
+}
+
+.contentPage[data-step="0"] .gradeOverviewTitle,
+.contentPage[data-step="0"] .sectionLineTitle{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:clamp(8px,2cqw,18px);
+    width:100%;
+    margin:0 0 clamp(12px,3.2cqh,30px);
+    color:var(--accent-blue-label);
+    font-size:clamp(.68rem,1.7cqw,.82rem);
+    font-weight:800;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    text-align:center;
+    white-space:nowrap;
+}
+
+.contentPage[data-step="0"] .gradeOverviewTitle::before,
+.contentPage[data-step="0"] .gradeOverviewTitle::after,
+.contentPage[data-step="0"] .sectionLineTitle::before,
+.contentPage[data-step="0"] .sectionLineTitle::after{
+    content:"";
+    height:var(--border-thin);
+    flex:1 1 auto;
+    background:var(--og-border);
+}
+
+.contentPage[data-step="0"] .gradeDonutGrid{
+    gap:clamp(8px,2.4cqw,28px);
+}
+
+.contentPage[data-step="0"] .gradeDonut{
+    width:clamp(70px,18cqw,160px);
+}
+
+.contentPage[data-step="0"] .gradeMetric{
+    gap:clamp(7px,1.8cqh,14px);
+}
+
+.contentPage[data-step="0"] .inspectionComments{
+    width:100%;
+    margin-top:clamp(16px,5cqh,48px);
+}
+
+.contentPage[data-step="0"] .inspectionCommentBox{
+    min-height:clamp(42px,6.5cqh,70px);
+    display:flex;
+    align-items:center;
+    padding:
+        clamp(9px,1.6cqh,15px)
+        clamp(12px,2.2cqw,20px);
+    border:var(--border-thin) solid var(--og-border);
+    border-radius:var(--radius-control);
+    background:var(--surface-overlay);
+    color:var(--og-muted);
+    font-size:clamp(.72rem,1.7cqw,.92rem);
+    line-height:1.4;
+}
+
+.contentPage[data-step="0"] .inspectionCommentBox.notificationRequired{
+    border-color:var(--warning-border);
+    background:var(--warning-bg);
+    color:#fbbf24;
+}
+
+.contentPage[data-step="0"] .previewActions{
+    margin-top:clamp(16px,5cqh,48px);
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
+    gap:clamp(8px,2cqw,18px);
+}
+
+.contentPage[data-step="0"] .cardPreview::after{
+    content:none !important;
+}
+
+@media(max-width:620px){
+    .contentPage[data-step="0"] .cardPreview{
+        padding:
+            clamp(10px,2.4cqh,22px)
+            clamp(10px,3cqw,18px);
+    }
+
+    .contentPage[data-step="0"] .previewStatus{
+        margin-top:clamp(10px,4cqh,26px);
+    }
+
+    .contentPage[data-step="0"] .gradeOverview{
+        margin-top:clamp(18px,7cqh,44px);
+    }
+
+    .contentPage[data-step="0"] .inspectionComments{
+        margin-top:clamp(14px,4cqh,28px);
+    }
+
+    .contentPage[data-step="0"] .previewActions{
+        margin-top:clamp(14px,4cqh,28px);
+    }
+
+    .contentPage[data-step="0"] .gradeDonut{
+        width:min(21cqw,82px);
+    }
+}
+
+
+/* ===== v38 Inspection Detail structure ===== */
+
+/* Restore a simple solid rule beneath the title block. */
+.contentPage[data-step="0"] .inspectionHeaderDivider{
+    margin-top:clamp(12px,3.5cqh,34px);
+}
+
+/* Completion remains the first content item after the title divider. */
+.contentPage[data-step="0"] .previewStatus{
+    margin-top:clamp(12px,4cqh,38px);
+}
+
+/* Section headings return to simple left-aligned labels. */
+.contentPage[data-step="0"] .gradeOverviewTitle,
+.contentPage[data-step="0"] .sectionLineTitle{
+    display:block;
+    width:100%;
+    margin:0 0 clamp(12px,3.2cqh,30px);
+    color:var(--accent-blue-label);
+    font-size:clamp(.68rem,1.7cqw,.82rem);
+    font-weight:800;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    text-align:left;
+    white-space:normal;
+}
+
+.contentPage[data-step="0"] .gradeOverviewTitle::before,
+.contentPage[data-step="0"] .gradeOverviewTitle::after,
+.contentPage[data-step="0"] .sectionLineTitle::before,
+.contentPage[data-step="0"] .sectionLineTitle::after{
+    content:none;
+}
+
+/* The card now has enough content to justify bottom-pinned actions.
+   auto margin consumes only the unused space after Comments. */
+
+
+.contentPage[data-step="0"] .previewActions{
+    margin-top:0;
+    flex:0 0 auto;
+}
+
+/* Keep the proportional content rhythm above the pinned action area. */
+.contentPage[data-step="0"] .gradeOverview{
+    margin-top:clamp(18px,6cqh,58px);
+}
+
+.contentPage[data-step="0"] .inspectionComments{
+    margin-top:clamp(16px,5cqh,48px);
+}
+
+@media(max-width:620px){
+    .contentPage[data-step="0"] .inspectionHeaderDivider{
+        margin-top:clamp(10px,2.8cqh,22px);
+    }
+
+    .contentPage[data-step="0"] .previewStatus{
+        margin-top:clamp(10px,3.2cqh,24px);
+    }
+
+    .contentPage[data-step="0"] .gradeOverview{
+        margin-top:clamp(16px,5cqh,34px);
+    }
+
+    .contentPage[data-step="0"] .inspectionComments{
+        margin-top:clamp(14px,4cqh,28px);
+    }
+
+    
+}
+
+
+/* ===== v39 Inspection comments integration ===== */
+.contentPage[data-step="0"] .inspectionComments{
+    width:100%;
+    margin-top:clamp(14px,4cqh,36px);
+    flex:1 1 auto;
+    display:flex;
+    min-height:0;
+}
+
+.contentPage[data-step="0"] .inspectionCommentBox{
+    width:100%;
+    min-height:var(--inspection-status-height, clamp(54px,7cqh,76px));
+    height:100%;
+    flex:1 1 auto;
+    align-items:flex-start;
+    padding:
+        clamp(9px,1.6cqh,15px)
+        clamp(12px,2.2cqw,20px);
+    border:var(--border-thin) solid var(--og-border);
+    border-radius:var(--radius-control);
+    background:var(--surface-overlay);
+    color:var(--og-muted);
+    font-size:inherit;
+    line-height:inherit;
+}
+
+/* Match the Section Complete body copy exactly. */
+.contentPage[data-step="0"] .inspectionCommentBox,
+.contentPage[data-step="0"] .previewStatus small{
+    font-size:clamp(.68rem,1.55cqw,.84rem);
+    line-height:1.4;
+}
+
+/* A notification changes wording only; the container remains visually neutral. */
+.contentPage[data-step="0"] .inspectionCommentBox.notificationRequired{
+    border-color:var(--og-border);
+    background:var(--surface-overlay);
+    color:var(--og-muted);
+}
+
+/* The comments region now absorbs spare card height, so the action area stays pinned. */
+
+
+@media(max-width:620px){
+    .contentPage[data-step="0"] .inspectionComments{
+        margin-top:clamp(12px,3cqh,22px);
+    }
+
+    .contentPage[data-step="0"] .inspectionCommentBox{
+        min-height:clamp(54px,7cqh,72px);
+    }
+
+    
+}
+
+
+/* ===== v40 Inspection Summary approved overview ===== */
+.contentPage[data-step="1"] .cardPreview{
+    container-type:size;
+    justify-content:flex-start;
+    gap:0;
+    padding:
+        clamp(12px,3.2cqh,40px)
+        clamp(12px,3.2cqw,42px);
+}
+
+.contentPage[data-step="1"] .previewHero{
+    margin:0;
+}
+
+.contentPage[data-step="1"] .summaryHeaderDivider{
+    margin-top:clamp(12px,3.5cqh,34px);
+}
+
+.contentPage[data-step="1"] .previewStatus{
+    margin-top:clamp(12px,4cqh,38px);
+    padding:
+        clamp(9px,1.6cqh,15px)
+        clamp(12px,2.2cqw,20px);
+    gap:clamp(8px,1.8cqw,14px);
+}
+
+.contentPage[data-step="1"] .summaryOverview{
+    width:100%;
+    margin-top:clamp(16px,5cqh,44px);
+}
+
+.contentPage[data-step="1"] .summaryOverviewTitle,
+.contentPage[data-step="1"] .grossNetTitle{
+    color:var(--accent-blue-label);
+    font-size:clamp(.68rem,1.7cqw,.82rem);
+    font-weight:800;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+}
+
+.contentPage[data-step="1"] .summaryOverviewTitle{
+    text-align:center;
+    margin-bottom:clamp(12px,3cqh,28px);
+}
+
+.summaryMetricGrid{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:clamp(8px,2cqw,18px);
+}
+
+.summaryMetric{
+    min-width:0;
+    border:var(--border-thin) solid var(--og-border);
+    border-radius:16px;
+    background:rgba(15,23,42,.24);
+    padding:
+        clamp(10px,2cqh,18px)
+        clamp(6px,1.4cqw,14px);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+
+.summaryMetricIcon{
+    width:clamp(28px,5cqw,48px);
+    height:clamp(28px,5cqw,48px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:clamp(6px,1.2cqh,10px);
+}
+
+.summaryMetricIcon svg{
+    width:100%;
+    height:100%;
+    fill:currentColor;
+}
+
+.summaryMetricSamples .summaryMetricIcon{color:#a855f7;}
+.summaryMetricGross .summaryMetricIcon{color:var(--accent-blue);}
+.summaryMetricNet .summaryMetricIcon{color:var(--accent-green);}
+
+.summaryMetric strong{
+    font-size:clamp(1.05rem,4cqw,1.7rem);
+    line-height:1.05;
+    color:var(--og-text);
+}
+
+.summaryMetric > span{
+    margin-top:clamp(5px,1cqh,9px);
+    color:var(--og-muted);
+    font-size:clamp(.64rem,1.55cqw,.82rem);
+    line-height:1.25;
+}
+
+
+
+
+
+
+/* Gross is always the full blue baseline. Net is the green overlay. */
+.grossNetBase,
+.grossNetOverlay{
+    position:absolute;
+    inset-block:0;
+    left:0;
+    border-radius:var(--radius-pill);
+}
+
+
+.contentPage[data-step="1"] .summaryActionDivider{
+    margin-top:auto;
+    margin-bottom:clamp(12px,3cqh,28px);
+}
+
+.contentPage[data-step="1"] .previewActions{
+    margin-top:0;
+    flex:0 0 auto;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
+    gap:clamp(8px,2cqw,18px);
+}
+
+@media(max-width:620px){
+    .contentPage[data-step="1"] .cardPreview{
+        padding:
+            clamp(10px,2.4cqh,22px)
+            clamp(10px,3cqw,18px);
+    }
+
+    .contentPage[data-step="1"] .summaryHeaderDivider{
+        margin-top:clamp(10px,2.8cqh,22px);
+    }
+
+    .contentPage[data-step="1"] .previewStatus{
+        margin-top:clamp(10px,3.2cqh,24px);
+    }
+
+    .contentPage[data-step="1"] .summaryOverview{
+        margin-top:clamp(14px,4cqh,28px);
+    }
+
+    .summaryMetricGrid{gap:6px;}
+    .summaryMetric{border-radius:13px;padding:9px 4px;}
+    .summaryMetricIcon{width:26px;height:26px;}
+    .summaryMetric strong{font-size:clamp(.9rem,4.2cqw,1.2rem);}
+    .summaryMetric > span{font-size:clamp(.56rem,2.05vw,.68rem);}
+
+
+
+    .contentPage[data-step="1"] .summaryActionDivider{
+        margin-bottom:clamp(10px,2.5cqh,20px);
+    }
+
+    .contentPage[data-step="1"] .previewActions{
+        grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
+        gap:8px;
+    }
+}
+
+
+/* ===== v41 cleanup pass ===== */
+
+/* Inspection Detail: centered overview heading. */
+.contentPage[data-step="0"] .gradeOverviewTitle{
+    text-align:center;
+}
+
+/* Give each donut an outer color ring/glow like the navigation states. */
+.contentPage[data-step="0"] .gradeDonut{
+    box-shadow:
+        0 0 0 3px color-mix(in srgb,var(--metric-color) 22%,transparent),
+        0 0 14px color-mix(in srgb,var(--metric-color) 20%,transparent),
+        inset 0 0 0 1px var(--surface-ring);
+}
+
+/* Slightly larger mobile charts with more protected center space. */
+@media(max-width:620px){
+    .contentPage[data-step="0"] .gradeDonut{
+        width:min(23cqw,90px);
+    }
+
+    .contentPage[data-step="0"] .gradeDonut::after{
+        inset:20%;
+    }
+
+    .contentPage[data-step="0"] .gradeDonut span{
+        max-width:58%;
+        white-space:nowrap;
+        text-align:center;
+        font-size:clamp(.60rem,2.45vw,.82rem);
+        line-height:1;
+    }
+}
+
+/* Inspection Summary: explicitly preserve title/footer divider lines. */
+.contentPage[data-step="1"] .summaryHeaderDivider,
+.contentPage[data-step="1"] .summaryActionDivider{
+    display:block;
+    width:100%;
+    height:var(--border-thin);
+    background:var(--og-border);
+}
+
+/* The comparison is already part of Inspection Overview; no extra heading. */
+.contentPage[data-step="1"] .grossNetTitle{
+    display:none;
+}
+
+/* Gross always remains the full blue baseline; Net overlays it in green. */
+.grossNetBase{
+    background:var(--accent-blue);
+}
+
+
+/* Difference text remains neutral rather than implying an error/removal. */
+.grossNetDifference strong,
+.grossNetDifference span{
+    color:var(--og-muted);
+}
+
+
+/* ===== v42 grading/landing logic correction ===== */
+
+/* Remove the glow from Inspection Detail charts.
+   Keep only a crisp outer tint ring to echo navigation-state rings. */
+.contentPage[data-step="0"] .gradeDonut{
+    box-shadow:
+        0 0 0 2px color-mix(in srgb,var(--metric-color) 34%,transparent),
+        inset 0 0 0 1px var(--surface-ring);
+}
+
+
+/* ===== v44 donut cleanup ===== */
+
+/* Remove the outer colored ring/glow completely.
+   Keep only the donut itself and a subtle inner edge. */
+.contentPage[data-step="0"] .gradeDonut{
+    box-shadow:
+        inset 0 0 0 1px var(--surface-ring) !important;
+}
+
+
+/* ===== v45 Inspection Summary presentation ===== */
+
+/* Gross/Net numbers retain semantic colors; unit text is white. */
+.grossNetValue .unit,
+.grossNetValue small,
+.grossNetValue .grossNetUnit{
+    color:var(--color-white) !important;
+}
+
+/* Existing markup keeps the number's semantic color while forcing a
+   separately rendered "lbs" token to white. */
+.grossNetValue{
+    white-space:nowrap;
+}
+
+/* Summary explanation: icon/supporting copy white, Percent Crab orange. */
+.grossNetDifference{
+    color:var(--color-white);
+}
+
+
+
+
+
+
+
+/* ===== v46 Inspection Summary composition cleanup ===== */
+
+/* Gross/Net: semantic number color, white unit. */
+[data-summary-gross-detail] .grossNetNumber{
+    color:var(--accent-blue) !important;
+}
+
+
+
+/* Composition line stays on ONE line next to the icon. */
+.grossNetDifference{
+    display:flex;
+    align-items:center;
+    gap:clamp(9px,1.8cqw,14px);
+    color:var(--color-white);
+}
+
+
+
+
+
+
+/* Progress bar semantics now match the composition text:
+   white = total/gross baseline, orange = crab portion. */
+.grossNetBase{
+    background:var(--color-white) !important;
+}
+
+
+/* Keep the line fitting on smaller phones without wrapping. */
+@media(max-width:620px){
+
+
+}
+
+
+/* ===== v47 Inspection Summary corrections ===== */
+
+/* Gross/Net landed headline values must stay on ONE line. */
+[data-summary-gross-detail],
+[data-summary-net-detail]{
+    display:inline-flex !important;
+    align-items:baseline;
+    gap:.22em;
+    white-space:nowrap !important;
+    flex-wrap:nowrap !important;
+}
+
+
+
+
+/* Ratio line: explicit readable spacing between each semantic piece. */
+.grossNetSingleLine{
+    display:flex;
+    align-items:baseline;
+    flex-wrap:nowrap;
+    white-space:nowrap;
+    column-gap:.34em;
+}
+
+
+
+/* Keep the line usable on narrow phones without introducing line breaks. */
+@media(max-width:620px){
+
+    [data-summary-gross-detail],
+    [data-summary-net-detail]{
+        gap:.18em;
+    }
+}
+
+
+/* ===== v48 requested summary refinements ===== */
+
+/* Muted body-text tone instead of pure white for the gross/base track. */
+.grossNetBase{
+    background:#cbd5e1 !important;
+}
+
+/* Crab portion remains orange. */
+.grossNetOverlay{
+    background:var(--accent-orange) !important;
+}
+
+/* Both percentages carry equal visual weight. */
+.summaryCrabPercent,
+.summaryDebrisPercent{
+    color:var(--accent-orange) !important;
+    font-weight:800 !important;
+}
+
+
+/* Preserve the deliberate single-line composition with readable spacing. */
+.grossNetSingleLine{
+    display:flex;
+    align-items:baseline;
+    flex-wrap:nowrap;
+    white-space:nowrap;
+    column-gap:.34em;
+}
+
+
+/* ===== v49 percentage color correction ===== */
+
+/* Numbers are bold and colored according to their meaning. */
+.summaryCrabPercent{
+    color:var(--accent-orange) !important;
+    font-weight:800 !important;
+}
+
+
+/* Labels remain regular white. */
+.summaryCrabLabel,
+.summaryDebrisLabel{
+    color:var(--color-white) !important;
+    font-weight:400 !important;
+}
+
+/* Preserve white units beside the colored Gross/Net values. */
+[data-summary-gross-detail] .grossNetUnit,
+[data-summary-net-detail] .grossNetUnit{
+    color:var(--color-white) !important;
+}
+
+
+/* ===== v51 Inspection Summary: by-size comparison ===== */
+[data-summary-premium-size],
+[data-summary-standard-size]{
+    display:inline-flex !important;
+    align-items:baseline;
+    gap:.10em;
+    white-space:nowrap !important;
+    flex-wrap:nowrap !important;
+}
+[data-summary-premium-size] .sizePercentNumber{color:var(--accent-blue) !important;font-weight:800;}
+[data-summary-standard-size] .sizePercentNumber{color:var(--accent-orange) !important;font-weight:800;}
+[data-summary-premium-size] .sizePercentUnit,
+[data-summary-standard-size] .sizePercentUnit{color:var(--color-white) !important;font-weight:800;}
+
+
+/* ===== v52 Premium-vs-Standard presentation refinement ===== */
+
+/* The bar now highlights Premium only:
+   muted UI tone = full baseline, blue overlay = Premium share. */
+.grossNetBase{
+    background:#64748b !important;
+}
+
+
+/* Restore the same icon + single-line information pattern used previously. */
+.sizeWeightSummary{
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    gap:clamp(9px,1.8cqw,14px);
+    margin-top:clamp(8px,1.8cqh,14px);
+    color:var(--color-white);
+    text-align:left;
+}
+
+
+
+
+
+
+@media(max-width:620px){
+
+
+}
+
+
+/* ===== v53: By Size moved from Summary to Detail ===== */
+.detailBySizeSection{
+    display:block;
+}
+.detailBySizePanel{
+    width:100%;
+    box-sizing:border-box;
+}
+/* Summary intentionally keeps the freed space empty for a future feature. */
+
+
+/* ===== v54 Inspection Detail: dual By Size bars ===== */
+.detailBySizePanel{
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    gap:clamp(18px,4cqh,30px);
+    padding-block:clamp(18px,4cqh,28px);
+    padding-inline:clamp(16px,3.5cqw,24px);
+    box-sizing:border-box;
+}
+
+.bySizeRow{
+    display:flex;
+    flex-direction:column;
+    gap:clamp(7px,1.5cqh,11px);
+}
+
+.bySizeLabel{
+    display:flex;
+    align-items:baseline;
+    gap:.35em;
+    color:var(--color-white);
+    white-space:nowrap;
+}
+
+.bySizeLabel > span{
+    color:var(--color-white);
+    font-weight:400;
+}
+
+[data-summary-premium-size],
+[data-summary-standard-size]{
+    display:inline-flex !important;
+    align-items:baseline;
+    gap:.08em;
+    white-space:nowrap !important;
+}
+
+[data-summary-premium-size] .sizePercentNumber{
+    color:var(--accent-blue) !important;
+    font-weight:800;
+}
+
+[data-summary-standard-size] .sizePercentNumber{
+    color:var(--accent-orange) !important;
+    font-weight:800;
+}
+
+[data-summary-premium-size] .sizePercentUnit,
+[data-summary-standard-size] .sizePercentUnit{
+    color:var(--color-white) !important;
+    font-weight:800;
+}
+
+.bySizeTrack{
+    position:relative;
+    width:100%;
+    height:clamp(8px,1.5cqh,12px);
+    overflow:hidden;
+    border-radius:var(--radius-pill);
+    /* Muted remainder matches the navigation icon ring/border tone. */
+    background:var(--og-border, #475569);
+}
+
+.bySizeFill{
+    height:100%;
+    width:0;
+    border-radius:inherit;
+    transition:width .35s ease;
+}
+
+.bySizePremiumFill{
+    background:var(--accent-blue);
+}
+
+.bySizeStandardFill{
+    background:var(--accent-orange);
+}
+
+
+/* =====================================================================
+   v57 — Inspection Detail responsive component system
+   ---------------------------------------------------------------------
+   One card-relative design scale for phone / tablet / desktop.
+   All values below are derived from the Inspection Detail card itself.
+   Avoid adding device-specific font sizes to this component later;
+   adjust these variables instead.
+   ===================================================================== */
+
+.contentPage[data-step="0"] .cardPreview{
+    container-type:size;
+
+    /* ---------- Typography ---------- */
+    --detail-title-size:        clamp(1.45rem, 5.6cqw, 2.15rem);
+    --detail-subtitle-size:     clamp(.82rem, 2.7cqw, 1.05rem);
+    --detail-status-title-size: clamp(.88rem, 3.15cqw, 1.05rem);
+    --detail-body-size:         clamp(.72rem, 2.45cqw, .90rem);
+    --detail-section-size:      clamp(.72rem, 2.45cqw, .90rem);
+    --detail-metric-size:       clamp(.70rem, 2.35cqw, .88rem);
+    --detail-button-size:       clamp(.82rem, 2.8cqw, 1rem);
+
+    /* ---------- Horizontal sizing ---------- */
+    --detail-pad-x:             clamp(14px, 4.2cqw, 34px);
+    --detail-status-pad-x:      clamp(12px, 3.2cqw, 24px);
+    --detail-panel-pad-x:       clamp(14px, 4cqw, 28px);
+    --detail-action-gap:        clamp(8px, 2.2cqw, 18px);
+
+    /* ---------- Vertical rhythm ---------- */
+    --detail-pad-y:             clamp(16px, 3.4cqh, 38px);
+    --detail-gap-xs:            clamp(8px, 1.7cqh, 14px);
+    --detail-gap-sm:            clamp(12px, 2.5cqh, 22px);
+    --detail-gap-md:            clamp(16px, 3.5cqh, 34px);
+    --detail-gap-lg:            clamp(22px, 5cqh, 48px);
+
+    /* ---------- Component sizing ---------- */
+    --detail-hero-icon:         clamp(54px, 15cqw, 96px);
+    --detail-donut:             clamp(74px, 21cqw, 132px);
+    --detail-donut-center:      21%;
+    --detail-bar-height:        clamp(8px, 1.45cqh, 12px);
+    --detail-radius:            clamp(14px, 3.4cqw, 22px);
+    --detail-status-min-h:      clamp(58px, 9cqh, 82px);
+    --detail-button-min-h:      clamp(46px, 7.5cqh, 58px);
+
+    padding:
+        var(--detail-pad-y)
+        var(--detail-pad-x) !important;
+}
+
+/* ---------- Header ---------- */
+.contentPage[data-step="0"] .previewHero{
+    margin:0 !important;
+    gap:clamp(12px,3.2cqw,24px);
+}
+
+.contentPage[data-step="0"] .previewHero .contentIcon{
+    width:var(--detail-hero-icon) !important;
+    height:var(--detail-hero-icon) !important;
+    flex:0 0 var(--detail-hero-icon);
+}
+
+.contentPage[data-step="0"] .contentTitle{
+    font-size:var(--detail-title-size) !important;
+    line-height:1.08;
+}
+
+.contentPage[data-step="0"] .contentBody{
+    font-size:var(--detail-subtitle-size) !important;
+    line-height:1.35;
+    margin-top:var(--detail-gap-xs);
+}
+
+.contentPage[data-step="0"] .inspectionHeaderDivider{
+    margin-top:var(--detail-gap-md) !important;
+}
+
+/* ---------- Section Complete ---------- */
+.contentPage[data-step="0"] .previewStatus{
+    min-height:var(--detail-status-min-h);
+    margin-top:var(--detail-gap-md) !important;
+    padding:
+        var(--detail-gap-xs)
+        var(--detail-status-pad-x) !important;
+    gap:clamp(9px,2.2cqw,14px) !important;
+    border-radius:var(--detail-radius);
+}
+
+.contentPage[data-step="0"] .previewStatus strong{
+    font-size:var(--detail-status-title-size) !important;
+    line-height:1.25;
+}
+
+.contentPage[data-step="0"] .previewStatus small{
+    font-size:var(--detail-body-size) !important;
+    line-height:1.4;
+    margin-top:clamp(2px,.6cqh,5px);
+}
+
+/* ---------- Inspection Overview heading ---------- */
+.contentPage[data-step="0"] .gradeOverview{
+    margin-top:var(--detail-gap-lg) !important;
+}
+
+.contentPage[data-step="0"] .gradeOverviewTitle{
+    font-size:var(--detail-section-size) !important;
+    line-height:1.25;
+    text-align:center !important;
+    margin-bottom:var(--detail-gap-md) !important;
+}
+
+/* ---------- Donut metrics ---------- */
+.contentPage[data-step="0"] .gradeDonutGrid{
+    gap:clamp(8px,2.4cqw,22px) !important;
+}
+
+.contentPage[data-step="0"] .gradeDonut{
+    width:var(--detail-donut) !important;
+    flex-basis:var(--detail-donut);
+}
+
+.contentPage[data-step="0"] .gradeDonut::after{
+    inset:var(--detail-donut-center) !important;
+}
+
+.contentPage[data-step="0"] .gradeDonut span{
+    max-width:58%;
+    font-size:var(--detail-metric-size) !important;
+    line-height:1;
+    white-space:nowrap;
+}
+
+.contentPage[data-step="0"] .gradeMetric{
+    gap:var(--detail-gap-xs) !important;
+}
+
+.contentPage[data-step="0"] .gradeLegend{
+    font-size:var(--detail-body-size) !important;
+    line-height:1.25;
+    gap:clamp(5px,1.4cqw,9px);
+}
+
+/* ---------- By Size panel ---------- */
+.contentPage[data-step="0"] .detailBySizeSection{
+    margin-top:var(--detail-gap-md) !important;
+}
+
+.contentPage[data-step="0"] .detailBySizePanel{
+    width:100%;
+    display:flex !important;
+    flex-direction:column;
+    justify-content:center !important;
+    align-items:stretch;
+    gap:var(--detail-gap-md) !important;
+    padding:
+        var(--detail-gap-md)
+        var(--detail-panel-pad-x) !important;
+    border-radius:var(--detail-radius) !important;
+    box-sizing:border-box;
+}
+
+.contentPage[data-step="0"] .bySizeRow{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    gap:var(--detail-gap-xs) !important;
+    margin:0 !important;
+}
+
+.contentPage[data-step="0"] .bySizeLabel{
+    display:flex;
+    align-items:baseline;
+    gap:.35em;
+    
+    line-height:1.25 !important;
+    white-space:nowrap;
+}
+
+.contentPage[data-step="0"] .bySizeLabel > span,
+.contentPage[data-step="0"] [data-summary-premium-size],
+.contentPage[data-step="0"] [data-summary-standard-size]{
+    font-size:inherit !important;
+    line-height:inherit !important;
+}
+
+.contentPage[data-step="0"] .bySizeTrack{
+    height:var(--detail-bar-height) !important;
+    border-radius:var(--radius-pill);
+}
+
+/* ---------- Footer / actions ---------- */
+
+
+.contentPage[data-step="0"] .previewActions{
+    margin-top:0 !important;
+    gap:var(--detail-action-gap) !important;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
+}
+
+.contentPage[data-step="0"] .previewActions button{
+    min-height:var(--detail-button-min-h);
+    font-size:var(--detail-button-size) !important;
+}
+
+/* ---------------------------------------------------------------------
+   IMPORTANT:
+   Neutralize older phone-only Inspection Detail sizing patches.
+   Layout may adapt elsewhere, but this card's component sizes must
+   come from the shared card-relative variables above.
+   --------------------------------------------------------------------- */
+@media(max-width:620px){
+    .contentPage[data-step="0"] .cardPreview{
+        padding:
+            var(--detail-pad-y)
+            var(--detail-pad-x) !important;
+    }
+
+    .contentPage[data-step="0"] .previewStatus{
+        margin-top:var(--detail-gap-md) !important;
+    }
+
+    .contentPage[data-step="0"] .gradeOverview{
+        margin-top:var(--detail-gap-lg) !important;
+    }
+
+    .contentPage[data-step="0"] .gradeDonut{
+        width:var(--detail-donut) !important;
+    }
+
+    .contentPage[data-step="0"] .gradeDonut span{
+        font-size:var(--detail-metric-size) !important;
+    }
+
+    .contentPage[data-step="0"] .detailBySizePanel{
+        justify-content:center !important;
+        padding:
+            var(--detail-gap-md)
+            var(--detail-panel-pad-x) !important;
+        gap:var(--detail-gap-md) !important;
+    }
+
+    .contentPage[data-step="0"] .detailBySizePanel .bySizeLabel{
+        
+    }
+
+    
+}
+
+
+/* =====================================================================
+   v58 — Inspection Detail true relative sizing experiment
+   Mobile-first, card-relative, minimal hard floors.
+   ===================================================================== */
+
+.contentPage[data-step="0"] .cardPreview{
+    container-type:size;
+
+    /* Core relative type scale */
+    --detail-title-size:        5.2cqmin;
+    --detail-subtitle-size:     3.0cqmin;
+    --detail-status-title-size: 3.2cqmin;
+    --detail-body-size:         2.55cqmin;
+    --detail-section-size:      2.7cqmin;
+    --detail-metric-size:       2.55cqmin;
+    --detail-button-size:       2.9cqmin;
+
+    /* Core relative spacing */
+    --detail-pad-x:             4.2cqw;
+    --detail-pad-y:             2.6cqh;
+    --detail-gap-xs:            1.2cqh;
+    --detail-gap-sm:            2.0cqh;
+    --detail-gap-md:            2.8cqh;
+    --detail-gap-lg:            3.8cqh;
+
+    /* Component scale */
+    --detail-hero-icon:         14cqmin;
+    --detail-donut:             min(21cqw, 13.5cqh);
+    --detail-donut-center:      21%;
+    --detail-bar-height:        1.15cqh;
+    --detail-radius:            3.2cqmin;
+    --detail-status-min-h:      8.2cqh;
+    --detail-button-min-h:      6.2cqh;
+
+    padding:var(--detail-pad-y) var(--detail-pad-x) !important;
+}
+
+/* Header */
+.contentPage[data-step="0"] .previewHero{
+    gap:3cqw !important;
+}
+
+.contentPage[data-step="0"] .previewHero .contentIcon{
+    width:var(--detail-hero-icon) !important;
+    height:var(--detail-hero-icon) !important;
+    flex:0 0 var(--detail-hero-icon) !important;
+}
+
+.contentPage[data-step="0"] .contentTitle{
+    font-size:var(--detail-title-size) !important;
+}
+
+.contentPage[data-step="0"] .contentBody{
+    font-size:var(--detail-subtitle-size) !important;
+    margin-top:var(--detail-gap-xs) !important;
+}
+
+.contentPage[data-step="0"] .inspectionHeaderDivider{
+    margin-top:var(--detail-gap-md) !important;
+}
+
+/* Section Complete */
+.contentPage[data-step="0"] .previewStatus{
+    min-height:var(--detail-status-min-h) !important;
+    margin-top:var(--detail-gap-md) !important;
+    padding:var(--detail-gap-xs) 3cqw !important;
+    gap:2cqw !important;
+    border-radius:var(--detail-radius) !important;
+}
+
+.contentPage[data-step="0"] .previewStatus strong{
+    font-size:var(--detail-status-title-size) !important;
+}
+
+.contentPage[data-step="0"] .previewStatus small{
+    font-size:var(--detail-body-size) !important;
+}
+
+/* Overview */
+.contentPage[data-step="0"] .gradeOverview{
+    margin-top:var(--detail-gap-lg) !important;
+}
+
+.contentPage[data-step="0"] .gradeOverviewTitle{
+    font-size:var(--detail-section-size) !important;
+    margin-bottom:var(--detail-gap-md) !important;
+}
+
+/* Donuts */
+.contentPage[data-step="0"] .gradeDonutGrid{
+    gap:2.2cqw !important;
+}
+
+.contentPage[data-step="0"] .gradeDonut{
+    width:var(--detail-donut) !important;
+    flex-basis:var(--detail-donut) !important;
+}
+
+.contentPage[data-step="0"] .gradeDonut span{
+    font-size:var(--detail-metric-size) !important;
+}
+
+.contentPage[data-step="0"] .gradeMetric{
+    gap:var(--detail-gap-xs) !important;
+}
+
+.contentPage[data-step="0"] .gradeLegend{
+    font-size:var(--detail-body-size) !important;
+}
+
+/* By Size box */
+.contentPage[data-step="0"] .detailBySizeSection{
+    margin-top:var(--detail-gap-md) !important;
+}
+
+.contentPage[data-step="0"] .detailBySizePanel{
+    gap:var(--detail-gap-md) !important;
+    padding:var(--detail-gap-md) 3.5cqw !important;
+    border-radius:var(--detail-radius) !important;
+}
+
+.contentPage[data-step="0"] .bySizeRow{
+    gap:var(--detail-gap-xs) !important;
+}
+
+.contentPage[data-step="0"] .bySizeLabel{
+    
+}
+
+.contentPage[data-step="0"] .bySizeTrack{
+    height:var(--detail-bar-height) !important;
+}
+
+/* Footer */
+
+
+.contentPage[data-step="0"] .previewActions{
+    gap:2.2cqw !important;
+}
+
+.contentPage[data-step="0"] .previewActions button{
+    min-height:var(--detail-button-min-h) !important;
+    font-size:var(--detail-button-size) !important;
+}
+
+/* Remove earlier mobile-specific resizing behavior for this card.
+   The same relative system now governs every device width. */
+@media(max-width:620px){
+    .contentPage[data-step="0"] .cardPreview,
+    .contentPage[data-step="0"] .previewStatus,
+    .contentPage[data-step="0"] .gradeOverview,
+    .contentPage[data-step="0"] .gradeDonut,
+    .contentPage[data-step="0"] .gradeDonut span,
+    .contentPage[data-step="0"] .detailBySizePanel,
+    .contentPage[data-step="0"] .detailBySizePanel .bySizeLabel,
+    
+}
+
+
+/* =====================================================================
+   v59 — Inspection Detail mobile-first responsive system
+   ---------------------------------------------------------------------
+   Design target: phones first (roughly 360–440 CSS px wide).
+   Typography stays readable and only changes slightly.
+   Spacing and visual components scale from card width.
+   Card height is natural; vertical scrolling is allowed.
+   ===================================================================== */
+
+.contentPage[data-step="0"] .cardPreview{
+    container-type:inline-size;
+
+    /* ---------- Stable mobile typography ---------- */
+    --detail-title-size:        var(--card-title-size);
+    --detail-subtitle-size:     var(--card-subtitle-size);
+    --detail-status-title-size: var(--card-step-title-size);
+    --detail-body-size:         var(--card-body-size);
+    --detail-section-size:      var(--card-overview-title-size);
+    --detail-metric-size:       clamp(.80rem, 3.35cqw, .92rem);
+    --detail-button-size:       var(--card-button-size);
+
+    /* ---------- Width-relative spacing ---------- */
+    --detail-space-xs: 2.0cqw;
+    --detail-space-sm: 3.5cqw;
+    --detail-space-md: 5.0cqw;
+    --detail-space-lg: 7.0cqw;
+
+    --detail-pad-x:       5.0cqw;
+    --detail-pad-y:       5.0cqw;
+    --detail-panel-pad-x: 5.0cqw;
+    --detail-action-gap:  var(--card-button-gap);
+
+    /* ---------- Width-relative components ---------- */
+    --detail-hero-icon: var(--card-header-icon-size);
+    --detail-donut:     24cqw;
+    --detail-radius:    4.5cqw;
+    --detail-bar-height: 2.2cqw;
+
+    padding:var(--detail-pad-y) var(--detail-pad-x) !important;
+}
+
+/* ---------- Header ---------- */
+.contentPage[data-step="0"] .previewHero{
+    gap:4cqw !important;
+}
+
+.contentPage[data-step="0"] .previewHero .contentIcon{
+    width:var(--detail-hero-icon) !important;
+    height:var(--detail-hero-icon) !important;
+    flex:0 0 var(--detail-hero-icon) !important;
+}
+
+.contentPage[data-step="0"] .contentTitle{
+    font-size:var(--detail-title-size) !important;
+    line-height:1.08;
+}
+
+.contentPage[data-step="0"] .contentBody{
+    font-size:var(--detail-subtitle-size) !important;
+    line-height:1.35;
+    margin-top:var(--detail-space-xs) !important;
+}
+
+.contentPage[data-step="0"] .inspectionHeaderDivider{
+    margin-top:var(--detail-space-md) !important;
+}
+
+/* ---------- Section Complete ---------- */
+.contentPage[data-step="0"] .previewStatus{
+    min-height:0 !important;
+    margin-top:var(--detail-space-md) !important;
+    padding:var(--detail-space-sm) 4cqw !important;
+    gap:3cqw !important;
+    border-radius:var(--detail-radius) !important;
+}
+
+.contentPage[data-step="0"] .previewStatus strong{
+    font-size:var(--detail-status-title-size) !important;
+    line-height:1.22;
+}
+
+.contentPage[data-step="0"] .previewStatus small{
+    font-size:var(--detail-body-size) !important;
+    line-height:1.35;
+    margin-top:1cqw;
+}
+
+/* ---------- Overview ---------- */
+.contentPage[data-step="0"] .gradeOverview{
+    margin-top:var(--detail-space-lg) !important;
+}
+
+.contentPage[data-step="0"] .gradeOverviewTitle{
+    font-size:var(--detail-section-size) !important;
+    line-height:1.2;
+    margin-bottom:var(--detail-space-md) !important;
+}
+
+/* ---------- Donut row ---------- */
+.contentPage[data-step="0"] .gradeDonutGrid{
+    gap:2.5cqw !important;
+}
+
+.contentPage[data-step="0"] .gradeMetric{
+    gap:var(--detail-space-xs) !important;
+    min-width:0;
+}
+
+.contentPage[data-step="0"] .gradeDonut{
+    width:var(--detail-donut) !important;
+    flex-basis:var(--detail-donut) !important;
+}
+
+.contentPage[data-step="0"] .gradeDonut span{
+    font-size:var(--detail-metric-size) !important;
+    max-width:58%;
+}
+
+.contentPage[data-step="0"] .gradeLegend{
+    font-size:var(--detail-body-size) !important;
+    line-height:1.2;
+    gap:1.5cqw !important;
+}
+
+/* ---------- By Size panel ---------- */
+.contentPage[data-step="0"] .detailBySizeSection{
+    margin-top:var(--detail-space-md) !important;
+}
+
+.contentPage[data-step="0"] .detailBySizePanel{
+    display:flex !important;
+    flex-direction:column;
+    justify-content:center !important;
+    align-items:stretch;
+    gap:var(--detail-space-md) !important;
+    padding:var(--detail-space-md) var(--detail-panel-pad-x) !important;
+    border-radius:var(--detail-radius) !important;
+}
+
+.contentPage[data-step="0"] .bySizeRow{
+    width:100%;
+    gap:var(--detail-space-xs) !important;
+}
+
+.contentPage[data-step="0"] .bySizeLabel{
+    
+    line-height:1.25 !important;
+}
+
+.contentPage[data-step="0"] .bySizeTrack{
+    height:var(--detail-bar-height) !important;
+}
+
+/* ---------- Footer ---------- */
+
+
+.contentPage[data-step="0"] .previewActions{
+    gap:var(--detail-action-gap) !important;
+}
+
+.contentPage[data-step="0"] .previewActions button{
+    min-height:var(--touch-target-min) !important; /* touch target floor only */
+    font-size:var(--detail-button-size) !important;
+}
+
+/* ---------------------------------------------------------------------
+   Phone-width tuning without separate typography systems.
+   These only adjust spacing/components, not font formulas.
+   --------------------------------------------------------------------- */
+@container (max-width:380px){
+    .contentPage[data-step="0"] .cardPreview{
+        --detail-space-lg: 5.5cqw;
+        --detail-space-md: 4.2cqw;
+        --detail-donut: 22.5cqw;
+        --detail-hero-icon: 14.5cqw;
+        --detail-pad-y: 4.2cqw;
+    }
+}
+
+@container (min-width:421px){
+    .contentPage[data-step="0"] .cardPreview{
+        --detail-donut: 23cqw;
+        --detail-pad-y: 4.5cqw;
+    }
+}
+
+/* Neutralize the older cqh/cqmin sizing from v57/v58 for this card. */
+@media(max-width:620px){
+    .contentPage[data-step="0"] .cardPreview{
+        padding:var(--detail-pad-y) var(--detail-pad-x) !important;
+    }
+
+    .contentPage[data-step="0"] .previewStatus{
+        margin-top:var(--detail-space-md) !important;
+    }
+
+    .contentPage[data-step="0"] .gradeOverview{
+        margin-top:var(--detail-space-lg) !important;
+    }
+
+    .contentPage[data-step="0"] .gradeDonut{
+        width:var(--detail-donut) !important;
+    }
+
+    .contentPage[data-step="0"] .detailBySizePanel{
+        gap:var(--detail-space-md) !important;
+        padding:var(--detail-space-md) var(--detail-panel-pad-x) !important;
+    }
+
+    
+}
+
+
+/* =====================================================================
+   v60 — Inspection Detail donut + By Size panel refinement
+   ===================================================================== */
+
+/* Slightly larger donuts overall. */
+.contentPage[data-step="0"] .cardPreview{
+    --detail-donut: 26cqw;
+}
+
+/* Thin the donut ring by enlarging the inner cutout.
+   This gives the percentage a larger protected center area. */
+.contentPage[data-step="0"] .gradeDonut::after{
+    inset:27% !important;
+}
+
+/* Keep the value centered and constrained inside the protected center. */
+.contentPage[data-step="0"] .gradeDonut span{
+    max-width:52% !important;
+    text-align:center;
+    white-space:nowrap;
+    line-height:1 !important;
+}
+
+/* By Size should size to its contents rather than stretching vertically. */
+.contentPage[data-step="0"] .inspectionComments.detailBySizeSection{
+    flex:0 0 auto !important;
+    min-height:0 !important;
+    height:auto !important;
+}
+
+.contentPage[data-step="0"] .detailBySizePanel{
+    flex:0 0 auto !important;
+    min-height:0 !important;
+    height:auto !important;
+    justify-content:flex-start !important;
+
+    /* Equal relative top/bottom padding, content-sized box. */
+    padding:
+        var(--detail-space-md)
+        var(--detail-panel-pad-x) !important;
+}
+
+/* Keep deliberate spacing between the two rows, but no filler space. */
+.contentPage[data-step="0"] .detailBySizePanel .bySizeRow{
+    flex:0 0 auto !important;
+}
+
+@container (max-width:380px){
+    .contentPage[data-step="0"] .cardPreview{
+        --detail-donut: 24.5cqw;
+    }
+}
+
+@container (min-width:421px){
+    .contentPage[data-step="0"] .cardPreview{
+        --detail-donut: 25cqw;
+    }
+}
+
+
+/* =====================================================================
+   v61 — NON-DESTRUCTIVE Inspection Detail visual correction
+   ---------------------------------------------------------------------
+   Scope:
+   1. Restore the divider/actions as the card footer.
+   2. Correct donut geometry only.
+   Existing responsive typography, spacing, By Size content and logic
+   remain untouched.
+   ===================================================================== */
+
+/* ---- Card footer stays at the bottom ---- */
+
+
+.contentPage[data-step="0"] .previewActions{
+    flex:0 0 auto;
+    margin-top:0 !important;
+}
+
+/* ---- Donut sizing ----
+   Slightly larger overall, but with a THINNER visible ring.
+   The pseudo-element is the center mask, so increasing its inset was
+   making the hole smaller / ring thicker. Use a SMALL inset instead. */
+.contentPage[data-step="0"] .cardPreview{
+    --detail-donut: 27cqw;
+}
+
+.contentPage[data-step="0"] .gradeDonut::after{
+    inset:12% !important;
+}
+
+/* Percentage gets a clean protected central area and never rides the ring. */
+.contentPage[data-step="0"] .gradeDonut span{
+    max-width:68% !important;
+    font-size:var(--detail-metric-size) !important;
+    line-height:1 !important;
+    white-space:nowrap !important;
+    text-align:center !important;
+    z-index:2;
+}
+
+/* Nearby phone widths use the same geometry, with only modest size changes. */
+@container (max-width:380px){
+    .contentPage[data-step="0"] .cardPreview{
+        --detail-donut:25.5cqw;
+    }
+}
+
+@container (min-width:421px){
+    .contentPage[data-step="0"] .cardPreview{
+        --detail-donut:26cqw;
+    }
+}
+
+
+/* =====================================================================
+   v62 — tiny typography/spacing alignment pass
+   ===================================================================== */
+
+/* Match By Size text to the donut percentage typography exactly. */
+.contentPage[data-step="0"] .bySizeLabel{
+    
+}
+
+/* Add only a small extra gap between Section Complete and Inspection Overview. */
+.contentPage[data-step="0"] .gradeOverview{
+    margin-top:calc(var(--detail-space-lg) + 1.2cqw) !important;
+}
+
+
+
+
+/* =====================================================================
+   v64 — Inspection Detail shared data typography
+   ---------------------------------------------------------------------
+   One source of truth for:
+   - Premium / Standard / Rejects legend labels
+   - By Size Premium / By Size Standard lines
+   Donut percentages remain on their separate metric-size token.
+   ===================================================================== */
+
+.contentPage[data-step="0"] .cardPreview{
+    --detail-data-label-size: clamp(.84rem, 3.45cqw, .94rem);
+}
+
+/* Chart legend labels and By Size rows now share the exact same type size. */
+.contentPage[data-step="0"] .gradeLegend,
+.contentPage[data-step="0"] .bySizeLabel{
+    font-size:var(--detail-data-label-size) !important;
+    line-height:1.2 !important;
+}
+
+/* Everything inside each By Size line inherits that exact shared size. */
+.contentPage[data-step="0"] .bySizeLabel > span,
+.contentPage[data-step="0"] .bySizeLabel strong,
+.contentPage[data-step="0"] .bySizeLabel strong span{
+    font-size:inherit !important;
+    line-height:inherit !important;
+}
+
+/* Preserve existing chart legend layout while using the shared type token. */
+.contentPage[data-step="0"] .gradeLegend{
+    gap:1.5cqw !important;
+}
+
+
+/* =====================================================================
+   v65 — Inspection Detail spacing rhythm + By Size container restore
+   ===================================================================== */
+
+.contentPage[data-step="0"] .cardPreview{
+    /* Universal outer card padding for this card. */
+    --detail-pad-y: 4cqw;
+
+    /* Shared inter-section rhythm. */
+    --detail-section-gap: 4cqw;
+}
+
+/* Keep the card's top and bottom padding equal at every phone width. */
+.contentPage[data-step="0"] .cardPreview{
+    padding-top:var(--detail-pad-y) !important;
+    padding-bottom:var(--detail-pad-y) !important;
+}
+
+/* Section Complete -> Inspection Overview = 4cqw. */
+.contentPage[data-step="0"] .gradeOverview{
+    margin-top:var(--detail-section-gap) !important;
+}
+
+/* Charts/legend -> By Size container = 4cqw. */
+.contentPage[data-step="0"] .inspectionComments.detailBySizeSection{
+    margin-top:var(--detail-section-gap) !important;
+}
+
+/* Restore the visual By Size container without changing its typography. */
+.contentPage[data-step="0"] .detailBySizePanel{
+    border:var(--border-thin) solid var(--og-border) !important;
+    border-radius:var(--detail-radius) !important;
+    background:var(--surface-overlay-light) !important;
+    padding:var(--detail-space-md) var(--detail-panel-pad-x) !important;
+}
+
+/* Older width-specific vertical-padding values must not override the
+   universal 4cqw outer padding. */
+@container (max-width:380px){
+    .contentPage[data-step="0"] .cardPreview{
+        --detail-pad-y:4cqw;
+    }
+}
+@container (min-width:421px){
+    .contentPage[data-step="0"] .cardPreview{
+        --detail-pad-y:4cqw;
+    }
+}
+
+
+/* =====================================================================
+   v66 — Inspection Detail centralized master spacing controls
+   ---------------------------------------------------------------------
+   These are now the primary controls for the card:
+   X = left/right outer padding
+   Y = top/bottom outer padding
+   Section Gap = spacing between major content sections
+   ===================================================================== */
+
+.contentPage[data-step="0"] .cardPreview{
+    --detail-pad-x: var(--card-pad-x);
+    --detail-pad-y: var(--card-pad-y);
+    --detail-section-gap: var(--card-section-gap);
+
+    padding:
+        var(--detail-pad-y)
+        var(--detail-pad-x) !important;
+}
+
+/* Header/divider -> Section Complete uses the shared major-section gap. */
+.contentPage[data-step="0"] .previewStatus{
+    margin-top:var(--detail-section-gap) !important;
+}
+
+/* Section Complete -> Inspection Overview uses the same shared gap. */
+.contentPage[data-step="0"] .gradeOverview{
+    margin-top:var(--detail-section-gap) !important;
+}
+
+/* Charts/legend -> By Size box uses the same shared gap. */
+.contentPage[data-step="0"] .inspectionComments.detailBySizeSection{
+    margin-top:var(--detail-section-gap) !important;
+}
+
+/* Keep the master X/Y values universal across our phone-width containers. */
+@container (max-width:380px){
+    .contentPage[data-step="0"] .cardPreview{
+        --detail-pad-x:3cqw;
+        --detail-pad-y:3cqw;
+    }
+}
+
+@container (min-width:421px){
+    .contentPage[data-step="0"] .cardPreview{
+        --detail-pad-x:3cqw;
+        --detail-pad-y:3cqw;
+    }
+}
+
+
+
+/* =====================================================================
+   v71 — SHARED HOME CARD COMPONENTS
+   ---------------------------------------------------------------------
+   Canonical repeating patterns:
+   .appCard
+   .cardHeader / .cardHeaderIcon / .cardTitle / .cardSubtitle
+   .cardDivider
+   .cardStepStatus / .cardStepIcon / .cardStepText
+   .cardOverviewTitle
+   .cardActions / .cardPrimaryAction / .cardSecondaryAction
+
+   Card-specific CSS should govern only content unique to that card.
+   ===================================================================== */
+
+/* ---------- Card shell ---------- */
+.appCard{
+    container-type:inline-size;
+    padding:
+        var(--card-pad-y)
+        var(--card-pad-x) !important;
+}
+
+/* ---------- Shared header ---------- */
+.cardHeader{
+    display:flex;
+    align-items:center;
+    gap:var(--card-header-gap) !important;
+}
+
+.cardHeaderIcon{
+    width:var(--card-header-icon-size) !important;
+    height:var(--card-header-icon-size) !important;
+    flex:0 0 var(--card-header-icon-size) !important;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--accent-blue);
+}
+
+.cardHeaderIcon svg{
+    width:100%;
+    height:100%;
+    fill:currentColor;
+}
+
+.cardTitle{
+    font-size:var(--card-title-size) !important;
+    line-height:1.08;
+}
+
+.cardSubtitle{
+    font-size:var(--card-subtitle-size) !important;
+    line-height:1.35;
+    color:var(--og-muted);
+}
+
+/* ---------- Shared divider ---------- */
+.cardDivider{
+    width:100%;
+    height:var(--border-thin) !important;
+    background:var(--og-border);
+    flex:0 0 auto;
+}
+
+/* ---------- Shared Step Complete ---------- */
+.cardStepStatus{
+    width:100%;
+    margin-top:var(--card-section-gap) !important;
+    border:var(--border-thin) solid var(--og-border);
+    border-radius:var(--card-step-radius) !important;
+    background:var(--og-panel-deep);
+    color:var(--og-text);
+    text-align:left !important;
+}
+
+.cardStepStatus strong{
+    font-size:var(--card-step-title-size) !important;
+    line-height:1.22;
+}
+
+.cardStepStatus small{
+    font-size:var(--card-body-size) !important;
+    line-height:1.35;
+    color:var(--og-muted);
+}
+
+.cardStepIcon{
+    width:var(--card-step-icon-size) !important;
+    height:var(--card-step-icon-size) !important;
+    flex:0 0 var(--card-step-icon-size) !important;
+    color:var(--og-subtle);
+    background:transparent;
+    border:0;
+    box-shadow:none;
+}
+
+.cardStepIcon svg{
+    width:100%;
+    height:100%;
+    color:currentColor;
+    fill:currentColor;
+}
+
+.cardStepStatus.complete .cardStepIcon{
+    color:var(--accent-green) !important;
+}
+
+.cardStepText{
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:center;
+    text-align:left;
+}
+
+/* ---------- Shared overview heading ---------- */
+.cardOverviewTitle{
+    font-size:var(--card-overview-title-size) !important;
+    line-height:1.2;
+    text-align:center;
+}
+
+/* ---------- Shared footer actions ---------- */
+.cardActions{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
+    gap:var(--card-button-gap) !important;
+    margin-top:0;
+    flex:0 0 auto;
+}
+
+.cardActions button{
+    min-height:var(--card-button-min-height) !important;
+    border-radius:var(--card-button-radius) !important;
+    font-size:var(--card-button-size) !important;
+    font-family:inherit;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.cardPrimaryAction{
+    border:var(--border-thin) solid var(--accent-blue);
+    background:var(--accent-blue-strong);
+    color:var(--color-white);
+}
+
+.cardSecondaryAction{
+    border:var(--border-thin) solid var(--og-border);
+    background:transparent;
+    color:var(--og-text);
+}
+
+
+
+
+/* =====================================================================
+   v74 — canonical shared card footer
+   ---------------------------------------------------------------------
+   Flexible unused space belongs BEFORE .cardFooter.
+   Footer owns:
+   divider -> shared divider gap -> buttons
+   No card-specific footer spacing is allowed.
+   ===================================================================== */
+
+.appCard .cardFooter{
+    margin-top:auto !important;
+    flex:0 0 auto;
+    display:flex;
+    flex-direction:column;
+    width:100%;
+}
+
+.appCard .cardFooter .cardDivider{
+    margin:0 0 var(--card-divider-gap) 0 !important;
+    flex:0 0 auto;
+}
+
+.appCard .cardFooter .cardActions{
+    margin:0 !important;
+    flex:0 0 auto;
+}
+
+/* Legacy footer divider classes are now semantic markers only. */
+.appCard .inspectionActionDivider,
+.appCard .summaryActionDivider,
+.appCard .activityActionDivider{
+    margin:0 !important;
+}
+
+
+/* =====================================================================
+   v75 — canonical shared Step Complete component
+   ---------------------------------------------------------------------
+   Same markup, layout, icon, spacing, typography, colors and state
+   behaviour on all three cards.
+   ===================================================================== */
+
+.appCard .cardStepStatus{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:flex-start !important;
+    gap:var(--card-step-gap) !important;
+
+    width:100%;
+    margin-top:var(--card-section-gap) !important;
+    padding:3cqw 4cqw !important;
+
+    border:var(--border-thin) solid var(--og-border);
+    border-radius:var(--card-step-radius) !important;
+    background:var(--og-panel-deep);
+    color:var(--og-text);
+
+    text-align:left !important;
+    cursor:pointer;
+}
+
+.appCard .cardStepIcon{
+    width:var(--card-step-icon-size) !important;
+    height:var(--card-step-icon-size) !important;
+    flex:0 0 var(--card-step-icon-size) !important;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:var(--og-subtle) !important;
+    background:transparent !important;
+    border:0 !important;
+    border-radius:0 !important;
+    box-shadow:none !important;
+}
+
+.appCard .cardStepIcon svg{
+    width:100%;
+    height:100%;
+    color:currentColor !important;
+    fill:currentColor !important;
+}
+
+.appCard .cardStepText{
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:center;
+    text-align:left;
+}
+
+.appCard .cardStepText strong{
+    margin:0 !important;
+    font-size:var(--card-step-title-size) !important;
+    line-height:1.22;
+    color:var(--og-text);
+    text-align:left !important;
+}
+
+.appCard .cardStepText small{
+    margin:1cqw 0 0 !important;
+    font-size:var(--card-body-size) !important;
+    line-height:1.35;
+    color:var(--og-muted);
+    text-align:left !important;
+}
+
+/* Pending / incomplete state */
+.appCard .cardStepStatus.pending .cardStepIcon{
+    color:var(--og-subtle) !important;
+}
+
+/* Complete state */
+.appCard .cardStepStatus.complete{
+    border-color:var(--accent-green);
+    background:var(--accent-green-bg-strong);
+}
+
+.appCard .cardStepStatus.complete .cardStepIcon{
+    color:var(--accent-green) !important;
+}
+
+.appCard .cardStepStatus.complete .cardStepText strong{
+    color:var(--accent-green-light);
+}
+
+/* No glow/ring around Step Complete icon in either state. */
+.appCard .cardStepIcon,
+.appCard .cardStepIcon::before,
+.appCard .cardStepIcon::after{
+    box-shadow:none !important;
+}
+
+
+/* =====================================================================
+   v76 — canonical card flow + Overview spacing
+   ===================================================================== */
+
+/* Legacy .cardPreview used justify-content:center + a generic gap.
+   Shared cards now get all spacing exclusively from named master controls. */
+.appCard{
+    justify-content:flex-start !important;
+    gap:0 !important;
+}
+
+/* One shared gap below every Overview heading.
+   This value reflects the preferred Inspection Detail spacing. */
+.appCard .cardOverviewTitle{
+    margin-bottom:var(--card-overview-content-gap) !important;
+}
+
+
+/* =====================================================================
+   v78 — metric color consistency
+   ===================================================================== */
+
+/* Summary Overview colors */
+.contentPage[data-step="1"] .summaryMetricNet .summaryMetricIcon,
+.contentPage[data-step="1"] .summaryMetricValueNet{
+    color:var(--accent-blue) !important;
+}
+
+.contentPage[data-step="1"] .summaryMetricSamples .summaryMetricIcon,
+.contentPage[data-step="1"] .summaryMetricValueSamples{
+    color:var(--accent-green) !important;
+}
+
+.contentPage[data-step="1"] .summaryMetricCrab .summaryMetricIcon,
+.contentPage[data-step="1"] .summaryMetricValueCrab .summaryMetricNumber{
+    color:var(--accent-orange) !important;
+}
+
+.contentPage[data-step="1"] .summaryMetricUnit{
+    color:var(--color-white) !important;
+}
+
+/* Detail donut unit standard */
+.contentPage[data-step="0"] .donutPercentUnit{
+    color:var(--color-white) !important;
+}
+
+
+/* =====================================================================
+   v79 — percentage rendering / legacy selector correction
+   ===================================================================== */
+
+/* Internal value spans must inherit the metric value size/weight.
+   Only the direct child label beneath the value uses label typography. */
+.contentPage[data-step="1"] .summaryMetricValue,
+.contentPage[data-step="1"] .summaryMetricValue > span{
+    font-size:inherit !important;
+    font-weight:inherit !important;
+    line-height:inherit !important;
+}
+
+.contentPage[data-step="1"] .summaryMetricValueCrab{
+    display:inline-flex;
+    align-items:baseline;
+    justify-content:center;
+    gap:0;
+}
+
+.contentPage[data-step="1"] .summaryMetricValueCrab .summaryMetricNumber{
+    color:var(--accent-orange) !important;
+}
+
+.contentPage[data-step="1"] .summaryMetricValueCrab .summaryMetricUnit{
+    color:var(--color-white) !important;
+}
+
+
+.contentPage[data-step="0"] .gradeDonut [data-home-percent]{
+    display:inline-flex !important;
+    align-items:baseline;
+    justify-content:center;
+    white-space:nowrap;
+}
+
+.contentPage[data-step="0"] .gradeDonut .donutPercentNumber{
+    color:inherit !important;
+    font-size:inherit !important;
+    font-weight:inherit !important;
+    line-height:inherit !important;
+}
+
+.contentPage[data-step="0"] .gradeDonut .donutPercentUnit{
+    color:var(--color-white) !important;
+    font-size:inherit !important;
+    font-weight:inherit !important;
+    line-height:inherit !important;
+}
+
+
+/* =====================================================================
+   v80 — canonical Summary Overview metric tiles
+   ---------------------------------------------------------------------
+   Net Pounds Landed / Number of Samples / Percentage of Crab share:
+   - padding
+   - icon size
+   - numeric value size
+   - label size
+   - internal spacing
+   Individual semantic colors remain intentionally different.
+   ===================================================================== */
+
+.contentPage[data-step="1"] .metricTile{
+    box-sizing:border-box;
+    padding:
+        var(--metric-tile-pad-y)
+        var(--metric-tile-pad-x) !important;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:var(--metric-tile-content-gap) !important;
+    text-align:center;
+}
+
+.contentPage[data-step="1"] .metricTileIcon{
+    width:var(--metric-tile-icon-size) !important;
+    height:var(--metric-tile-icon-size) !important;
+    flex:0 0 var(--metric-tile-icon-size);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.contentPage[data-step="1"] .metricTileIcon svg{
+    width:100%;
+    height:100%;
+    color:currentColor;
+    fill:currentColor;
+}
+
+.contentPage[data-step="1"] .metricTileValue{
+    margin:0 !important;
+    font-size:var(--metric-tile-value-size) !important;
+    line-height:1.1 !important;
+    font-weight:800 !important;
+    white-space:nowrap;
+}
+
+.contentPage[data-step="1"] .metricTileValue > span{
+    font-size:inherit !important;
+    line-height:inherit !important;
+    font-weight:inherit !important;
+}
+
+/* Only the direct child text label beneath the value uses label sizing. */
+.contentPage[data-step="1"] .metricTile > span{
+    margin:0 !important;
+    font-size:var(--metric-tile-label-size) !important;
+    line-height:1.2;
+    color:var(--og-muted);
+    text-align:center;
+}
+
+/* Crab percent unit remains white while sharing identical value size. */
+.contentPage[data-step="1"] .metricTileValueCrab .summaryMetricUnit{
+    color:var(--color-white) !important;
+}
+
+
+/* Card 1 By Size values and Card 2 metric values intentionally share
+   one canonical font-size control. */
+.contentPage[data-step="0"] .bySizeLabel,
+.contentPage[data-step="0"] .bySizeLabel > span,
+.contentPage[data-step="0"] .bySizeLabel strong,
+.contentPage[data-step="0"] .bySizeLabel strong span{
+    font-size:var(--metric-tile-value-size) !important;
+}
+
+/* v81 compact landing comparison */
+.contentPage[data-step="1"] .summaryRadialComparison{
+ --hailed-ratio:0;--gross-ratio:0;
+ margin-top:var(--card-section-gap);
+ display:grid;grid-template-columns:1.08fr .92fr;align-items:center;
+ gap:4cqw;width:100%;
+}
+.contentPage[data-step="1"] .summaryRadialChart{
+ position:relative;width:42cqw;max-width:190px;aspect-ratio:1;justify-self:center;
+}
+.contentPage[data-step="1"] .summaryRadialRing{
+ position:absolute;border-radius:50%;
+ background:conic-gradient(from 225deg,currentColor 0 calc(var(--ratio)*270deg),rgba(71,85,105,.26) calc(var(--ratio)*270deg) 270deg,transparent 270deg 360deg);
+ -webkit-mask:radial-gradient(circle,transparent 61%,#000 62%);
+ mask:radial-gradient(circle,transparent 61%,#000 62%);
+}
+.contentPage[data-step="1"] .summaryRadialRingHailed{inset:0;--ratio:var(--hailed-ratio);color:var(--accent-blue);}
+.contentPage[data-step="1"] .summaryRadialRingGross{inset:11%;--ratio:var(--gross-ratio);color:var(--accent-green);}
+.contentPage[data-step="1"] .summaryRadialCenter{
+ position:absolute;inset:25%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+}
+.contentPage[data-step="1"] .summaryRadialCenter strong{
+ color:var(--accent-blue);font-size:clamp(1.12rem,5cqw,1.45rem);line-height:1;font-weight:800;
+}
+.contentPage[data-step="1"] .summaryRadialCenter>span{color:var(--accent-blue);font-size:var(--card-body-size);font-weight:700;margin-top:.5cqw;}
+.contentPage[data-step="1"] .summaryRadialCenter small{color:var(--og-text);font-size:clamp(.6rem,2.55cqw,.72rem);line-height:1.2;margin-top:1cqw;}
+.contentPage[data-step="1"] .summaryRadialLegend{display:flex;flex-direction:column;gap:7cqw;min-width:0;}
+.contentPage[data-step="1"] .summaryRadialLegendRow{display:grid;grid-template-columns:3cqw 1fr;gap:2.3cqw;align-items:start;}
+.contentPage[data-step="1"] .summaryRadialLegendDot{width:3cqw;height:3cqw;border-radius:50%;margin-top:.7cqw;}
+.contentPage[data-step="1"] .summaryRadialLegendHailed .summaryRadialLegendDot{background:var(--accent-blue);}
+.contentPage[data-step="1"] .summaryRadialLegendGross .summaryRadialLegendDot{background:var(--accent-green);}
+.contentPage[data-step="1"] .summaryRadialLegendRow>div{display:flex;flex-direction:column;gap:1.2cqw;min-width:0;}
+.contentPage[data-step="1"] .summaryRadialLegendRow>div>span{font-size:var(--card-body-size);color:var(--og-text);line-height:1.2;}
+.contentPage[data-step="1"] .summaryRadialLegendRow strong{font-size:var(--metric-tile-value-size);line-height:1.1;font-weight:800;white-space:nowrap;}
+.contentPage[data-step="1"] .summaryRadialLegendHailed strong{color:var(--accent-blue);}
+.contentPage[data-step="1"] .summaryRadialLegendGross strong{color:var(--accent-green);}
+.contentPage[data-step="1"] .summaryRadialUnit{color:var(--color-white);font-size:inherit;font-weight:inherit;}
+@container (max-width:380px){
+ .contentPage[data-step="1"] .summaryRadialComparison{gap:3cqw;grid-template-columns:1fr .95fr;}
+ .contentPage[data-step="1"] .summaryRadialChart{width:39cqw;}
+ .contentPage[data-step="1"] .summaryRadialLegend{gap:5cqw;}
+}
+
+
+/* =====================================================================
+   v82 — compact Summary Overview copy
+   ===================================================================== */
+
+/* Radial center now reads:
+   [value]
+   lbs difference
+*/
+.contentPage[data-step="1"] .summaryRadialCenter > span{
+    margin-top:1cqw !important;
+    color:var(--og-text) !important;
+    font-size:clamp(.68rem,2.8cqw,.80rem) !important;
+    font-weight:600 !important;
+    line-height:1.15 !important;
+    white-space:nowrap;
+}
+
+/* The old secondary radial description is no longer part of the component. */
+.contentPage[data-step="1"] .summaryRadialCenter small{
+    display:none !important;
+}
+
+
+/* =====================================================================
+   v83 — radial value standard + 8cqw section rhythm
+   ===================================================================== */
+
+.contentPage[data-step="1"] .summaryRadialCenter{
+    inset:20% !important;
+}
+
+.contentPage[data-step="1"] .summaryRadialDifferenceLine{
+    display:inline-flex;
+    align-items:baseline;
+    justify-content:center;
+    gap:1cqw;
+    white-space:nowrap;
+}
+
+/* Match Card 1 donut percentage typography. */
+.contentPage[data-step="1"] .summaryRadialDifferenceLine strong{
+    margin:0 !important;
+    color:var(--accent-blue) !important;
+    font-size:var(--detail-metric-size, clamp(.80rem,3.35cqw,.92rem)) !important;
+    line-height:1 !important;
+    font-weight:800 !important;
+}
+
+.contentPage[data-step="1"] .summaryRadialDifferenceLine span{
+    margin:0 !important;
+    color:var(--color-white) !important;
+    font-size:var(--card-body-size) !important;
+    line-height:1 !important;
+    font-weight:600 !important;
+    white-space:nowrap;
+}
+
+/* Neutralize v82's now-obsolete stacked center rule. */
+.contentPage[data-step="1"] .summaryRadialCenter > span{
+    display:none !important;
+}
+
+
+/* =====================================================================
+   v84 — radial difference copy correction
+   ---------------------------------------------------------------------
+   Center format:
+       0lbs
+       difference
+   ===================================================================== */
+
+.contentPage[data-step="1"] .summaryRadialCenter{
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:center !important;
+    text-align:center !important;
+}
+
+.contentPage[data-step="1"] .summaryRadialDifferenceValue{
+    display:inline-flex;
+    align-items:baseline;
+    justify-content:center;
+    gap:0;
+    white-space:nowrap;
+    line-height:1;
+}
+
+/* Number stays on the same shared metric scale as Card 1 chart values. */
+.contentPage[data-step="1"] .summaryRadialDifferenceValue strong{
+    margin:0 !important;
+    color:var(--accent-blue) !important;
+    font-size:var(--detail-metric-size, clamp(.80rem,3.35cqw,.92rem)) !important;
+    line-height:1 !important;
+    font-weight:800 !important;
+}
+
+/* lbs is part of the value line, with no visual gap. */
+.contentPage[data-step="1"] .summaryRadialDifferenceValue span{
+    margin:0 !important;
+    color:var(--color-white) !important;
+    font-size:var(--detail-metric-size, clamp(.80rem,3.35cqw,.92rem)) !important;
+    line-height:1 !important;
+    font-weight:800 !important;
+}
+
+/* Descriptor sits centered beneath the value. */
+.contentPage[data-step="1"] .summaryRadialCenter small{
+    display:block !important;
+    margin-top:1.2cqw !important;
+    color:var(--og-text) !important;
+    font-size:clamp(.68rem,2.8cqw,.80rem) !important;
+    line-height:1.1 !important;
+    font-weight:600 !important;
+    text-align:center !important;
+}
+
+/* v83 single-line wrapper is obsolete. */
+.contentPage[data-step="1"] .summaryRadialDifferenceLine{
+    display:none !important;
+}
+
+
+/* =====================================================================
+   v85 — Summary Overview big difference focus
+   ---------------------------------------------------------------------
+   Replaces the radial comparison with a simpler information hierarchy:
+       [large difference] lbs
+       difference
+
+       Hailed Weight        Gross Lbs. Landed
+   ===================================================================== */
+
+.contentPage[data-step="1"] .summaryDifferenceFocus{
+    margin-top:var(--card-section-gap);
+    width:100%;
+    display:grid;
+    grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
+    align-items:center;
+    gap:5cqw;
+}
+
+.contentPage[data-step="1"] .summaryDifferencePrimary{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    min-width:0;
+}
+
+.contentPage[data-step="1"] .summaryDifferenceValue{
+    display:inline-flex;
+    align-items:baseline;
+    justify-content:center;
+    gap:1cqw;
+    white-space:nowrap;
+}
+
+.contentPage[data-step="1"] .summaryDifferenceValue strong{
+    margin:0;
+    color:var(--accent-blue);
+    font-size:clamp(1.55rem,7.5cqw,2.15rem);
+    line-height:1;
+    font-weight:800;
+}
+
+.contentPage[data-step="1"] .summaryDifferenceValue > span{
+    margin:0;
+    color:var(--color-white);
+    font-size:var(--card-body-size);
+    line-height:1;
+    font-weight:700;
+}
+
+.contentPage[data-step="1"] .summaryDifferencePrimary > small{
+    margin-top:1.5cqw;
+    color:var(--og-muted);
+    font-size:var(--card-body-size);
+    line-height:1.1;
+    font-weight:600;
+}
+
+.contentPage[data-step="1"] .summaryDifferenceSupport{
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    gap:5cqw;
+}
+
+.contentPage[data-step="1"] .summaryDifferenceSupportItem{
+    display:grid;
+    grid-template-columns:3cqw minmax(0,1fr);
+    align-items:start;
+    gap:2.5cqw;
+}
+
+.contentPage[data-step="1"] .summaryDifferenceDot{
+    width:3cqw;
+    height:3cqw;
+    border-radius:50%;
+    margin-top:.7cqw;
+}
+
+.contentPage[data-step="1"] .summaryDifferenceHailed .summaryDifferenceDot{
+    background:var(--accent-blue);
+}
+
+.contentPage[data-step="1"] .summaryDifferenceGross .summaryDifferenceDot{
+    background:var(--accent-green);
+}
+
+.contentPage[data-step="1"] .summaryDifferenceSupportItem > div{
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    gap:1cqw;
+}
+
+.contentPage[data-step="1"] .summaryDifferenceSupportItem > div > span{
+    color:var(--og-text);
+    font-size:var(--card-body-size);
+    line-height:1.2;
+}
+
+.contentPage[data-step="1"] .summaryDifferenceSupportItem strong{
+    font-size:var(--metric-tile-value-size);
+    line-height:1.1;
+    font-weight:800;
+    white-space:nowrap;
+}
+
+.contentPage[data-step="1"] .summaryDifferenceHailed strong{
+    color:var(--accent-blue);
+}
+
+.contentPage[data-step="1"] .summaryDifferenceGross strong{
+    color:var(--accent-green);
+}
+
+.contentPage[data-step="1"] .summaryDifferenceUnit{
+    color:var(--color-white);
+    font-size:inherit;
+    font-weight:inherit;
+}
+
+@container (max-width:380px){
+    .contentPage[data-step="1"] .summaryDifferenceFocus{
+        gap:3.5cqw;
+        grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr);
+    }
+
+    .contentPage[data-step="1"] .summaryDifferenceValue strong{
+        font-size:clamp(1.4rem,7cqw,1.9rem);
+    }
+
+    .contentPage[data-step="1"] .summaryDifferenceSupport{
+        gap:4cqw;
+    }
+}
+
+
+/* =====================================================================
+   v86 — Summary Overview big-difference composition
+   ---------------------------------------------------------------------
+   Hailed Weight                         Gross Lbs. Landed
+   [value] lbs                              [value] lbs
+
+                       [difference] lbs
+                          Difference
+   ===================================================================== */
+
+.contentPage[data-step="1"] .summaryDifferenceFocus{
+    margin-top:var(--card-section-gap);
+    width:100%;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:stretch !important;
+    gap:5cqw !important;
+}
+
+.contentPage[data-step="1"] .summaryDifferenceTop{
+    width:100%;
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    gap:5cqw;
+    align-items:start;
+}
+
+.contentPage[data-step="1"] .summaryDifferenceWeight{
+    display:flex;
+    flex-direction:column;
+    gap:1.2cqw;
+    min-width:0;
+}
+
+.contentPage[data-step="1"] .summaryDifferenceHailed{
+    align-items:flex-start;
+    text-align:left;
+}
+
+.contentPage[data-step="1"] .summaryDifferenceGross{
+    align-items:flex-end;
+    text-align:right;
+}
+
+.contentPage[data-step="1"] .summaryDifferenceWeight > span{
+    color:var(--og-text);
+    font-size:var(--card-body-size);
+    line-height:1.2;
+}
+
+.contentPage[data-step="1"] .summaryDifferenceWeight strong{
+    font-size:var(--metric-tile-value-size);
+    line-height:1.1;
+    font-weight:800;
+    white-space:nowrap;
+}
+
+.contentPage[data-step="1"] .summaryDifferenceHailed strong{
+    color:var(--accent-blue);
+}
+
+.contentPage[data-step="1"] .summaryDifferenceGross strong{
+    color:var(--accent-green);
+}
+
+.contentPage[data-step="1"] .summaryDifferenceUnit{
+    color:var(--color-white);
+    font-size:inherit;
+    font-weight:inherit;
+}
+
+.contentPage[data-step="1"] .summaryDifferencePrimary{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    min-width:0;
+}
+
+.contentPage[data-step="1"] .summaryDifferenceValue{
+    display:inline-flex;
+    align-items:baseline;
+    justify-content:center;
+    gap:1cqw;
+    white-space:nowrap;
+}
+
+.contentPage[data-step="1"] .summaryDifferenceValue strong{
+    margin:0;
+    color:var(--accent-blue);
+    font-size:clamp(1.7rem,8cqw,2.3rem);
+    line-height:1;
+    font-weight:800;
+}
+
+.contentPage[data-step="1"] .summaryDifferenceValue > span{
+    margin:0;
+    color:var(--color-white);
+    font-size:var(--card-body-size);
+    line-height:1;
+    font-weight:700;
+}
+
+.contentPage[data-step="1"] .summaryDifferencePrimary > small{
+    margin-top:1.4cqw;
+    color:var(--og-muted);
+    font-size:var(--card-body-size);
+    line-height:1.1;
+    font-weight:600;
+    text-transform:none;
+}
+
+@container (max-width:380px){
+    .contentPage[data-step="1"] .summaryDifferenceFocus{
+        gap:4cqw !important;
+    }
+
+    .contentPage[data-step="1"] .summaryDifferenceTop{
+        gap:3cqw;
+    }
+
+    .contentPage[data-step="1"] .summaryDifferenceValue strong{
+        font-size:clamp(1.5rem,7.5cqw,2rem);
+    }
+}
+
+
+/* =====================================================================
+   v88 — Summary Overview spacing inherits global card rhythm
+   ===================================================================== */
+
+/* Difference Focus -> metric tiles is a major content transition,
+   so it uses the shared global section gap rather than local spacing. */
+.contentPage[data-step="1"] .summaryDifferenceFocus + .summaryMetricGrid{
+    margin-top:var(--card-section-gap) !important;
 }
