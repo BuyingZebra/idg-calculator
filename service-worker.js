@@ -1,4 +1,4 @@
-const CACHE_NAME = "idg-training-v88";
+const CACHE_NAME = "idg-training-v121";
 const PRECACHE_URLS = [
   "./",
   "./PROJECT_STRUCTURE.md",

@@ -90,7 +90,6 @@ aria-label="Help">
                         <div class="contentIcon cardHeaderIcon" data-icon="grading"></div>
                         <div>
                             <h2 class="contentTitle cardTitle">Inspection Detail</h2>
-                            <p class="contentBody cardSubtitle">detail overview</p>
                         </div>
                     </div>
 
@@ -109,24 +108,52 @@ aria-label="Help">
                         <div class="gradeDonutGrid">
                             <div class="gradeMetric gradeMetricPremium">
                                 <div class="gradeDonut" data-home-donut="premium">
+                                    <svg class="gradeDonutSvg" viewBox="0 0 100 100" aria-hidden="true">
+                                        <circle class="gradeDonutTrack" cx="50" cy="50" r="44"></circle>
+                                        <circle class="gradeDonutProgress" data-home-progress="premium" cx="50" cy="50" r="44" pathLength="100"></circle>
+                                    </svg>
                                     <span data-home-percent="premium">0.00%</span>
                                 </div>
                                 <div class="gradeLegend"><span class="gradeLegendDot"></span><span>Premium</span></div>
                             </div>
                             <div class="gradeMetric gradeMetricStandard">
                                 <div class="gradeDonut" data-home-donut="standard">
+                                    <svg class="gradeDonutSvg" viewBox="0 0 100 100" aria-hidden="true">
+                                        <circle class="gradeDonutTrack" cx="50" cy="50" r="44"></circle>
+                                        <circle class="gradeDonutProgress" data-home-progress="standard" cx="50" cy="50" r="44" pathLength="100"></circle>
+                                    </svg>
                                     <span data-home-percent="standard">0.00%</span>
                                 </div>
                                 <div class="gradeLegend"><span class="gradeLegendDot"></span><span>Standard</span></div>
                             </div>
                             <div class="gradeMetric gradeMetricReject">
                                 <div class="gradeDonut" data-home-donut="reject">
+                                    <svg class="gradeDonutSvg" viewBox="0 0 100 100" aria-hidden="true">
+                                        <circle class="gradeDonutTrack" cx="50" cy="50" r="44"></circle>
+                                        <circle class="gradeDonutProgress" data-home-progress="reject" cx="50" cy="50" r="44" pathLength="100"></circle>
+                                    </svg>
                                     <span data-home-percent="reject">0.00%</span>
                                 </div>
                                 <div class="gradeLegend"><span class="gradeLegendDot"></span><span>Rejects</span></div>
                             </div>
                         </div>
                     </section>
+
+                    <div class="fisheriesNotification"
+                         data-fisheries-notification
+                         data-required="false"
+                         role="status"
+                         aria-label="Fisheries notification status">
+                        <div class="fisheriesNotificationDivider" aria-hidden="true">
+                            <span></span>
+                            <div class="fisheriesNotificationIcon" data-icon="grading"></div>
+                            <span></span>
+                        </div>
+                        <div class="fisheriesNotificationCopy">
+                            <strong data-fisheries-notification-title>FISHERIES NOTIFICATION</strong>
+                            <small data-fisheries-notification-text>No notification is required</small>
+                        </div>
+                    </div>
 
                     <section class="inspectionComments detailBySizeSection" aria-label="Premium versus standard by size">
                         <div class="detailBySizePanel">
@@ -135,6 +162,7 @@ aria-label="Help">
                                     <span>By Size Premium:</span>
                                     <strong data-summary-premium-size><span class="sizePercentNumber">0.00</span><span class="sizePercentUnit">%</span></strong>
                                 </div>
+                        
                                 <div class="bySizeTrack" aria-label="By Size Premium">
                                     <div class="bySizeFill bySizePremiumFill" data-summary-premium-bar></div>
                                 </div>
@@ -151,6 +179,8 @@ aria-label="Help">
                             </div>
                         </div>
                     </section>
+
+                    
 
                     <div class="cardFooter">
                         <div class="previewDivider cardDivider inspectionActionDivider"></div>
@@ -169,7 +199,6 @@ aria-label="Help">
                         <div class="contentIcon cardHeaderIcon" data-icon="inspection"></div>
                         <div>
                             <h2 class="contentTitle cardTitle">Inspection Summary</h2>
-                            <p class="contentBody cardSubtitle">summary overview</p>
                         </div>
                     </div>
 
@@ -186,25 +215,26 @@ aria-label="Help">
                     <section class="summaryOverview" aria-label="Inspection overview">
                         <div class="summaryOverviewTitle cardOverviewTitle">Summary Overview</div>
 
-                        <div class="summaryDifferenceFocus" aria-label="Landing weight comparison">
-                            <div class="summaryDifferenceTop">
-                                <div class="summaryDifferenceWeight summaryDifferenceHailed">
-                                    <span>Hailed Weight</span>
-                                    <strong><span data-summary-hailed-weight>0</span> <span class="summaryDifferenceUnit">lbs</span></strong>
+                        <div class="summaryVesselInfo" aria-label="Vessel and receipt information">
+                            <div class="summaryVesselIdentity">
+                                <span class="summaryVesselEyebrow">VESSEL</span>
+                                <strong data-summary-boat-name data-empty-state="true">Boat Name</strong>
+
+                                <div class="summaryVesselDivider" aria-hidden="true">
+                                    <span></span>
+                                    <div class="summaryVesselIcon" data-icon="inspection"></div>
+                                    <span></span>
                                 </div>
 
-                                <div class="summaryDifferenceWeight summaryDifferenceGross">
-                                    <span>Gross Lbs. Landed</span>
-                                    <strong><span data-summary-gross-landed>0</span> <span class="summaryDifferenceUnit">lbs</span></strong>
-                                </div>
+                                <div class="summaryVesselCfv">CFV <b data-summary-cfv data-empty-state="true">123456</b></div>
                             </div>
 
-                            <div class="summaryDifferencePrimary">
-                                <div class="summaryDifferenceValue">
-                                    <strong data-summary-landed-difference>0</strong>
-                                    <span>lbs</span>
+                            <div class="summaryReceiptInfo">
+                                <span class="summaryReceiptLabel">FISH RECEIPT #</span>
+                                <div class="summaryReceiptValue">
+                                    <div class="summaryReceiptIcon" data-icon="grading" aria-hidden="true"></div>
+                                    <strong data-summary-fish-receipt data-empty-state="true">1234567</strong>
                                 </div>
-                                <small>Difference</small>
                             </div>
                         </div>
 
@@ -247,7 +277,6 @@ aria-label="Help">
                         <div class="contentIcon cardHeaderIcon" data-icon="activity"></div>
                         <div>
                             <h2 class="contentTitle cardTitle">Activity Slip</h2>
-                            <p class="contentBody cardSubtitle">Travel, wait &amp; inspection time</p>
                         </div>
                     </div>
 

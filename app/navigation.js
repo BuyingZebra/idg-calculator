@@ -4,6 +4,24 @@
 const HEADER_ANIMATION_DURATION =
     800;
 
+function updateFisheriesNotification(deadPercent=0, criticalWeakPercent=0){
+    const box=document.querySelector("[data-fisheries-notification]");
+    if(!box) return;
+
+    const dead=Number(deadPercent || 0);
+    const critical=Number(criticalWeakPercent || 0);
+    const required=dead>4 || critical>20;
+
+    box.dataset.required=required ? "true" : "false";
+
+    const title=box.querySelector("[data-fisheries-notification-title]");
+    const text=box.querySelector("[data-fisheries-notification-text]");
+    if(title) title.textContent="FISHERIES NOTIFICATION";
+    if(text) text.textContent=required
+        ? "Contact fisheries, thresholds exceeded"
+        : "No notification is required";
+}
+
 function initializeLayout(){
 
     const headerBackButton =
@@ -435,31 +453,27 @@ function refreshInspectionDetailPreview(){
         reject:Number(results.rejectPercent || 0)
     };
 
+    updateFisheriesNotification(
+        Number(results.deadPercent || 0),
+        Number(results.criticalWeakPercent || 0)
+    );
+
     Object.entries(values).forEach(([key,value])=>{
         const safe=Math.max(0,Math.min(100,Number.isFinite(value)?value:0));
         const donut=document.querySelector(`[data-home-donut="${key}"]`);
         const label=document.querySelector(`[data-home-percent="${key}"]`);
         if(donut) donut.style.setProperty("--percent",String(safe));
+
+        const progress=document.querySelector(`[data-home-progress="${key}"]`);
+        if(progress){
+            progress.style.strokeDasharray=`${safe} ${100-safe}`;
+            progress.style.strokeDashoffset="0";
+        }
+
         if(label) label.innerHTML=`<span class="donutPercentNumber">${safe.toFixed(2)}</span><span class="donutPercentUnit">%</span>`;
     });
 
-    const comments=document.querySelector("[data-inspection-comments]");
-    if(comments){
-        const dead=Number(results.deadPercent || 0);
-        const rejects=Number(results.rejectPercent || 0);
-        const reasons=[];
 
-        if(dead>4) reasons.push(`dead is ${dead.toFixed(2)}% (> 4%)`);
-        if(rejects>20) reasons.push(`total rejects are ${rejects.toFixed(2)}% (> 20%)`);
-
-        if(reasons.length){
-            comments.textContent=`Department of Fisheries notification required: ${reasons.join(" and ")}.`;
-            comments.classList.add("notificationRequired");
-        }else{
-            comments.textContent="No comments.";
-            comments.classList.remove("notificationRequired");
-        }
-    }
 }
 
 function refreshInspectionSummaryPreview(){
@@ -501,17 +515,45 @@ function refreshInspectionSummaryPreview(){
         if(el) el.textContent=value;
     };
 
+    const vesselSource =
+        appState?.landingInformation?.inputs ||
+        appState?.landingInfo?.inputs ||
+        appState?.inspectionSummary?.inputs ||
+        {};
+    const boatName =
+        vesselSource.boatName ??
+        vesselSource.vesselName ??
+        vesselSource.boat ??
+        appState?.boatName ??
+        appState?.vesselName ??
+        "";
+    const cfv =
+        vesselSource.cfv ??
+        vesselSource.cfvNumber ??
+        vesselSource.vesselNumber ??
+        appState?.cfv ??
+        "";
+    const fishReceipt =
+        vesselSource.fishReceipt ??
+        vesselSource.fishReceiptNumber ??
+        vesselSource.receiptNumber ??
+        appState?.fishReceipt ??
+        "";
+
+    setText("[data-summary-boat-name]", boatName || "Boat Name");
+    document.querySelector("[data-summary-boat-name]")?.toggleAttribute("data-empty-state", !boatName);
+    setText("[data-summary-cfv]", cfv || "123456");
+    document.querySelector("[data-summary-cfv]")?.toggleAttribute("data-empty-state", !cfv);
+    setText("[data-summary-fish-receipt]", fishReceipt || "1234567");
+    document.querySelector("[data-summary-fish-receipt]")?.toggleAttribute("data-empty-state", !fishReceipt);
+
     setText("[data-summary-samples]",String(samples));
     setText("[data-summary-net-landed]",net.toLocaleString(undefined,{maximumFractionDigits:1}));
     const crabSummary=document.querySelector("[data-summary-crab-percent]");
     if(crabSummary){
         crabSummary.innerHTML=`<span class="summaryMetricNumber">${percentCrab.toFixed(2)}</span><span class="summaryMetricUnit">%</span>`;
     }
-    const landedDifference=(hailed>0 && gross>0) ? Math.abs(hailed-gross) : 0;
-    setText("[data-summary-hailed-weight]",hailed.toLocaleString(undefined,{maximumFractionDigits:1}));
-    setText("[data-summary-gross-landed]",gross.toLocaleString(undefined,{maximumFractionDigits:1}));
-    setText("[data-summary-landed-difference]",landedDifference.toLocaleString(undefined,{maximumFractionDigits:1}));
-    const premiumSizeDetail=document.querySelector("[data-summary-premium-size]");
+const premiumSizeDetail=document.querySelector("[data-summary-premium-size]");
     if(premiumSizeDetail){
         premiumSizeDetail.innerHTML=`<span class="sizePercentNumber">${premiumBySize.toFixed(2)}</span><span class="sizePercentUnit">%</span>`;
     }

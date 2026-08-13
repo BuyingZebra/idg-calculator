@@ -113,6 +113,10 @@
   /* Shared separator rhythm */
   --card-divider-gap:3.5cqw;
 
+  /* Shared boxed-content padding */
+  --content-box-pad-y:3cqw;
+  --content-box-pad-x:4cqw;
+
 
   /* Shared component geometry */
   --card-step-radius:var(--radius-control);
@@ -124,6 +128,13 @@
        with available screen size rather than a fixed device pixel count. */
     --screen-pad-x:2.5vw;
     --screen-pad-y:1.25vh;
+
+    /* Shared application bar shell height.
+       Header/footer contents remain independently controlled. */
+    --app-bar-height:12cqw;
+    --app-bar-pad-x:3cqw;
+    --app-bar-pad-y:3cqw;
+    --app-bar-control-size:44px;
 }
 
 html,
@@ -154,19 +165,23 @@ body{
 }
 
 #appHeader{
-    height:80px;
+    height:var(--app-bar-height);
+    min-height:var(--app-bar-height);
     display:grid;
-    grid-template-columns:60px 1fr 60px;
+    grid-template-columns:var(--app-bar-control-size) minmax(0,1fr) var(--app-bar-control-size);
     align-items:center;
+    column-gap:var(--app-bar-pad-x);
+    padding:
+        calc(var(--app-bar-pad-y) + env(safe-area-inset-top))
+        var(--app-bar-pad-x)
+        var(--app-bar-pad-y);
+
     border-bottom:1px solid var(--og-border);
     flex-shrink:0;
-    padding:0 10px;
 }
 
 #headerBackButton,
 #headerHelpButton{
-    width:44px;
-    height:44px;
     border:none;
     background:none;
     font-size:24px;
@@ -174,6 +189,9 @@ body{
     display:flex;
     align-items:center;
     justify-content:center;
+
+    width:var(--app-bar-control-size);
+    height:var(--app-bar-control-size);
 }
 
 #headerBackButton{
@@ -183,17 +201,17 @@ body{
 #headerTitleViewport{
     position:relative;
     width:100%;
-    height:100%;
     overflow:hidden;
+
+    min-height:0;
+    align-self:stretch;
 }
 
 .headerTitle{
     position:absolute;
-    top:0;
     left:0;
 
     width:100%;
-    height:100%;
 
     display:flex;
     align-items:center;
@@ -207,6 +225,8 @@ body{
     text-overflow:ellipsis;
 
     transition:transform 0.8s ease;
+
+    inset-block:0;
 }
 
 #headerTitleCurrent{
@@ -218,7 +238,13 @@ body{
 }
 
 #appFooter{
-    height:80px;
+    height:var(--app-bar-height);
+    min-height:var(--app-bar-height);
+    padding:
+        var(--app-bar-pad-y)
+        var(--app-bar-pad-x)
+        calc(var(--app-bar-pad-y) + env(safe-area-inset-bottom));
+
     display:flex;
     align-items:center;
     justify-content:center;
@@ -299,8 +325,53 @@ body{
 }
 body,#appShell{color:var(--og-text);}
 #appHeader,#appFooter{background:var(--og-bg);color:var(--og-text);}
-#headerBackButton,#headerHelpButton{color:var(--og-text);}
+#headerBackButton,
+#headerHelpButton{color:var(--og-text);
+    width:var(--app-bar-control-size);
+    height:var(--app-bar-control-size);
+}
 
 
-/* v29: footer intentionally reserved for a future app-level control. */
-#appFooter:empty{height:clamp(34px,5vh,54px);}
+/* =====================================================================
+   v89 — shared header/footer shell
+   ===================================================================== */
+
+#appHeader,
+#appFooter{
+    flex-shrink:0;
+}
+
+
+
+
+/* =====================================================================
+   v90 — canonical app bar height system
+   ---------------------------------------------------------------------
+   --app-bar-height is the sole height control for both header/footer.
+   Safe-area padding remains independent.
+   ===================================================================== */
+
+
+/* =====================================================================
+   v91 — canonical app-bar shell/content separation
+   ---------------------------------------------------------------------
+   Shell:
+     --app-bar-height
+     --app-bar-pad-x
+     --app-bar-pad-y
+
+   Header content:
+     responsive control columns + constrained title viewport
+
+   Footer content:
+     independent future controls inside the same shell dimensions
+   ===================================================================== */
+
+
+/* =====================================================================
+   v119 NOTE
+   ---------------------------------------------------------------------
+   Card-specific layout editing now belongs in the CARD CONTROL PANEL at
+   the top of ui/navigation.css. Global tokens here remain as fallbacks
+   and for genuinely global visual language only.
+   ===================================================================== */

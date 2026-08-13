@@ -1,3 +1,117 @@
+/* =====================================================================
+   IDG TRAINING TOOL — CARD CONTROL PANEL
+   ---------------------------------------------------------------------
+   Edit values here first.
+   Each card is intentionally independent.
+   ===================================================================== */
+
+/* ========================= CARD 1 — INSPECTION DETAIL ========================= */
+.contentPage[data-step="0"] .appCard{
+    /* Shell */
+    --c1-card-pad-x:3cqw;
+    --c1-card-pad-y:3cqw;
+
+    /* Major vertical rhythm */
+    --c1-section-gap:8cqw;
+    --c1-overview-content-gap:4cqw;
+
+    /* Header */
+    --c1-header-gap:4cqw;
+    --c1-header-icon-size:16cqw;
+    --c1-header-divider-gap:3.5cqw;
+
+    /* Footer */
+    --c1-footer-divider-gap:3.5cqw;
+    --c1-button-gap:3cqw;
+    --c1-button-min-height:var(--touch-target-min);
+    --c1-button-radius:var(--radius-control);
+    --c1-button-font-size:var(--card-button-size);
+
+    /* Box geometry — Step Complete + By Size */
+    --c1-box-pad-x:4cqw;
+    --c1-box-pad-y:3cqw;
+    --c1-box-radius:var(--radius-control);
+
+    /* Step Complete */
+    --c1-step-icon-size:9cqw;
+    --c1-step-gap:3cqw;
+    --c1-step-title-size:var(--card-step-title-size);
+    --c1-step-body-size:var(--card-body-size);
+
+    /* Overview */
+    --c1-overview-title-size:var(--card-overview-title-size);
+
+    /* Donut charts */
+    --c1-donut-size:32cqw;
+    --c1-donut-track-stroke:4;
+    --c1-donut-progress-stroke:6;
+    --c1-donut-grid-gap:2cqw;
+    --c1-donut-value-size:var(--metric-tile-value-size);
+    --c1-chart-label-gap:3cqw;
+    --c1-legend-gap:1.5cqw;
+    --c1-legend-dot-size:3cqw;
+
+    /* Fisheries status */
+    --c1-fisheries-divider-width:82%;
+    --c1-fisheries-icon-size:9cqw;
+    --c1-fisheries-gap:2cqw;
+    --c1-fisheries-line-gap:3cqw;
+
+    /* By Size */
+    --c1-by-size-row-gap:3cqw;
+    --c1-by-size-label-gap:.35em;
+    --c1-progress-track-height:1.35cqw;
+    --c1-progress-fill-height:2cqw;
+}
+
+
+/* ========================= CARD 2 — INSPECTION SUMMARY ========================= */
+.contentPage[data-step="1"] .appCard{
+    --c2-card-pad-x:3cqw;
+    --c2-card-pad-y:3cqw;
+    --c2-section-gap:8cqw;
+    --c2-header-gap:4cqw;
+    --c2-header-icon-size:16cqw;
+    --c2-header-divider-gap:3.5cqw;
+    --c2-footer-divider-gap:3.5cqw;
+    --c2-button-gap:3cqw;
+    --c2-box-pad-x:4cqw;
+    --c2-box-pad-y:3cqw;
+    --c2-box-radius:var(--radius-control);
+    --c2-step-icon-size:9cqw;
+    --c2-step-gap:3cqw;
+    --c2-metric-pad-x:3cqw;
+    --c2-metric-pad-y:3cqw;
+    --c2-metric-icon-size:9cqw;
+    --c2-metric-content-gap:1.5cqw;
+}
+
+
+/* ========================= CARD 3 — ACTIVITY TIME SLIP ========================= */
+.contentPage[data-step="2"] .appCard{
+    --c3-card-pad-x:3cqw;
+    --c3-card-pad-y:3cqw;
+    --c3-section-gap:8cqw;
+    --c3-header-gap:4cqw;
+    --c3-header-icon-size:16cqw;
+    --c3-header-divider-gap:3.5cqw;
+    --c3-footer-divider-gap:3.5cqw;
+    --c3-button-gap:3cqw;
+    --c3-box-pad-x:4cqw;
+    --c3-box-pad-y:3cqw;
+    --c3-box-radius:var(--radius-control);
+    --c3-step-icon-size:9cqw;
+    --c3-step-gap:3cqw;
+}
+
+/* =====================================================================
+   END CARD CONTROL PANEL
+   ===================================================================== */
+
+
+
+
+
 /* ================================================================
    DESIGN SYSTEM NOTE (v70)
    Global colors, surfaces, radii, border thickness and touch-target
@@ -126,7 +240,7 @@
     overflow:hidden;
     color:var(--og-text);
 }
-.contentPage[data-step="0"]{top:0;}
+
 .contentPage[data-step="1"]{top:calc(100% + 2%);}
 .contentPage[data-step="2"]{top:calc(200% + 4%);}
 
@@ -215,7 +329,8 @@
     .timelineItem{width:54px;height:54px;}
     .timelineNode{width:42px;height:42px;border-width:2px;}
     .timelineNodeIcon{width:22px;height:22px;}
-    #timelineLine,#timelineProgress{
+    #timelineLine,
+#timelineProgress{
         top:calc(var(--screen-pad-y) + 27px);
         bottom:calc(var(--screen-pad-y) + 27px);
         width:2px;
@@ -332,7 +447,7 @@
     }
 
     #timelineLine,
-    #timelineProgress{
+#timelineProgress{
         left:calc(50% + (var(--screen-pad-x) / 2));
     }
 
@@ -381,8 +496,8 @@
 
 @media(max-width:620px){
     .timelineItem.active .timelineNode,
-    .timelineItem.active.complete .timelineNode,
-    .timelineItem.complete.active .timelineNode{
+.timelineItem.active.complete .timelineNode,
+.timelineItem.complete.active .timelineNode{
         transform:scale(1.12);
     }
 }
@@ -458,14 +573,7 @@
     box-shadow:inset 0 0 0 1px var(--surface-ring-light);
 }
 
-.gradeDonut span{
-    position:relative;
-    z-index:1;
-    color:var(--metric-color);
-    font-weight:800;
-    font-size:clamp(.9rem,2vw,1.2rem);
-    font-variant-numeric:tabular-nums;
-}
+
 
 .gradeLegend{
     display:flex;
@@ -533,392 +641,161 @@
         inset:14%;
     }
 
-    .gradeDonut span{
-        font-size:clamp(.68rem,2.7vw,.88rem);
-    }
 
-    .gradeLegend{
-        gap:5px;
-        font-size:clamp(.58rem,2.25vw,.72rem);
-    }
-
-    .gradeLegendDot{
-        width:9px;
-        height:9px;
-    }
-
-    .previewActions{
-        grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
-        gap:8px;
-    }
-
-    .previewActions button{
-        min-width:0;
-        padding:0 8px;
-        font-size:.76rem;
-    }
-}
 
 
 /* ===== v36 Inspection Detail composition pass ===== */
 
 /* Only the Inspection Detail home card uses the new natural vertical flow. */
-.contentPage[data-step="0"] .cardPreview{
-    justify-content:flex-start;
-    gap:clamp(18px,2.6vh,30px);
-}
+
 
 /* Keep the title/icon block deliberate and centered. */
-.contentPage[data-step="0"] .previewHero{
-    margin-bottom:0;
-}
+
 
 /* Grade Overview becomes its own divider:
    -------- GRADE OVERVIEW -------- */
-.contentPage[data-step="0"] .gradeOverviewTitle{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:14px;
-    width:100%;
-    margin:0 0 clamp(16px,2vh,24px);
-    color:var(--accent-blue-label);
-    text-align:center;
-    white-space:nowrap;
-}
 
-.contentPage[data-step="0"] .gradeOverviewTitle::before,
-.contentPage[data-step="0"] .gradeOverviewTitle::after{
-    content:"";
-    height:var(--border-thin);
-    flex:1 1 auto;
-    background:var(--og-border);
-}
+
+
 
 /* Larger gauges on roomy screens, preserving current mobile sizing. */
-.contentPage[data-step="0"] .gradeDonut{
-    width:clamp(108px,14vw,160px);
-}
 
-.contentPage[data-step="0"] .gradeDonutGrid{
-    gap:clamp(14px,2.2vw,28px);
-}
+
+
 
 /* Do not push the completion state or buttons to the bottom.
    Their position now follows the charts naturally. */
-.contentPage[data-step="0"] .previewStatus{
-    margin-top:clamp(10px,2vh,22px);
-}
 
-.contentPage[data-step="0"] .previewActions{
-    margin-top:0;
-}
+
+
 
 /* Any unused card height stays below the controls instead of between sections. */
-.contentPage[data-step="0"] .cardPreview::after{
-    content:"";
-    flex:1 1 auto;
-    min-height:0;
-}
+
 
 /* Keep horizontal actions consistent. */
-.contentPage[data-step="0"] .previewActions{
-    grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
-}
+
 
 /* Desktop gets a little more breathing room inside the card,
    but the content remains grouped instead of being stretched apart. */
 @media(min-width:900px){
-    .contentPage[data-step="0"] .cardPreview{
-        padding-top:clamp(28px,4vh,46px);
-        padding-bottom:clamp(24px,3vh,38px);
-    }
+    
 
-    .contentPage[data-step="0"] .gradeOverview{
-        margin-top:2px;
-    }
+    
 }
 
 /* Mobile: retain compact donut sizing and tighten the composition. */
 @media(max-width:620px){
-    .contentPage[data-step="0"] .cardPreview{
-        gap:15px;
-    }
+    
 
-    .contentPage[data-step="0"] .gradeOverviewTitle{
-        gap:10px;
-        margin-bottom:13px;
-    }
+    
 
-    .contentPage[data-step="0"] .gradeDonut{
-        width:min(21vw,82px);
-    }
+    
 
-    .contentPage[data-step="0"] .previewStatus{
-        margin-top:12px;
-    }
+    
 
-    .contentPage[data-step="0"] .previewActions{
-        margin-top:2px;
-    }
+    
 }
 
 
 /* ===== v37 Inspection Detail parent-relative spacing ===== */
-.contentPage[data-step="0"] .cardPreview{
-    container-type:size;
-    padding:
-        clamp(12px,3.2cqh,40px)
-        clamp(12px,3.2cqw,42px);
-    gap:0;
-    justify-content:flex-start;
-}
 
-.contentPage[data-step="0"] .previewHero{
-    margin:0;
-}
 
-.contentPage[data-step="0"] .previewStatus{
-    margin-top:clamp(12px,5cqh,48px);
-    padding:
-        clamp(9px,1.6cqh,15px)
-        clamp(12px,2.2cqw,20px);
-    gap:clamp(8px,1.8cqw,14px);
-}
 
-.contentPage[data-step="0"] .gradeOverview{
-    width:100%;
-    margin-top:clamp(18px,10cqh,88px);
-}
 
-.contentPage[data-step="0"] .gradeOverviewTitle,
-.contentPage[data-step="0"] .sectionLineTitle{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:clamp(8px,2cqw,18px);
-    width:100%;
-    margin:0 0 clamp(12px,3.2cqh,30px);
-    color:var(--accent-blue-label);
-    font-size:clamp(.68rem,1.7cqw,.82rem);
-    font-weight:800;
-    letter-spacing:.06em;
-    text-transform:uppercase;
-    text-align:center;
-    white-space:nowrap;
-}
 
-.contentPage[data-step="0"] .gradeOverviewTitle::before,
-.contentPage[data-step="0"] .gradeOverviewTitle::after,
-.contentPage[data-step="0"] .sectionLineTitle::before,
-.contentPage[data-step="0"] .sectionLineTitle::after{
-    content:"";
-    height:var(--border-thin);
-    flex:1 1 auto;
-    background:var(--og-border);
-}
 
-.contentPage[data-step="0"] .gradeDonutGrid{
-    gap:clamp(8px,2.4cqw,28px);
-}
 
-.contentPage[data-step="0"] .gradeDonut{
-    width:clamp(70px,18cqw,160px);
-}
 
-.contentPage[data-step="0"] .gradeMetric{
-    gap:clamp(7px,1.8cqh,14px);
-}
 
-.contentPage[data-step="0"] .inspectionComments{
-    width:100%;
-    margin-top:clamp(16px,5cqh,48px);
-}
 
-.contentPage[data-step="0"] .inspectionCommentBox{
-    min-height:clamp(42px,6.5cqh,70px);
-    display:flex;
-    align-items:center;
-    padding:
-        clamp(9px,1.6cqh,15px)
-        clamp(12px,2.2cqw,20px);
-    border:var(--border-thin) solid var(--og-border);
-    border-radius:var(--radius-control);
-    background:var(--surface-overlay);
-    color:var(--og-muted);
-    font-size:clamp(.72rem,1.7cqw,.92rem);
-    line-height:1.4;
-}
 
-.contentPage[data-step="0"] .inspectionCommentBox.notificationRequired{
-    border-color:var(--warning-border);
-    background:var(--warning-bg);
-    color:#fbbf24;
-}
 
-.contentPage[data-step="0"] .previewActions{
-    margin-top:clamp(16px,5cqh,48px);
-    grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
-    gap:clamp(8px,2cqw,18px);
-}
 
-.contentPage[data-step="0"] .cardPreview::after{
-    content:none !important;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @media(max-width:620px){
-    .contentPage[data-step="0"] .cardPreview{
-        padding:
-            clamp(10px,2.4cqh,22px)
-            clamp(10px,3cqw,18px);
-    }
+    
 
-    .contentPage[data-step="0"] .previewStatus{
-        margin-top:clamp(10px,4cqh,26px);
-    }
+    
 
-    .contentPage[data-step="0"] .gradeOverview{
-        margin-top:clamp(18px,7cqh,44px);
-    }
+    
 
-    .contentPage[data-step="0"] .inspectionComments{
-        margin-top:clamp(14px,4cqh,28px);
-    }
+    
 
-    .contentPage[data-step="0"] .previewActions{
-        margin-top:clamp(14px,4cqh,28px);
-    }
+    
 
-    .contentPage[data-step="0"] .gradeDonut{
-        width:min(21cqw,82px);
-    }
+    
 }
 
 
 /* ===== v38 Inspection Detail structure ===== */
 
 /* Restore a simple solid rule beneath the title block. */
-.contentPage[data-step="0"] .inspectionHeaderDivider{
-    margin-top:clamp(12px,3.5cqh,34px);
-}
+
 
 /* Completion remains the first content item after the title divider. */
-.contentPage[data-step="0"] .previewStatus{
-    margin-top:clamp(12px,4cqh,38px);
-}
+
 
 /* Section headings return to simple left-aligned labels. */
-.contentPage[data-step="0"] .gradeOverviewTitle,
-.contentPage[data-step="0"] .sectionLineTitle{
-    display:block;
-    width:100%;
-    margin:0 0 clamp(12px,3.2cqh,30px);
-    color:var(--accent-blue-label);
-    font-size:clamp(.68rem,1.7cqw,.82rem);
-    font-weight:800;
-    letter-spacing:.06em;
-    text-transform:uppercase;
-    text-align:left;
-    white-space:normal;
-}
 
-.contentPage[data-step="0"] .gradeOverviewTitle::before,
-.contentPage[data-step="0"] .gradeOverviewTitle::after,
-.contentPage[data-step="0"] .sectionLineTitle::before,
-.contentPage[data-step="0"] .sectionLineTitle::after{
-    content:none;
-}
+
+
 
 /* The card now has enough content to justify bottom-pinned actions.
    auto margin consumes only the unused space after Comments. */
 
 
-.contentPage[data-step="0"] .previewActions{
-    margin-top:0;
-    flex:0 0 auto;
-}
+
 
 /* Keep the proportional content rhythm above the pinned action area. */
-.contentPage[data-step="0"] .gradeOverview{
-    margin-top:clamp(18px,6cqh,58px);
-}
 
-.contentPage[data-step="0"] .inspectionComments{
-    margin-top:clamp(16px,5cqh,48px);
-}
+
+
 
 @media(max-width:620px){
-    .contentPage[data-step="0"] .inspectionHeaderDivider{
-        margin-top:clamp(10px,2.8cqh,22px);
-    }
+    
 
-    .contentPage[data-step="0"] .previewStatus{
-        margin-top:clamp(10px,3.2cqh,24px);
-    }
+    
 
-    .contentPage[data-step="0"] .gradeOverview{
-        margin-top:clamp(16px,5cqh,34px);
-    }
+    
 
-    .contentPage[data-step="0"] .inspectionComments{
-        margin-top:clamp(14px,4cqh,28px);
-    }
+    
 
     
 }
 
 
 /* ===== v39 Inspection comments integration ===== */
-.contentPage[data-step="0"] .inspectionComments{
-    width:100%;
-    margin-top:clamp(14px,4cqh,36px);
-    flex:1 1 auto;
-    display:flex;
-    min-height:0;
-}
 
-.contentPage[data-step="0"] .inspectionCommentBox{
-    width:100%;
-    min-height:var(--inspection-status-height, clamp(54px,7cqh,76px));
-    height:100%;
-    flex:1 1 auto;
-    align-items:flex-start;
-    padding:
-        clamp(9px,1.6cqh,15px)
-        clamp(12px,2.2cqw,20px);
-    border:var(--border-thin) solid var(--og-border);
-    border-radius:var(--radius-control);
-    background:var(--surface-overlay);
-    color:var(--og-muted);
-    font-size:inherit;
-    line-height:inherit;
-}
+
+
 
 /* Match the Section Complete body copy exactly. */
-.contentPage[data-step="0"] .inspectionCommentBox,
-.contentPage[data-step="0"] .previewStatus small{
-    font-size:clamp(.68rem,1.55cqw,.84rem);
-    line-height:1.4;
-}
+
 
 /* A notification changes wording only; the container remains visually neutral. */
-.contentPage[data-step="0"] .inspectionCommentBox.notificationRequired{
-    border-color:var(--og-border);
-    background:var(--surface-overlay);
-    color:var(--og-muted);
-}
+
 
 /* The comments region now absorbs spare card height, so the action area stays pinned. */
 
 
 @media(max-width:620px){
-    .contentPage[data-step="0"] .inspectionComments{
-        margin-top:clamp(12px,3cqh,22px);
-    }
+    
 
-    .contentPage[data-step="0"] .inspectionCommentBox{
-        min-height:clamp(54px,7cqh,72px);
-    }
+    
 
     
 }
@@ -938,9 +815,7 @@
     margin:0;
 }
 
-.contentPage[data-step="1"] .summaryHeaderDivider{
-    margin-top:clamp(12px,3.5cqh,34px);
-}
+
 
 .contentPage[data-step="1"] .previewStatus{
     margin-top:clamp(12px,4cqh,38px);
@@ -1056,9 +931,7 @@
             clamp(10px,3cqw,18px);
     }
 
-    .contentPage[data-step="1"] .summaryHeaderDivider{
-        margin-top:clamp(10px,2.8cqh,22px);
-    }
+    
 
     .contentPage[data-step="1"] .previewStatus{
         margin-top:clamp(10px,3.2cqh,24px);
@@ -1090,36 +963,18 @@
 /* ===== v41 cleanup pass ===== */
 
 /* Inspection Detail: centered overview heading. */
-.contentPage[data-step="0"] .gradeOverviewTitle{
-    text-align:center;
-}
+
 
 /* Give each donut an outer color ring/glow like the navigation states. */
-.contentPage[data-step="0"] .gradeDonut{
-    box-shadow:
-        0 0 0 3px color-mix(in srgb,var(--metric-color) 22%,transparent),
-        0 0 14px color-mix(in srgb,var(--metric-color) 20%,transparent),
-        inset 0 0 0 1px var(--surface-ring);
-}
+
 
 /* Slightly larger mobile charts with more protected center space. */
 @media(max-width:620px){
-    .contentPage[data-step="0"] .gradeDonut{
-        width:min(23cqw,90px);
-    }
+    
 
-    .contentPage[data-step="0"] .gradeDonut::after{
-        inset:20%;
-    }
+    
 
-    .contentPage[data-step="0"] .gradeDonut span{
-        max-width:58%;
-        white-space:nowrap;
-        text-align:center;
-        font-size:clamp(.60rem,2.45vw,.82rem);
-        line-height:1;
-    }
-}
+
 
 /* Inspection Summary: explicitly preserve title/footer divider lines. */
 .contentPage[data-step="1"] .summaryHeaderDivider,
@@ -1152,21 +1007,14 @@
 
 /* Remove the glow from Inspection Detail charts.
    Keep only a crisp outer tint ring to echo navigation-state rings. */
-.contentPage[data-step="0"] .gradeDonut{
-    box-shadow:
-        0 0 0 2px color-mix(in srgb,var(--metric-color) 34%,transparent),
-        inset 0 0 0 1px var(--surface-ring);
-}
+
 
 
 /* ===== v44 donut cleanup ===== */
 
 /* Remove the outer colored ring/glow completely.
    Keep only the donut itself and a subtle inner edge. */
-.contentPage[data-step="0"] .gradeDonut{
-    box-shadow:
-        inset 0 0 0 1px var(--surface-ring) !important;
-}
+
 
 
 /* ===== v45 Inspection Summary presentation ===== */
@@ -1261,7 +1109,7 @@
 @media(max-width:620px){
 
     [data-summary-gross-detail],
-    [data-summary-net-detail]{
+[data-summary-net-detail]{
         gap:.18em;
     }
 }
@@ -1466,198 +1314,63 @@
    adjust these variables instead.
    ===================================================================== */
 
-.contentPage[data-step="0"] .cardPreview{
-    container-type:size;
 
-    /* ---------- Typography ---------- */
-    --detail-title-size:        clamp(1.45rem, 5.6cqw, 2.15rem);
-    --detail-subtitle-size:     clamp(.82rem, 2.7cqw, 1.05rem);
-    --detail-status-title-size: clamp(.88rem, 3.15cqw, 1.05rem);
-    --detail-body-size:         clamp(.72rem, 2.45cqw, .90rem);
-    --detail-section-size:      clamp(.72rem, 2.45cqw, .90rem);
-    --detail-metric-size:       clamp(.70rem, 2.35cqw, .88rem);
-    --detail-button-size:       clamp(.82rem, 2.8cqw, 1rem);
-
-    /* ---------- Horizontal sizing ---------- */
-    --detail-pad-x:             clamp(14px, 4.2cqw, 34px);
-    --detail-status-pad-x:      clamp(12px, 3.2cqw, 24px);
-    --detail-panel-pad-x:       clamp(14px, 4cqw, 28px);
-    --detail-action-gap:        clamp(8px, 2.2cqw, 18px);
-
-    /* ---------- Vertical rhythm ---------- */
-    --detail-pad-y:             clamp(16px, 3.4cqh, 38px);
-    --detail-gap-xs:            clamp(8px, 1.7cqh, 14px);
-    --detail-gap-sm:            clamp(12px, 2.5cqh, 22px);
-    --detail-gap-md:            clamp(16px, 3.5cqh, 34px);
-    --detail-gap-lg:            clamp(22px, 5cqh, 48px);
-
-    /* ---------- Component sizing ---------- */
-    --detail-hero-icon:         clamp(54px, 15cqw, 96px);
-    --detail-donut:             clamp(74px, 21cqw, 132px);
-    --detail-donut-center:      21%;
-    --detail-bar-height:        clamp(8px, 1.45cqh, 12px);
-    --detail-radius:            clamp(14px, 3.4cqw, 22px);
-    --detail-status-min-h:      clamp(58px, 9cqh, 82px);
-    --detail-button-min-h:      clamp(46px, 7.5cqh, 58px);
-
-    padding:
-        var(--detail-pad-y)
-        var(--detail-pad-x) !important;
-}
 
 /* ---------- Header ---------- */
-.contentPage[data-step="0"] .previewHero{
-    margin:0 !important;
-    gap:clamp(12px,3.2cqw,24px);
-}
 
-.contentPage[data-step="0"] .previewHero .contentIcon{
-    width:var(--detail-hero-icon) !important;
-    height:var(--detail-hero-icon) !important;
-    flex:0 0 var(--detail-hero-icon);
-}
 
-.contentPage[data-step="0"] .contentTitle{
-    font-size:var(--detail-title-size) !important;
-    line-height:1.08;
-}
 
-.contentPage[data-step="0"] .contentBody{
-    font-size:var(--detail-subtitle-size) !important;
-    line-height:1.35;
-    margin-top:var(--detail-gap-xs);
-}
 
-.contentPage[data-step="0"] .inspectionHeaderDivider{
-    margin-top:var(--detail-gap-md) !important;
-}
+
+
+
+
+
 
 /* ---------- Section Complete ---------- */
-.contentPage[data-step="0"] .previewStatus{
-    min-height:var(--detail-status-min-h);
-    margin-top:var(--detail-gap-md) !important;
-    padding:
-        var(--detail-gap-xs)
-        var(--detail-status-pad-x) !important;
-    gap:clamp(9px,2.2cqw,14px) !important;
-    border-radius:var(--detail-radius);
-}
 
-.contentPage[data-step="0"] .previewStatus strong{
-    font-size:var(--detail-status-title-size) !important;
-    line-height:1.25;
-}
 
-.contentPage[data-step="0"] .previewStatus small{
-    font-size:var(--detail-body-size) !important;
-    line-height:1.4;
-    margin-top:clamp(2px,.6cqh,5px);
-}
+
+
+
 
 /* ---------- Inspection Overview heading ---------- */
-.contentPage[data-step="0"] .gradeOverview{
-    margin-top:var(--detail-gap-lg) !important;
-}
 
-.contentPage[data-step="0"] .gradeOverviewTitle{
-    font-size:var(--detail-section-size) !important;
-    line-height:1.25;
-    text-align:center !important;
-    margin-bottom:var(--detail-gap-md) !important;
-}
+
+
 
 /* ---------- Donut metrics ---------- */
-.contentPage[data-step="0"] .gradeDonutGrid{
-    gap:clamp(8px,2.4cqw,22px) !important;
-}
 
-.contentPage[data-step="0"] .gradeDonut{
-    width:var(--detail-donut) !important;
-    flex-basis:var(--detail-donut);
-}
 
-.contentPage[data-step="0"] .gradeDonut::after{
-    inset:var(--detail-donut-center) !important;
-}
 
-.contentPage[data-step="0"] .gradeDonut span{
-    max-width:58%;
-    font-size:var(--detail-metric-size) !important;
-    line-height:1;
-    white-space:nowrap;
-}
 
-.contentPage[data-step="0"] .gradeMetric{
-    gap:var(--detail-gap-xs) !important;
-}
 
-.contentPage[data-step="0"] .gradeLegend{
-    font-size:var(--detail-body-size) !important;
-    line-height:1.25;
-    gap:clamp(5px,1.4cqw,9px);
-}
+
+
+
+
+
+
 
 /* ---------- By Size panel ---------- */
-.contentPage[data-step="0"] .detailBySizeSection{
-    margin-top:var(--detail-gap-md) !important;
-}
 
-.contentPage[data-step="0"] .detailBySizePanel{
-    width:100%;
-    display:flex !important;
-    flex-direction:column;
-    justify-content:center !important;
-    align-items:stretch;
-    gap:var(--detail-gap-md) !important;
-    padding:
-        var(--detail-gap-md)
-        var(--detail-panel-pad-x) !important;
-    border-radius:var(--detail-radius) !important;
-    box-sizing:border-box;
-}
 
-.contentPage[data-step="0"] .bySizeRow{
-    width:100%;
-    display:flex;
-    flex-direction:column;
-    gap:var(--detail-gap-xs) !important;
-    margin:0 !important;
-}
 
-.contentPage[data-step="0"] .bySizeLabel{
-    display:flex;
-    align-items:baseline;
-    gap:.35em;
-    
-    line-height:1.25 !important;
-    white-space:nowrap;
-}
 
-.contentPage[data-step="0"] .bySizeLabel > span,
-.contentPage[data-step="0"] [data-summary-premium-size],
-.contentPage[data-step="0"] [data-summary-standard-size]{
-    font-size:inherit !important;
-    line-height:inherit !important;
-}
 
-.contentPage[data-step="0"] .bySizeTrack{
-    height:var(--detail-bar-height) !important;
-    border-radius:var(--radius-pill);
-}
+
+
+
+
+
+
 
 /* ---------- Footer / actions ---------- */
 
 
-.contentPage[data-step="0"] .previewActions{
-    margin-top:0 !important;
-    gap:var(--detail-action-gap) !important;
-    grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
-}
 
-.contentPage[data-step="0"] .previewActions button{
-    min-height:var(--detail-button-min-h);
-    font-size:var(--detail-button-size) !important;
-}
+
+
 
 /* ---------------------------------------------------------------------
    IMPORTANT:
@@ -1666,679 +1379,14 @@
    come from the shared card-relative variables above.
    --------------------------------------------------------------------- */
 @media(max-width:620px){
-    .contentPage[data-step="0"] .cardPreview{
-        padding:
-            var(--detail-pad-y)
-            var(--detail-pad-x) !important;
-    }
-
-    .contentPage[data-step="0"] .previewStatus{
-        margin-top:var(--detail-gap-md) !important;
-    }
-
-    .contentPage[data-step="0"] .gradeOverview{
-        margin-top:var(--detail-gap-lg) !important;
-    }
-
-    .contentPage[data-step="0"] .gradeDonut{
-        width:var(--detail-donut) !important;
-    }
-
-    .contentPage[data-step="0"] .gradeDonut span{
-        font-size:var(--detail-metric-size) !important;
-    }
-
-    .contentPage[data-step="0"] .detailBySizePanel{
-        justify-content:center !important;
-        padding:
-            var(--detail-gap-md)
-            var(--detail-panel-pad-x) !important;
-        gap:var(--detail-gap-md) !important;
-    }
-
-    .contentPage[data-step="0"] .detailBySizePanel .bySizeLabel{
-        
-    }
+    
 
     
-}
-
-
-/* =====================================================================
-   v58 — Inspection Detail true relative sizing experiment
-   Mobile-first, card-relative, minimal hard floors.
-   ===================================================================== */
-
-.contentPage[data-step="0"] .cardPreview{
-    container-type:size;
-
-    /* Core relative type scale */
-    --detail-title-size:        5.2cqmin;
-    --detail-subtitle-size:     3.0cqmin;
-    --detail-status-title-size: 3.2cqmin;
-    --detail-body-size:         2.55cqmin;
-    --detail-section-size:      2.7cqmin;
-    --detail-metric-size:       2.55cqmin;
-    --detail-button-size:       2.9cqmin;
-
-    /* Core relative spacing */
-    --detail-pad-x:             4.2cqw;
-    --detail-pad-y:             2.6cqh;
-    --detail-gap-xs:            1.2cqh;
-    --detail-gap-sm:            2.0cqh;
-    --detail-gap-md:            2.8cqh;
-    --detail-gap-lg:            3.8cqh;
-
-    /* Component scale */
-    --detail-hero-icon:         14cqmin;
-    --detail-donut:             min(21cqw, 13.5cqh);
-    --detail-donut-center:      21%;
-    --detail-bar-height:        1.15cqh;
-    --detail-radius:            3.2cqmin;
-    --detail-status-min-h:      8.2cqh;
-    --detail-button-min-h:      6.2cqh;
-
-    padding:var(--detail-pad-y) var(--detail-pad-x) !important;
-}
-
-/* Header */
-.contentPage[data-step="0"] .previewHero{
-    gap:3cqw !important;
-}
-
-.contentPage[data-step="0"] .previewHero .contentIcon{
-    width:var(--detail-hero-icon) !important;
-    height:var(--detail-hero-icon) !important;
-    flex:0 0 var(--detail-hero-icon) !important;
-}
-
-.contentPage[data-step="0"] .contentTitle{
-    font-size:var(--detail-title-size) !important;
-}
-
-.contentPage[data-step="0"] .contentBody{
-    font-size:var(--detail-subtitle-size) !important;
-    margin-top:var(--detail-gap-xs) !important;
-}
-
-.contentPage[data-step="0"] .inspectionHeaderDivider{
-    margin-top:var(--detail-gap-md) !important;
-}
-
-/* Section Complete */
-.contentPage[data-step="0"] .previewStatus{
-    min-height:var(--detail-status-min-h) !important;
-    margin-top:var(--detail-gap-md) !important;
-    padding:var(--detail-gap-xs) 3cqw !important;
-    gap:2cqw !important;
-    border-radius:var(--detail-radius) !important;
-}
-
-.contentPage[data-step="0"] .previewStatus strong{
-    font-size:var(--detail-status-title-size) !important;
-}
-
-.contentPage[data-step="0"] .previewStatus small{
-    font-size:var(--detail-body-size) !important;
-}
-
-/* Overview */
-.contentPage[data-step="0"] .gradeOverview{
-    margin-top:var(--detail-gap-lg) !important;
-}
-
-.contentPage[data-step="0"] .gradeOverviewTitle{
-    font-size:var(--detail-section-size) !important;
-    margin-bottom:var(--detail-gap-md) !important;
-}
-
-/* Donuts */
-.contentPage[data-step="0"] .gradeDonutGrid{
-    gap:2.2cqw !important;
-}
-
-.contentPage[data-step="0"] .gradeDonut{
-    width:var(--detail-donut) !important;
-    flex-basis:var(--detail-donut) !important;
-}
-
-.contentPage[data-step="0"] .gradeDonut span{
-    font-size:var(--detail-metric-size) !important;
-}
-
-.contentPage[data-step="0"] .gradeMetric{
-    gap:var(--detail-gap-xs) !important;
-}
-
-.contentPage[data-step="0"] .gradeLegend{
-    font-size:var(--detail-body-size) !important;
-}
-
-/* By Size box */
-.contentPage[data-step="0"] .detailBySizeSection{
-    margin-top:var(--detail-gap-md) !important;
-}
-
-.contentPage[data-step="0"] .detailBySizePanel{
-    gap:var(--detail-gap-md) !important;
-    padding:var(--detail-gap-md) 3.5cqw !important;
-    border-radius:var(--detail-radius) !important;
-}
-
-.contentPage[data-step="0"] .bySizeRow{
-    gap:var(--detail-gap-xs) !important;
-}
-
-.contentPage[data-step="0"] .bySizeLabel{
-    
-}
-
-.contentPage[data-step="0"] .bySizeTrack{
-    height:var(--detail-bar-height) !important;
-}
-
-/* Footer */
-
-
-.contentPage[data-step="0"] .previewActions{
-    gap:2.2cqw !important;
-}
-
-.contentPage[data-step="0"] .previewActions button{
-    min-height:var(--detail-button-min-h) !important;
-    font-size:var(--detail-button-size) !important;
-}
-
-/* Remove earlier mobile-specific resizing behavior for this card.
-   The same relative system now governs every device width. */
-@media(max-width:620px){
-    .contentPage[data-step="0"] .cardPreview,
-    .contentPage[data-step="0"] .previewStatus,
-    .contentPage[data-step="0"] .gradeOverview,
-    .contentPage[data-step="0"] .gradeDonut,
-    .contentPage[data-step="0"] .gradeDonut span,
-    .contentPage[data-step="0"] .detailBySizePanel,
-    .contentPage[data-step="0"] .detailBySizePanel .bySizeLabel,
-    
-}
-
-
-/* =====================================================================
-   v59 — Inspection Detail mobile-first responsive system
-   ---------------------------------------------------------------------
-   Design target: phones first (roughly 360–440 CSS px wide).
-   Typography stays readable and only changes slightly.
-   Spacing and visual components scale from card width.
-   Card height is natural; vertical scrolling is allowed.
-   ===================================================================== */
-
-.contentPage[data-step="0"] .cardPreview{
-    container-type:inline-size;
-
-    /* ---------- Stable mobile typography ---------- */
-    --detail-title-size:        var(--card-title-size);
-    --detail-subtitle-size:     var(--card-subtitle-size);
-    --detail-status-title-size: var(--card-step-title-size);
-    --detail-body-size:         var(--card-body-size);
-    --detail-section-size:      var(--card-overview-title-size);
-    --detail-metric-size:       clamp(.80rem, 3.35cqw, .92rem);
-    --detail-button-size:       var(--card-button-size);
-
-    /* ---------- Width-relative spacing ---------- */
-    --detail-space-xs: 2.0cqw;
-    --detail-space-sm: 3.5cqw;
-    --detail-space-md: 5.0cqw;
-    --detail-space-lg: 7.0cqw;
-
-    --detail-pad-x:       5.0cqw;
-    --detail-pad-y:       5.0cqw;
-    --detail-panel-pad-x: 5.0cqw;
-    --detail-action-gap:  var(--card-button-gap);
-
-    /* ---------- Width-relative components ---------- */
-    --detail-hero-icon: var(--card-header-icon-size);
-    --detail-donut:     24cqw;
-    --detail-radius:    4.5cqw;
-    --detail-bar-height: 2.2cqw;
-
-    padding:var(--detail-pad-y) var(--detail-pad-x) !important;
-}
-
-/* ---------- Header ---------- */
-.contentPage[data-step="0"] .previewHero{
-    gap:4cqw !important;
-}
-
-.contentPage[data-step="0"] .previewHero .contentIcon{
-    width:var(--detail-hero-icon) !important;
-    height:var(--detail-hero-icon) !important;
-    flex:0 0 var(--detail-hero-icon) !important;
-}
-
-.contentPage[data-step="0"] .contentTitle{
-    font-size:var(--detail-title-size) !important;
-    line-height:1.08;
-}
-
-.contentPage[data-step="0"] .contentBody{
-    font-size:var(--detail-subtitle-size) !important;
-    line-height:1.35;
-    margin-top:var(--detail-space-xs) !important;
-}
-
-.contentPage[data-step="0"] .inspectionHeaderDivider{
-    margin-top:var(--detail-space-md) !important;
-}
-
-/* ---------- Section Complete ---------- */
-.contentPage[data-step="0"] .previewStatus{
-    min-height:0 !important;
-    margin-top:var(--detail-space-md) !important;
-    padding:var(--detail-space-sm) 4cqw !important;
-    gap:3cqw !important;
-    border-radius:var(--detail-radius) !important;
-}
-
-.contentPage[data-step="0"] .previewStatus strong{
-    font-size:var(--detail-status-title-size) !important;
-    line-height:1.22;
-}
-
-.contentPage[data-step="0"] .previewStatus small{
-    font-size:var(--detail-body-size) !important;
-    line-height:1.35;
-    margin-top:1cqw;
-}
-
-/* ---------- Overview ---------- */
-.contentPage[data-step="0"] .gradeOverview{
-    margin-top:var(--detail-space-lg) !important;
-}
-
-.contentPage[data-step="0"] .gradeOverviewTitle{
-    font-size:var(--detail-section-size) !important;
-    line-height:1.2;
-    margin-bottom:var(--detail-space-md) !important;
-}
-
-/* ---------- Donut row ---------- */
-.contentPage[data-step="0"] .gradeDonutGrid{
-    gap:2.5cqw !important;
-}
-
-.contentPage[data-step="0"] .gradeMetric{
-    gap:var(--detail-space-xs) !important;
-    min-width:0;
-}
-
-.contentPage[data-step="0"] .gradeDonut{
-    width:var(--detail-donut) !important;
-    flex-basis:var(--detail-donut) !important;
-}
-
-.contentPage[data-step="0"] .gradeDonut span{
-    font-size:var(--detail-metric-size) !important;
-    max-width:58%;
-}
-
-.contentPage[data-step="0"] .gradeLegend{
-    font-size:var(--detail-body-size) !important;
-    line-height:1.2;
-    gap:1.5cqw !important;
-}
-
-/* ---------- By Size panel ---------- */
-.contentPage[data-step="0"] .detailBySizeSection{
-    margin-top:var(--detail-space-md) !important;
-}
-
-.contentPage[data-step="0"] .detailBySizePanel{
-    display:flex !important;
-    flex-direction:column;
-    justify-content:center !important;
-    align-items:stretch;
-    gap:var(--detail-space-md) !important;
-    padding:var(--detail-space-md) var(--detail-panel-pad-x) !important;
-    border-radius:var(--detail-radius) !important;
-}
-
-.contentPage[data-step="0"] .bySizeRow{
-    width:100%;
-    gap:var(--detail-space-xs) !important;
-}
-
-.contentPage[data-step="0"] .bySizeLabel{
-    
-    line-height:1.25 !important;
-}
-
-.contentPage[data-step="0"] .bySizeTrack{
-    height:var(--detail-bar-height) !important;
-}
-
-/* ---------- Footer ---------- */
-
-
-.contentPage[data-step="0"] .previewActions{
-    gap:var(--detail-action-gap) !important;
-}
-
-.contentPage[data-step="0"] .previewActions button{
-    min-height:var(--touch-target-min) !important; /* touch target floor only */
-    font-size:var(--detail-button-size) !important;
-}
-
-/* ---------------------------------------------------------------------
-   Phone-width tuning without separate typography systems.
-   These only adjust spacing/components, not font formulas.
-   --------------------------------------------------------------------- */
-@container (max-width:380px){
-    .contentPage[data-step="0"] .cardPreview{
-        --detail-space-lg: 5.5cqw;
-        --detail-space-md: 4.2cqw;
-        --detail-donut: 22.5cqw;
-        --detail-hero-icon: 14.5cqw;
-        --detail-pad-y: 4.2cqw;
-    }
-}
-
-@container (min-width:421px){
-    .contentPage[data-step="0"] .cardPreview{
-        --detail-donut: 23cqw;
-        --detail-pad-y: 4.5cqw;
-    }
-}
-
-/* Neutralize the older cqh/cqmin sizing from v57/v58 for this card. */
-@media(max-width:620px){
-    .contentPage[data-step="0"] .cardPreview{
-        padding:var(--detail-pad-y) var(--detail-pad-x) !important;
-    }
-
-    .contentPage[data-step="0"] .previewStatus{
-        margin-top:var(--detail-space-md) !important;
-    }
-
-    .contentPage[data-step="0"] .gradeOverview{
-        margin-top:var(--detail-space-lg) !important;
-    }
-
-    .contentPage[data-step="0"] .gradeDonut{
-        width:var(--detail-donut) !important;
-    }
-
-    .contentPage[data-step="0"] .detailBySizePanel{
-        gap:var(--detail-space-md) !important;
-        padding:var(--detail-space-md) var(--detail-panel-pad-x) !important;
-    }
 
     
-}
 
-
-/* =====================================================================
-   v60 — Inspection Detail donut + By Size panel refinement
-   ===================================================================== */
-
-/* Slightly larger donuts overall. */
-.contentPage[data-step="0"] .cardPreview{
-    --detail-donut: 26cqw;
-}
-
-/* Thin the donut ring by enlarging the inner cutout.
-   This gives the percentage a larger protected center area. */
-.contentPage[data-step="0"] .gradeDonut::after{
-    inset:27% !important;
-}
-
-/* Keep the value centered and constrained inside the protected center. */
-.contentPage[data-step="0"] .gradeDonut span{
-    max-width:52% !important;
-    text-align:center;
-    white-space:nowrap;
-    line-height:1 !important;
-}
-
-/* By Size should size to its contents rather than stretching vertically. */
-.contentPage[data-step="0"] .inspectionComments.detailBySizeSection{
-    flex:0 0 auto !important;
-    min-height:0 !important;
-    height:auto !important;
-}
-
-.contentPage[data-step="0"] .detailBySizePanel{
-    flex:0 0 auto !important;
-    min-height:0 !important;
-    height:auto !important;
-    justify-content:flex-start !important;
-
-    /* Equal relative top/bottom padding, content-sized box. */
-    padding:
-        var(--detail-space-md)
-        var(--detail-panel-pad-x) !important;
-}
-
-/* Keep deliberate spacing between the two rows, but no filler space. */
-.contentPage[data-step="0"] .detailBySizePanel .bySizeRow{
-    flex:0 0 auto !important;
-}
-
-@container (max-width:380px){
-    .contentPage[data-step="0"] .cardPreview{
-        --detail-donut: 24.5cqw;
-    }
-}
-
-@container (min-width:421px){
-    .contentPage[data-step="0"] .cardPreview{
-        --detail-donut: 25cqw;
-    }
-}
-
-
-/* =====================================================================
-   v61 — NON-DESTRUCTIVE Inspection Detail visual correction
-   ---------------------------------------------------------------------
-   Scope:
-   1. Restore the divider/actions as the card footer.
-   2. Correct donut geometry only.
-   Existing responsive typography, spacing, By Size content and logic
-   remain untouched.
-   ===================================================================== */
-
-/* ---- Card footer stays at the bottom ---- */
-
-
-.contentPage[data-step="0"] .previewActions{
-    flex:0 0 auto;
-    margin-top:0 !important;
-}
-
-/* ---- Donut sizing ----
-   Slightly larger overall, but with a THINNER visible ring.
-   The pseudo-element is the center mask, so increasing its inset was
-   making the hole smaller / ring thicker. Use a SMALL inset instead. */
-.contentPage[data-step="0"] .cardPreview{
-    --detail-donut: 27cqw;
-}
-
-.contentPage[data-step="0"] .gradeDonut::after{
-    inset:12% !important;
-}
-
-/* Percentage gets a clean protected central area and never rides the ring. */
-.contentPage[data-step="0"] .gradeDonut span{
-    max-width:68% !important;
-    font-size:var(--detail-metric-size) !important;
-    line-height:1 !important;
-    white-space:nowrap !important;
-    text-align:center !important;
-    z-index:2;
-}
-
-/* Nearby phone widths use the same geometry, with only modest size changes. */
-@container (max-width:380px){
-    .contentPage[data-step="0"] .cardPreview{
-        --detail-donut:25.5cqw;
-    }
-}
-
-@container (min-width:421px){
-    .contentPage[data-step="0"] .cardPreview{
-        --detail-donut:26cqw;
-    }
-}
-
-
-/* =====================================================================
-   v62 — tiny typography/spacing alignment pass
-   ===================================================================== */
-
-/* Match By Size text to the donut percentage typography exactly. */
-.contentPage[data-step="0"] .bySizeLabel{
     
-}
 
-/* Add only a small extra gap between Section Complete and Inspection Overview. */
-.contentPage[data-step="0"] .gradeOverview{
-    margin-top:calc(var(--detail-space-lg) + 1.2cqw) !important;
-}
-
-
-
-
-/* =====================================================================
-   v64 — Inspection Detail shared data typography
-   ---------------------------------------------------------------------
-   One source of truth for:
-   - Premium / Standard / Rejects legend labels
-   - By Size Premium / By Size Standard lines
-   Donut percentages remain on their separate metric-size token.
-   ===================================================================== */
-
-.contentPage[data-step="0"] .cardPreview{
-    --detail-data-label-size: clamp(.84rem, 3.45cqw, .94rem);
-}
-
-/* Chart legend labels and By Size rows now share the exact same type size. */
-.contentPage[data-step="0"] .gradeLegend,
-.contentPage[data-step="0"] .bySizeLabel{
-    font-size:var(--detail-data-label-size) !important;
-    line-height:1.2 !important;
-}
-
-/* Everything inside each By Size line inherits that exact shared size. */
-.contentPage[data-step="0"] .bySizeLabel > span,
-.contentPage[data-step="0"] .bySizeLabel strong,
-.contentPage[data-step="0"] .bySizeLabel strong span{
-    font-size:inherit !important;
-    line-height:inherit !important;
-}
-
-/* Preserve existing chart legend layout while using the shared type token. */
-.contentPage[data-step="0"] .gradeLegend{
-    gap:1.5cqw !important;
-}
-
-
-/* =====================================================================
-   v65 — Inspection Detail spacing rhythm + By Size container restore
-   ===================================================================== */
-
-.contentPage[data-step="0"] .cardPreview{
-    /* Universal outer card padding for this card. */
-    --detail-pad-y: 4cqw;
-
-    /* Shared inter-section rhythm. */
-    --detail-section-gap: 4cqw;
-}
-
-/* Keep the card's top and bottom padding equal at every phone width. */
-.contentPage[data-step="0"] .cardPreview{
-    padding-top:var(--detail-pad-y) !important;
-    padding-bottom:var(--detail-pad-y) !important;
-}
-
-/* Section Complete -> Inspection Overview = 4cqw. */
-.contentPage[data-step="0"] .gradeOverview{
-    margin-top:var(--detail-section-gap) !important;
-}
-
-/* Charts/legend -> By Size container = 4cqw. */
-.contentPage[data-step="0"] .inspectionComments.detailBySizeSection{
-    margin-top:var(--detail-section-gap) !important;
-}
-
-/* Restore the visual By Size container without changing its typography. */
-.contentPage[data-step="0"] .detailBySizePanel{
-    border:var(--border-thin) solid var(--og-border) !important;
-    border-radius:var(--detail-radius) !important;
-    background:var(--surface-overlay-light) !important;
-    padding:var(--detail-space-md) var(--detail-panel-pad-x) !important;
-}
-
-/* Older width-specific vertical-padding values must not override the
-   universal 4cqw outer padding. */
-@container (max-width:380px){
-    .contentPage[data-step="0"] .cardPreview{
-        --detail-pad-y:4cqw;
-    }
-}
-@container (min-width:421px){
-    .contentPage[data-step="0"] .cardPreview{
-        --detail-pad-y:4cqw;
-    }
-}
-
-
-/* =====================================================================
-   v66 — Inspection Detail centralized master spacing controls
-   ---------------------------------------------------------------------
-   These are now the primary controls for the card:
-   X = left/right outer padding
-   Y = top/bottom outer padding
-   Section Gap = spacing between major content sections
-   ===================================================================== */
-
-.contentPage[data-step="0"] .cardPreview{
-    --detail-pad-x: var(--card-pad-x);
-    --detail-pad-y: var(--card-pad-y);
-    --detail-section-gap: var(--card-section-gap);
-
-    padding:
-        var(--detail-pad-y)
-        var(--detail-pad-x) !important;
-}
-
-/* Header/divider -> Section Complete uses the shared major-section gap. */
-.contentPage[data-step="0"] .previewStatus{
-    margin-top:var(--detail-section-gap) !important;
-}
-
-/* Section Complete -> Inspection Overview uses the same shared gap. */
-.contentPage[data-step="0"] .gradeOverview{
-    margin-top:var(--detail-section-gap) !important;
-}
-
-/* Charts/legend -> By Size box uses the same shared gap. */
-.contentPage[data-step="0"] .inspectionComments.detailBySizeSection{
-    margin-top:var(--detail-section-gap) !important;
-}
-
-/* Keep the master X/Y values universal across our phone-width containers. */
-@container (max-width:380px){
-    .contentPage[data-step="0"] .cardPreview{
-        --detail-pad-x:3cqw;
-        --detail-pad-y:3cqw;
-    }
-}
-
-@container (min-width:421px){
-    .contentPage[data-step="0"] .cardPreview{
-        --detail-pad-x:3cqw;
-        --detail-pad-y:3cqw;
-    }
-}
 
 
 
@@ -2677,9 +1725,7 @@
 }
 
 /* Detail donut unit standard */
-.contentPage[data-step="0"] .donutPercentUnit{
-    color:var(--color-white) !important;
-}
+
 
 
 /* =====================================================================
@@ -2708,28 +1754,6 @@
 
 .contentPage[data-step="1"] .summaryMetricValueCrab .summaryMetricUnit{
     color:var(--color-white) !important;
-}
-
-
-.contentPage[data-step="0"] .gradeDonut [data-home-percent]{
-    display:inline-flex !important;
-    align-items:baseline;
-    justify-content:center;
-    white-space:nowrap;
-}
-
-.contentPage[data-step="0"] .gradeDonut .donutPercentNumber{
-    color:inherit !important;
-    font-size:inherit !important;
-    font-weight:inherit !important;
-    line-height:inherit !important;
-}
-
-.contentPage[data-step="0"] .gradeDonut .donutPercentUnit{
-    color:var(--color-white) !important;
-    font-size:inherit !important;
-    font-weight:inherit !important;
-    line-height:inherit !important;
 }
 
 
@@ -2805,12 +1829,7 @@
 
 /* Card 1 By Size values and Card 2 metric values intentionally share
    one canonical font-size control. */
-.contentPage[data-step="0"] .bySizeLabel,
-.contentPage[data-step="0"] .bySizeLabel > span,
-.contentPage[data-step="0"] .bySizeLabel strong,
-.contentPage[data-step="0"] .bySizeLabel strong span{
-    font-size:var(--metric-tile-value-size) !important;
-}
+
 
 /* v81 compact landing comparison */
 .contentPage[data-step="1"] .summaryRadialComparison{
@@ -3254,4 +2273,1255 @@
    so it uses the shared global section gap rather than local spacing. */
 .contentPage[data-step="1"] .summaryDifferenceFocus + .summaryMetricGrid{
     margin-top:var(--card-section-gap) !important;
+}
+
+
+/* =====================================================================
+   v92 — Summary Overview vessel identity block
+   ===================================================================== */
+
+.contentPage[data-step="1"] .summaryVesselInfo{
+    margin-top:var(--card-section-gap);
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    gap:5cqw;
+}
+
+.contentPage[data-step="1"] .summaryVesselHero{
+    display:grid;
+    grid-template-columns:10cqw minmax(0,1fr);
+    align-items:center;
+    gap:4cqw;
+    width:100%;
+}
+
+.contentPage[data-step="1"] .summaryVesselIcon{
+    width:10cqw;
+    height:10cqw;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--accent-blue);
+}
+
+.contentPage[data-step="1"] .summaryVesselIcon svg,
+.contentPage[data-step="1"] .summaryReceiptIcon svg{
+    width:100%;
+    height:100%;
+    fill:currentColor;
+    color:currentColor;
+}
+
+.contentPage[data-step="1"] .summaryVesselIdentity{
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:1.2cqw;
+}
+
+.contentPage[data-step="1"] .summaryVesselEyebrow,
+.contentPage[data-step="1"] .summaryReceiptText > span{
+    color:var(--og-muted);
+    font-size:var(--metric-tile-label-size);
+    line-height:1.2;
+}
+
+.contentPage[data-step="1"] .summaryVesselIdentity > strong{
+    width:100%;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    color:var(--og-text);
+    font-size:clamp(1.1rem,5.2cqw,1.5rem);
+    line-height:1.1;
+    font-weight:800;
+}
+
+.contentPage[data-step="1"] .summaryVesselCfv{
+    color:var(--og-muted);
+    font-size:var(--card-body-size);
+    line-height:1.2;
+}
+
+.contentPage[data-step="1"] .summaryVesselCfv b{
+    color:var(--accent-blue);
+    font-weight:800;
+}
+
+.contentPage[data-step="1"] .summaryReceiptInfo{
+    display:grid;
+    grid-template-columns:8cqw minmax(0,1fr);
+    align-items:center;
+    gap:3.5cqw;
+    width:100%;
+    padding-top:4cqw;
+    border-top:var(--border-thin) solid var(--og-border);
+}
+
+.contentPage[data-step="1"] .summaryReceiptIcon{
+    width:8cqw;
+    height:8cqw;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--accent-blue);
+}
+
+.contentPage[data-step="1"] .summaryReceiptText{
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    gap:1cqw;
+}
+
+.contentPage[data-step="1"] .summaryReceiptText strong{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    color:var(--og-text);
+    font-size:var(--metric-tile-value-size);
+    line-height:1.1;
+    font-weight:800;
+}
+
+.contentPage[data-step="1"] .summaryVesselInfo + .summaryMetricGrid{
+    margin-top:var(--card-section-gap) !important;
+}
+
+
+/* =====================================================================
+   v93 — centered vessel identity layout
+   ===================================================================== */
+
+.contentPage[data-step="1"] .summaryVesselInfo{
+    margin-top:var(--card-section-gap);
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:var(--card-section-gap);
+    text-align:center;
+}
+
+.contentPage[data-step="1"] .summaryVesselIdentity{
+    width:100%;
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:2cqw;
+}
+
+.contentPage[data-step="1"] .summaryVesselEyebrow,
+.contentPage[data-step="1"] .summaryReceiptLabel{
+    color:var(--og-muted);
+    font-size:var(--metric-tile-label-size);
+    line-height:1.1;
+    font-weight:700;
+    letter-spacing:.02em;
+}
+
+.contentPage[data-step="1"] .summaryVesselIdentity > strong{
+    width:100%;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    text-align:center;
+    color:var(--og-text);
+    font-size:clamp(1.15rem,5.5cqw,1.55rem);
+    line-height:1.1;
+    font-weight:800;
+}
+
+.contentPage[data-step="1"] .summaryVesselDivider{
+    width:82%;
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 7cqw minmax(0,1fr);
+    align-items:center;
+    gap:3cqw;
+}
+
+.contentPage[data-step="1"] .summaryVesselDivider > span{
+    display:block;
+    height:var(--border-thin);
+    background:var(--og-border);
+}
+
+.contentPage[data-step="1"] .summaryVesselDivider .summaryVesselIcon{
+    width:7cqw;
+    height:7cqw;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--accent-blue);
+}
+
+.contentPage[data-step="1"] .summaryVesselDivider .summaryVesselIcon svg{
+    width:100%;
+    height:100%;
+    fill:currentColor;
+    color:currentColor;
+}
+
+.contentPage[data-step="1"] .summaryVesselCfv{
+    color:var(--og-text);
+    font-size:var(--card-body-size);
+    line-height:1.15;
+}
+
+.contentPage[data-step="1"] .summaryVesselCfv b{
+    color:inherit;
+    font-weight:inherit;
+}
+
+.contentPage[data-step="1"] .summaryReceiptInfo{
+    width:100%;
+    padding:0;
+    border:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:2cqw;
+    text-align:center;
+}
+
+.contentPage[data-step="1"] .summaryReceiptValue{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:2.5cqw;
+    min-width:0;
+}
+
+.contentPage[data-step="1"] .summaryReceiptIcon{
+    width:7cqw;
+    height:7cqw;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--accent-blue);
+}
+
+.contentPage[data-step="1"] .summaryReceiptIcon svg{
+    width:100%;
+    height:100%;
+    fill:currentColor;
+    color:currentColor;
+}
+
+.contentPage[data-step="1"] .summaryReceiptValue strong{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    color:var(--og-text);
+    font-size:clamp(1.05rem,5cqw,1.4rem);
+    line-height:1.1;
+    font-weight:500;
+}
+
+/* No divider/line before Fish Receipt. */
+.contentPage[data-step="1"] .summaryReceiptInfo::before{
+    content:none !important;
+    display:none !important;
+}
+
+.contentPage[data-step="1"] .summaryVesselInfo + .summaryMetricGrid{
+    margin-top:var(--card-section-gap) !important;
+}
+
+
+/* v96 — Summary Overview default-value state
+   Dedicated neutral grey: intentionally separate from active app text colors. */
+.contentPage[data-step="1"] [data-empty-state]{
+    color:rgba(148, 158, 173, 0.62) !important;
+    font-weight:500 !important;
+}
+
+
+/* =====================================================================
+   v97 — compact card headers + Card 2 vessel/receipt scale alignment
+   ===================================================================== */
+
+.contentPage[data-step="1"] .summaryVesselDivider .summaryVesselIcon,
+.contentPage[data-step="1"] .summaryReceiptIcon{
+    width:var(--metric-tile-icon-size) !important;
+    height:var(--metric-tile-icon-size) !important;
+    flex:0 0 var(--metric-tile-icon-size);
+}
+
+.contentPage[data-step="1"] .summaryReceiptValue strong{
+    font-size:var(--metric-tile-value-size) !important;
+    line-height:1.1 !important;
+    font-weight:800 !important;
+}
+
+
+
+
+/* =====================================================================
+   v100 — Fisheries Notification reuses canonical Step Complete component
+   ===================================================================== */
+
+/* By Size remains unboxed. */
+
+
+/* Fisheries status sits as the next major section. */
+
+
+/* Default state = same visual treatment as Step Complete pending state. */
+
+
+
+
+
+
+
+
+/* Triggered state mirrors Step Complete's completed-state behavior,
+   but with orange as the semantic alert color. */
+
+
+
+
+
+
+
+
+
+/* =====================================================================
+   v101 — Notification above By Size / By Size panel restored
+   ===================================================================== */
+
+/* Fisheries Notification remains the same functional state component,
+   but is presented without an enclosing box. */
+
+
+/* Remove box/background changes from either state; retain text/icon colors. */
+
+
+/* Preserve Step Complete-style internal alignment despite no outer box. */
+
+
+/* Restore the By Size panel box. */
+
+
+/* Notification -> By Size uses the shared major section gap. */
+
+
+
+/* =====================================================================
+   v102 — Department of Fisheries status refinement
+   ===================================================================== */
+
+/* Informational status only: no button/panel visual treatment. */
+
+
+/* Icon aligns with the TOP of the text block rather than its center. */
+
+
+/* Subtext is always muted, regardless of notification state. */
+
+
+/* Good grade: entire status reads as inactive. */
+
+
+/* Notification required: only icon + title become orange. */
+
+
+/* Ensure inherited Step Complete states can never restore a box here. */
+
+
+
+/* =====================================================================
+   v103 — Fisheries Notification final copy + persistent muted subtext
+   ===================================================================== */
+
+
+
+
+/* =====================================================================
+   v104 — Fisheries status borrows Card 2 divider/icon language
+   ===================================================================== */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Required state: only icon + title activate in orange.
+   Grade explanation remains muted. */
+
+
+
+/* =====================================================================
+   v105 — simplified Fisheries Notification, Card 2 visual language
+   ===================================================================== */
+
+
+
+
+
+
+
+/* Required state: keep icon + label unchanged; only action message turns red. */
+
+
+
+
+
+/* =====================================================================
+   v111 — canonical SVG donut system
+   ---------------------------------------------------------------------
+   True stroke geometry with rounded progress caps.
+   ===================================================================== */
+
+
+
+/* Retire legacy pseudo-element donut drawing. */
+
+
+/* SVG owns all donut geometry. */
+
+
+/* Empty track: solid muted grey, thinner than progress stroke. */
+
+
+/* Colored progress: solid metric color + true round caps. */
+
+
+/* Preserve semantic colors. */
+
+
+
+
+/* Text remains anchored to the same donut box. */
+/* Value line */
+/* Unit line */
+/* Keep the three enlarged donuts evenly distributed and scalable. */
+
+
+
+
+
+/* =====================================================================
+   v112 — shared header/footer separator spacing
+   ---------------------------------------------------------------------
+   --card-divider-gap is the single source of truth for BOTH sides:
+   Header content -> gap -> separator
+   Footer separator -> gap -> buttons
+   ===================================================================== */
+
+.appCard .cardHeader + .cardDivider{
+    margin:var(--card-divider-gap) 0 0 0 !important;
+}
+
+.appCard .cardFooter .cardDivider{
+    margin:0 0 var(--card-divider-gap) 0 !important;
+}
+
+
+/* =====================================================================
+   v113 — canonical header/footer separator rhythm
+   ---------------------------------------------------------------------
+   No card-specific header-divider margins remain.
+   --card-divider-gap owns both relationships.
+   ===================================================================== */
+
+.appCard > .cardHeader + .cardDivider{
+    margin-block-start:var(--card-divider-gap) !important;
+    margin-inline:0 !important;
+    margin-block-end:0 !important;
+}
+
+.appCard .cardFooter > .cardDivider{
+    margin-block-start:0 !important;
+    margin-inline:0 !important;
+    margin-block-end:var(--card-divider-gap) !important;
+}
+
+
+/* =====================================================================
+   v114 — header visual-gap cleanup
+   ---------------------------------------------------------------------
+   Legacy .contentTitle supplied a 7px bottom margin inside the cardHeader.
+   That margin stacked with --card-divider-gap, so the header visually had
+   more space than the footer even though both divider rules said 3.5cqw.
+   The shared card title now owns no external spacing.
+   ===================================================================== */
+
+.appCard .cardHeader .cardTitle{
+    margin:0 !important;
+    padding:0 !important;
+}
+
+.appCard > .cardHeader{
+    margin:0 !important;
+    padding:0 !important;
+}
+
+.appCard > .cardHeader + .cardDivider{
+    margin:var(--card-divider-gap) 0 0 0 !important;
+}
+
+.appCard .cardFooter > .cardDivider{
+    margin:0 0 var(--card-divider-gap) 0 !important;
+}
+
+
+/* =====================================================================
+   v115 — CANONICAL CARD 1 SYSTEM
+   ---------------------------------------------------------------------
+   Shared controls own reusable spacing and geometry.
+   Card 1 owns only its genuinely unique visualization details.
+   ===================================================================== */
+
+/* ---------- Shared shell / section rhythm ---------- */
+
+
+
+
+
+
+
+
+/* ---------- Header / footer separator rhythm ---------- */
+
+
+
+
+/* ---------- Shared Card 1 data typography ---------- */
+
+
+
+
+/* ---------- By Size panel ---------- */
+
+
+/* ---------- By Size bars ---------- */
+
+
+
+
+
+
+
+
+/* ---------- Legend dots ---------- */
+
+
+
+
+/* ---------- SVG donut geometry ----------
+   Unique to Inspection Detail; v111 owns actual rendering. */
+
+
+
+
+
+/* =====================================================================
+   v118 — CANONICAL CARD 1 CONTENT BOX SYSTEM
+   ---------------------------------------------------------------------
+   Shared box rules:
+   1. box wraps its content
+   2. X/Y padding comes only from central tokens
+   ===================================================================== */
+
+
+
+/* Wrapper around the By Size box must also remain content-sized. */
+
+
+/* Rows cannot absorb unused vertical space inside the box. */
+
+
+
+/* =====================================================================
+   v119 — ISOLATED CARD COMPONENT ARCHITECTURE
+   ---------------------------------------------------------------------
+   Repetitive components are intentionally duplicated per card.
+   Future Card 1 edits should remain inside CARD 1, etc.
+   ===================================================================== */
+
+
+/* ==========================================================================
+   CARD 1 — INSPECTION DETAIL
+   ========================================================================== */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   CARD 2 — INSPECTION SUMMARY
+   ========================================================================== */
+
+.contentPage[data-step="1"] .appCard{
+    padding:var(--c2-card-pad-y) var(--c2-card-pad-x) !important;
+}
+
+.contentPage[data-step="1"] .cardHeader{
+    gap:var(--c2-header-gap) !important;
+}
+
+.contentPage[data-step="1"] .cardHeaderIcon{
+    width:var(--c2-header-icon-size) !important;
+    height:var(--c2-header-icon-size) !important;
+    flex-basis:var(--c2-header-icon-size) !important;
+}
+
+.contentPage[data-step="1"] .appCard > .cardHeader + .cardDivider{
+    margin:var(--c2-header-divider-gap) 0 0 !important;
+}
+
+.contentPage[data-step="1"] .cardStepStatus{
+    flex:0 0 auto !important;
+    min-height:0 !important;
+    height:auto !important;
+    padding:var(--c2-box-pad-y) var(--c2-box-pad-x) !important;
+    gap:var(--c2-step-gap) !important;
+    border-radius:var(--c2-box-radius) !important;
+    margin-top:var(--c2-section-gap) !important;
+}
+
+.contentPage[data-step="1"] .cardStepIcon{
+    width:var(--c2-step-icon-size) !important;
+    height:var(--c2-step-icon-size) !important;
+    flex-basis:var(--c2-step-icon-size) !important;
+}
+
+.contentPage[data-step="1"] .summaryMetricGrid{
+    margin-top:var(--c2-section-gap) !important;
+}
+
+.contentPage[data-step="1"] .summaryMetricTile{
+    padding:var(--c2-metric-pad-y) var(--c2-metric-pad-x) !important;
+}
+
+.contentPage[data-step="1"] .summaryMetricIcon{
+    width:var(--c2-metric-icon-size) !important;
+    height:var(--c2-metric-icon-size) !important;
+}
+
+.contentPage[data-step="1"] .cardFooter > .cardDivider{
+    margin:0 0 var(--c2-footer-divider-gap) !important;
+}
+
+.contentPage[data-step="1"] .cardActions{
+    gap:var(--c2-button-gap) !important;
+}
+
+
+/* ==========================================================================
+   CARD 3 — ACTIVITY TIME SLIP
+   ========================================================================== */
+
+.contentPage[data-step="2"] .appCard{
+    padding:var(--c3-card-pad-y) var(--c3-card-pad-x) !important;
+}
+
+.contentPage[data-step="2"] .cardHeader{
+    gap:var(--c3-header-gap) !important;
+}
+
+.contentPage[data-step="2"] .cardHeaderIcon{
+    width:var(--c3-header-icon-size) !important;
+    height:var(--c3-header-icon-size) !important;
+    flex-basis:var(--c3-header-icon-size) !important;
+}
+
+.contentPage[data-step="2"] .appCard > .cardHeader + .cardDivider{
+    margin:var(--c3-header-divider-gap) 0 0 !important;
+}
+
+.contentPage[data-step="2"] .cardStepStatus{
+    flex:0 0 auto !important;
+    min-height:0 !important;
+    height:auto !important;
+    padding:var(--c3-box-pad-y) var(--c3-box-pad-x) !important;
+    gap:var(--c3-step-gap) !important;
+    border-radius:var(--c3-box-radius) !important;
+    margin-top:var(--c3-section-gap) !important;
+}
+
+.contentPage[data-step="2"] .cardStepIcon{
+    width:var(--c3-step-icon-size) !important;
+    height:var(--c3-step-icon-size) !important;
+    flex-basis:var(--c3-step-icon-size) !important;
+}
+
+.contentPage[data-step="2"] .cardFooter > .cardDivider{
+    margin:0 0 var(--c3-footer-divider-gap) !important;
+}
+
+.contentPage[data-step="2"] .cardActions{
+    gap:var(--c3-button-gap) !important;
+}
+}}}
+
+/* ==========================================================================
+   CARD 1 — INSPECTION DETAIL
+   SINGLE SOURCE OF TRUTH
+   ========================================================================== */
+
+/* ---------- Card shell ---------- */
+.contentPage[data-step="0"] .cardPreview.appCard{
+    container-type:inline-size !important;
+    width:100% !important;
+    height:100% !important;
+    display:flex !important;
+    flex-direction:column !important;
+    justify-content:flex-start !important;
+    gap:0 !important;
+    padding:var(--c1-card-pad-y) var(--c1-card-pad-x) !important;
+    box-sizing:border-box !important;
+}
+
+/* ---------- Header ---------- */
+.contentPage[data-step="0"] .previewHero.cardHeader{
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:var(--c1-header-gap) !important;
+    margin:0 !important;
+    padding:0 !important;
+    text-align:center !important;
+}
+
+.contentPage[data-step="0"] .cardHeaderIcon{
+    width:var(--c1-header-icon-size) !important;
+    height:var(--c1-header-icon-size) !important;
+    flex:0 0 var(--c1-header-icon-size) !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    color:var(--accent-blue) !important;
+}
+
+.contentPage[data-step="0"] .cardHeaderIcon svg{
+    width:100% !important;
+    height:100% !important;
+    fill:currentColor !important;
+    color:currentColor !important;
+}
+
+.contentPage[data-step="0"] .cardTitle{
+    margin:0 !important;
+    padding:0 !important;
+    font-size:var(--card-title-size) !important;
+    line-height:1.08 !important;
+    text-align:center !important;
+}
+
+.contentPage[data-step="0"] .inspectionHeaderDivider{
+    width:100% !important;
+    height:var(--border-thin) !important;
+    flex:0 0 auto !important;
+    margin:var(--c1-header-divider-gap) 0 0 !important;
+    background:var(--og-border) !important;
+}
+
+/* ---------- Step Complete ---------- */
+.contentPage[data-step="0"] .previewStatus.cardStepStatus{
+    width:100% !important;
+    flex:0 0 auto !important;
+    min-height:0 !important;
+    height:auto !important;
+    max-height:none !important;
+
+    display:flex !important;
+    align-items:center !important;
+    justify-content:flex-start !important;
+    gap:var(--c1-step-gap) !important;
+
+    margin:var(--c1-section-gap) 0 0 !important;
+    padding:var(--c1-box-pad-y) var(--c1-box-pad-x) !important;
+
+    border:var(--border-thin) solid var(--og-border) !important;
+    border-radius:var(--c1-box-radius) !important;
+    background:var(--og-panel-deep) !important;
+    color:var(--og-text) !important;
+    box-sizing:border-box !important;
+    text-align:left !important;
+    cursor:pointer;
+}
+
+.contentPage[data-step="0"] .cardStepIcon{
+    width:var(--c1-step-icon-size) !important;
+    height:var(--c1-step-icon-size) !important;
+    flex:0 0 var(--c1-step-icon-size) !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    color:var(--og-subtle) !important;
+    background:transparent !important;
+    border:0 !important;
+    box-shadow:none !important;
+}
+
+.contentPage[data-step="0"] .cardStepIcon svg{
+    width:100% !important;
+    height:100% !important;
+    fill:currentColor !important;
+    color:currentColor !important;
+}
+
+.contentPage[data-step="0"] .cardStepText{
+    min-width:0 !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:flex-start !important;
+    justify-content:center !important;
+    text-align:left !important;
+}
+
+.contentPage[data-step="0"] .cardStepText strong{
+    margin:0 !important;
+    font-size:var(--c1-step-title-size) !important;
+    line-height:1.22 !important;
+    color:var(--og-text) !important;
+}
+
+.contentPage[data-step="0"] .cardStepText small{
+    margin:1cqw 0 0 !important;
+    font-size:var(--c1-step-body-size) !important;
+    line-height:1.35 !important;
+    color:var(--og-muted) !important;
+}
+
+.contentPage[data-step="0"] .cardStepStatus.complete{
+    border-color:var(--accent-green) !important;
+    background:color-mix(in srgb,var(--accent-green) 10%,transparent) !important;
+}
+
+.contentPage[data-step="0"] .cardStepStatus.complete .cardStepIcon,
+.contentPage[data-step="0"] .cardStepStatus.complete .cardStepText strong{
+    color:var(--accent-green-light) !important;
+}
+
+/* ---------- Detail Overview ---------- */
+.contentPage[data-step="0"] .gradeOverview{
+    width:100% !important;
+    flex:0 0 auto !important;
+    margin:var(--c1-section-gap) 0 0 !important;
+}
+
+.contentPage[data-step="0"] .gradeOverviewTitle{
+    width:100% !important;
+    margin:0 0 var(--c1-overview-content-gap) !important;
+    color:var(--accent-blue-label) !important;
+    font-size:var(--c1-overview-title-size) !important;
+    font-weight:800 !important;
+    line-height:1.2 !important;
+    letter-spacing:.06em !important;
+    text-transform:uppercase !important;
+    text-align:center !important;
+}
+
+/* ---------- Donut chart system ---------- */
+.contentPage[data-step="0"] .gradeDonutGrid{
+    width:100% !important;
+    display:grid !important;
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    gap:var(--c1-donut-grid-gap) !important;
+    align-items:start !important;
+}
+
+.contentPage[data-step="0"] .gradeMetric{
+    --metric-color:var(--accent-blue);
+    min-width:0 !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    gap:var(--c1-chart-label-gap) !important;
+}
+
+.contentPage[data-step="0"] .gradeMetricPremium{ --metric-color:var(--accent-blue); }
+.contentPage[data-step="0"] .gradeMetricStandard{ --metric-color:var(--accent-orange); }
+.contentPage[data-step="0"] .gradeMetricReject{ --metric-color:var(--accent-red); }
+
+.contentPage[data-step="0"] .gradeDonut{
+    position:relative !important;
+    width:var(--c1-donut-size) !important;
+    height:var(--c1-donut-size) !important;
+    min-width:var(--c1-donut-size) !important;
+    min-height:var(--c1-donut-size) !important;
+    aspect-ratio:1 / 1 !important;
+    margin-inline:auto !important;
+    background:none !important;
+    border:0 !important;
+    border-radius:50% !important;
+    box-shadow:none !important;
+    overflow:visible !important;
+    color:var(--metric-color) !important;
+}
+
+.contentPage[data-step="0"] .gradeDonut::before,
+.contentPage[data-step="0"] .gradeDonut::after{
+    content:none !important;
+    display:none !important;
+}
+
+.contentPage[data-step="0"] .gradeDonutSvg{
+    position:absolute !important;
+    inset:0 !important;
+    width:100% !important;
+    height:100% !important;
+    display:block !important;
+    overflow:visible !important;
+    transform:rotate(-90deg) !important;
+    transform-origin:50% 50% !important;
+}
+
+.contentPage[data-step="0"] .gradeDonutTrack{
+    fill:none !important;
+    stroke:rgba(148,158,173,.62) !important;
+    stroke-width:var(--c1-donut-track-stroke) !important;
+    vector-effect:non-scaling-stroke;
+}
+
+.contentPage[data-step="0"] .gradeDonutProgress{
+    fill:none !important;
+    stroke:currentColor !important;
+    stroke-width:var(--c1-donut-progress-stroke) !important;
+    stroke-linecap:round !important;
+    vector-effect:non-scaling-stroke;
+    transition:stroke-dashoffset .2s ease;
+}
+
+.contentPage[data-step="0"] .gradeDonut [data-home-percent]{
+    position:absolute !important;
+    inset:0 !important;
+    width:100% !important;
+    height:100% !important;
+    max-width:none !important;
+
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:0 !important;
+
+    margin:0 !important;
+    padding:0 !important;
+    color:var(--metric-color) !important;
+    font-size:var(--c1-donut-value-size) !important;
+    font-weight:400 !important;
+    font-variant-numeric:tabular-nums;
+    line-height:1 !important;
+    text-align:center !important;
+    white-space:nowrap !important;
+    pointer-events:none;
+    z-index:3;
+}
+
+.contentPage[data-step="0"] .donutPercentNumber{
+    display:inline !important;
+    color:inherit !important;
+    font:inherit !important;
+    line-height:1 !important;
+}
+
+.contentPage[data-step="0"] .donutPercentUnit{
+    display:inline !important;
+    color:var(--color-white) !important;
+    font:inherit !important;
+    line-height:1 !important;
+}
+
+.contentPage[data-step="0"] .gradeLegend{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:var(--c1-legend-gap) !important;
+    color:var(--og-text) !important;
+    font-size:var(--metric-tile-value-size) !important;
+    line-height:1.2 !important;
+    white-space:nowrap !important;
+}
+
+.contentPage[data-step="0"] .gradeLegendDot{
+    width:var(--c1-legend-dot-size) !important;
+    height:var(--c1-legend-dot-size) !important;
+    flex:0 0 var(--c1-legend-dot-size) !important;
+    border-radius:50% !important;
+    background:var(--metric-color) !important;
+    box-shadow:none !important;
+    filter:none !important;
+    outline:none !important;
+}
+
+/* ---------- Fisheries Notification ---------- */
+.contentPage[data-step="0"] .fisheriesNotification{
+    width:100% !important;
+    flex:0 0 auto !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    gap:var(--c1-fisheries-gap) !important;
+
+    margin:var(--c1-section-gap) 0 0 !important;
+    padding:0 !important;
+    border:0 !important;
+    background:transparent !important;
+    box-shadow:none !important;
+    text-align:center !important;
+}
+
+.contentPage[data-step="0"] .fisheriesNotificationDivider{
+    width:var(--c1-fisheries-divider-width) !important;
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) var(--c1-fisheries-icon-size) minmax(0,1fr) !important;
+    align-items:center !important;
+    gap:var(--c1-fisheries-line-gap) !important;
+}
+
+.contentPage[data-step="0"] .fisheriesNotificationDivider > span{
+    display:block !important;
+    height:var(--border-thin) !important;
+    background:var(--og-border) !important;
+}
+
+.contentPage[data-step="0"] .fisheriesNotificationIcon{
+    width:var(--c1-fisheries-icon-size) !important;
+    height:var(--c1-fisheries-icon-size) !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    color:var(--accent-blue) !important;
+}
+
+.contentPage[data-step="0"] .fisheriesNotificationIcon svg{
+    width:100% !important;
+    height:100% !important;
+    fill:currentColor !important;
+    color:currentColor !important;
+}
+
+.contentPage[data-step="0"] .fisheriesNotificationCopy{
+    min-width:0 !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    gap:1cqw !important;
+}
+
+.contentPage[data-step="0"] .fisheriesNotificationCopy strong{
+    color:var(--og-muted) !important;
+    font-size:var(--metric-tile-label-size) !important;
+    font-weight:700 !important;
+    line-height:1.1 !important;
+    letter-spacing:.02em !important;
+}
+
+.contentPage[data-step="0"] .fisheriesNotificationCopy small{
+    color:rgba(148,158,173,.62) !important;
+    font-size:var(--metric-tile-label-size) !important;
+    line-height:1.25 !important;
+}
+
+.contentPage[data-step="0"] .fisheriesNotification[data-required="true"] .fisheriesNotificationCopy small{
+    color:var(--og-text) !important;
+    font-weight:700 !important;
+}
+
+/* ---------- By Size ---------- */
+.contentPage[data-step="0"] .inspectionComments.detailBySizeSection{
+    width:100% !important;
+    flex:0 0 auto !important;
+    min-height:0 !important;
+    height:auto !important;
+    margin:var(--c1-section-gap) 0 0 !important;
+    align-self:stretch !important;
+}
+
+.contentPage[data-step="0"] .detailBySizePanel{
+    width:100% !important;
+    flex:0 0 auto !important;
+    min-height:0 !important;
+    height:auto !important;
+
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:stretch !important;
+    justify-content:flex-start !important;
+    gap:var(--c1-by-size-row-gap) !important;
+
+    padding:var(--c1-box-pad-y) var(--c1-box-pad-x) !important;
+
+    border:var(--border-thin) solid var(--og-border) !important;
+    border-radius:var(--c1-box-radius) !important;
+    background:var(--og-panel-deep) !important;
+    box-shadow:none !important;
+    box-sizing:border-box !important;
+}
+
+.contentPage[data-step="0"] .bySizeRow{
+    width:100% !important;
+    flex:0 0 auto !important;
+    display:flex !important;
+    flex-direction:column !important;
+    gap:1.5cqw !important;
+    margin:0 !important;
+}
+
+.contentPage[data-step="0"] .bySizeLabel{
+    display:flex !important;
+    align-items:baseline !important;
+    gap:var(--c1-by-size-label-gap) !important;
+    color:var(--color-white) !important;
+    font-size:var(--metric-tile-value-size) !important;
+    line-height:1.2 !important;
+    white-space:nowrap !important;
+}
+
+.contentPage[data-step="0"] .bySizeLabel > span{
+    color:var(--color-white) !important;
+    font-weight:400 !important;
+}
+
+.contentPage[data-step="0"] .bySizeLabel strong,
+.contentPage[data-step="0"] .bySizeLabel strong span{
+    font-size:inherit !important;
+    line-height:inherit !important;
+}
+
+.contentPage[data-step="0"] [data-summary-premium-size]{
+    color:var(--accent-blue) !important;
+}
+
+.contentPage[data-step="0"] [data-summary-standard-size]{
+    color:var(--accent-orange) !important;
+}
+
+.contentPage[data-step="0"] .sizePercentUnit{
+    color:var(--color-white) !important;
+}
+
+.contentPage[data-step="0"] .bySizeTrack{
+    position:relative !important;
+    width:100% !important;
+    height:var(--c1-progress-track-height) !important;
+    overflow:visible !important;
+    border-radius:999px !important;
+    background:rgba(148,158,173,.62) !important;
+    box-shadow:none !important;
+}
+
+.contentPage[data-step="0"] .bySizeFill{
+    position:absolute !important;
+    left:0 !important;
+    top:50% !important;
+    bottom:auto !important;
+    height:var(--c1-progress-fill-height) !important;
+    width:0;
+    transform:translateY(-50%) !important;
+    border-radius:999px !important;
+    background-image:none !important;
+    box-shadow:none !important;
+    transition:width .35s ease;
+}
+
+.contentPage[data-step="0"] .bySizePremiumFill{
+    background-color:var(--accent-blue) !important;
+}
+
+.contentPage[data-step="0"] .bySizeStandardFill{
+    background-color:var(--accent-orange) !important;
+}
+
+/* ---------- Footer ---------- */
+.contentPage[data-step="0"] .cardFooter{
+    width:100% !important;
+    flex:0 0 auto !important;
+    display:flex !important;
+    flex-direction:column !important;
+    margin-top:auto !important;
+}
+
+.contentPage[data-step="0"] .inspectionActionDivider{
+    width:100% !important;
+    height:var(--border-thin) !important;
+    flex:0 0 auto !important;
+    margin:0 0 var(--c1-footer-divider-gap) !important;
+    background:var(--og-border) !important;
+}
+
+.contentPage[data-step="0"] .previewActions.cardActions{
+    width:100% !important;
+    flex:0 0 auto !important;
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
+    gap:var(--c1-button-gap) !important;
+    margin:0 !important;
+}
+
+.contentPage[data-step="0"] .cardActions button{
+    min-height:var(--c1-button-min-height) !important;
+    border-radius:var(--c1-button-radius) !important;
+    font-size:var(--c1-button-font-size) !important;
+    font-family:inherit !important;
+    font-weight:700 !important;
+    cursor:pointer;
+}
+
+.contentPage[data-step="0"] .cardPrimaryAction{
+    border:var(--border-thin) solid var(--accent-blue) !important;
+    background:var(--accent-blue-strong) !important;
+    color:var(--color-white) !important;
+}
+
+.contentPage[data-step="0"] .cardSecondaryAction{
+    border:var(--border-thin) solid var(--og-border) !important;
+    background:transparent !important;
+    color:var(--og-text) !important;
+}
+
+
+/* =====================================================================
+   v121 — Card 1 direct percentage donut rendering
+   ---------------------------------------------------------------------
+   Each progress circle has pathLength="100".
+   88.50% therefore draws exactly 88.50 of 100 path units.
+   ===================================================================== */
+
+.contentPage[data-step="0"] .gradeDonutProgress{
+    stroke-dasharray:0 100;
+    stroke-dashoffset:0;
 }
