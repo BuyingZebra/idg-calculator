@@ -1,24 +1,58 @@
 /* =====================================================================
    IDG TRAINING TOOL — CARD CONTROL PANEL
-   ---------------------------------------------------------------------
-   Edit values here first.
-   Each card is intentionally independent.
+   =====================================================================
+   RULE:
+   Each card owns its own values, even when the values currently match.
+
+   Generic skeleton on every card:
+       Card
+       Header -> Icon + Title
+       Header Separator (independent)
+       Step Complete -> Icon + Title + Body
+       Card-specific content
+       Footer Separator (independent)
+       Footer -> Buttons
+
+   Edit these values before touching implementation CSS.
    ===================================================================== */
 
-/* ========================= CARD 1 — INSPECTION DETAIL ========================= */
-.contentPage[data-step="0"] .appCard{
-    /* Shell */
-    --c1-card-pad-x:3cqw;
-    --c1-card-pad-y:3cqw;
 
-    /* Major vertical rhythm */
+/* ==========================================================================
+   CARD 1 — INSPECTION DETAIL CONTROLS
+   ========================================================================== */
+.contentPage[data-step="0"] .appCard{
+    /* Card shell */
+    --c1-card-pad-x:3cqw;
+    --c1-card-bg:var(--og-panel);
+    --c1-card-border:var(--border-thin);
+    --c1-card-border-color:var(--og-border);
+    --c1-card-radius:var(--radius-card);
+    --c1-card-pad-y:3cqw;
     --c1-section-gap:8cqw;
-    --c1-overview-content-gap:4cqw;
 
     /* Header */
     --c1-header-gap:4cqw;
     --c1-header-icon-size:16cqw;
+    --c1-header-title-size:var(--card-title-size);
     --c1-header-divider-gap:3.5cqw;
+    --c1-divider-height:var(--border-thin);
+
+    /* Repeating content boxes */
+    --c1-box-pad-x:4cqw;
+    --c1-box-pad-y:3cqw;
+    --c1-box-radius:var(--radius-control);
+    --c1-box-border:var(--border-thin);
+
+    /* Step Complete */
+    --c1-step-gap:3cqw;
+    --c1-step-icon-size:9cqw;
+    --c1-step-title-size:var(--card-step-title-size);
+    --c1-step-body-size:var(--card-body-size);
+    --c1-step-text-gap:1cqw;
+
+    /* Overview */
+    --c1-overview-title-size:var(--card-overview-title-size);
+    --c1-overview-content-gap:4cqw;
 
     /* Footer */
     --c1-footer-divider-gap:3.5cqw;
@@ -27,21 +61,7 @@
     --c1-button-radius:var(--radius-control);
     --c1-button-font-size:var(--card-button-size);
 
-    /* Box geometry — Step Complete + By Size */
-    --c1-box-pad-x:4cqw;
-    --c1-box-pad-y:3cqw;
-    --c1-box-radius:var(--radius-control);
-
-    /* Step Complete */
-    --c1-step-icon-size:9cqw;
-    --c1-step-gap:3cqw;
-    --c1-step-title-size:var(--card-step-title-size);
-    --c1-step-body-size:var(--card-body-size);
-
-    /* Overview */
-    --c1-overview-title-size:var(--card-overview-title-size);
-
-    /* Donut charts */
+    /* Card 1 unique — donut charts */
     --c1-donut-size:32cqw;
     --c1-donut-track-stroke:4;
     --c1-donut-progress-stroke:6;
@@ -51,63 +71,183 @@
     --c1-legend-gap:1.5cqw;
     --c1-legend-dot-size:3cqw;
 
-    /* Fisheries status */
+    /* Card 1 unique — Fisheries */
     --c1-fisheries-divider-width:82%;
     --c1-fisheries-icon-size:9cqw;
     --c1-fisheries-gap:2cqw;
     --c1-fisheries-line-gap:3cqw;
 
-    /* By Size */
+    /* Card 1 unique — shared progress appearance */
+    --c1-progress-muted:rgba(148,158,173,.62);
+    --c1-progress-radius:var(--radius-pill);
+
+    /* Card 1 unique — Fisheries */
+    --c1-fisheries-copy-gap:1cqw;
+
+    /* Card 1 unique — By Size */
     --c1-by-size-row-gap:3cqw;
+    --c1-by-size-inner-gap:1.5cqw;
     --c1-by-size-label-gap:.35em;
     --c1-progress-track-height:1.35cqw;
     --c1-progress-fill-height:2cqw;
+    --c1-by-size-value-weight:400;
 }
 
 
-/* ========================= CARD 2 — INSPECTION SUMMARY ========================= */
+/* ==========================================================================
+   CARD 2 — INSPECTION SUMMARY CONTROLS
+   ========================================================================== */
 .contentPage[data-step="1"] .appCard{
+    /* Card shell */
     --c2-card-pad-x:3cqw;
+    --c2-card-bg:var(--og-panel);
+    --c2-card-border:var(--border-thin);
+    --c2-card-border-color:var(--og-border);
+    --c2-card-radius:var(--radius-card);
     --c2-card-pad-y:3cqw;
     --c2-section-gap:8cqw;
+
+    /* Header */
     --c2-header-gap:4cqw;
     --c2-header-icon-size:16cqw;
+    --c2-header-title-size:var(--card-title-size);
     --c2-header-divider-gap:3.5cqw;
-    --c2-footer-divider-gap:3.5cqw;
-    --c2-button-gap:3cqw;
+    --c2-divider-height:var(--border-thin);
+
+    /* Repeating content boxes */
     --c2-box-pad-x:4cqw;
     --c2-box-pad-y:3cqw;
     --c2-box-radius:var(--radius-control);
-    --c2-step-icon-size:9cqw;
+    --c2-box-border:var(--border-thin);
+
+    /* Step Complete */
     --c2-step-gap:3cqw;
+    --c2-step-icon-size:9cqw;
+    --c2-step-title-size:var(--card-step-title-size);
+    --c2-step-body-size:var(--card-body-size);
+    --c2-step-text-gap:1cqw;
+
+    /* Overview */
+    --c2-overview-title-size:var(--card-overview-title-size);
+
+    /* Footer */
+    --c2-footer-divider-gap:3.5cqw;
+    --c2-button-gap:3cqw;
+    --c2-button-min-height:var(--touch-target-min);
+    --c2-button-radius:var(--radius-control);
+    --c2-button-font-size:var(--card-button-size);
+
+    /* Card 2 unique — overview */
+    --c2-overview-content-gap:5cqw;
+
+    /* Card 2 unique — Boat Data */
+    --c2-boat-block-gap:4cqw;
+    --c2-boat-block-internal-gap:1.5cqw;
+    --c2-boat-name-size:var(--metric-tile-value-size);
+    --c2-boat-name-weight:400;
+    --c2-boat-placeholder-color:var(--og-muted);
+    --c2-boat-divider-width:82%;
+    --c2-boat-divider-gap:2cqw;
+    --c2-boat-icon-size:9cqw;
+    --c2-boat-cfv-size:var(--metric-tile-label-size);
+    --c2-boat-cfv-gap:.35em;
+    --c2-receipt-label-size:var(--metric-tile-label-size);
+    --c2-receipt-row-gap:1.5cqw;
+
+    /* Card 2 unique — vessel identity */
+    --c2-vessel-gap:2cqw;
+    --c2-vessel-eyebrow-size:var(--metric-tile-label-size);
+    --c2-vessel-eyebrow-gap:1cqw;
+    --c2-vessel-name-size:var(--metric-tile-value-size);
+    --c2-vessel-name-weight:400;
+    --c2-vessel-divider-width:82%;
+    --c2-vessel-divider-gap:2cqw;
+    --c2-vessel-icon-size:9cqw;
+    --c2-vessel-cfv-size:var(--metric-tile-label-size);
+    --c2-vessel-cfv-gap:1.5cqw;
+
+    /* Card 2 unique — fish receipt */
+    --c2-receipt-gap:2cqw;
+    --c2-receipt-label-size:var(--metric-tile-label-size);
+    --c2-receipt-icon-size:9cqw;
+    --c2-receipt-value-size:var(--metric-tile-value-size);
+    --c2-receipt-value-weight:400;
+    --c2-receipt-icon-gap:1.5cqw;
+
+    /* Card 2 unique — mini metric cards */
+    --c2-metric-grid-gap:3cqw;
     --c2-metric-pad-x:3cqw;
     --c2-metric-pad-y:3cqw;
+    --c2-metric-radius:var(--radius-control);
+    --c2-metric-border:var(--border-thin);
     --c2-metric-icon-size:9cqw;
     --c2-metric-content-gap:1.5cqw;
+    --c2-metric-value-size:var(--metric-tile-value-size);
+    --c2-metric-value-weight:400;
+    --c2-metric-label-size:var(--metric-tile-label-size);
+    --c2-metric-label-line-height:1.25;
 }
 
 
-/* ========================= CARD 3 — ACTIVITY TIME SLIP ========================= */
+/* ==========================================================================
+   CARD 3 — ACTIVITY TIME SLIP CONTROLS
+   ========================================================================== */
 .contentPage[data-step="2"] .appCard{
+    /* Card shell */
     --c3-card-pad-x:3cqw;
+    --c3-card-bg:var(--og-panel);
+    --c3-card-border:var(--border-thin);
+    --c3-card-border-color:var(--og-border);
+    --c3-card-radius:var(--radius-card);
     --c3-card-pad-y:3cqw;
     --c3-section-gap:8cqw;
+
+    /* Header */
     --c3-header-gap:4cqw;
     --c3-header-icon-size:16cqw;
+    --c3-header-title-size:var(--card-title-size);
     --c3-header-divider-gap:3.5cqw;
-    --c3-footer-divider-gap:3.5cqw;
-    --c3-button-gap:3cqw;
+    --c3-divider-height:var(--border-thin);
+
+    /* Repeating content boxes */
     --c3-box-pad-x:4cqw;
     --c3-box-pad-y:3cqw;
     --c3-box-radius:var(--radius-control);
-    --c3-step-icon-size:9cqw;
+    --c3-box-border:var(--border-thin);
+
+    /* Step Complete */
     --c3-step-gap:3cqw;
+    --c3-step-icon-size:9cqw;
+    --c3-step-title-size:var(--card-step-title-size);
+    --c3-step-body-size:var(--card-body-size);
+    --c3-step-text-gap:1cqw;
+
+    /* Overview */
+    --c3-overview-title-size:var(--card-overview-title-size);
+
+    /* Footer */
+    --c3-footer-divider-gap:3.5cqw;
+    --c3-button-gap:3cqw;
+    --c3-button-min-height:var(--touch-target-min);
+    --c3-button-radius:var(--radius-control);
+    --c3-button-font-size:var(--card-button-size);
 }
+
 
 /* =====================================================================
    END CARD CONTROL PANEL
    ===================================================================== */
 
+/* ==========================================================================
+   CARD STACK / TRANSITION CONTROLS
+   --------------------------------------------------------------------------
+   Space physically placed between full-height card pages.
+   The navigation JS uses each page's actual offsetTop, so this gap is
+   automatically visible while transitioning from one card to another.
+   ========================================================================== */
+#contentContainer{
+    --card-transition-gap:2%;
+}
 
 
 
@@ -229,53 +369,19 @@
     transition:transform .8s ease;
 }
 
-.contentPage{
-    position:absolute;
-    left:0;
-    width:100%;
-    height:100%;
-    background:var(--og-panel);
-    border:var(--border-thin) solid var(--og-border);
-    border-radius:var(--radius-card);
-    overflow:hidden;
-    color:var(--og-text);
-}
 
-.contentPage[data-step="1"]{top:calc(100% + 2%);}
-.contentPage[data-step="2"]{top:calc(200% + 4%);}
 
-.cardPreview{
-    width:100%;
-    height:100%;
-    padding:clamp(18px,4vw,42px);
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    gap:clamp(16px,3vh,28px);
-}
 
-.previewHero{
-    display:flex;
-    align-items:center;
-    gap:clamp(14px,3vw,28px);
-}
 
-.contentIcon{
-    width:clamp(64px,12vw,112px);
-    height:clamp(64px,12vw,112px);
-    flex:0 0 auto;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:var(--accent-blue);
-}
-.contentIcon svg{width:100%;height:100%;fill:currentColor;}
 
-.contentTitle{
-    margin:0 0 7px;
-    font-size:clamp(1.35rem,3vw,2rem);
-    font-weight:750;
-}
+
+
+
+
+
+
+
+
 .contentBody{
     margin:0;
     color:var(--og-muted);
@@ -283,45 +389,18 @@
     line-height:1.45;
 }
 
-.previewDivider{height:var(--border-thin);background:var(--og-border);width:100%;}
 
 
-.previewStatus{
-    border:var(--border-thin) solid var(--og-border);
-    border-radius:var(--radius-control);
-    padding:13px 14px;
-    display:flex;
-    align-items:flex-start;
-    gap:11px;
-    background:var(--og-panel-deep);
-}
 
-.previewStatus strong{display:block;font-size:.92rem;}
-.previewStatus small{display:block;color:var(--og-muted);margin-top:3px;line-height:1.35;}
 
-.previewActions{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-    margin-top:auto;
-}
-.previewActions button{
-    min-height:48px;
-    border-radius:var(--radius-control);
-    font:inherit;
-    font-weight:700;
-    cursor:pointer;
-}
-.previewPrimary{
-    border:var(--border-thin) solid var(--accent-blue);
-    background:var(--accent-blue-strong);
-    color:var(--color-white);
-}
-.previewSecondary{
-    border:var(--border-thin) solid var(--og-border);
-    background:transparent;
-    color:var(--og-text);
-}
+
+
+
+
+
+
+
+
 
 @media(max-width:620px){
     #timelineContainer{width:20%;min-width:66px;}
@@ -335,35 +414,23 @@
         bottom:calc(var(--screen-pad-y) + 27px);
         width:2px;
     }
-    .cardPreview{padding:18px 15px;gap:16px;}
-    .previewHero{flex-direction:column;text-align:center;gap:10px;}
-    .contentIcon{width:72px;height:72px;}
-    .contentTitle{font-size:1.25rem;}
+    
+    
+    
+    
     .contentBody{font-size:.82rem;}
-    .previewStatus{padding:10px 11px;}
-    .previewStatus strong{font-size:.8rem;}
-    .previewStatus small{font-size:.7rem;}
-    .previewActions{grid-template-columns:1fr;}
-    .previewActions button{min-height:43px;font-size:.82rem;}
+    
+    
+    
+    
+    
 }
 
 
 /* v30 temporary debug completion toggle. Wording remains unchanged. */
-.previewStatus{
-  width:100%;
-  text-align:left;
-  font:inherit;
-  color:inherit;
-  cursor:pointer;
-}
-.previewStatus.complete{
-  border-color:var(--accent-green);
-  background:var(--accent-green-bg-strong);
-}
-.previewStatus.complete 
-.previewStatus.complete strong{
-  color:var(--accent-green-light);
-}
+
+
+
 .timelineItem.complete .timelineNode{
   border-color:var(--accent-green);
 }
@@ -507,13 +574,9 @@
    Progress rows removed. Inspection Detail now presents a three-gauge
    grade overview. Completion remains a separate user-confirmed state. */
 
-.cardPreview{
-    justify-content:flex-start;
-}
 
-.previewHero{
-    justify-content:center;
-}
+
+
 
 .gradeOverview{
     width:100%;
@@ -528,12 +591,10 @@
     margin-bottom:18px;
 }
 
-.gradeDonutGrid{
-    display:grid;
+.gradeDonutGrid{display:grid;
     grid-template-columns:repeat(3,minmax(0,1fr));
     gap:clamp(12px,2vw,24px);
-    align-items:start;
-}
+    align-items:start;}
 
 .gradeMetric{
     --metric-color:var(--accent-blue);
@@ -548,30 +609,21 @@
 .gradeMetricStandard{--metric-color:var(--accent-orange-alt);}
 .gradeMetricReject{--metric-color:var(--accent-red);}
 
-.gradeDonut{
-    --percent:0;
+.gradeDonut{--percent:0;
     width:clamp(92px,13vw,138px);
     aspect-ratio:1;
     border-radius:50%;
     display:grid;
     place-items:center;
     position:relative;
-    background:
-        conic-gradient(
-            var(--metric-color) calc(var(--percent) * 1%),
-            rgba(51,65,85,.72) 0
-        );
-    box-shadow:inset 0 0 0 1px var(--surface-ring);
-}
+    box-shadow:inset 0 0 0 1px var(--surface-ring);}
 
-.gradeDonut::after{
-    content:"";
+.gradeDonut::after{content:"";
     position:absolute;
     inset:13%;
     border-radius:50%;
     background:var(--og-panel);
-    box-shadow:inset 0 0 0 1px var(--surface-ring-light);
-}
+    box-shadow:inset 0 0 0 1px var(--surface-ring-light);}
 
 
 
@@ -595,9 +647,7 @@
 }
 
 /* Completion is green; chart colors carry grade meaning independently. */
-.previewStatus{
-    margin-top:auto;
-}
+
 
 
 
@@ -614,32 +664,21 @@
 }
 
 /* Actions stay side-by-side on phone and desktop. */
-.previewActions{
-    grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
-}
+
 
 @media(max-width:620px){
-    .cardPreview{
-        padding:18px 14px;
-        gap:14px;
-    }
+    
 
     .gradeOverviewTitle{
         font-size:.68rem;
         margin-bottom:13px;
     }
 
-    .gradeDonutGrid{
-        gap:7px;
-    }
+    .gradeDonutGrid{gap:7px;}
 
-    .gradeDonut{
-        width:min(21vw,82px);
-    }
+    .gradeDonut{width:min(21vw,82px);}
 
-    .gradeDonut::after{
-        inset:14%;
-    }
+    .gradeDonut::after{inset:14%;}
 
 
 
@@ -802,28 +841,13 @@
 
 
 /* ===== v40 Inspection Summary approved overview ===== */
-.contentPage[data-step="1"] .cardPreview{
-    container-type:size;
-    justify-content:flex-start;
-    gap:0;
-    padding:
-        clamp(12px,3.2cqh,40px)
-        clamp(12px,3.2cqw,42px);
-}
-
-.contentPage[data-step="1"] .previewHero{
-    margin:0;
-}
 
 
 
-.contentPage[data-step="1"] .previewStatus{
-    margin-top:clamp(12px,4cqh,38px);
-    padding:
-        clamp(9px,1.6cqh,15px)
-        clamp(12px,2.2cqw,20px);
-    gap:clamp(8px,1.8cqw,14px);
-}
+
+
+
+
 
 .contentPage[data-step="1"] .summaryOverview{
     width:100%;
@@ -898,44 +922,19 @@
 }
 
 
-
-
-
-
-/* Gross is always the full blue baseline. Net is the green overlay. */
-.grossNetBase,
-.grossNetOverlay{
-    position:absolute;
-    inset-block:0;
-    left:0;
-    border-radius:var(--radius-pill);
-}
-
-
 .contentPage[data-step="1"] .summaryActionDivider{
     margin-top:auto;
     margin-bottom:clamp(12px,3cqh,28px);
 }
 
-.contentPage[data-step="1"] .previewActions{
-    margin-top:0;
-    flex:0 0 auto;
-    grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
-    gap:clamp(8px,2cqw,18px);
-}
+
 
 @media(max-width:620px){
-    .contentPage[data-step="1"] .cardPreview{
-        padding:
-            clamp(10px,2.4cqh,22px)
-            clamp(10px,3cqw,18px);
-    }
+    
 
     
 
-    .contentPage[data-step="1"] .previewStatus{
-        margin-top:clamp(10px,3.2cqh,24px);
-    }
+    
 
     .contentPage[data-step="1"] .summaryOverview{
         margin-top:clamp(14px,4cqh,28px);
@@ -953,10 +952,7 @@
         margin-bottom:clamp(10px,2.5cqh,20px);
     }
 
-    .contentPage[data-step="1"] .previewActions{
-        grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
-        gap:8px;
-    }
+    
 }
 
 
@@ -988,11 +984,6 @@
 /* The comparison is already part of Inspection Overview; no extra heading. */
 .contentPage[data-step="1"] .grossNetTitle{
     display:none;
-}
-
-/* Gross always remains the full blue baseline; Net overlays it in green. */
-.grossNetBase{
-    background:var(--accent-blue);
 }
 
 
@@ -1061,17 +1052,6 @@
 }
 
 
-
-
-
-
-/* Progress bar semantics now match the composition text:
-   white = total/gross baseline, orange = crab portion. */
-.grossNetBase{
-    background:var(--color-white) !important;
-}
-
-
 /* Keep the line fitting on smaller phones without wrapping. */
 @media(max-width:620px){
 
@@ -1112,19 +1092,6 @@
 [data-summary-net-detail]{
         gap:.18em;
     }
-}
-
-
-/* ===== v48 requested summary refinements ===== */
-
-/* Muted body-text tone instead of pure white for the gross/base track. */
-.grossNetBase{
-    background:#cbd5e1 !important;
-}
-
-/* Crab portion remains orange. */
-.grossNetOverlay{
-    background:var(--accent-orange) !important;
 }
 
 /* Both percentages carry equal visual weight. */
@@ -1181,27 +1148,6 @@
 [data-summary-standard-size] .sizePercentNumber{color:var(--accent-orange) !important;font-weight:800;}
 [data-summary-premium-size] .sizePercentUnit,
 [data-summary-standard-size] .sizePercentUnit{color:var(--color-white) !important;font-weight:800;}
-
-
-/* ===== v52 Premium-vs-Standard presentation refinement ===== */
-
-/* The bar now highlights Premium only:
-   muted UI tone = full baseline, blue overlay = Premium share. */
-.grossNetBase{
-    background:#64748b !important;
-}
-
-
-/* Restore the same icon + single-line information pattern used previously. */
-.sizeWeightSummary{
-    display:flex;
-    align-items:center;
-    justify-content:flex-start;
-    gap:clamp(9px,1.8cqw,14px);
-    margin-top:clamp(8px,1.8cqh,14px);
-    color:var(--color-white);
-    text-align:left;
-}
 
 
 
@@ -1390,296 +1336,95 @@
 
 
 
-/* =====================================================================
-   v71 — SHARED HOME CARD COMPONENTS
-   ---------------------------------------------------------------------
-   Canonical repeating patterns:
-   .appCard
-   .cardHeader / .cardHeaderIcon / .cardTitle / .cardSubtitle
-   .cardDivider
-   .cardStepStatus / .cardStepIcon / .cardStepText
-   .cardOverviewTitle
-   .cardActions / .cardPrimaryAction / .cardSecondaryAction
 
-   Card-specific CSS should govern only content unique to that card.
-   ===================================================================== */
 
 /* ---------- Card shell ---------- */
-.appCard{
-    container-type:inline-size;
-    padding:
-        var(--card-pad-y)
-        var(--card-pad-x) !important;
-}
+
 
 /* ---------- Shared header ---------- */
-.cardHeader{
-    display:flex;
-    align-items:center;
-    gap:var(--card-header-gap) !important;
-}
 
-.cardHeaderIcon{
-    width:var(--card-header-icon-size) !important;
-    height:var(--card-header-icon-size) !important;
-    flex:0 0 var(--card-header-icon-size) !important;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:var(--accent-blue);
-}
 
-.cardHeaderIcon svg{
-    width:100%;
-    height:100%;
-    fill:currentColor;
-}
 
-.cardTitle{
-    font-size:var(--card-title-size) !important;
-    line-height:1.08;
-}
 
-.cardSubtitle{
-    font-size:var(--card-subtitle-size) !important;
-    line-height:1.35;
-    color:var(--og-muted);
-}
+
+
+
+
+
 
 /* ---------- Shared divider ---------- */
-.cardDivider{
-    width:100%;
-    height:var(--border-thin) !important;
-    background:var(--og-border);
-    flex:0 0 auto;
-}
+
 
 /* ---------- Shared Step Complete ---------- */
-.cardStepStatus{
-    width:100%;
-    margin-top:var(--card-section-gap) !important;
-    border:var(--border-thin) solid var(--og-border);
-    border-radius:var(--card-step-radius) !important;
-    background:var(--og-panel-deep);
-    color:var(--og-text);
-    text-align:left !important;
-}
 
-.cardStepStatus strong{
-    font-size:var(--card-step-title-size) !important;
-    line-height:1.22;
-}
 
-.cardStepStatus small{
-    font-size:var(--card-body-size) !important;
-    line-height:1.35;
-    color:var(--og-muted);
-}
 
-.cardStepIcon{
-    width:var(--card-step-icon-size) !important;
-    height:var(--card-step-icon-size) !important;
-    flex:0 0 var(--card-step-icon-size) !important;
-    color:var(--og-subtle);
-    background:transparent;
-    border:0;
-    box-shadow:none;
-}
 
-.cardStepIcon svg{
-    width:100%;
-    height:100%;
-    color:currentColor;
-    fill:currentColor;
-}
 
-.cardStepStatus.complete .cardStepIcon{
-    color:var(--accent-green) !important;
-}
 
-.cardStepText{
-    min-width:0;
-    display:flex;
-    flex-direction:column;
-    align-items:flex-start;
-    justify-content:center;
-    text-align:left;
-}
+
+
+
+
+
+
+
 
 /* ---------- Shared overview heading ---------- */
-.cardOverviewTitle{
-    font-size:var(--card-overview-title-size) !important;
-    line-height:1.2;
-    text-align:center;
-}
+
 
 /* ---------- Shared footer actions ---------- */
-.cardActions{
-    display:grid;
-    grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
-    gap:var(--card-button-gap) !important;
-    margin-top:0;
-    flex:0 0 auto;
-}
-
-.cardActions button{
-    min-height:var(--card-button-min-height) !important;
-    border-radius:var(--card-button-radius) !important;
-    font-size:var(--card-button-size) !important;
-    font-family:inherit;
-    font-weight:700;
-    cursor:pointer;
-}
-
-.cardPrimaryAction{
-    border:var(--border-thin) solid var(--accent-blue);
-    background:var(--accent-blue-strong);
-    color:var(--color-white);
-}
-
-.cardSecondaryAction{
-    border:var(--border-thin) solid var(--og-border);
-    background:transparent;
-    color:var(--og-text);
-}
 
 
 
 
-/* =====================================================================
-   v74 — canonical shared card footer
-   ---------------------------------------------------------------------
-   Flexible unused space belongs BEFORE .cardFooter.
-   Footer owns:
-   divider -> shared divider gap -> buttons
-   No card-specific footer spacing is allowed.
-   ===================================================================== */
 
-.appCard .cardFooter{
-    margin-top:auto !important;
-    flex:0 0 auto;
-    display:flex;
-    flex-direction:column;
-    width:100%;
-}
 
-.appCard .cardFooter .cardDivider{
-    margin:0 0 var(--card-divider-gap) 0 !important;
-    flex:0 0 auto;
-}
 
-.appCard .cardFooter .cardActions{
-    margin:0 !important;
-    flex:0 0 auto;
-}
+
+
+
+
+
+
+
+
+
+
+
 
 /* Legacy footer divider classes are now semantic markers only. */
-.appCard .inspectionActionDivider,
-.appCard .summaryActionDivider,
-.appCard .activityActionDivider{
+.appCard .summaryActionDivider{
     margin:0 !important;
 }
 
 
-/* =====================================================================
-   v75 — canonical shared Step Complete component
-   ---------------------------------------------------------------------
-   Same markup, layout, icon, spacing, typography, colors and state
-   behaviour on all three cards.
-   ===================================================================== */
 
-.appCard .cardStepStatus{
-    display:flex !important;
-    align-items:center !important;
-    justify-content:flex-start !important;
-    gap:var(--card-step-gap) !important;
 
-    width:100%;
-    margin-top:var(--card-section-gap) !important;
-    padding:3cqw 4cqw !important;
 
-    border:var(--border-thin) solid var(--og-border);
-    border-radius:var(--card-step-radius) !important;
-    background:var(--og-panel-deep);
-    color:var(--og-text);
 
-    text-align:left !important;
-    cursor:pointer;
-}
 
-.appCard .cardStepIcon{
-    width:var(--card-step-icon-size) !important;
-    height:var(--card-step-icon-size) !important;
-    flex:0 0 var(--card-step-icon-size) !important;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
 
-    color:var(--og-subtle) !important;
-    background:transparent !important;
-    border:0 !important;
-    border-radius:0 !important;
-    box-shadow:none !important;
-}
 
-.appCard .cardStepIcon svg{
-    width:100%;
-    height:100%;
-    color:currentColor !important;
-    fill:currentColor !important;
-}
 
-.appCard .cardStepText{
-    min-width:0;
-    display:flex;
-    flex-direction:column;
-    align-items:flex-start;
-    justify-content:center;
-    text-align:left;
-}
 
-.appCard .cardStepText strong{
-    margin:0 !important;
-    font-size:var(--card-step-title-size) !important;
-    line-height:1.22;
-    color:var(--og-text);
-    text-align:left !important;
-}
 
-.appCard .cardStepText small{
-    margin:1cqw 0 0 !important;
-    font-size:var(--card-body-size) !important;
-    line-height:1.35;
-    color:var(--og-muted);
-    text-align:left !important;
-}
+
+
 
 /* Pending / incomplete state */
-.appCard .cardStepStatus.pending .cardStepIcon{
-    color:var(--og-subtle) !important;
-}
+
 
 /* Complete state */
-.appCard .cardStepStatus.complete{
-    border-color:var(--accent-green);
-    background:var(--accent-green-bg-strong);
-}
 
-.appCard .cardStepStatus.complete .cardStepIcon{
-    color:var(--accent-green) !important;
-}
 
-.appCard .cardStepStatus.complete .cardStepText strong{
-    color:var(--accent-green-light);
-}
+
+
+
 
 /* No glow/ring around Step Complete icon in either state. */
-.appCard .cardStepIcon,
-.appCard .cardStepIcon::before,
-.appCard .cardStepIcon::after{
-    box-shadow:none !important;
-}
+
 
 
 /* =====================================================================
@@ -1688,16 +1433,11 @@
 
 /* Legacy .cardPreview used justify-content:center + a generic gap.
    Shared cards now get all spacing exclusively from named master controls. */
-.appCard{
-    justify-content:flex-start !important;
-    gap:0 !important;
-}
+
 
 /* One shared gap below every Overview heading.
    This value reflects the preferred Inspection Detail spacing. */
-.appCard .cardOverviewTitle{
-    margin-bottom:var(--card-overview-content-gap) !important;
-}
+
 
 
 /* =====================================================================
@@ -2297,79 +2037,6 @@
     width:100%;
 }
 
-.contentPage[data-step="1"] .summaryVesselIcon{
-    width:10cqw;
-    height:10cqw;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:var(--accent-blue);
-}
-
-.contentPage[data-step="1"] .summaryVesselIcon svg,
-.contentPage[data-step="1"] .summaryReceiptIcon svg{
-    width:100%;
-    height:100%;
-    fill:currentColor;
-    color:currentColor;
-}
-
-.contentPage[data-step="1"] .summaryVesselIdentity{
-    min-width:0;
-    display:flex;
-    flex-direction:column;
-    align-items:flex-start;
-    gap:1.2cqw;
-}
-
-.contentPage[data-step="1"] .summaryVesselEyebrow,
-.contentPage[data-step="1"] .summaryReceiptText > span{
-    color:var(--og-muted);
-    font-size:var(--metric-tile-label-size);
-    line-height:1.2;
-}
-
-.contentPage[data-step="1"] .summaryVesselIdentity > strong{
-    width:100%;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
-    color:var(--og-text);
-    font-size:clamp(1.1rem,5.2cqw,1.5rem);
-    line-height:1.1;
-    font-weight:800;
-}
-
-.contentPage[data-step="1"] .summaryVesselCfv{
-    color:var(--og-muted);
-    font-size:var(--card-body-size);
-    line-height:1.2;
-}
-
-.contentPage[data-step="1"] .summaryVesselCfv b{
-    color:var(--accent-blue);
-    font-weight:800;
-}
-
-.contentPage[data-step="1"] .summaryReceiptInfo{
-    display:grid;
-    grid-template-columns:8cqw minmax(0,1fr);
-    align-items:center;
-    gap:3.5cqw;
-    width:100%;
-    padding-top:4cqw;
-    border-top:var(--border-thin) solid var(--og-border);
-}
-
-.contentPage[data-step="1"] .summaryReceiptIcon{
-    width:8cqw;
-    height:8cqw;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:var(--accent-blue);
-}
-
 .contentPage[data-step="1"] .summaryReceiptText{
     min-width:0;
     display:flex;
@@ -2406,156 +2073,8 @@
     text-align:center;
 }
 
-.contentPage[data-step="1"] .summaryVesselIdentity{
-    width:100%;
-    min-width:0;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:2cqw;
-}
-
-.contentPage[data-step="1"] .summaryVesselEyebrow,
-.contentPage[data-step="1"] .summaryReceiptLabel{
-    color:var(--og-muted);
-    font-size:var(--metric-tile-label-size);
-    line-height:1.1;
-    font-weight:700;
-    letter-spacing:.02em;
-}
-
-.contentPage[data-step="1"] .summaryVesselIdentity > strong{
-    width:100%;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
-    text-align:center;
-    color:var(--og-text);
-    font-size:clamp(1.15rem,5.5cqw,1.55rem);
-    line-height:1.1;
-    font-weight:800;
-}
-
-.contentPage[data-step="1"] .summaryVesselDivider{
-    width:82%;
-    display:grid;
-    grid-template-columns:minmax(0,1fr) 7cqw minmax(0,1fr);
-    align-items:center;
-    gap:3cqw;
-}
-
-.contentPage[data-step="1"] .summaryVesselDivider > span{
-    display:block;
-    height:var(--border-thin);
-    background:var(--og-border);
-}
-
-.contentPage[data-step="1"] .summaryVesselDivider .summaryVesselIcon{
-    width:7cqw;
-    height:7cqw;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:var(--accent-blue);
-}
-
-.contentPage[data-step="1"] .summaryVesselDivider .summaryVesselIcon svg{
-    width:100%;
-    height:100%;
-    fill:currentColor;
-    color:currentColor;
-}
-
-.contentPage[data-step="1"] .summaryVesselCfv{
-    color:var(--og-text);
-    font-size:var(--card-body-size);
-    line-height:1.15;
-}
-
-.contentPage[data-step="1"] .summaryVesselCfv b{
-    color:inherit;
-    font-weight:inherit;
-}
-
-.contentPage[data-step="1"] .summaryReceiptInfo{
-    width:100%;
-    padding:0;
-    border:0;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:2cqw;
-    text-align:center;
-}
-
-.contentPage[data-step="1"] .summaryReceiptValue{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap:2.5cqw;
-    min-width:0;
-}
-
-.contentPage[data-step="1"] .summaryReceiptIcon{
-    width:7cqw;
-    height:7cqw;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:var(--accent-blue);
-}
-
-.contentPage[data-step="1"] .summaryReceiptIcon svg{
-    width:100%;
-    height:100%;
-    fill:currentColor;
-    color:currentColor;
-}
-
-.contentPage[data-step="1"] .summaryReceiptValue strong{
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
-    color:var(--og-text);
-    font-size:clamp(1.05rem,5cqw,1.4rem);
-    line-height:1.1;
-    font-weight:500;
-}
-
-/* No divider/line before Fish Receipt. */
-.contentPage[data-step="1"] .summaryReceiptInfo::before{
-    content:none !important;
-    display:none !important;
-}
-
 .contentPage[data-step="1"] .summaryVesselInfo + .summaryMetricGrid{
     margin-top:var(--card-section-gap) !important;
-}
-
-
-/* v96 — Summary Overview default-value state
-   Dedicated neutral grey: intentionally separate from active app text colors. */
-.contentPage[data-step="1"] [data-empty-state]{
-    color:rgba(148, 158, 173, 0.62) !important;
-    font-weight:500 !important;
-}
-
-
-/* =====================================================================
-   v97 — compact card headers + Card 2 vessel/receipt scale alignment
-   ===================================================================== */
-
-.contentPage[data-step="1"] .summaryVesselDivider .summaryVesselIcon,
-.contentPage[data-step="1"] .summaryReceiptIcon{
-    width:var(--metric-tile-icon-size) !important;
-    height:var(--metric-tile-icon-size) !important;
-    flex:0 0 var(--metric-tile-icon-size);
-}
-
-.contentPage[data-step="1"] .summaryReceiptValue strong{
-    font-size:var(--metric-tile-value-size) !important;
-    line-height:1.1 !important;
-    font-weight:800 !important;
 }
 
 
@@ -2717,69 +2236,29 @@
 
 
 
-/* =====================================================================
-   v112 — shared header/footer separator spacing
-   ---------------------------------------------------------------------
-   --card-divider-gap is the single source of truth for BOTH sides:
-   Header content -> gap -> separator
-   Footer separator -> gap -> buttons
-   ===================================================================== */
-
-.appCard .cardHeader + .cardDivider{
-    margin:var(--card-divider-gap) 0 0 0 !important;
-}
-
-.appCard .cardFooter .cardDivider{
-    margin:0 0 var(--card-divider-gap) 0 !important;
-}
 
 
-/* =====================================================================
-   v113 — canonical header/footer separator rhythm
-   ---------------------------------------------------------------------
-   No card-specific header-divider margins remain.
-   --card-divider-gap owns both relationships.
-   ===================================================================== */
-
-.appCard > .cardHeader + .cardDivider{
-    margin-block-start:var(--card-divider-gap) !important;
-    margin-inline:0 !important;
-    margin-block-end:0 !important;
-}
-
-.appCard .cardFooter > .cardDivider{
-    margin-block-start:0 !important;
-    margin-inline:0 !important;
-    margin-block-end:var(--card-divider-gap) !important;
-}
 
 
-/* =====================================================================
-   v114 — header visual-gap cleanup
-   ---------------------------------------------------------------------
-   Legacy .contentTitle supplied a 7px bottom margin inside the cardHeader.
-   That margin stacked with --card-divider-gap, so the header visually had
-   more space than the footer even though both divider rules said 3.5cqw.
-   The shared card title now owns no external spacing.
-   ===================================================================== */
 
-.appCard .cardHeader .cardTitle{
-    margin:0 !important;
-    padding:0 !important;
-}
 
-.appCard > .cardHeader{
-    margin:0 !important;
-    padding:0 !important;
-}
 
-.appCard > .cardHeader + .cardDivider{
-    margin:var(--card-divider-gap) 0 0 0 !important;
-}
 
-.appCard .cardFooter > .cardDivider{
-    margin:0 0 var(--card-divider-gap) 0 !important;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* =====================================================================
@@ -2832,13 +2311,7 @@
 
 
 
-/* =====================================================================
-   v118 — CANONICAL CARD 1 CONTENT BOX SYSTEM
-   ---------------------------------------------------------------------
-   Shared box rules:
-   1. box wraps its content
-   2. X/Y padding comes only from central tokens
-   ===================================================================== */
+
 
 
 
@@ -2849,12 +2322,7 @@
 
 
 
-/* =====================================================================
-   v119 — ISOLATED CARD COMPONENT ARCHITECTURE
-   ---------------------------------------------------------------------
-   Repetitive components are intentionally duplicated per card.
-   Future Card 1 edits should remain inside CARD 1, etc.
-   ===================================================================== */
+
 
 
 /* ==========================================================================
@@ -2892,39 +2360,17 @@
    CARD 2 — INSPECTION SUMMARY
    ========================================================================== */
 
-.contentPage[data-step="1"] .appCard{
-    padding:var(--c2-card-pad-y) var(--c2-card-pad-x) !important;
-}
 
-.contentPage[data-step="1"] .cardHeader{
-    gap:var(--c2-header-gap) !important;
-}
 
-.contentPage[data-step="1"] .cardHeaderIcon{
-    width:var(--c2-header-icon-size) !important;
-    height:var(--c2-header-icon-size) !important;
-    flex-basis:var(--c2-header-icon-size) !important;
-}
 
-.contentPage[data-step="1"] .appCard > .cardHeader + .cardDivider{
-    margin:var(--c2-header-divider-gap) 0 0 !important;
-}
 
-.contentPage[data-step="1"] .cardStepStatus{
-    flex:0 0 auto !important;
-    min-height:0 !important;
-    height:auto !important;
-    padding:var(--c2-box-pad-y) var(--c2-box-pad-x) !important;
-    gap:var(--c2-step-gap) !important;
-    border-radius:var(--c2-box-radius) !important;
-    margin-top:var(--c2-section-gap) !important;
-}
 
-.contentPage[data-step="1"] .cardStepIcon{
-    width:var(--c2-step-icon-size) !important;
-    height:var(--c2-step-icon-size) !important;
-    flex-basis:var(--c2-step-icon-size) !important;
-}
+
+
+
+
+
+
 
 .contentPage[data-step="1"] .summaryMetricGrid{
     margin-top:var(--c2-section-gap) !important;
@@ -2939,60 +2385,30 @@
     height:var(--c2-metric-icon-size) !important;
 }
 
-.contentPage[data-step="1"] .cardFooter > .cardDivider{
-    margin:0 0 var(--c2-footer-divider-gap) !important;
-}
 
-.contentPage[data-step="1"] .cardActions{
-    gap:var(--c2-button-gap) !important;
-}
+
+
 
 
 /* ==========================================================================
    CARD 3 — ACTIVITY TIME SLIP
    ========================================================================== */
 
-.contentPage[data-step="2"] .appCard{
-    padding:var(--c3-card-pad-y) var(--c3-card-pad-x) !important;
-}
 
-.contentPage[data-step="2"] .cardHeader{
-    gap:var(--c3-header-gap) !important;
-}
 
-.contentPage[data-step="2"] .cardHeaderIcon{
-    width:var(--c3-header-icon-size) !important;
-    height:var(--c3-header-icon-size) !important;
-    flex-basis:var(--c3-header-icon-size) !important;
-}
 
-.contentPage[data-step="2"] .appCard > .cardHeader + .cardDivider{
-    margin:var(--c3-header-divider-gap) 0 0 !important;
-}
 
-.contentPage[data-step="2"] .cardStepStatus{
-    flex:0 0 auto !important;
-    min-height:0 !important;
-    height:auto !important;
-    padding:var(--c3-box-pad-y) var(--c3-box-pad-x) !important;
-    gap:var(--c3-step-gap) !important;
-    border-radius:var(--c3-box-radius) !important;
-    margin-top:var(--c3-section-gap) !important;
-}
 
-.contentPage[data-step="2"] .cardStepIcon{
-    width:var(--c3-step-icon-size) !important;
-    height:var(--c3-step-icon-size) !important;
-    flex-basis:var(--c3-step-icon-size) !important;
-}
 
-.contentPage[data-step="2"] .cardFooter > .cardDivider{
-    margin:0 0 var(--c3-footer-divider-gap) !important;
-}
 
-.contentPage[data-step="2"] .cardActions{
-    gap:var(--c3-button-gap) !important;
-}
+
+
+
+
+
+
+
+
 }}}
 
 /* ==========================================================================
@@ -3001,140 +2417,35 @@
    ========================================================================== */
 
 /* ---------- Card shell ---------- */
-.contentPage[data-step="0"] .cardPreview.appCard{
-    container-type:inline-size !important;
-    width:100% !important;
-    height:100% !important;
-    display:flex !important;
-    flex-direction:column !important;
-    justify-content:flex-start !important;
-    gap:0 !important;
-    padding:var(--c1-card-pad-y) var(--c1-card-pad-x) !important;
-    box-sizing:border-box !important;
-}
+
 
 /* ---------- Header ---------- */
-.contentPage[data-step="0"] .previewHero.cardHeader{
-    display:flex !important;
-    flex-direction:column !important;
-    align-items:center !important;
-    justify-content:center !important;
-    gap:var(--c1-header-gap) !important;
-    margin:0 !important;
-    padding:0 !important;
-    text-align:center !important;
-}
 
-.contentPage[data-step="0"] .cardHeaderIcon{
-    width:var(--c1-header-icon-size) !important;
-    height:var(--c1-header-icon-size) !important;
-    flex:0 0 var(--c1-header-icon-size) !important;
-    display:flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-    color:var(--accent-blue) !important;
-}
 
-.contentPage[data-step="0"] .cardHeaderIcon svg{
-    width:100% !important;
-    height:100% !important;
-    fill:currentColor !important;
-    color:currentColor !important;
-}
 
-.contentPage[data-step="0"] .cardTitle{
-    margin:0 !important;
-    padding:0 !important;
-    font-size:var(--card-title-size) !important;
-    line-height:1.08 !important;
-    text-align:center !important;
-}
 
-.contentPage[data-step="0"] .inspectionHeaderDivider{
-    width:100% !important;
-    height:var(--border-thin) !important;
-    flex:0 0 auto !important;
-    margin:var(--c1-header-divider-gap) 0 0 !important;
-    background:var(--og-border) !important;
-}
+
+
+
+
+
 
 /* ---------- Step Complete ---------- */
-.contentPage[data-step="0"] .previewStatus.cardStepStatus{
-    width:100% !important;
-    flex:0 0 auto !important;
-    min-height:0 !important;
-    height:auto !important;
-    max-height:none !important;
 
-    display:flex !important;
-    align-items:center !important;
-    justify-content:flex-start !important;
-    gap:var(--c1-step-gap) !important;
 
-    margin:var(--c1-section-gap) 0 0 !important;
-    padding:var(--c1-box-pad-y) var(--c1-box-pad-x) !important;
 
-    border:var(--border-thin) solid var(--og-border) !important;
-    border-radius:var(--c1-box-radius) !important;
-    background:var(--og-panel-deep) !important;
-    color:var(--og-text) !important;
-    box-sizing:border-box !important;
-    text-align:left !important;
-    cursor:pointer;
-}
 
-.contentPage[data-step="0"] .cardStepIcon{
-    width:var(--c1-step-icon-size) !important;
-    height:var(--c1-step-icon-size) !important;
-    flex:0 0 var(--c1-step-icon-size) !important;
-    display:flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-    color:var(--og-subtle) !important;
-    background:transparent !important;
-    border:0 !important;
-    box-shadow:none !important;
-}
 
-.contentPage[data-step="0"] .cardStepIcon svg{
-    width:100% !important;
-    height:100% !important;
-    fill:currentColor !important;
-    color:currentColor !important;
-}
 
-.contentPage[data-step="0"] .cardStepText{
-    min-width:0 !important;
-    display:flex !important;
-    flex-direction:column !important;
-    align-items:flex-start !important;
-    justify-content:center !important;
-    text-align:left !important;
-}
 
-.contentPage[data-step="0"] .cardStepText strong{
-    margin:0 !important;
-    font-size:var(--c1-step-title-size) !important;
-    line-height:1.22 !important;
-    color:var(--og-text) !important;
-}
 
-.contentPage[data-step="0"] .cardStepText small{
-    margin:1cqw 0 0 !important;
-    font-size:var(--c1-step-body-size) !important;
-    line-height:1.35 !important;
-    color:var(--og-muted) !important;
-}
 
-.contentPage[data-step="0"] .cardStepStatus.complete{
-    border-color:var(--accent-green) !important;
-    background:color-mix(in srgb,var(--accent-green) 10%,transparent) !important;
-}
 
-.contentPage[data-step="0"] .cardStepStatus.complete .cardStepIcon,
-.contentPage[data-step="0"] .cardStepStatus.complete .cardStepText strong{
-    color:var(--accent-green-light) !important;
-}
+
+
+
+
+
 
 /* ---------- Detail Overview ---------- */
 .contentPage[data-step="0"] .gradeOverview{
@@ -3156,13 +2467,11 @@
 }
 
 /* ---------- Donut chart system ---------- */
-.contentPage[data-step="0"] .gradeDonutGrid{
-    width:100% !important;
+.contentPage[data-step="0"] .gradeDonutGrid{width:100% !important;
     display:grid !important;
     grid-template-columns:repeat(3,minmax(0,1fr)) !important;
     gap:var(--c1-donut-grid-gap) !important;
-    align-items:start !important;
-}
+    align-items:start !important;}
 
 .contentPage[data-step="0"] .gradeMetric{
     --metric-color:var(--accent-blue);
@@ -3177,8 +2486,7 @@
 .contentPage[data-step="0"] .gradeMetricStandard{ --metric-color:var(--accent-orange); }
 .contentPage[data-step="0"] .gradeMetricReject{ --metric-color:var(--accent-red); }
 
-.contentPage[data-step="0"] .gradeDonut{
-    position:relative !important;
+.contentPage[data-step="0"] .gradeDonut{position:relative !important;
     width:var(--c1-donut-size) !important;
     height:var(--c1-donut-size) !important;
     min-width:var(--c1-donut-size) !important;
@@ -3190,54 +2498,40 @@
     border-radius:50% !important;
     box-shadow:none !important;
     overflow:visible !important;
-    color:var(--metric-color) !important;
-}
+    color:var(--metric-color) !important;}
 
 .contentPage[data-step="0"] .gradeDonut::before,
-.contentPage[data-step="0"] .gradeDonut::after{
-    content:none !important;
-    display:none !important;
-}
+.contentPage[data-step="0"] .gradeDonut::after{content:none !important;
+    display:none !important;}
 
-.contentPage[data-step="0"] .gradeDonutSvg{
-    position:absolute !important;
+.contentPage[data-step="0"] .gradeDonutSvg{position:absolute !important;
     inset:0 !important;
     width:100% !important;
     height:100% !important;
     display:block !important;
     overflow:visible !important;
-    transform:rotate(-90deg) !important;
-    transform-origin:50% 50% !important;
-}
+    transform-origin:50% 50% !important;}
 
-.contentPage[data-step="0"] .gradeDonutTrack{
-    fill:none !important;
-    stroke:rgba(148,158,173,.62) !important;
+.contentPage[data-step="0"] .gradeDonutTrack{fill:none !important;
+    stroke:var(--c1-progress-muted) !important;
     stroke-width:var(--c1-donut-track-stroke) !important;
-    vector-effect:non-scaling-stroke;
-}
+    vector-effect:non-scaling-stroke;}
 
-.contentPage[data-step="0"] .gradeDonutProgress{
-    fill:none !important;
+.contentPage[data-step="0"] .gradeDonutProgress{fill:none !important;
     stroke:currentColor !important;
     stroke-width:var(--c1-donut-progress-stroke) !important;
-    stroke-linecap:round !important;
-    vector-effect:non-scaling-stroke;
-    transition:stroke-dashoffset .2s ease;
-}
+    stroke-linecap:butt !important;
+    vector-effect:non-scaling-stroke;}
 
-.contentPage[data-step="0"] .gradeDonut [data-home-percent]{
-    position:absolute !important;
+.contentPage[data-step="0"] .gradeDonut [data-home-percent]{position:absolute !important;
     inset:0 !important;
     width:100% !important;
     height:100% !important;
     max-width:none !important;
-
     display:flex !important;
     align-items:center !important;
     justify-content:center !important;
     gap:0 !important;
-
     margin:0 !important;
     padding:0 !important;
     color:var(--metric-color) !important;
@@ -3248,8 +2542,7 @@
     text-align:center !important;
     white-space:nowrap !important;
     pointer-events:none;
-    z-index:3;
-}
+    z-index:3;}
 
 .contentPage[data-step="0"] .donutPercentNumber{
     display:inline !important;
@@ -3339,7 +2632,7 @@
     display:flex !important;
     flex-direction:column !important;
     align-items:center !important;
-    gap:1cqw !important;
+    gap:var(--c1-fisheries-copy-gap) !important;
 }
 
 .contentPage[data-step="0"] .fisheriesNotificationCopy strong{
@@ -3397,7 +2690,7 @@
     flex:0 0 auto !important;
     display:flex !important;
     flex-direction:column !important;
-    gap:1.5cqw !important;
+    gap:var(--c1-by-size-inner-gap) !important;
     margin:0 !important;
 }
 
@@ -3422,13 +2715,9 @@
     line-height:inherit !important;
 }
 
-.contentPage[data-step="0"] [data-summary-premium-size]{
-    color:var(--accent-blue) !important;
-}
 
-.contentPage[data-step="0"] [data-summary-standard-size]{
-    color:var(--accent-orange) !important;
-}
+
+
 
 .contentPage[data-step="0"] .sizePercentUnit{
     color:var(--color-white) !important;
@@ -3439,8 +2728,8 @@
     width:100% !important;
     height:var(--c1-progress-track-height) !important;
     overflow:visible !important;
-    border-radius:999px !important;
-    background:rgba(148,158,173,.62) !important;
+    border-radius:var(--c1-progress-radius) !important;
+    background:var(--c1-progress-muted) !important;
     box-shadow:none !important;
 }
 
@@ -3452,7 +2741,7 @@
     height:var(--c1-progress-fill-height) !important;
     width:0;
     transform:translateY(-50%) !important;
-    border-radius:999px !important;
+    border-radius:var(--c1-progress-radius) !important;
     background-image:none !important;
     box-shadow:none !important;
     transition:width .35s ease;
@@ -3467,20 +2756,471 @@
 }
 
 /* ---------- Footer ---------- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =====================================================================
+   v124 — DEVELOPMENT LAYOUT HIERARCHY INSPECTOR
+   ---------------------------------------------------------------------
+   Square CSS bounds only.
+   Level 1 = major containers
+   Level 2 = component groups
+   Level 3 = individual visual/text objects
+   Uses OUTLINE so layout dimensions never change.
+   ===================================================================== */
+
+#headerHelpButton .debugToggleIcon{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    height:100%;
+}
+
+#headerHelpButton .debugToggleIcon svg{
+    width:1.15em;
+    height:1.15em;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.8;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+#headerHelpButton.active{
+    color:var(--accent-blue) !important;
+}
+
+/* Force debug bounds to remain rectangular regardless of component radius. */
+.debugLayout .debugBound,
+.debugLayout .appCard,
+.debugLayout .cardHeader,
+.debugLayout .cardHeaderIcon,
+.debugLayout .cardTitle,
+.debugLayout .cardStepStatus,
+.debugLayout .cardStepIcon,
+.debugLayout .cardStepText,
+.debugLayout .cardStepText strong,
+.debugLayout .cardStepText small,
+.debugLayout .gradeOverviewTitle,
+.debugLayout .gradeDonutGrid,
+.debugLayout .gradeMetric,
+.debugLayout .gradeDonut,
+.debugLayout .gradeDonut [data-home-percent],
+.debugLayout .gradeLegend,
+.debugLayout .fisheriesNotification,
+.debugLayout .fisheriesNotificationDivider,
+.debugLayout .fisheriesNotificationIcon,
+.debugLayout .fisheriesNotificationCopy,
+.debugLayout .fisheriesNotificationCopy strong,
+.debugLayout .fisheriesNotificationCopy small,
+.debugLayout .detailBySizePanel,
+.debugLayout .bySizeRow,
+.debugLayout .bySizeLabel,
+.debugLayout .bySizeTrack,
+.debugLayout .cardFooter,
+.debugLayout .inspectionActionDivider,
+.debugLayout .cardActions,
+.debugLayout .cardActions > button{outline-offset:-1px !important;}
+
+/* =========================
+   LEVEL 1 — MAJOR CONTAINERS
+   ========================= */
+
+.debugLayout .appCard{
+    outline:2px solid #ff4081 !important;
+}
+
+.debugLayout .cardHeader{
+    outline:2px solid #00e676 !important;
+}
+
+.debugLayout .cardStepStatus{
+    outline:2px solid #c6ff00 !important;
+}
+
+.debugLayout .gradeDonutGrid{outline:2px solid #00b0ff !important;}
+
+.debugLayout .fisheriesNotification{
+    outline:2px solid #e040fb !important;
+}
+
+.debugLayout .detailBySizePanel{
+    outline:2px solid #40c4ff !important;
+}
+
+.debugLayout .cardFooter{
+    outline:2px solid #ff3d00 !important;
+}
+
+/* =========================
+   LEVEL 2 — COMPONENT GROUPS
+   ========================= */
+
+.debugLayout .cardHeaderIcon,
+.debugLayout .cardTitle{
+    outline:1.5px solid #69f0ae !important;
+}
+
+.debugLayout .cardStepIcon,
+.debugLayout .cardStepText{
+    outline:1.5px solid #ffd740 !important;
+}
+
+/* Detail Overview is intentionally its own object. */
+.debugLayout .gradeOverviewTitle{
+    outline:2px solid #ffab00 !important;
+}
+
+/* Each grading chart group gets its own bounds. */
+.debugLayout .gradeMetric{
+    outline:1.5px solid #18ffff !important;
+}
+
+/* Fisheries internal groups. */
+.debugLayout .fisheriesNotificationDivider{
+    outline:1.5px solid #ff6e40 !important;
+}
+
+.debugLayout .fisheriesNotificationCopy{
+    outline:1.5px solid #7c4dff !important;
+}
+
+/* By-size row groups. */
+.debugLayout .bySizeRow{
+    outline:1.5px solid #536dfe !important;
+}
+
+/* Footer internal groups. */
+.debugLayout .inspectionActionDivider{
+    outline:1.5px solid #ff80ab !important;
+}
+
+.debugLayout .cardActions{
+    outline:1.5px solid #1de9b6 !important;
+}
+
+/* =========================
+   LEVEL 3 — INDIVIDUAL OBJECTS
+   ========================= */
+
+/* Step Complete */
+.debugLayout .cardStepText strong{
+    outline:1px solid #00e5ff !important;
+}
+
+.debugLayout .cardStepText small{
+    outline:1px solid #ff9100 !important;
+}
+
+/* Donut visual + percentage + label are separate objects. */
+.debugLayout .gradeDonut{outline:1px solid #69f0ae !important;
+    border-radius:0 !important;}
+
+.debugLayout .gradeDonut [data-home-percent]{outline:1px solid #ff5252 !important;}
+
+.debugLayout .gradeLegend{
+    outline:1px solid #ffd740 !important;
+}
+
+/* Fisheries objects */
+.debugLayout .fisheriesNotificationIcon{
+    outline:1px solid #64ffda !important;
+}
+
+.debugLayout .fisheriesNotificationCopy strong{
+    outline:1px solid #ea80fc !important;
+}
+
+.debugLayout .fisheriesNotificationCopy small{
+    outline:1px solid #ff8a80 !important;
+}
+
+/* By Size objects */
+.debugLayout .bySizeLabel{
+    outline:1px solid #b388ff !important;
+}
+
+.debugLayout .bySizeTrack{
+    outline:1px solid #b2ff59 !important;
+    border-radius:0 !important;
+}
+
+/* Footer objects */
+.debugLayout .cardActions > button{
+    outline:1px solid #e7ff00 !important;
+}
+
+/* Keep actual component styling untouched; only debug outlines are square. */
+
+
+
+
+/* ---------- Direct header children ---------- */
+
+
+
+
+/* ---------- Independent header separators ---------- */
+.contentPage[data-step="1"] .summaryHeaderDivider{
+    width:100% !important;
+    height:var(--border-thin) !important;
+    flex:0 0 auto !important;
+    background:var(--og-border) !important;
+}
+
+
+
+.contentPage[data-step="1"] .summaryHeaderDivider{
+    margin:var(--c2-header-divider-gap) 0 0 !important;
+}
+
+
+
+/* ---------- Independent footer separators ----------
+   margin-top:auto anchors the footer assembly to the bottom without
+   making the separator part of cardFooter. */
+.contentPage[data-step="1"] .summaryActionDivider{
+    width:100% !important;
+    height:var(--border-thin) !important;
+    flex:0 0 auto !important;
+    margin-left:0 !important;
+    margin-right:0 !important;
+    margin-top:auto !important;
+    background:var(--og-border) !important;
+}
+
+
+
+.contentPage[data-step="1"] .summaryActionDivider{
+    margin-bottom:var(--c2-footer-divider-gap) !important;
+}
+
+
+
+/* ---------- Footer content containers ----------
+   No separator and no automatic vertical anchoring live here anymore. */
+
+
+/* ---------- Debug inspector ----------
+   Header/footer content and separators now visibly report as four
+   independent rectangular objects. */
+.debugLayout .inspectionHeaderDivider,
+.debugLayout .summaryHeaderDivider,
+.debugLayout .activityHeaderDivider{
+    outline:1.5px solid #18ffff !important;
+    outline-offset:-1px !important;
+}
+
+.debugLayout .inspectionActionDivider,
+.debugLayout .summaryActionDivider,
+.debugLayout .activityActionDivider{
+    outline:1.5px solid #ff80ab !important;
+    outline-offset:-1px !important;
+}
+
+.debugLayout .cardFooter{
+    outline:2px solid #ff3d00 !important;
+    outline-offset:-1px !important;
+}
+
+/* =====================================================================
+   v126 — FORMAL CARD ARCHITECTURE
+   ===================================================================== */
+
+/* ==========================================================================
+   CARD 1 — CANONICAL GENERIC SKELETON
+   ========================================================================== */
+
+/* Card */
+.contentPage[data-step="0"] .cardPreview.appCard{
+    container-type:inline-size !important;
+    width:100% !important;
+    height:100% !important;
+    display:flex !important;
+    flex-direction:column !important;
+    justify-content:flex-start !important;
+    gap:0 !important;
+    padding:var(--c1-card-pad-y) var(--c1-card-pad-x) !important;
+    box-sizing:border-box !important;
+    background:var(--c1-card-bg) !important;
+    border:var(--c1-card-border) solid var(--c1-card-border-color) !important;
+    border-radius:var(--c1-card-radius) !important;
+    overflow:hidden !important;
+
+}
+
+/* Header content */
+.contentPage[data-step="0"] .previewHero.cardHeader{
+    width:100% !important;
+    flex:0 0 auto !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:var(--c1-header-gap) !important;
+    margin:0 !important;
+    padding:0 !important;
+    text-align:center !important;
+}
+
+.contentPage[data-step="0"] .cardHeaderIcon{
+    width:var(--c1-header-icon-size) !important;
+    height:var(--c1-header-icon-size) !important;
+    flex:0 0 var(--c1-header-icon-size) !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    color:var(--accent-blue) !important;
+}
+
+.contentPage[data-step="0"] .cardHeaderIcon svg{
+    width:100% !important;
+    height:100% !important;
+    fill:currentColor !important;
+    color:currentColor !important;
+}
+
+.contentPage[data-step="0"] .cardTitle{
+    flex:0 0 auto !important;
+    margin:0 !important;
+    padding:0 !important;
+    font-size:var(--c1-header-title-size) !important;
+    line-height:1.08 !important;
+    text-align:center !important;
+}
+
+/* Header separator — independent sibling */
+.contentPage[data-step="0"] .inspectionHeaderDivider{
+    width:100% !important;
+    height:var(--c1-divider-height) !important;
+    flex:0 0 auto !important;
+    margin:var(--c1-header-divider-gap) 0 0 !important;
+    background:var(--og-border) !important;
+}
+
+/* Step Complete */
+.contentPage[data-step="0"] .previewStatus.cardStepStatus{
+    width:100% !important;
+    flex:0 0 auto !important;
+    min-height:0 !important;
+    height:auto !important;
+    max-height:none !important;
+
+    display:flex !important;
+    align-items:center !important;
+    justify-content:flex-start !important;
+    gap:var(--c1-step-gap) !important;
+
+    margin:var(--c1-section-gap) 0 0 !important;
+    padding:var(--c1-box-pad-y) var(--c1-box-pad-x) !important;
+
+    border:var(--c1-box-border) solid var(--og-border) !important;
+    border-radius:var(--c1-box-radius) !important;
+    background:var(--og-panel-deep) !important;
+    color:var(--og-text) !important;
+    box-sizing:border-box !important;
+    text-align:left !important;
+    cursor:pointer;
+}
+
+.contentPage[data-step="0"] .cardStepIcon{
+    width:var(--c1-step-icon-size) !important;
+    height:var(--c1-step-icon-size) !important;
+    flex:0 0 var(--c1-step-icon-size) !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    color:var(--og-subtle) !important;
+    background:transparent !important;
+    border:0 !important;
+    border-radius:0 !important;
+    box-shadow:none !important;
+}
+
+.contentPage[data-step="0"] .cardStepIcon svg{
+    width:100% !important;
+    height:100% !important;
+    fill:currentColor !important;
+    color:currentColor !important;
+}
+
+.contentPage[data-step="0"] .cardStepText{
+    min-width:0 !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:flex-start !important;
+    justify-content:center !important;
+    text-align:left !important;
+}
+
+.contentPage[data-step="0"] .cardStepText strong{
+    margin:0 !important;
+    font-size:var(--c1-step-title-size) !important;
+    line-height:1.22 !important;
+    color:var(--og-text) !important;
+}
+
+.contentPage[data-step="0"] .cardStepText small{
+    margin:var(--c1-step-text-gap) 0 0 !important;
+    font-size:var(--c1-step-body-size) !important;
+    line-height:1.35 !important;
+    color:var(--og-muted) !important;
+}
+
+.contentPage[data-step="0"] .cardStepStatus.complete{
+    border-color:var(--accent-green) !important;
+    background:var(--accent-green-bg-strong) !important;
+}
+
+.contentPage[data-step="0"] .cardStepStatus.complete .cardStepIcon{
+    color:var(--accent-green) !important;
+}
+
+.contentPage[data-step="0"] .cardStepStatus.complete .cardStepText strong{
+    color:var(--accent-green-light) !important;
+}
+
+/* Generic overview heading */
+.contentPage[data-step="0"] .cardOverviewTitle{
+    font-size:var(--c1-overview-title-size) !important;
+    line-height:1.2 !important;
+    text-align:center !important;
+}
+
+/* Footer separator — independent sibling and bottom anchor */
+.contentPage[data-step="0"] .inspectionActionDivider{
+    width:100% !important;
+    height:var(--c1-divider-height) !important;
+    flex:0 0 auto !important;
+    margin-top:auto !important;
+    margin-right:0 !important;
+    margin-bottom:var(--c1-footer-divider-gap) !important;
+    margin-left:0 !important;
+    background:var(--og-border) !important;
+}
+
+/* Footer content */
 .contentPage[data-step="0"] .cardFooter{
     width:100% !important;
     flex:0 0 auto !important;
     display:flex !important;
     flex-direction:column !important;
-    margin-top:auto !important;
-}
-
-.contentPage[data-step="0"] .inspectionActionDivider{
-    width:100% !important;
-    height:var(--border-thin) !important;
-    flex:0 0 auto !important;
-    margin:0 0 var(--c1-footer-divider-gap) !important;
-    background:var(--og-border) !important;
+    margin:0 !important;
+    padding:0 !important;
 }
 
 .contentPage[data-step="0"] .previewActions.cardActions{
@@ -3492,7 +3232,7 @@
     margin:0 !important;
 }
 
-.contentPage[data-step="0"] .cardActions button{
+.contentPage[data-step="0"] .cardActions > button{
     min-height:var(--c1-button-min-height) !important;
     border-radius:var(--c1-button-radius) !important;
     font-size:var(--c1-button-font-size) !important;
@@ -3513,15 +3253,1197 @@
     color:var(--og-text) !important;
 }
 
+/* ==========================================================================
+   CARD 2 — CANONICAL GENERIC SKELETON
+   ========================================================================== */
+
+/* Card */
+.contentPage[data-step="1"] .cardPreview.appCard{
+    container-type:inline-size !important;
+    width:100% !important;
+    height:100% !important;
+    display:flex !important;
+    flex-direction:column !important;
+    justify-content:flex-start !important;
+    gap:0 !important;
+    padding:var(--c2-card-pad-y) var(--c2-card-pad-x) !important;
+    box-sizing:border-box !important;
+    background:var(--c2-card-bg) !important;
+    border:var(--c2-card-border) solid var(--c2-card-border-color) !important;
+    border-radius:var(--c2-card-radius) !important;
+    overflow:hidden !important;
+
+}
+
+/* Header content */
+.contentPage[data-step="1"] .previewHero.cardHeader{
+    width:100% !important;
+    flex:0 0 auto !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:var(--c2-header-gap) !important;
+    margin:0 !important;
+    padding:0 !important;
+    text-align:center !important;
+}
+
+.contentPage[data-step="1"] .cardHeaderIcon{
+    width:var(--c2-header-icon-size) !important;
+    height:var(--c2-header-icon-size) !important;
+    flex:0 0 var(--c2-header-icon-size) !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    color:var(--accent-blue) !important;
+}
+
+.contentPage[data-step="1"] .cardHeaderIcon svg{
+    width:100% !important;
+    height:100% !important;
+    fill:currentColor !important;
+    color:currentColor !important;
+}
+
+.contentPage[data-step="1"] .cardTitle{
+    flex:0 0 auto !important;
+    margin:0 !important;
+    padding:0 !important;
+    font-size:var(--c2-header-title-size) !important;
+    line-height:1.08 !important;
+    text-align:center !important;
+}
+
+/* Header separator — independent sibling */
+.contentPage[data-step="1"] .summaryHeaderDivider{
+    width:100% !important;
+    height:var(--c2-divider-height) !important;
+    flex:0 0 auto !important;
+    margin:var(--c2-header-divider-gap) 0 0 !important;
+    background:var(--og-border) !important;
+}
+
+/* Step Complete */
+.contentPage[data-step="1"] .previewStatus.cardStepStatus{
+    width:100% !important;
+    flex:0 0 auto !important;
+    min-height:0 !important;
+    height:auto !important;
+    max-height:none !important;
+
+    display:flex !important;
+    align-items:center !important;
+    justify-content:flex-start !important;
+    gap:var(--c2-step-gap) !important;
+
+    margin:var(--c2-section-gap) 0 0 !important;
+    padding:var(--c2-box-pad-y) var(--c2-box-pad-x) !important;
+
+    border:var(--c2-box-border) solid var(--og-border) !important;
+    border-radius:var(--c2-box-radius) !important;
+    background:var(--og-panel-deep) !important;
+    color:var(--og-text) !important;
+    box-sizing:border-box !important;
+    text-align:left !important;
+    cursor:pointer;
+}
+
+.contentPage[data-step="1"] .cardStepIcon{
+    width:var(--c2-step-icon-size) !important;
+    height:var(--c2-step-icon-size) !important;
+    flex:0 0 var(--c2-step-icon-size) !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    color:var(--og-subtle) !important;
+    background:transparent !important;
+    border:0 !important;
+    border-radius:0 !important;
+    box-shadow:none !important;
+}
+
+.contentPage[data-step="1"] .cardStepIcon svg{
+    width:100% !important;
+    height:100% !important;
+    fill:currentColor !important;
+    color:currentColor !important;
+}
+
+.contentPage[data-step="1"] .cardStepText{
+    min-width:0 !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:flex-start !important;
+    justify-content:center !important;
+    text-align:left !important;
+}
+
+.contentPage[data-step="1"] .cardStepText strong{
+    margin:0 !important;
+    font-size:var(--c2-step-title-size) !important;
+    line-height:1.22 !important;
+    color:var(--og-text) !important;
+}
+
+.contentPage[data-step="1"] .cardStepText small{
+    margin:var(--c2-step-text-gap) 0 0 !important;
+    font-size:var(--c2-step-body-size) !important;
+    line-height:1.35 !important;
+    color:var(--og-muted) !important;
+}
+
+.contentPage[data-step="1"] .cardStepStatus.complete{
+    border-color:var(--accent-green) !important;
+    background:var(--accent-green-bg-strong) !important;
+}
+
+.contentPage[data-step="1"] .cardStepStatus.complete .cardStepIcon{
+    color:var(--accent-green) !important;
+}
+
+.contentPage[data-step="1"] .cardStepStatus.complete .cardStepText strong{
+    color:var(--accent-green-light) !important;
+}
+
+/* Generic overview heading */
+.contentPage[data-step="1"] .cardOverviewTitle{
+    font-size:var(--c2-overview-title-size) !important;
+    line-height:1.2 !important;
+    text-align:center !important;
+}
+
+/* Footer separator — independent sibling and bottom anchor */
+.contentPage[data-step="1"] .summaryActionDivider{
+    width:100% !important;
+    height:var(--c2-divider-height) !important;
+    flex:0 0 auto !important;
+    margin-top:auto !important;
+    margin-right:0 !important;
+    margin-bottom:var(--c2-footer-divider-gap) !important;
+    margin-left:0 !important;
+    background:var(--og-border) !important;
+}
+
+/* Footer content */
+.contentPage[data-step="1"] .cardFooter{
+    width:100% !important;
+    flex:0 0 auto !important;
+    display:flex !important;
+    flex-direction:column !important;
+    margin:0 !important;
+    padding:0 !important;
+}
+
+.contentPage[data-step="1"] .previewActions.cardActions{
+    width:100% !important;
+    flex:0 0 auto !important;
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
+    gap:var(--c2-button-gap) !important;
+    margin:0 !important;
+}
+
+.contentPage[data-step="1"] .cardActions > button{
+    min-height:var(--c2-button-min-height) !important;
+    border-radius:var(--c2-button-radius) !important;
+    font-size:var(--c2-button-font-size) !important;
+    font-family:inherit !important;
+    font-weight:700 !important;
+    cursor:pointer;
+}
+
+.contentPage[data-step="1"] .cardPrimaryAction{
+    border:var(--border-thin) solid var(--accent-blue) !important;
+    background:var(--accent-blue-strong) !important;
+    color:var(--color-white) !important;
+}
+
+.contentPage[data-step="1"] .cardSecondaryAction{
+    border:var(--border-thin) solid var(--og-border) !important;
+    background:transparent !important;
+    color:var(--og-text) !important;
+}
+
+/* ==========================================================================
+   CARD 3 — CANONICAL GENERIC SKELETON
+   ========================================================================== */
+
+/* Card */
+.contentPage[data-step="2"] .cardPreview.appCard{
+    container-type:inline-size !important;
+    width:100% !important;
+    height:100% !important;
+    display:flex !important;
+    flex-direction:column !important;
+    justify-content:flex-start !important;
+    gap:0 !important;
+    padding:var(--c3-card-pad-y) var(--c3-card-pad-x) !important;
+    box-sizing:border-box !important;
+    background:var(--c3-card-bg) !important;
+    border:var(--c3-card-border) solid var(--c3-card-border-color) !important;
+    border-radius:var(--c3-card-radius) !important;
+    overflow:hidden !important;
+
+}
+
+/* Header content */
+.contentPage[data-step="2"] .previewHero.cardHeader{
+    width:100% !important;
+    flex:0 0 auto !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:var(--c3-header-gap) !important;
+    margin:0 !important;
+    padding:0 !important;
+    text-align:center !important;
+}
+
+.contentPage[data-step="2"] .cardHeaderIcon{
+    width:var(--c3-header-icon-size) !important;
+    height:var(--c3-header-icon-size) !important;
+    flex:0 0 var(--c3-header-icon-size) !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    color:var(--accent-blue) !important;
+}
+
+.contentPage[data-step="2"] .cardHeaderIcon svg{
+    width:100% !important;
+    height:100% !important;
+    fill:currentColor !important;
+    color:currentColor !important;
+}
+
+.contentPage[data-step="2"] .cardTitle{
+    flex:0 0 auto !important;
+    margin:0 !important;
+    padding:0 !important;
+    font-size:var(--c3-header-title-size) !important;
+    line-height:1.08 !important;
+    text-align:center !important;
+}
+
+/* Header separator — independent sibling */
+.contentPage[data-step="2"] .activityHeaderDivider{
+    width:100% !important;
+    height:var(--c3-divider-height) !important;
+    flex:0 0 auto !important;
+    margin:var(--c3-header-divider-gap) 0 0 !important;
+    background:var(--og-border) !important;
+}
+
+/* Step Complete */
+.contentPage[data-step="2"] .previewStatus.cardStepStatus{
+    width:100% !important;
+    flex:0 0 auto !important;
+    min-height:0 !important;
+    height:auto !important;
+    max-height:none !important;
+
+    display:flex !important;
+    align-items:center !important;
+    justify-content:flex-start !important;
+    gap:var(--c3-step-gap) !important;
+
+    margin:var(--c3-section-gap) 0 0 !important;
+    padding:var(--c3-box-pad-y) var(--c3-box-pad-x) !important;
+
+    border:var(--c3-box-border) solid var(--og-border) !important;
+    border-radius:var(--c3-box-radius) !important;
+    background:var(--og-panel-deep) !important;
+    color:var(--og-text) !important;
+    box-sizing:border-box !important;
+    text-align:left !important;
+    cursor:pointer;
+}
+
+.contentPage[data-step="2"] .cardStepIcon{
+    width:var(--c3-step-icon-size) !important;
+    height:var(--c3-step-icon-size) !important;
+    flex:0 0 var(--c3-step-icon-size) !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    color:var(--og-subtle) !important;
+    background:transparent !important;
+    border:0 !important;
+    border-radius:0 !important;
+    box-shadow:none !important;
+}
+
+.contentPage[data-step="2"] .cardStepIcon svg{
+    width:100% !important;
+    height:100% !important;
+    fill:currentColor !important;
+    color:currentColor !important;
+}
+
+.contentPage[data-step="2"] .cardStepText{
+    min-width:0 !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:flex-start !important;
+    justify-content:center !important;
+    text-align:left !important;
+}
+
+.contentPage[data-step="2"] .cardStepText strong{
+    margin:0 !important;
+    font-size:var(--c3-step-title-size) !important;
+    line-height:1.22 !important;
+    color:var(--og-text) !important;
+}
+
+.contentPage[data-step="2"] .cardStepText small{
+    margin:var(--c3-step-text-gap) 0 0 !important;
+    font-size:var(--c3-step-body-size) !important;
+    line-height:1.35 !important;
+    color:var(--og-muted) !important;
+}
+
+.contentPage[data-step="2"] .cardStepStatus.complete{
+    border-color:var(--accent-green) !important;
+    background:var(--accent-green-bg-strong) !important;
+}
+
+.contentPage[data-step="2"] .cardStepStatus.complete .cardStepIcon{
+    color:var(--accent-green) !important;
+}
+
+.contentPage[data-step="2"] .cardStepStatus.complete .cardStepText strong{
+    color:var(--accent-green-light) !important;
+}
+
+/* Generic overview heading */
+.contentPage[data-step="2"] .cardOverviewTitle{
+    font-size:var(--c3-overview-title-size) !important;
+    line-height:1.2 !important;
+    text-align:center !important;
+}
+
+/* Footer separator — independent sibling and bottom anchor */
+.contentPage[data-step="2"] .activityActionDivider{
+    width:100% !important;
+    height:var(--c3-divider-height) !important;
+    flex:0 0 auto !important;
+    margin-top:auto !important;
+    margin-right:0 !important;
+    margin-bottom:var(--c3-footer-divider-gap) !important;
+    margin-left:0 !important;
+    background:var(--og-border) !important;
+}
+
+/* Footer content */
+.contentPage[data-step="2"] .cardFooter{
+    width:100% !important;
+    flex:0 0 auto !important;
+    display:flex !important;
+    flex-direction:column !important;
+    margin:0 !important;
+    padding:0 !important;
+}
+
+.contentPage[data-step="2"] .previewActions.cardActions{
+    width:100% !important;
+    flex:0 0 auto !important;
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
+    gap:var(--c3-button-gap) !important;
+    margin:0 !important;
+}
+
+.contentPage[data-step="2"] .cardActions > button{
+    min-height:var(--c3-button-min-height) !important;
+    border-radius:var(--c3-button-radius) !important;
+    font-size:var(--c3-button-font-size) !important;
+    font-family:inherit !important;
+    font-weight:700 !important;
+    cursor:pointer;
+}
+
+.contentPage[data-step="2"] .cardPrimaryAction{
+    border:var(--border-thin) solid var(--accent-blue) !important;
+    background:var(--accent-blue-strong) !important;
+    color:var(--color-white) !important;
+}
+
+.contentPage[data-step="2"] .cardSecondaryAction{
+    border:var(--border-thin) solid var(--og-border) !important;
+    background:transparent !important;
+    color:var(--og-text) !important;
+}
+
+
 
 /* =====================================================================
-   v121 — Card 1 direct percentage donut rendering
+   v127 — MAIN CARD SHELL RESTORATION
    ---------------------------------------------------------------------
-   Each progress circle has pathLength="100".
-   88.50% therefore draws exactly 88.50 of 100 path units.
+   The appCard is now an explicit first-class component in the new
+   architecture. Its background, border and radius are controlled per card.
    ===================================================================== */
 
+.debugLayout .contentPage[data-step="0"] .appCard,
+.debugLayout .contentPage[data-step="1"] .appCard,
+.debugLayout .contentPage[data-step="2"] .appCard{
+    outline:2px solid #ff4081 !important;
+    outline-offset:-2px !important;
+}
+
+
+/* =====================================================================
+   v129 — CARD VIEWPORT + TRANSITION STACK CONTRACT
+   ---------------------------------------------------------------------
+   Restores the proven pre-refactor transition structure:
+
+   Page 1: 0
+   Page 2: 100% + gap
+   Page 3: 200% + (gap × 2)
+
+   Pages remain full-height, while the space between them is visible only
+   during card transitions. Cards themselves still own their visual shell.
+   ===================================================================== */
+
+#contentViewport{
+    position:relative !important;
+    height:100% !important;
+    min-height:0 !important;
+    overflow:hidden !important;
+}
+
+#contentTrack{
+    position:absolute !important;
+    inset:0 !important;
+    width:100% !important;
+    height:100% !important;
+    min-height:0 !important;
+    display:block !important;
+}
+
+/* Full-height page frames */
+.contentPage{
+    position:absolute !important;
+    left:0 !important;
+    width:100% !important;
+    height:100% !important;
+    min-height:100% !important;
+    box-sizing:border-box !important;
+
+    /* Page is geometry only; visual shell belongs to .appCard. */
+    background:transparent !important;
+    border:0 !important;
+    border-radius:0 !important;
+    overflow:visible !important;
+}
+
+/* Explicit vertical stack with controlled inter-card spacing */
+.contentPage[data-step="0"]{
+    top:0 !important;
+}
+
+.contentPage[data-step="1"]{
+    top:calc(100% + var(--card-transition-gap)) !important;
+}
+
+.contentPage[data-step="2"]{
+    top:calc(200% + (var(--card-transition-gap) * 2)) !important;
+}
+
+/* Cards fill their page frames */
+.contentPage[data-step="0"] .cardPreview.appCard{
+    height:100% !important;
+    min-height:100% !important;
+    align-self:stretch !important;
+}
+
+.contentPage[data-step="1"] .cardPreview.appCard{
+    height:100% !important;
+    min-height:100% !important;
+    align-self:stretch !important;
+}
+
+.contentPage[data-step="2"] .cardPreview.appCard{
+    height:100% !important;
+    min-height:100% !important;
+    align-self:stretch !important;
+}
+
+
+/* =====================================================================
+   v130 — MARK COMPLETE ALIGNMENT
+   ---------------------------------------------------------------------
+   The completion-toggle icon now anchors to the top-left of its content
+   row rather than vertically centering beside multi-line text.
+   ===================================================================== */
+.contentPage[data-step="0"] .cardStepIcon,
+.contentPage[data-step="1"] .cardStepIcon,
+.contentPage[data-step="2"] .cardStepIcon{
+    align-self:flex-start !important;
+}
+
+
+/* =====================================================================
+   v131 — ICON ROLE PASS
+   ---------------------------------------------------------------------
+   SVG artwork uses currentColor. Component controls continue to own size.
+   Navigation/card header icons use their existing state colors.
+   Mark Complete uses incomplete/complete checkbox assets.
+   Header developer toggle uses the terminal asset.
+   ===================================================================== */
+
+.timelineNodeIcon svg,
+.cardHeaderIcon svg,
+.cardStepIcon svg,
+.debugToggleIcon svg{
+    display:block !important;
+    width:100% !important;
+    height:100% !important;
+    fill:currentColor !important;
+    color:inherit !important;
+}
+
+.debugToggleIcon{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+}
+
+
+/* v132 — Fisheries Notification icon asset */
+.fisheriesNotificationIcon svg{
+    display:block !important;
+    width:100% !important;
+    height:100% !important;
+    fill:currentColor !important;
+    color:inherit !important;
+}
+
+
+
+
+/* Developer icon: navigation-glyph scale, touch target remains 44px. */
+#headerHelpButton{
+    color:var(--og-subtle) !important;
+}
+
+#headerHelpButton .debugToggleIcon{
+    width:var(--app-bar-icon-size) !important;
+    height:var(--app-bar-icon-size) !important;
+    flex:0 0 var(--app-bar-icon-size) !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+}
+
+#headerHelpButton .debugToggleIcon svg{
+    display:block !important;
+    width:100% !important;
+    height:100% !important;
+    fill:currentColor !important;
+    color:currentColor !important;
+    stroke:none !important;
+}
+
+#headerHelpButton.active{
+    color:var(--accent-green) !important;
+}
+
+
+/* =====================================================================
+   v134 — HEADER / FOOTER DEBUG BOUNDS
+   ---------------------------------------------------------------------
+   Top-level application bars are now visible in debug mode so their
+   actual rectangular heights can be compared directly.
+   ===================================================================== */
+
+.debugLayout #appHeader{
+    outline:2px solid #00e5ff !important;
+    outline-offset:-2px !important;
+}
+
+.debugLayout #appFooter{
+    outline:2px solid #ff6d00 !important;
+    outline-offset:-2px !important;
+}
+
+
+/* =====================================================================
+   v135 — HEADER DEVELOPER ICON PLACEMENT / SCALE
+   ===================================================================== */
+#headerHelpButton{
+    grid-column:3 !important;
+    justify-self:end !important;
+    align-self:center !important;
+    margin:0 !important;
+    padding:0 !important;
+}
+
+#headerHelpButton .debugToggleIcon{
+    width:var(--c1-header-icon-size) !important;
+    height:var(--c1-header-icon-size) !important;
+    flex:0 0 var(--c1-header-icon-size) !important;
+}
+
+
+/* =====================================================================
+   v136 — DONUT CAP TEST + TEMP DEBUG ICON SIZE
+   ===================================================================== */
+
+/* Test exact proportional arc geometry without round-cap extension. */
+.contentPage[data-step="0"] .gradeDonutProgress{stroke-linecap:butt !important;}
+
+/* Temporary developer tool.
+   Intentionally hard-coded and NOT linked to Card 1 controls.
+   44px matches the current rendered scale of the card title icon. */
+#headerHelpButton .debugToggleIcon{
+    width:44px !important;
+    height:44px !important;
+    flex:0 0 44px !important;
+}
+
+#headerHelpButton .debugToggleIcon svg{
+    width:44px !important;
+    height:44px !important;
+}
+
+/* v137 — clean SVG trim-path test */
+.contentPage[data-step="0"] .gradeDonutProgress{stroke-linecap:butt !important;}
+
+
+
+
+
+
+
+
+/* =====================================================================
+   v140 — CARD 1 DONUT DESIGN CONTRACT
+   ---------------------------------------------------------------------
+   Geometry owner: app/navigation.js
+   Appearance owner: this single production rule.
+   0% begins at 12 o'clock.
+   Requested percentage includes the visible contribution of round caps.
+   ===================================================================== */
 .contentPage[data-step="0"] .gradeDonutProgress{
-    stroke-dasharray:0 100;
-    stroke-dashoffset:0;
+    fill:none !important;
+    stroke:currentColor !important;
+    stroke-width:var(--c1-donut-progress-stroke) !important;
+    stroke-linecap:round !important;
+    stroke-linejoin:round !important;
+    vector-effect:non-scaling-stroke;
+}
+
+
+/* =====================================================================
+   v141 — CARD 1 LINEAR PROGRESS DESIGN CONTRACT
+   ---------------------------------------------------------------------
+   Geometry owner: setLinearProgress() in app/navigation.js
+       0%   = zero horizontal extent
+       100% = full track width
+
+   Appearance owner: CSS
+       track thickness
+       fill thickness
+       colours
+       rounded ends
+
+   CSS border-radius remains inside the declared fill width, so rounded
+   ends do not require the cap-length compensation used by SVG arcs.
+   ===================================================================== */
+.contentPage[data-step="0"] .bySizeFill{
+    box-sizing:border-box !important;
+}
+
+
+/* =====================================================================
+   v142 — CARD 1 BY SIZE VALUE TYPOGRAPHY
+   ---------------------------------------------------------------------
+   Number uses the existing premium/standard colour but regular weight,
+   matching the visual weight of the approved donut percentage values.
+   ===================================================================== */
+.contentPage[data-step="0"] [data-summary-premium-size] .sizePercentNumber,
+.contentPage[data-step="0"] [data-summary-standard-size] .sizePercentNumber{
+    font-weight:var(--c1-by-size-value-weight) !important;
+}
+
+
+/* =====================================================================
+   v142 — CARD 1 DEBUG INSPECTOR OWNERSHIP
+   ===================================================================== */
+.debugLayout .inspectionActionDivider{
+    outline:1.5px solid #ff80ab !important;
+    outline-offset:-1px !important;
+}
+
+.debugLayout .cardFooter{
+    outline:2px solid #ff3d00 !important;
+    outline-offset:-1px !important;
+}
+
+
+/* =====================================================================
+   v143 — CARD 2 UNIQUE CONTENT ARCHITECTURE
+   ---------------------------------------------------------------------
+   Card 2 owns all vessel, receipt, and metric-card visual rules.
+   Generic card skeleton remains owned by the canonical Card 2 skeleton.
+   ===================================================================== */
+
+/* Overview-to-content rhythm */
+.contentPage[data-step="1"] .summaryOverview{
+    width:100% !important;
+    flex:0 0 auto !important;
+    margin:var(--c2-section-gap) 0 0 !important;
+    padding:0 !important;
+}
+
+.contentPage[data-step="1"] .summaryOverviewTitle,
+.contentPage[data-step="1"] .cardOverviewTitle{
+    margin:0 0 var(--c2-overview-content-gap) !important;
+}
+
+/* Vessel identity */
+.contentPage[data-step="1"] .summaryVesselInfo{
+    width:100% !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    gap:var(--c2-vessel-gap) !important;
+    margin:0 !important;
+    padding:0 !important;
+    text-align:center !important;
+}
+
+.contentPage[data-step="1"] .summaryVesselName{
+    margin:0 !important;
+    padding:0 !important;
+    font-size:var(--c2-vessel-name-size) !important;
+    line-height:1.15 !important;
+    font-weight:var(--c2-vessel-name-weight) !important;
+    color:var(--og-text) !important;
+    text-align:center !important;
+}
+
+.contentPage[data-step="1"] .summaryCfv{
+    display:flex !important;
+    align-items:baseline !important;
+    justify-content:center !important;
+    gap:var(--c2-vessel-cfv-gap) !important;
+    margin:0 !important;
+    font-size:var(--c2-vessel-cfv-size) !important;
+    line-height:1.2 !important;
+    color:var(--og-muted) !important;
+    font-weight:400 !important;
+}
+
+/* Metric grid */
+.contentPage[data-step="1"] .summaryMetricGrid{
+    width:100% !important;
+    display:grid !important;
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    gap:var(--c2-metric-grid-gap) !important;
+    margin:var(--c2-section-gap) 0 0 !important;
+    padding:0 !important;
+}
+
+.contentPage[data-step="1"] .summaryMetricCard{
+    min-width:0 !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:var(--c2-metric-content-gap) !important;
+    padding:var(--c2-metric-pad-y) var(--c2-metric-pad-x) !important;
+    border:var(--c2-metric-border) solid var(--og-border) !important;
+    border-radius:var(--c2-metric-radius) !important;
+    background:var(--og-panel-deep) !important;
+    box-shadow:none !important;
+    text-align:center !important;
+}
+
+.contentPage[data-step="1"] .summaryMetricIcon{
+    width:var(--c2-metric-icon-size) !important;
+    height:var(--c2-metric-icon-size) !important;
+    flex:0 0 var(--c2-metric-icon-size) !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    color:var(--accent-blue) !important;
+}
+
+.contentPage[data-step="1"] .summaryMetricIcon svg{
+    width:100% !important;
+    height:100% !important;
+    fill:currentColor !important;
+}
+
+.contentPage[data-step="1"] .summaryMetricValue{
+    margin:0 !important;
+    font-size:var(--c2-metric-value-size) !important;
+    line-height:1.1 !important;
+    font-weight:var(--c2-metric-value-weight) !important;
+    color:var(--og-text) !important;
+}
+
+.contentPage[data-step="1"] .summaryMetricLabel{
+    margin:0 !important;
+    font-size:var(--c2-metric-label-size) !important;
+    line-height:var(--c2-metric-label-line-height) !important;
+    font-weight:400 !important;
+    color:var(--og-muted) !important;
+}
+
+
+/* =====================================================================
+   v145 — CARD 2 DEBUG HIERARCHY
+   ---------------------------------------------------------------------
+   Rectangular bounds at the level needed for layout correction.
+   ===================================================================== */
+
+/* Standalone Summary Overview title */
+.debugLayout .contentPage[data-step="1"] .summaryOverviewTitle{
+    outline:2px solid #ffab00 !important;
+    outline-offset:-1px !important;
+}
+
+/* Grade data contents container */
+.debugLayout .contentPage[data-step="1"] .summaryGradeData{
+    outline:2px solid #40c4ff !important;
+    outline-offset:-2px !important;
+}
+
+/* One box per complete grade-data item */
+.debugLayout .contentPage[data-step="1"] .summaryMetric{
+    outline:1.5px solid #536dfe !important;
+    outline-offset:-1px !important;
+}
+
+
+/* =====================================================================
+   v146 — CARD 2 VISUAL RESTORATION ON v145 STRUCTURE
+   ---------------------------------------------------------------------
+   Preserve the corrected hierarchy; restore intended horizontal layout.
+   Card 2 uses the same section-gap token philosophy as Card 1.
+   ===================================================================== */
+
+/* Summary header -> boat contents uses the standard Card 2 section gap,
+   matching the Detail Overview -> chart relationship. */
+.contentPage[data-step="1"] .summaryOverviewTitle{
+    margin:0 0 var(--c2-section-gap) !important;
+}
+
+/* Standardized separation between boat contents and grade-data contents. */
+.contentPage[data-step="1"] .summaryGradeData{
+    margin-top:var(--c2-section-gap) !important;
+}
+
+/* Three metric boxes are one horizontal row with an even controlled gap. */
+.contentPage[data-step="1"] .summaryGradeData{
+    display:grid !important;
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    grid-auto-flow:column !important;
+    gap:var(--c2-metric-grid-gap) !important;
+    align-items:stretch !important;
+}
+
+.contentPage[data-step="1"] .summaryMetric{
+    width:auto !important;
+    min-width:0 !important;
+    height:100% !important;
+    margin:0 !important;
+}
+
+/* Prevent old generic metric-tile rules from forcing full-row stacking. */
+.contentPage[data-step="1"] .summaryGradeData > .summaryMetric{
+    grid-column:auto !important;
+    flex:none !important;
+}
+
+
+/* =====================================================================
+   v148 — CARD 2 SPACING HIERARCHY
+   ---------------------------------------------------------------------
+   Match Card 1's hierarchy:
+   heading -> first content block = 4cqw
+   content block -> next content block = 8cqw
+
+   Boat data internal rhythm:
+   vessel/name -> 4cqw -> CFV group -> 4cqw -> receipt
+   ===================================================================== */
+
+.contentPage[data-step="1"] .summaryOverviewTitle{
+    margin:0 0 4cqw !important;
+}
+
+.contentPage[data-step="1"] .summaryGradeData{
+    margin-top:8cqw !important;
+}
+
+
+/* =====================================================================
+   v150 — CARD 2 BOAT DATA DESIGN CONTRACT
+   ===================================================================== */
+.contentPage[data-step="1"] .summaryBoatContents{
+    width:100% !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:stretch !important;
+    gap:var(--c2-boat-block-gap) !important;
+    margin:0 !important;
+    padding:var(--c2-box-pad-y) var(--c2-box-pad-x) !important;
+    border:var(--c2-box-border) solid var(--og-border) !important;
+    border-radius:var(--c2-box-radius) !important;
+    background:var(--og-panel-deep) !important;
+    box-sizing:border-box !important;
+}
+
+.contentPage[data-step="1"] .summaryBoatBlock{
+    width:100% !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:var(--c2-boat-block-internal-gap) !important;
+    margin:0 !important;
+    padding:0 !important;
+    text-align:center !important;
+    box-sizing:border-box !important;
+}
+
+.contentPage[data-step="1"] .summaryVesselEyebrow{
+    margin:0 !important;
+    font-size:var(--c2-vessel-eyebrow-size) !important;
+    line-height:1.2 !important;
+    font-weight:400 !important;
+    color:var(--og-muted) !important;
+}
+
+.contentPage[data-step="1"] .summaryBoatName{
+    margin:0 !important;
+    font-size:var(--c2-boat-name-size) !important;
+    line-height:1.15 !important;
+    font-weight:var(--c2-boat-name-weight) !important;
+    color:var(--og-text) !important;
+}
+
+.contentPage[data-step="1"] .summaryVesselDivider{
+    width:var(--c2-boat-divider-width) !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:var(--c2-boat-divider-gap) !important;
+    margin:0 auto !important;
+}
+
+.contentPage[data-step="1"] .summaryVesselDivider > span{
+    height:var(--border-thin) !important;
+    flex:1 1 auto !important;
+    background:var(--og-border) !important;
+}
+
+.contentPage[data-step="1"] .summaryVesselIcon{
+    width:var(--c2-boat-icon-size) !important;
+    height:var(--c2-boat-icon-size) !important;
+    flex:0 0 var(--c2-boat-icon-size) !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    color:var(--accent-blue) !important;
+}
+
+.contentPage[data-step="1"] .summaryVesselIcon svg{
+    width:100% !important;
+    height:100% !important;
+    fill:currentColor !important;
+}
+
+.contentPage[data-step="1"] .summaryVesselCfv{
+    display:inline-flex !important;
+    align-items:baseline !important;
+    justify-content:center !important;
+    gap:var(--c2-boat-cfv-gap) !important;
+    margin:0 auto !important;
+    font-size:var(--c2-boat-cfv-size) !important;
+    line-height:1.2 !important;
+    font-weight:400 !important;
+    color:var(--og-text) !important;
+    white-space:nowrap !important;
+}
+
+.contentPage[data-step="1"] .summaryReceiptLabel{
+    margin:0 !important;
+    font-size:var(--c2-receipt-label-size) !important;
+    line-height:1.2 !important;
+    font-weight:400 !important;
+    color:var(--og-muted) !important;
+}
+
+.contentPage[data-step="1"] .summaryReceiptValue{
+    display:inline-flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:var(--c2-receipt-row-gap) !important;
+    margin:0 auto !important;
+    font-size:var(--c2-boat-name-size) !important;
+    line-height:1.15 !important;
+    font-weight:400 !important;
+    white-space:nowrap !important;
+}
+
+.contentPage[data-step="1"] .summaryReceiptIcon{
+    width:1em !important;
+    height:1em !important;
+    flex:0 0 1em !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    color:var(--accent-blue) !important;
+}
+
+.contentPage[data-step="1"] .summaryReceiptIcon svg{
+    width:100% !important;
+    height:100% !important;
+    fill:currentColor !important;
+}
+
+.contentPage[data-step="1"] [data-summary-boat-name][data-empty-state="true"],
+.contentPage[data-step="1"] [data-summary-cfv][data-empty-state="true"],
+.contentPage[data-step="1"] [data-summary-fish-receipt][data-empty-state="true"]{
+    color:var(--c2-boat-placeholder-color) !important;
+}
+
+/* Debug hierarchy */
+.debugLayout .contentPage[data-step="1"] .summaryBoatContents{
+    outline:2px solid #e040fb !important;
+    outline-offset:-2px !important;
+}
+.debugLayout .contentPage[data-step="1"] .summaryBoatIdentityBlock{
+    outline:1.5px solid #7c4dff !important;
+    outline-offset:-1px !important;
+}
+.debugLayout .contentPage[data-step="1"] .summaryBoatCfvBlock{
+    outline:1.5px solid #18ffff !important;
+    outline-offset:-1px !important;
+}
+.debugLayout .contentPage[data-step="1"] .summaryBoatReceiptBlock{
+    outline:1.5px solid #ff6e40 !important;
+    outline-offset:-1px !important;
+}
+
+
+/* =====================================================================
+   v151 — CARD 2 VISUAL-ONLY REFINEMENT
+   ---------------------------------------------------------------------
+   No structural/layout changes.
+   ===================================================================== */
+
+.contentPage[data-step="1"] .appCard{
+    /* Exact muted colour used by Fisheries Notification sub-text. */
+    --c2-boat-placeholder-color:rgba(148,158,173,.62);
+
+    /* Boat Name and Fish Receipt value intentionally match Mark Complete. */
+    --c2-boat-name-size:var(--c2-step-title-size);
+}
+
+/* Default placeholder values */
+.contentPage[data-step="1"] [data-summary-boat-name][data-empty-state="true"],
+.contentPage[data-step="1"] [data-summary-cfv][data-empty-state="true"],
+.contentPage[data-step="1"] [data-summary-fish-receipt][data-empty-state="true"]{
+    color:var(--c2-boat-placeholder-color) !important;
+}
+
+/* Boat Name matches Mark Complete font size. */
+.contentPage[data-step="1"] .summaryBoatName{
+    font-size:var(--c2-step-title-size) !important;
+}
+
+/* Fish receipt number row matches Boat Name / Mark Complete size.
+   Icon remains 1em, therefore exactly follows the same type scale. */
+.contentPage[data-step="1"] .summaryReceiptValue{
+    font-size:var(--c2-step-title-size) !important;
+}
+
+.contentPage[data-step="1"] .summaryReceiptIcon{
+    width:1em !important;
+    height:1em !important;
+    flex:0 0 1em !important;
+}
+
+/* Grade-data values use their category colours. */
+.contentPage[data-step="1"] .summaryMetricValueNet{
+    color:var(--accent-blue) !important;
+}
+
+.contentPage[data-step="1"] .summaryMetricValueSamples{
+    color:var(--accent-green) !important;
+}
+
+
+/* =====================================================================
+   v152 — PRECISE CARD 2 VISUAL CORRECTION
+   ---------------------------------------------------------------------
+   Requested changes only.
+   ===================================================================== */
+
+/* Boat Data is a structural parent only — not a visible card/box. */
+.contentPage[data-step="1"] .summaryBoatContents{
+    border:0 !important;
+    border-radius:0 !important;
+    background:transparent !important;
+    box-shadow:none !important;
+}
+
+/* Use one shared visual scale for:
+   - Boat Name
+   - mini separator icon
+   - Fish Receipt icon
+   - Fish Receipt value
+*/
+.contentPage[data-step="1"] .summaryBoatName{
+    font-size:var(--c2-boat-icon-size) !important;
+}
+
+.contentPage[data-step="1"] .summaryReceiptValue{
+    font-size:var(--c2-boat-icon-size) !important;
+}
+
+.contentPage[data-step="1"] .summaryReceiptIcon{
+    width:var(--c2-boat-icon-size) !important;
+    height:var(--c2-boat-icon-size) !important;
+    flex:0 0 var(--c2-boat-icon-size) !important;
+}
+
+
+/* =====================================================================
+   v153 — REQUESTED CARD 2 BOAT-DATA REFINEMENTS ONLY
+   ===================================================================== */
+
+/* Structural parent: remove vertical padding so section spacing is owned
+   solely by the established external 8cqw rhythm. Preserve horizontal pad. */
+.contentPage[data-step="1"] .summaryBoatContents{
+    padding-top:0 !important;
+    padding-bottom:0 !important;
+}
+
+/* VESSEL and FISH RECEIPT NUMBER match Fisheries Notification heading:
+   muted heading colour and bold weight. */
+.contentPage[data-step="1"] .summaryVesselEyebrow,
+.contentPage[data-step="1"] .summaryReceiptLabel{
+    color:var(--og-muted) !important;
+    font-weight:700 !important;
+}
+
+/* CFV value uses exactly the same type scale as the CFV label itself. */
+.contentPage[data-step="1"] .summaryVesselCfv > b{
+    font-size:inherit !important;
+    line-height:inherit !important;
+    font-weight:inherit !important;
+}
+
+
+/* v154 — requested Boat Name text treatment only */
+.contentPage[data-step="1"] .summaryBoatName{
+    font-weight:700 !important;
 }

@@ -129,12 +129,17 @@
     --screen-pad-x:2.5vw;
     --screen-pad-y:1.25vh;
 
-    /* Shared application bar shell height.
-       Header/footer contents remain independently controlled. */
-    --app-bar-height:12cqw;
+    /* Application bar controls.
+       Header/footer heights are independent controls; values match for now. */
+    --app-header-height:clamp(68px,18cqw,82px);
+    --app-footer-height:clamp(68px,18cqw,82px);
+
     --app-bar-pad-x:3cqw;
     --app-bar-pad-y:3cqw;
+
+    /* Touch target and visible icon scale are separate. */
     --app-bar-control-size:44px;
+    --app-bar-icon-size:25px;
 }
 
 html,
@@ -165,8 +170,8 @@ body{
 }
 
 #appHeader{
-    height:var(--app-bar-height);
-    min-height:var(--app-bar-height);
+    height:var(--app-header-height);
+    min-height:var(--app-header-height);
     display:grid;
     grid-template-columns:var(--app-bar-control-size) minmax(0,1fr) var(--app-bar-control-size);
     align-items:center;
@@ -198,48 +203,9 @@ body{
     visibility:hidden;
 }
 
-#headerTitleViewport{
-    position:relative;
-    width:100%;
-    overflow:hidden;
-
-    min-height:0;
-    align-self:stretch;
-}
-
-.headerTitle{
-    position:absolute;
-    left:0;
-
-    width:100%;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:1.1rem;
-    font-weight:700;
-
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-
-    transition:transform 0.8s ease;
-
-    inset-block:0;
-}
-
-#headerTitleCurrent{
-    transform:translateX(0);
-}
-
-#headerTitleIncoming{
-    transform:translateX(100%);
-}
-
 #appFooter{
-    height:var(--app-bar-height);
-    min-height:var(--app-bar-height);
+    height:var(--app-footer-height);
+    min-height:var(--app-footer-height);
     padding:
         var(--app-bar-pad-y)
         var(--app-bar-pad-x)
@@ -347,7 +313,7 @@ body,#appShell{color:var(--og-text);}
 /* =====================================================================
    v90 — canonical app bar height system
    ---------------------------------------------------------------------
-   --app-bar-height is the sole height control for both header/footer.
+   --app-header-height / --app-footer-height is the sole height control for both header/footer.
    Safe-area padding remains independent.
    ===================================================================== */
 
@@ -356,7 +322,7 @@ body,#appShell{color:var(--og-text);}
    v91 — canonical app-bar shell/content separation
    ---------------------------------------------------------------------
    Shell:
-     --app-bar-height
+     --app-header-height / --app-footer-height
      --app-bar-pad-x
      --app-bar-pad-y
 
@@ -375,3 +341,14 @@ body,#appShell{color:var(--og-text);}
    the top of ui/navigation.css. Global tokens here remain as fallbacks
    and for genuinely global visual language only.
    ===================================================================== */
+
+
+/* v135 — title-free header placement */
+#headerBackButton{
+    grid-column:1;
+    justify-self:start;
+}
+#headerHelpButton{
+    grid-column:3;
+    justify-self:end;
+}

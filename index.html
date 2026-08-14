@@ -31,28 +31,13 @@ aria-label="Back">
 ←
 </button>
 
-<div id="headerTitleViewport">
-
-<div
-id="headerTitleCurrent"
-class="headerTitle">
-
-Dockside Grading Tool
-
-</div>
-
-<div
-id="headerTitleIncoming"
-class="headerTitle">
-
-</div>
-
-</div>
-
 <button
 id="headerHelpButton"
-aria-label="Help">
-?
+type="button"
+aria-label="Toggle layout debug outlines"
+aria-pressed="false"
+title="Toggle layout debug outlines">
+<span class="debugToggleIcon" data-icon="debug" aria-hidden="true"></span>
 </button>
 
 </header>
@@ -88,17 +73,15 @@ aria-label="Help">
                 <div class="cardPreview appCard">
                     <div class="previewHero cardHeader">
                         <div class="contentIcon cardHeaderIcon" data-icon="grading"></div>
-                        <div>
-                            <h2 class="contentTitle cardTitle">Inspection Detail</h2>
-                        </div>
+                        <h2 class="contentTitle cardTitle">Inspection Detail</h2>
                     </div>
 
                     <div class="previewDivider cardDivider inspectionHeaderDivider"></div>
 
-                    <button class="previewStatus cardStepStatus pending" type="button" data-debug-complete="0" aria-pressed="false">
-                        <span class="previewStatusIcon cardStepIcon" data-icon="grading" aria-hidden="true"></span>
+                    <button class="previewStatus cardStepStatus pending" type="button" data-complete-step="0" aria-pressed="false">
+                        <span class="previewStatusIcon cardStepIcon" data-icon="incomplete" aria-hidden="true"></span>
                         <span class="previewStatusText cardStepText">
-                            <strong>Step Complete</strong>
+                            <strong>Mark Complete</strong>
                             <small>Net weights were exactly the same as the monitor</small>
                         </span>
                     </button>
@@ -110,7 +93,7 @@ aria-label="Help">
                                 <div class="gradeDonut" data-home-donut="premium">
                                     <svg class="gradeDonutSvg" viewBox="0 0 100 100" aria-hidden="true">
                                         <circle class="gradeDonutTrack" cx="50" cy="50" r="44"></circle>
-                                        <circle class="gradeDonutProgress" data-home-progress="premium" cx="50" cy="50" r="44" pathLength="100"></circle>
+                                        <path class="gradeDonutProgress" data-home-progress="premium" d=""></path>
                                     </svg>
                                     <span data-home-percent="premium">0.00%</span>
                                 </div>
@@ -120,7 +103,7 @@ aria-label="Help">
                                 <div class="gradeDonut" data-home-donut="standard">
                                     <svg class="gradeDonutSvg" viewBox="0 0 100 100" aria-hidden="true">
                                         <circle class="gradeDonutTrack" cx="50" cy="50" r="44"></circle>
-                                        <circle class="gradeDonutProgress" data-home-progress="standard" cx="50" cy="50" r="44" pathLength="100"></circle>
+                                        <path class="gradeDonutProgress" data-home-progress="standard" d=""></path>
                                     </svg>
                                     <span data-home-percent="standard">0.00%</span>
                                 </div>
@@ -130,7 +113,7 @@ aria-label="Help">
                                 <div class="gradeDonut" data-home-donut="reject">
                                     <svg class="gradeDonutSvg" viewBox="0 0 100 100" aria-hidden="true">
                                         <circle class="gradeDonutTrack" cx="50" cy="50" r="44"></circle>
-                                        <circle class="gradeDonutProgress" data-home-progress="reject" cx="50" cy="50" r="44" pathLength="100"></circle>
+                                        <path class="gradeDonutProgress" data-home-progress="reject" d=""></path>
                                     </svg>
                                     <span data-home-percent="reject">0.00%</span>
                                 </div>
@@ -146,7 +129,7 @@ aria-label="Help">
                          aria-label="Fisheries notification status">
                         <div class="fisheriesNotificationDivider" aria-hidden="true">
                             <span></span>
-                            <div class="fisheriesNotificationIcon" data-icon="grading"></div>
+                            <div class="fisheriesNotificationIcon" data-icon="fisheries-notification" aria-hidden="true"></div>
                             <span></span>
                         </div>
                         <div class="fisheriesNotificationCopy">
@@ -182,10 +165,10 @@ aria-label="Help">
 
                     
 
-                    <div class="cardFooter">
-                        <div class="previewDivider cardDivider inspectionActionDivider"></div>
+                    <div class="previewDivider cardDivider inspectionActionDivider"></div>
 
-                                            <div class="previewActions cardActions">
+                    <div class="cardFooter">
+                        <div class="previewActions cardActions">
                         <button class="previewPrimary cardPrimaryAction" type="button" data-open-step="0">Edit Form</button>
                         <button class="previewSecondary cardSecondaryAction" type="button" data-review-step="0">Review Form</button>
                     </div>
@@ -197,17 +180,15 @@ aria-label="Help">
                 <div class="cardPreview appCard">
                     <div class="previewHero cardHeader">
                         <div class="contentIcon cardHeaderIcon" data-icon="inspection"></div>
-                        <div>
-                            <h2 class="contentTitle cardTitle">Inspection Summary</h2>
-                        </div>
+                        <h2 class="contentTitle cardTitle">Inspection Summary</h2>
                     </div>
 
 <div class="previewDivider cardDivider summaryHeaderDivider"></div>
 
-                    <button class="previewStatus cardStepStatus pending" type="button" data-debug-complete="1" aria-pressed="false">
-                        <span class="previewStatusIcon cardStepIcon" data-icon="grading" aria-hidden="true"></span>
+                    <button class="previewStatus cardStepStatus pending" type="button" data-complete-step="1" aria-pressed="false">
+                        <span class="previewStatusIcon cardStepIcon" data-icon="incomplete" aria-hidden="true"></span>
                         <span class="previewStatusText cardStepText">
-                            <strong>Step Complete</strong>
+                            <strong>Mark Complete</strong>
                             <small>Net weights were exactly the same as the monitor</small>
                         </span>
                     </button>
@@ -215,22 +196,27 @@ aria-label="Help">
                     <section class="summaryOverview" aria-label="Inspection overview">
                         <div class="summaryOverviewTitle cardOverviewTitle">Summary Overview</div>
 
-                        <div class="summaryVesselInfo" aria-label="Vessel and receipt information">
-                            <div class="summaryVesselIdentity">
+                        <div class="summaryBoatContents" aria-label="Boat contents">
+                            <div class="summaryBoatBlock summaryBoatIdentityBlock">
                                 <span class="summaryVesselEyebrow">VESSEL</span>
-                                <strong data-summary-boat-name data-empty-state="true">Boat Name</strong>
+                                <strong class="summaryBoatName" data-summary-boat-name data-empty-state="true">O. S. C. Mariner</strong>
+                            </div>
 
+                            <div class="summaryBoatBlock summaryBoatCfvBlock">
                                 <div class="summaryVesselDivider" aria-hidden="true">
                                     <span></span>
                                     <div class="summaryVesselIcon" data-icon="inspection"></div>
                                     <span></span>
                                 </div>
 
-                                <div class="summaryVesselCfv">CFV <b data-summary-cfv data-empty-state="true">123456</b></div>
+                                <div class="summaryVesselCfv">
+                                    <span class="summaryVesselCfvLabel">CFV</span>
+                                    <b data-summary-cfv data-empty-state="true">123456</b>
+                                </div>
                             </div>
 
-                            <div class="summaryReceiptInfo">
-                                <span class="summaryReceiptLabel">FISH RECEIPT #</span>
+                            <div class="summaryBoatBlock summaryBoatReceiptBlock">
+                                <span class="summaryReceiptLabel">FISH RECEIPT NUMBER</span>
                                 <div class="summaryReceiptValue">
                                     <div class="summaryReceiptIcon" data-icon="grading" aria-hidden="true"></div>
                                     <strong data-summary-fish-receipt data-empty-state="true">1234567</strong>
@@ -238,7 +224,7 @@ aria-label="Help">
                             </div>
                         </div>
 
-                        <div class="summaryMetricGrid">
+                        <div class="summaryGradeData" aria-label="Grade data contents">
                             <div class="summaryMetric metricTile summaryMetricNet">
                                 <div class="summaryMetricIcon metricTileIcon" data-icon="inspection"></div>
                                 <strong class="summaryMetricValue metricTileValue summaryMetricValueNet" data-summary-net-landed>0</strong>
@@ -252,18 +238,17 @@ aria-label="Help">
                             </div>
 
                             <div class="summaryMetric metricTile summaryMetricCrab">
-                                <div class="summaryMetricIcon metricTileIcon" data-icon="inspection"></div>
+                                <div class="summaryMetricIcon metricTileIcon" data-icon="activity"></div>
                                 <strong class="summaryMetricValue metricTileValue summaryMetricValueCrab" data-summary-crab-percent><span class="summaryMetricNumber">0.00</span><span class="summaryMetricUnit">%</span></strong>
                                 <span>Percentage<br>of Crab</span>
                             </div>
                         </div>
-
                     </section>
 
-                    <div class="cardFooter">
-                        <div class="previewDivider cardDivider summaryActionDivider"></div>
+                    <div class="previewDivider cardDivider summaryActionDivider"></div>
 
-                                            <div class="previewActions cardActions">
+                    <div class="cardFooter">
+                        <div class="previewActions cardActions">
                         <button class="previewPrimary cardPrimaryAction" type="button" data-open-step="1">Edit Form</button>
                         <button class="previewSecondary cardSecondaryAction" type="button" data-review-step="1">Review Form</button>
                     </div>
@@ -275,24 +260,22 @@ aria-label="Help">
                 <div class="cardPreview appCard">
                     <div class="previewHero cardHeader">
                         <div class="contentIcon cardHeaderIcon" data-icon="activity"></div>
-                        <div>
-                            <h2 class="contentTitle cardTitle">Activity Slip</h2>
-                        </div>
+                        <h2 class="contentTitle cardTitle">Activity Slip</h2>
                     </div>
 
-<div class="previewDivider cardDivider"></div>
-                    <button class="previewStatus cardStepStatus pending" type="button" data-debug-complete="2" aria-pressed="false">
-                        <span class="previewStatusIcon cardStepIcon" data-icon="grading" aria-hidden="true"></span>
+<div class="previewDivider cardDivider activityHeaderDivider"></div>
+                    <button class="previewStatus cardStepStatus pending" type="button" data-complete-step="2" aria-pressed="false">
+                        <span class="previewStatusIcon cardStepIcon" data-icon="incomplete" aria-hidden="true"></span>
                         <span class="previewStatusText cardStepText">
-                            <strong>Step Complete</strong>
+                            <strong>Mark Complete</strong>
                             <small>Net weights were exactly the same as the monitor</small>
                         </span>
                     </button>
 
-                    <div class="cardFooter">
-                        <div class="previewDivider cardDivider activityActionDivider"></div>
+                    <div class="previewDivider cardDivider activityActionDivider"></div>
 
-                                            <div class="previewActions cardActions">
+                    <div class="cardFooter">
+                        <div class="previewActions cardActions">
                         <button class="previewPrimary cardPrimaryAction" type="button" data-open-step="2">Edit Form</button>
                         <button class="previewSecondary cardSecondaryAction" type="button" data-review-step="2">Review Form</button>
                     </div>

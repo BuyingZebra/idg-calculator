@@ -1,8 +1,21 @@
 
-/* ===== Layout / workspace transition ===== */
 
-const HEADER_ANIMATION_DURATION =
-    800;
+/* ===== Development layout inspector ===== */
+
+function initializeLayoutDebugToggle(){
+    const button=document.getElementById("headerHelpButton");
+    if(!button) return;
+
+    button.addEventListener("click",()=>{
+        const enabled=document.body.classList.toggle("debugLayout");
+        button.setAttribute("aria-pressed",String(enabled));
+        button.classList.toggle("active",enabled);
+    });
+}
+
+document.addEventListener("DOMContentLoaded",initializeLayoutDebugToggle);
+
+/* ===== Layout / workspace transition ===== */
 
 function updateFisheriesNotification(deadPercent=0, criticalWeakPercent=0){
     const box=document.querySelector("[data-fisheries-notification]");
@@ -47,216 +60,19 @@ document.addEventListener(
     initializeLayout
 );
 
-function getWorkspaceSlideDistance(){
-
-    const pageViewport =
-        document.getElementById(
-            "pageViewport"
-        );
-
-    if(
-        !pageViewport
-    ){
-        return 0;
-    }
-
-    return pageViewport
-        .getBoundingClientRect()
-        .width;
-
-}
-
 function showWorkspace(){
-
-    const pageTrack =
-        document.getElementById(
-            "pageTrack"
-        );
-
-    if(
-        !pageTrack
-    ){
-        return;
-    }
-
-    pageTrack.style.transform =
-        "translateX(-50%)";
-
+    const pageTrack=document.getElementById("pageTrack");
+    if(!pageTrack) return;
+    pageTrack.style.transform="translateX(-50%)";
     showHeaderBackButton();
-
 }
 
 function hideWorkspace(){
-
-    const pageTrack =
-        document.getElementById(
-            "pageTrack"
-        );
-
-    if(
-        !pageTrack
-    ){
-        return;
-    }
-
-    animateHeaderTitleBackward(
-        "Dockside Grading Tool"
-    );
-
-    pageTrack.style.transform =
-        "translateX(0)";
-
+    const pageTrack=document.getElementById("pageTrack");
+    if(!pageTrack) return;
+    pageTrack.style.transform="translateX(0)";
     hideHeaderBackButton();
-    refreshHomePreview();
-
-}
-
-function animateHeaderTitleForward(
-    title
-){
-
-    const currentTitle =
-        document.getElementById(
-            "headerTitleCurrent"
-        );
-
-    const incomingTitle =
-        document.getElementById(
-            "headerTitleIncoming"
-        );
-
-    if(
-        !currentTitle ||
-        !incomingTitle
-    ){
-        return;
-    }
-
-    const distance =
-        getWorkspaceSlideDistance();
-
-    incomingTitle.textContent =
-        title;
-
-    incomingTitle.style.transition =
-        "none";
-
-    incomingTitle.style.transform =
-        `translateX(${distance}px)`;
-
-    incomingTitle.offsetHeight;
-
-    currentTitle.style.transition =
-        `transform ${HEADER_ANIMATION_DURATION}ms ease`;
-
-    incomingTitle.style.transition =
-        `transform ${HEADER_ANIMATION_DURATION}ms ease`;
-
-    currentTitle.style.transform =
-        `translateX(-${distance}px)`;
-
-    incomingTitle.style.transform =
-        "translateX(0)";
-
-    setTimeout(
-        ()=>{
-
-            currentTitle.textContent =
-                title;
-
-            currentTitle.style.transition =
-                "none";
-
-            currentTitle.style.transform =
-                "translateX(0)";
-
-            incomingTitle.style.transition =
-                "none";
-
-            incomingTitle.style.transform =
-                `translateX(${distance}px)`;
-
-            incomingTitle.textContent =
-                "";
-
-        },
-        HEADER_ANIMATION_DURATION
-    );
-
-}
-
-function animateHeaderTitleBackward(
-    title
-){
-
-    const currentTitle =
-        document.getElementById(
-            "headerTitleCurrent"
-        );
-
-    const incomingTitle =
-        document.getElementById(
-            "headerTitleIncoming"
-        );
-
-    if(
-        !currentTitle ||
-        !incomingTitle
-    ){
-        return;
-    }
-
-    const distance =
-        getWorkspaceSlideDistance();
-
-    incomingTitle.textContent =
-        title;
-
-    incomingTitle.style.transition =
-        "none";
-
-    incomingTitle.style.transform =
-        `translateX(-${distance}px)`;
-
-    incomingTitle.offsetHeight;
-
-    currentTitle.style.transition =
-        `transform ${HEADER_ANIMATION_DURATION}ms ease`;
-
-    incomingTitle.style.transition =
-        `transform ${HEADER_ANIMATION_DURATION}ms ease`;
-
-    currentTitle.style.transform =
-        `translateX(${distance}px)`;
-
-    incomingTitle.style.transform =
-        "translateX(0)";
-
-    setTimeout(
-        ()=>{
-
-            currentTitle.textContent =
-                title;
-
-            currentTitle.style.transition =
-                "none";
-
-            currentTitle.style.transform =
-                "translateX(0)";
-
-            incomingTitle.style.transition =
-                "none";
-
-            incomingTitle.style.transform =
-                `translateX(-${distance}px)`;
-
-            incomingTitle.textContent =
-                "";
-
-        },
-        HEADER_ANIMATION_DURATION
-    );
-
+    currentWorkspace=null;
 }
 
 function showHeaderBackButton(){
@@ -304,15 +120,12 @@ function loadWorkspace(step){
 
     switch(step){
         case 0:
-            animateHeaderTitleForward("Inspection Detail");
             renderInspectionDetailWorkspace();
             break;
         case 1:
-            animateHeaderTitleForward("Inspection Summary");
             renderInspectionSummaryWorkspace();
             break;
         case 2:
-            animateHeaderTitleForward("Activity Slip");
             renderActivitySlipWorkspace();
             break;
         default:
@@ -425,15 +238,26 @@ window.addEventListener("orientationchange",()=>{
 
 /* ===== Preview-card navigation ===== */
 
-const debugCompletedSteps = new Set();
+const completedSteps = new Set();
 
-function updateDebugCompletionUI(){
-    document.querySelectorAll("[data-debug-complete]").forEach(control=>{
-        const step=Number(control.dataset.debugComplete);
-        const complete=debugCompletedSteps.has(step);
+function updateCompletionUI(){
+    document.querySelectorAll("[data-complete-step]").forEach(control=>{
+        const step=Number(control.dataset.completeStep);
+        const complete=completedSteps.has(step);
         control.classList.toggle("complete",complete);
         control.classList.toggle("pending",!complete);
         control.setAttribute("aria-pressed",String(complete));
+
+        const completionIcon=control.querySelector(".cardStepIcon");
+        if(completionIcon){
+            const iconName=complete ? "complete" : "incomplete";
+            if(completionIcon.dataset.icon !== iconName){
+                completionIcon.dataset.icon=iconName;
+                if(typeof loadSvgIcon==="function"){
+                    loadSvgIcon(completionIcon,iconName);
+                }
+            }
+        }
 
         const timelineItem=document.querySelector(`.timelineItem[data-step="${step}"]`);
         if(timelineItem) timelineItem.classList.toggle("complete",complete);
@@ -442,6 +266,107 @@ function updateDebugCompletionUI(){
     requestAnimationFrame(updateTimelineGeometry);
 }
 
+
+/* ===== SVG percentage arc rendering =====
+   v140 production geometry:
+   - 0% starts at 12 o'clock.
+   - Percentage describes the visible coloured length, including round caps.
+   - The centreline arc is shortened by one total stroke-width because two
+     round caps extend the visible stroke by half a stroke-width at each end.
+   - No dasharray / dashoffset geometry is used.
+*/
+function polarPoint(cx,cy,r,percent){
+    const angle=((percent/100)*360)-90;
+    const radians=angle*Math.PI/180;
+
+    return {
+        x:cx + (r*Math.cos(radians)),
+        y:cy + (r*Math.sin(radians))
+    };
+}
+
+function getArcStrokeWidthInUserUnits(path){
+    const computed=window.getComputedStyle(path);
+    const strokePx=parseFloat(computed.strokeWidth)||0;
+    const ctm=path.getScreenCTM();
+
+    if(!ctm) return strokePx;
+
+    /* Convert the non-scaling screen stroke back into SVG user units so the
+       cap compensation remains correct as the responsive SVG changes size. */
+    const scaleX=Math.hypot(ctm.a,ctm.b)||1;
+    const scaleY=Math.hypot(ctm.c,ctm.d)||1;
+    const scale=(scaleX+scaleY)/2;
+
+    return strokePx/scale;
+}
+
+function setCircleTrim(path,start,end){
+    if(!path) return;
+
+    const clamp=value=>Math.max(0,Math.min(100,Number(value)||0));
+    const requestedStart=clamp(start);
+    const requestedEnd=clamp(end);
+    const requestedSpan=Math.max(0,requestedEnd-requestedStart);
+
+    if(requestedSpan<=0){
+        path.setAttribute("d","");
+        return;
+    }
+
+    const cx=50;
+    const cy=50;
+    const r=44;
+    const circumference=2*Math.PI*r;
+    const strokeWidth=getArcStrokeWidthInUserUnits(path);
+
+    /* Two round caps add half a stroke-width each along the tangent.
+       Subtract their combined visual contribution from the centreline length. */
+    const capPercent=(strokeWidth/circumference)*100;
+    const centrelineSpan=Math.max(0,requestedSpan-capPercent);
+
+    /* A fixed-width round stroke has a minimum visible mark equal to its cap
+       diameter. For values below that threshold, use a zero-length round path:
+       this is the SVG-defined minimum round-cap mark and avoids inventing
+       distorted stroke geometry. */
+    if(centrelineSpan<=0){
+        const point=polarPoint(cx,cy,r,requestedStart);
+        path.setAttribute("d",`M ${point.x} ${point.y} l 0 0`);
+        return;
+    }
+
+    /* Keep the visible result centred on the requested angular interval:
+       half of the cap compensation is removed from each geometric endpoint. */
+    const halfCapPercent=capPercent/2;
+    const trimStart=requestedStart+halfCapPercent;
+    const trimEnd=requestedEnd-halfCapPercent;
+    const span=trimEnd-trimStart;
+
+    /* At a true 100%, there should be no visible endpoint/cap seam.
+       Render a closed two-arc circle instead. */
+    if(requestedSpan>=99.9999){
+        const top=polarPoint(cx,cy,r,0);
+        const bottom=polarPoint(cx,cy,r,50);
+
+        path.setAttribute(
+            "d",
+            `M ${top.x} ${top.y} ` +
+            `A ${r} ${r} 0 1 1 ${bottom.x} ${bottom.y} ` +
+            `A ${r} ${r} 0 1 1 ${top.x} ${top.y} Z`
+        );
+        return;
+    }
+
+    const startPoint=polarPoint(cx,cy,r,trimStart);
+    const endPoint=polarPoint(cx,cy,r,trimEnd);
+    const largeArcFlag=span>50 ? 1 : 0;
+
+    path.setAttribute(
+        "d",
+        `M ${startPoint.x} ${startPoint.y} ` +
+        `A ${r} ${r} 0 ${largeArcFlag} 1 ${endPoint.x} ${endPoint.y}`
+    );
+}
 
 function refreshInspectionDetailPreview(){
     if(typeof appState==="undefined" || !appState.inspectionDetail) return;
@@ -460,20 +385,50 @@ function refreshInspectionDetailPreview(){
 
     Object.entries(values).forEach(([key,value])=>{
         const safe=Math.max(0,Math.min(100,Number.isFinite(value)?value:0));
-        const donut=document.querySelector(`[data-home-donut="${key}"]`);
         const label=document.querySelector(`[data-home-percent="${key}"]`);
-        if(donut) donut.style.setProperty("--percent",String(safe));
 
         const progress=document.querySelector(`[data-home-progress="${key}"]`);
         if(progress){
-            progress.style.strokeDasharray=`${safe} ${100-safe}`;
-            progress.style.strokeDashoffset="0";
+            setCircleTrim(progress,0,safe);
         }
 
         if(label) label.innerHTML=`<span class="donutPercentNumber">${safe.toFixed(2)}</span><span class="donutPercentUnit">%</span>`;
     });
 
+    const premiumBySize=Math.max(0,Math.min(100,Number(results.premiumBySize || 0)));
+    const standardBySize=Math.max(0,Math.min(100,Number(results.standardBySize || 0)));
+    const hasBySizeData=premiumBySize>0 || standardBySize>0;
 
+    const premiumSizeDetail=document.querySelector("[data-summary-premium-size]");
+    if(premiumSizeDetail){
+        premiumSizeDetail.innerHTML=`<span class="sizePercentNumber">${premiumBySize.toFixed(2)}</span><span class="sizePercentUnit">%</span>`;
+    }
+
+    const standardSizeDetail=document.querySelector("[data-summary-standard-size]");
+    if(standardSizeDetail){
+        standardSizeDetail.innerHTML=`<span class="sizePercentNumber">${standardBySize.toFixed(2)}</span><span class="sizePercentUnit">%</span>`;
+    }
+
+    setLinearProgress(
+        document.querySelector("[data-summary-premium-bar]"),
+        hasBySizeData ? premiumBySize : 0
+    );
+
+    setLinearProgress(
+        document.querySelector("[data-summary-standard-bar]"),
+        hasBySizeData ? standardBySize : 0
+    );
+}
+
+/* ===== Linear percentage rendering =====
+   Straight progress bars use direct 0–100 width geometry.
+   Border radius is visual styling only and remains inside this width.
+*/
+function setLinearProgress(element,value){
+    if(!element) return;
+
+    const safe=Math.max(0,Math.min(100,Number(value)||0));
+    element.style.width=`${safe}%`;
 }
 
 function refreshInspectionSummaryPreview(){
@@ -481,34 +436,8 @@ function refreshInspectionSummaryPreview(){
 
     const inputs=appState.inspectionSummary.inputs || {};
     const results=appState.inspectionSummary.results || {};
-    const gradingInputs=(appState.inspectionDetail && appState.inspectionDetail.inputs) || {};
-    const gradingResults=(appState.inspectionDetail && appState.inspectionDetail.results) || {};
 
     const samples=Math.max(0,Number(results.numberOfSamples || 0));
-    const gross=Math.max(0,Number(inputs.grossLanded || 0));
-    const net=Math.max(0,Number(results.netPoundsLanded || 0));
-    const hailed=Math.max(0,Number(inputs.actualHailedWeight || inputs.hailedWeight || results.actualHailedWeight || results.hailedWeight || 0));
-    const grossGraded=Math.max(0,Number(gradingInputs.grossGraded || 0));
-    const netGraded=Math.max(0,Number(gradingResults.totalNetLbsGraded || 0));
-    const premiumBySize=Math.max(0,Math.min(100,Number(gradingResults.premiumBySize || 0)));
-    const standardBySize=Math.max(0,Math.min(100,Number(gradingResults.standardBySize || 0)));
-    const premiumWeight=Math.max(0,Number(gradingInputs.premium || 0));
-    const standardWeight=Math.max(0,Number(gradingInputs.standard || 0));
-
-    // Inspection Summary math is the single source of truth:
-    // % Crab comes from Net Graded ÷ Gross Graded.
-    const percentCrab=Math.max(0,Math.min(100,Number(results.percentCrab || 0)));
-
-    // A zero crab percentage means grading data has not produced a usable
-    // ratio yet. Do not present that empty state as 100% debris.
-    const hasCrabData=percentCrab>0;
-    const debrisPercent=hasCrabData
-        ? Math.max(0,Math.min(100,100-percentCrab))
-        : 0;
-
-    const difference=hasCrabData
-        ? Math.max(0,Number(results.landedDifference || 0))
-        : 0;
 
     const setText=(selector,value)=>{
         const el=document.querySelector(selector);
@@ -553,21 +482,6 @@ function refreshInspectionSummaryPreview(){
     if(crabSummary){
         crabSummary.innerHTML=`<span class="summaryMetricNumber">${percentCrab.toFixed(2)}</span><span class="summaryMetricUnit">%</span>`;
     }
-const premiumSizeDetail=document.querySelector("[data-summary-premium-size]");
-    if(premiumSizeDetail){
-        premiumSizeDetail.innerHTML=`<span class="sizePercentNumber">${premiumBySize.toFixed(2)}</span><span class="sizePercentUnit">%</span>`;
-    }
-
-    const standardSizeDetail=document.querySelector("[data-summary-standard-size]");
-    if(standardSizeDetail){
-        standardSizeDetail.innerHTML=`<span class="sizePercentNumber">${standardBySize.toFixed(2)}</span><span class="sizePercentUnit">%</span>`;
-    }
-
-    const premiumBar=document.querySelector("[data-summary-premium-bar]");
-    if(premiumBar) premiumBar.style.width=(premiumBySize>0 || standardBySize>0) ? `${premiumBySize}%` : "0%";
-
-    const standardBar=document.querySelector("[data-summary-standard-bar]");
-    if(standardBar) standardBar.style.width=(premiumBySize>0 || standardBySize>0) ? `${standardBySize}%` : "0%";
 }
 
 function refreshHomePreview(){
@@ -590,20 +504,20 @@ function initializeContent(){
         });
     });
 
-    document.querySelectorAll("[data-debug-complete]").forEach(control=>{
+    document.querySelectorAll("[data-complete-step]").forEach(control=>{
         control.addEventListener("click",(event)=>{
             event.stopPropagation();
-            const step=Number(control.dataset.debugComplete);
-            if(debugCompletedSteps.has(step)){
-                debugCompletedSteps.delete(step);
+            const step=Number(control.dataset.completeStep);
+            if(completedSteps.has(step)){
+                completedSteps.delete(step);
             }else{
-                debugCompletedSteps.add(step);
+                completedSteps.add(step);
             }
-            updateDebugCompletionUI();
+            updateCompletionUI();
         });
     });
 
-    updateDebugCompletionUI();
+    updateCompletionUI();
     refreshHomePreview();
 }
 

@@ -1,4 +1,4 @@
-const CACHE_NAME = "idg-training-v121";
+const CACHE_NAME = "idg-training-v154";
 const PRECACHE_URLS = [
   "./",
   "./PROJECT_STRUCTURE.md",
@@ -13,6 +13,10 @@ const PRECACHE_URLS = [
   "./assets/fonts/Noto_Sans/OFL.txt",
   "./assets/fonts/Noto_Sans/README.txt",
   "./assets/icons/activity.svg",
+  "./assets/icons/complete.svg",
+  "./assets/icons/incomplete.svg",
+  "./assets/icons/fisheries-notification.svg",
+  "./assets/icons/debug.svg",
   "./assets/icons/app-192.png",
   "./assets/icons/app-512.png",
   "./assets/icons/grading.svg",
