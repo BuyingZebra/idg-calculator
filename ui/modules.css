@@ -14,7 +14,7 @@
 .formRow label{font-size:1rem;color:var(--og-muted);}
 .numberField{height:52px;display:flex;align-items:center;border:1px solid var(--og-border);border-radius:18px;background:var(--og-input);overflow:hidden;}
 .numberField:focus-within{
-  border-color:#00c968;
+  border-color:var(--palette-green);
   outline:none;
   box-shadow:
     inset 0 0 0 2px #00c968,
@@ -223,7 +223,7 @@
 
 /* v15 helper interaction: selected result text turns green while its explanation is open. */
 .resultCellButton.formulaSelected{
-  color:#00c968;
+  color:var(--palette-green);
   text-decoration:none;
 }
 
@@ -303,8 +303,8 @@
 
 /* v17 formula teaching colours. Green remains reserved for active/selected UI;
    red remains reserved for destructive actions. */
-.formulaVarA{color:#60a5fa;font-weight:750;}
-.formulaVarB{color:#fb923c;font-weight:750;}
+.formulaVarA{color:var(--palette-blue);font-weight:750;}
+.formulaVarB{color:var(--palette-orange);font-weight:750;}
 .formulaValue{font-weight:750;}
 .formulaVariableLine{margin:.22em 0;}
 .formulaEquation .formulaVar{font-size:inherit;}
@@ -331,7 +331,7 @@
   overflow:hidden;
 }
 .activitySelectField:focus-within{
-  border-color:#00c968;
+  border-color:var(--palette-green);
   box-shadow:inset 0 0 0 2px #00c968,0 0 0 3px rgba(0,201,104,.20),0 0 12px rgba(0,201,104,.32);
 }
 .activitySelectField select{
@@ -386,8 +386,8 @@
   cursor:pointer;
 }
 .activityAddButton[aria-pressed="true"]{
-  border-color:#00c968;
-  color:#00c968;
+  border-color:var(--palette-green);
+  color:var(--palette-green);
 }
 .activityResults{margin-top:0;}
 .activityResultsTable th:first-child,.activityResultsTable td:first-child{width:70%;}
@@ -439,7 +439,7 @@
   padding:8px 4px;
 }
 .activityAllowanceButton.active{
-  color:#00c968;
+  color:var(--palette-green);
   font-weight:700;
 }
 .activityAllowanceButton.activeRemove{
@@ -491,7 +491,7 @@
   transition:transform .25s ease,background .25s ease;
 }
 .activitySwitch input:checked + .activitySwitchTrack{
-  border-color:#00c968;
+  border-color:var(--palette-green);
 }
 .activitySwitch input:checked + .activitySwitchTrack .activitySwitchThumb{
   transform:translateX(26px);

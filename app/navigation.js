@@ -438,6 +438,8 @@ function refreshInspectionSummaryPreview(){
     const results=appState.inspectionSummary.results || {};
 
     const samples=Math.max(0,Number(results.numberOfSamples || 0));
+    const net=Math.max(0,Number(results.netPoundsLanded || 0));
+    const percentCrab=Math.max(0,Math.min(100,Number(results.percentCrab || 0)));
 
     const setText=(selector,value)=>{
         const el=document.querySelector(selector);

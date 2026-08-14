@@ -78,7 +78,7 @@
     --c1-fisheries-line-gap:3cqw;
 
     /* Card 1 unique — shared progress appearance */
-    --c1-progress-muted:rgba(148,158,173,.62);
+    --c1-progress-muted:var(--palette-muted);
     --c1-progress-radius:var(--radius-pill);
 
     /* Card 1 unique — Fisheries */
@@ -145,7 +145,7 @@
     --c2-boat-block-internal-gap:1.5cqw;
     --c2-boat-name-size:var(--metric-tile-value-size);
     --c2-boat-name-weight:400;
-    --c2-boat-placeholder-color:var(--og-muted);
+    --c2-boat-placeholder-color:var(--palette-muted);
     --c2-boat-divider-width:82%;
     --c2-boat-divider-gap:2cqw;
     --c2-boat-icon-size:9cqw;
@@ -2644,7 +2644,7 @@
 }
 
 .contentPage[data-step="0"] .fisheriesNotificationCopy small{
-    color:rgba(148,158,173,.62) !important;
+    color:var(--palette-muted) !important;
     font-size:var(--metric-tile-label-size) !important;
     line-height:1.25 !important;
 }
@@ -4341,7 +4341,7 @@
 
 .contentPage[data-step="1"] .appCard{
     /* Exact muted colour used by Fisheries Notification sub-text. */
-    --c2-boat-placeholder-color:rgba(148,158,173,.62);
+    --c2-boat-placeholder-color:var(--palette-muted);
 
     /* Boat Name and Fish Receipt value intentionally match Mark Complete. */
     --c2-boat-name-size:var(--c2-step-title-size);
@@ -4446,4 +4446,109 @@
 /* v154 — requested Boat Name text treatment only */
 .contentPage[data-step="1"] .summaryBoatName{
     font-weight:700 !important;
+}
+
+
+/* =====================================================================
+   v156 — TARGETED OFF-WHITE TEXT PASS
+   ---------------------------------------------------------------------
+   Use --og-text (#f8fafc) only on explicitly approved content.
+   No global replacement of white assignments.
+   ===================================================================== */
+
+/* ---------------- CARD 1 ---------------- */
+
+/* Inspection Detail title */
+.contentPage[data-step="0"] .cardTitle{
+    color:var(--og-text) !important;
+}
+
+/* Percentage symbol everywhere on Card 1 */
+.contentPage[data-step="0"] .donutPercentUnit,
+.contentPage[data-step="0"] .sizePercentUnit{
+    color:var(--og-text) !important;
+}
+
+/* Premium / Standard / Rejects labels */
+.contentPage[data-step="0"] .gradeLegend{
+    color:var(--og-text) !important;
+}
+
+/* Fisheries Notification heading */
+.contentPage[data-step="0"] .fisheriesNotificationCopy strong{
+    color:var(--og-text) !important;
+}
+
+/* By Size Premium / By Size Standard text */
+.contentPage[data-step="0"] .bySizeLabel,
+.contentPage[data-step="0"] .bySizeLabel > span{
+    color:var(--og-text) !important;
+}
+
+/* Edit Form / Review Form */
+.contentPage[data-step="0"] .cardActions > button{
+    color:var(--og-text) !important;
+}
+
+
+/* ---------------- CARD 2 ---------------- */
+
+/* Inspection Summary title */
+.contentPage[data-step="1"] .cardTitle{
+    color:var(--og-text) !important;
+}
+
+/* Vessel / CFV / Fish Receipt Number headings */
+.contentPage[data-step="1"] .summaryVesselEyebrow,
+.contentPage[data-step="1"] .summaryVesselCfvLabel,
+.contentPage[data-step="1"] .summaryReceiptLabel{
+    color:var(--og-text) !important;
+}
+
+/* Percentage symbol */
+.contentPage[data-step="1"] .summaryMetricUnit{
+    color:var(--og-text) !important;
+}
+
+/* Edit Form / Review Form */
+.contentPage[data-step="1"] .cardActions > button{
+    color:var(--og-text) !important;
+}
+
+
+/* ---------------- CARD 3 ---------------- */
+
+/* Same shared content treatment as Cards 1–2 */
+.contentPage[data-step="2"] .cardTitle,
+.contentPage[data-step="2"] .cardActions > button{
+    color:var(--og-text) !important;
+}
+
+
+/* =====================================================================
+   v158 — REQUESTED CARD 2 CFV RESTRUCTURE
+   ===================================================================== */
+
+/* Vessel, Boat Name, and CFV now share the same internal vertical rhythm. */
+.contentPage[data-step="1"] .summaryBoatIdentityBlock{
+    gap:var(--c2-boat-block-internal-gap) !important;
+}
+
+/* Middle Boat Data block is separator/icon only. */
+.contentPage[data-step="1"] .summaryBoatCfvBlock{
+    gap:0 !important;
+}
+
+/* CFV remains one centred visual item under Boat Name. */
+.contentPage[data-step="1"] .summaryVesselCfv{
+    margin:0 auto !important;
+}
+
+
+/* v158 — temporary developer toggle off-state */
+#headerHelpButton:not(.active),
+#headerHelpButton:not(.active) .debugToggleIcon,
+#headerHelpButton:not(.active) .debugToggleIcon svg{
+    color:var(--palette-muted) !important;
+    fill:currentColor !important;
 }
