@@ -1,4 +1,4 @@
-const CACHE_NAME = "idg-training-v158";
+const CACHE_NAME = "idg-training-v175";
 const PRECACHE_URLS = [
   "./",
   "./PROJECT_STRUCTURE.md",
@@ -24,6 +24,7 @@ const PRECACHE_URLS = [
   "./data/travel/README.md",
   "./data/travel/locations.json",
   "./data/travel/travel-matrix.json",
+    "./data/vessels/atlantic-vessel-directory.js",
   "./index.html",
   "./manifest.webmanifest",
   "./modules/activity-slip/activity-slip.js",

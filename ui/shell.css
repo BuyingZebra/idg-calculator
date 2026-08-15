@@ -20,20 +20,14 @@
     box-sizing:border-box;
 }
 
-
 :root{
-  /* ================================================================
-     AUTHORITATIVE APP COLOUR PALETTE — v155
-     ---------------------------------------------------------------
-     These semantic colours are the source of truth.
-     Component/card tokens should reference these rather than define
-     independent literal colours.
-     ================================================================ */
+  
   --palette-blue:#60a5fa;
   --palette-green:#00c968;
   --palette-orange:#fb923c;
   --palette-red:#ef4444;
   --palette-muted:rgba(148,158,173,.62);
+  --palette-subtle:#94a3b8;
 
   --og-bg:#0f172a;
   --og-panel:#1e293b;
@@ -45,14 +39,8 @@
   --og-border:#475569;
   --og-text:#f8fafc;
   --og-muted:var(--palette-muted);
-  --og-subtle:#94a3b8;
+  --og-subtle:var(--palette-subtle);
   --og-danger:var(--palette-red);
-
-  /* ================================================================
-     Global design tokens — v70
-     One source of truth for repeated visual language.
-     Existing values are preserved exactly.
-     ================================================================ */
 
   /* Semantic accent colours */
   --accent-blue:var(--palette-blue);
@@ -87,12 +75,6 @@
   /* Interaction sizes */
   --touch-target-min:44px;
 
-  /* ================================================================
-     Shared card system — v71
-     These govern repeating patterns across home cards.
-     Individual cards may override content-specific visualization only.
-     ================================================================ */
-
   /* Card frame */
   --card-pad-x:3cqw;
   --card-pad-y:3cqw;
@@ -123,13 +105,17 @@
   --metric-tile-label-size:clamp(.715rem, calc(3.45cqw - .125rem), .815rem);
   --metric-tile-content-gap:1.5cqw;
 
+  /* Shared mini-separator pattern */
+  --mini-separator-width:82%;
+  --mini-separator-icon-size:9cqw;
+  --mini-separator-gap:2cqw;
+
   /* Shared separator rhythm */
   --card-divider-gap:3.5cqw;
 
   /* Shared boxed-content padding */
   --content-box-pad-y:3cqw;
   --content-box-pad-x:4cqw;
-
 
   /* Shared component geometry */
   --card-step-radius:var(--radius-control);
@@ -310,53 +296,11 @@ body,#appShell{color:var(--og-text);}
     height:var(--app-bar-control-size);
 }
 
-
-/* =====================================================================
-   v89 — shared header/footer shell
-   ===================================================================== */
-
 #appHeader,
 #appFooter{
     flex-shrink:0;
 }
 
-
-
-
-/* =====================================================================
-   v90 — canonical app bar height system
-   ---------------------------------------------------------------------
-   --app-header-height / --app-footer-height is the sole height control for both header/footer.
-   Safe-area padding remains independent.
-   ===================================================================== */
-
-
-/* =====================================================================
-   v91 — canonical app-bar shell/content separation
-   ---------------------------------------------------------------------
-   Shell:
-     --app-header-height / --app-footer-height
-     --app-bar-pad-x
-     --app-bar-pad-y
-
-   Header content:
-     responsive control columns + constrained title viewport
-
-   Footer content:
-     independent future controls inside the same shell dimensions
-   ===================================================================== */
-
-
-/* =====================================================================
-   v119 NOTE
-   ---------------------------------------------------------------------
-   Card-specific layout editing now belongs in the CARD CONTROL PANEL at
-   the top of ui/navigation.css. Global tokens here remain as fallbacks
-   and for genuinely global visual language only.
-   ===================================================================== */
-
-
-/* v135 — title-free header placement */
 #headerBackButton{
     grid-column:1;
     justify-self:start;

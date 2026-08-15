@@ -1,16 +1,143 @@
 
 
-/* ===== Development layout inspector ===== */
+/* ===== Development layout inspector =====
+   Pure visual overlay. It never modifies card/layout CSS. */
+
+const layoutDebugInspector={
+    enabled:false,
+    overlay:null,
+    frame:0,
+    selectors:[
+        "#appHeader",
+        "#timelineContainer",
+        "#contentViewport",
+        ".contentPage.active .appCard",
+        ".contentPage.active .cardHeader",
+        ".contentPage.active .cardHeaderIcon",
+        ".contentPage.active .cardTitle",
+        ".contentPage.active .cardDivider",
+        ".contentPage.active .cardStepStatus",
+        ".contentPage.active .cardStepIcon",
+        ".contentPage.active .cardStepText",
+        ".contentPage.active .gradeOverview",
+        ".contentPage.active .gradeOverviewTitle",
+        ".contentPage.active .gradeDonutGrid",
+        ".contentPage.active .gradeMetric",
+        ".contentPage.active .gradeDonut",
+        ".contentPage.active .gradeLegend",
+        ".contentPage.active .fisheriesNotification",
+        ".contentPage.active .fisheriesNotificationDivider",
+        ".contentPage.active .fisheriesNotificationCopy",
+        ".contentPage.active .detailBySizeSection",
+        ".contentPage.active .detailBySizePanel",
+        ".contentPage.active .bySizeRow",
+        ".contentPage.active .bySizeLabel",
+        ".contentPage.active .bySizeTrack",
+        ".contentPage.active .summaryOverview",
+        ".contentPage.active .summaryVesselInfo",
+        ".contentPage.active .summaryVesselIdentity",
+        ".contentPage.active .summaryReceiptInfo",
+        ".contentPage.active .summaryMetricGrid",
+        ".contentPage.active .summaryMetric",
+        ".contentPage.active .cardFooter",
+        ".contentPage.active .cardActions",
+        ".contentPage.active .cardActions > button",
+        "#workspaceContent .moduleCard",
+        "#workspaceContent .moduleCardHeader",
+        "#workspaceContent .moduleCardBody",
+        "#workspaceContent .inputList",
+        "#workspaceContent .formRow",
+        "#workspaceContent .numberField",
+        "#workspaceContent .resultsHeading",
+        "#workspaceContent .resultsTableWrap"
+    ],
+    colors:[
+        "#ff1744","#00e5ff","#76ff03","#ff9100","#d500f9",
+        "#ffff00","#00b0ff","#ff4081","#00e676","#651fff",
+        "#ff6d00","#18ffff","#c6ff00","#f50057","#00bfa5",
+        "#ffab00","#7c4dff","#ff5252","#69f0ae","#ffd740"
+    ]
+};
+
+function ensureLayoutDebugOverlay(){
+    if(layoutDebugInspector.overlay) return layoutDebugInspector.overlay;
+    const overlay=document.createElement("div");
+    overlay.id="layoutDebugOverlay";
+    overlay.setAttribute("aria-hidden","true");
+    document.body.appendChild(overlay);
+    layoutDebugInspector.overlay=overlay;
+    return overlay;
+}
+
+function drawLayoutDebugOverlay(){
+    if(!layoutDebugInspector.enabled) return;
+
+    const overlay=ensureLayoutDebugOverlay();
+    overlay.replaceChildren();
+
+    const viewportWidth=window.innerWidth;
+    const viewportHeight=window.innerHeight;
+    const seen=new Set();
+    let colorIndex=0;
+
+    layoutDebugInspector.selectors.forEach(selector=>{
+        document.querySelectorAll(selector).forEach(element=>{
+            if(seen.has(element)) return;
+            seen.add(element);
+
+            const rect=element.getBoundingClientRect();
+            if(
+                rect.width<=0 ||
+                rect.height<=0 ||
+                rect.right<0 ||
+                rect.bottom<0 ||
+                rect.left>viewportWidth ||
+                rect.top>viewportHeight
+            ) return;
+
+            const box=document.createElement("div");
+            box.className="layoutDebugBox";
+            box.style.left=`${rect.left}px`;
+            box.style.top=`${rect.top}px`;
+            box.style.width=`${rect.width}px`;
+            box.style.height=`${rect.height}px`;
+            box.style.borderColor=layoutDebugInspector.colors[colorIndex % layoutDebugInspector.colors.length];
+            overlay.appendChild(box);
+            colorIndex++;
+        });
+    });
+
+    layoutDebugInspector.frame=requestAnimationFrame(drawLayoutDebugOverlay);
+}
+
+function setLayoutDebugEnabled(enabled){
+    layoutDebugInspector.enabled=enabled;
+    const button=document.getElementById("headerHelpButton");
+
+    if(button){
+        button.setAttribute("aria-pressed",String(enabled));
+        button.classList.toggle("active",enabled);
+    }
+
+    if(enabled){
+        const overlay=ensureLayoutDebugOverlay();
+        overlay.hidden=false;
+        cancelAnimationFrame(layoutDebugInspector.frame);
+        layoutDebugInspector.frame=requestAnimationFrame(drawLayoutDebugOverlay);
+    }else{
+        cancelAnimationFrame(layoutDebugInspector.frame);
+        layoutDebugInspector.frame=0;
+        if(layoutDebugInspector.overlay){
+            layoutDebugInspector.overlay.replaceChildren();
+            layoutDebugInspector.overlay.hidden=true;
+        }
+    }
+}
 
 function initializeLayoutDebugToggle(){
     const button=document.getElementById("headerHelpButton");
     if(!button) return;
-
-    button.addEventListener("click",()=>{
-        const enabled=document.body.classList.toggle("debugLayout");
-        button.setAttribute("aria-pressed",String(enabled));
-        button.classList.toggle("active",enabled);
-    });
+    button.addEventListener("click",()=>setLayoutDebugEnabled(!layoutDebugInspector.enabled));
 }
 
 document.addEventListener("DOMContentLoaded",initializeLayoutDebugToggle);

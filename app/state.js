@@ -14,6 +14,8 @@ const appState = {
     },
     inspectionSummary: {
         inputs: {
+            boatName: "",
+            vesselOfficialNumber: "",
             totalPans: 0,
             hailedWeight: 0,
             grossLanded: 0

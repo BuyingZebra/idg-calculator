@@ -31,7 +31,75 @@ function inspectionResultsTable(){
  </tbody></table></div></div>`;
  return samplingPlan+landedPounds;
 }
-function renderInspectionSummaryWorkspace(){setWorkspaceContent(`<div class="workspaceModule inspectionModule"><section class="moduleCard"><header class="moduleCardHeader"><div class="moduleCardIcon" data-icon="inspection"></div><div><h2 class="moduleCardTitle">Inspection Summary</h2><p class="moduleCardSubtitle">Sampling plan & landed pounds summary</p></div></header><div class="moduleCardBody"><div class="inputList">${inspectionInputRow("Gross Pounds Landed","grossLanded")}${inspectionInputRow("Total # of Pans","totalPans",0,"")}${inspectionInputRow("Actual / Hailed Weight","hailedWeight")}</div><div class="moduleActions"><button type="button" class="clearButton" id="clearInspection">Clear</button></div><div id="inspectionLiveResults" class="inspectionResults">${inspectionResultsTable()}</div></div></section></div>`);if(typeof renderIcons==='function')renderIcons();bindInspectionWorkspace();}
+
+function inspectionEscape(value){
+ return String(value ?? "")
+  .replaceAll("&","&amp;")
+  .replaceAll("<","&lt;")
+  .replaceAll(">","&gt;")
+  .replaceAll('"',"&quot;");
+}
+
+function inspectionVesselDirectory(){
+ return Array.isArray(window.ATLANTIC_VESSEL_DIRECTORY)
+  ? window.ATLANTIC_VESSEL_DIRECTORY
+  : [];
+}
+
+function inspectionVesselDatalist(){
+ return `<datalist id="inspectionVesselOptions">
+  ${inspectionVesselDirectory().map(vessel=>
+   `<option value="${inspectionEscape(vessel.name)}" label="Official No. ${inspectionEscape(vessel.officialNumber)}"></option>`
+  ).join("")}
+ </datalist>`;
+}
+
+function inspectionVesselRow(){
+ const value=appState.inspectionSummary.inputs.boatName || "";
+ return `<div class="formRow inspectionVesselRow">
+  <label for="inspectionBoatName">Boat Name</label>
+  <span class="activitySelectField activitySearchField inspectionVesselSearchField">
+   <input
+    id="inspectionBoatName"
+    type="text"
+    list="inspectionVesselOptions"
+    autocomplete="off"
+    spellcheck="false"
+    placeholder="Search vessel"
+    value="${inspectionEscape(value)}">
+  </span>
+ </div>`;
+}
+
+function inspectionResolveVessel(name){
+ const normalized=String(name || "").trim().toLocaleLowerCase();
+ if(!normalized) return null;
+ return inspectionVesselDirectory().find(
+  vessel=>String(vessel.name || "").trim().toLocaleLowerCase()===normalized
+ ) || null;
+}
+
+function renderInspectionSummaryWorkspace(){setWorkspaceContent(`<div class="workspaceModule inspectionModule"><section class="moduleCard"><header class="moduleCardHeader"><div class="moduleCardIcon" data-icon="inspection"></div><div><h2 class="moduleCardTitle">Inspection Summary</h2><p class="moduleCardSubtitle">Sampling plan & landed pounds summary</p></div></header><div class="moduleCardBody">${inspectionVesselDatalist()}<div class="inputList">${inspectionVesselRow()}${inspectionInputRow("Gross Pounds Landed","grossLanded")}${inspectionInputRow("Total # of Pans","totalPans",0,"")}${inspectionInputRow("Actual / Hailed Weight","hailedWeight")}</div><div class="moduleActions"><button type="button" class="clearButton" id="clearInspection">Clear</button></div><div id="inspectionLiveResults" class="inspectionResults">${inspectionResultsTable()}</div></div></section></div>`);if(typeof renderIcons==='function')renderIcons();bindInspectionWorkspace();}
 function bindInspectionFormulaButtons(){document.querySelectorAll("[data-inspection-formula]").forEach(b=>b.addEventListener("click",()=>showFormulaHelp(inspectionFormulaDetails(b.dataset.inspectionFormula),b)));}
 function refreshInspectionResultsOnly(){const p=document.getElementById("inspectionLiveResults");if(p){p.innerHTML=inspectionResultsTable();bindInspectionFormulaButtons();}}
-function bindInspectionWorkspace(){document.querySelectorAll("[data-inspection-input]").forEach(input=>{input.addEventListener("focus",e=>e.target.select());input.addEventListener("input",e=>{setAppNumber("inspectionSummary",e.target.dataset.inspectionInput,e.target.value);refreshInspectionResultsOnly();if(typeof refreshHomePreview==="function")refreshHomePreview();});});const clear=document.getElementById("clearInspection");if(clear)clear.addEventListener("click",()=>{Object.keys(appState.inspectionSummary.inputs).forEach(k=>appState.inspectionSummary.inputs[k]=0);recalculateAll();if(typeof refreshHomePreview==="function")refreshHomePreview();renderInspectionSummaryWorkspace();});bindInspectionFormulaButtons();}
+function bindInspectionWorkspace(){document.querySelectorAll("[data-inspection-input]").forEach(input=>{input.addEventListener("focus",e=>e.target.select());input.addEventListener("input",e=>{setAppNumber("inspectionSummary",e.target.dataset.inspectionInput,e.target.value);refreshInspectionResultsOnly();if(typeof refreshHomePreview==="function")refreshHomePreview();});});
+const boatInput=document.getElementById("inspectionBoatName");
+if(boatInput){
+ const applyVesselSelection=()=>{
+  const vessel=inspectionResolveVessel(boatInput.value);
+  if(vessel){
+   appState.inspectionSummary.inputs.boatName=vessel.name;
+   appState.inspectionSummary.inputs.vesselOfficialNumber=vessel.officialNumber || "";
+   boatInput.value=vessel.name;
+  }else{
+   appState.inspectionSummary.inputs.boatName="";
+   appState.inspectionSummary.inputs.vesselOfficialNumber="";
+  }
+  if(typeof refreshHomePreview==="function")refreshHomePreview();
+ };
+
+ boatInput.addEventListener("input",applyVesselSelection);
+ boatInput.addEventListener("change",applyVesselSelection);
+}
+
+const clear=document.getElementById("clearInspection");if(clear)clear.addEventListener("click",()=>{appState.inspectionSummary.inputs.boatName="";appState.inspectionSummary.inputs.vesselOfficialNumber="";Object.keys(appState.inspectionSummary.inputs).forEach(k=>appState.inspectionSummary.inputs[k]=0);recalculateAll();if(typeof refreshHomePreview==="function")refreshHomePreview();renderInspectionSummaryWorkspace();});bindInspectionFormulaButtons();}

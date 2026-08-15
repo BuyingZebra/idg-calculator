@@ -69,7 +69,6 @@
  .formulaDialogHeader{padding:20px 20px 6px;}.formulaDialogBody{padding:14px 20px 24px;}
 }
 
-
 /* Inspection Summary uses a simpler label/value results grid. */
 .inspectionModule .resultsTable th:first-child,
 .inspectionModule .resultsTable td:first-child {
@@ -105,7 +104,6 @@
   /* Preserve a two-line header footprint even when the label itself is short. */
   line-height:1.2;
 }
-
 
 /* Data-sheet alignment:
    labels stay left-aligned and vertically centered;
@@ -165,9 +163,6 @@
   text-align: left;
 }
 
-
-/* v13 refinement: vertically center all data-sheet column headers,
-   including the intentionally two-line Inspection Summary headers. */
 .resultsTable thead th {
   vertical-align: middle;
 }
@@ -197,8 +192,6 @@
   margin-top: 0;
 }
 
-
-/* v14: selected workspace labels remain centered at every viewport size. */
 .moduleCardHeader{
   position:relative;
   justify-content:center;
@@ -220,8 +213,6 @@
   }
 }
 
-
-/* v15 helper interaction: selected result text turns green while its explanation is open. */
 .resultCellButton.formulaSelected{
   color:var(--palette-green);
   text-decoration:none;
@@ -242,11 +233,6 @@
   transition:transform .42s ease, opacity .22s ease;
 }
 
-.formulaDialog.formulaOpen{
-  opacity:1;
-  transform:translate(-50%,-50%);
-}
-
 .formulaDialog.formulaClosing{
   opacity:1;
   transform:translate(calc(100vw + 50%), -50%);
@@ -259,10 +245,6 @@
   }
 }
 
-
-/* v16: synchronize helper motion and backdrop blur with the app's
-   0.8s card/workspace transition. The backdrop begins unblurred so
-   iOS/Safari has an actual filter value to animate from. */
 .formulaDialog::backdrop{
   background:transparent;
   backdrop-filter:blur(0px);
@@ -300,18 +282,12 @@
   transform:translate(calc(100vw + 50%), -50%);
 }
 
-
-/* v17 formula teaching colours. Green remains reserved for active/selected UI;
-   red remains reserved for destructive actions. */
 .formulaVarA{color:var(--palette-blue);font-weight:750;}
 .formulaVarB{color:var(--palette-orange);font-weight:750;}
 .formulaValue{font-weight:750;}
 .formulaVariableLine{margin:.22em 0;}
 .formulaEquation .formulaVar{font-size:inherit;}
 
-
-/* v20 Activity Slip blockout — uses the same card/input/data-sheet language
-   as Inspection Detail and Inspection Summary. */
 .activitySection + .activitySection{
   margin-top:clamp(20px,4vw,34px);
   padding-top:clamp(18px,3vw,26px);
@@ -401,8 +377,6 @@
   .activityAddButton{min-width:92px;}
 }
 
-
-/* v21 functional Activity Slip */
 .activityLoading{
   min-height:220px;
   display:flex;
@@ -526,8 +500,6 @@
   .activityDepartureToggleRow{align-items:flex-start;}
 }
 
-
-/* v22 Activity Slip refinement */
 .activitySegmented{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -653,8 +625,6 @@
   }
 }
 
-
-/* v23 Activity Slip: persistent travel lookup + work-only clear */
 .activityTravelSection{
   padding-top:0;
 }
@@ -719,8 +689,6 @@
   .activityAllowanceToggle{min-width:96px;}
 }
 
-
-/* v26: Work Activity is one uninterrupted visual section. */
 .activityWorkSection .inputList{margin-bottom:0;}
 
 .activityAdjustments{
@@ -750,9 +718,6 @@
   content:none !important;
 }
 
-
-/* v27: no unconfirmed setup/cleaning allowance.
-   Work Activity is inputs -> Clear, then one divider before Return Travel. */
 .activityWorkActions{
   margin-top:clamp(12px,2vw,16px) !important;
   padding:0 !important;
@@ -775,9 +740,6 @@
   content:none !important;
 }
 
-
-/* v29 visual identity: informational/module icons use the new blue accent.
-   Green remains reserved for active selections and future completion states. */
 .moduleCardIcon,
 .resultsHeadingIcon{
   color:#3b82f6 !important;
@@ -787,8 +749,6 @@
   fill:currentColor;
 }
 
-
-/* v30 review overlay: same helper motion/blur, wider body for tables only. */
 .formulaDialog.reviewDialogMode{
   width:min(94vw,760px);
   max-height:min(82vh,820px);
@@ -822,4 +782,103 @@
 .activitySearchField input:disabled{
   color:var(--og-subtle);
   opacity:.75;
+}
+
+.inspectionVesselSearchField{
+  width:100%;
+}
+
+.inspectionVesselSearchField input{
+  width:100%;
+}
+
+.gradingTimelineRow{
+  --grading-accent:var(--palette-blue);
+  position:relative;
+  grid-template-columns:minmax(0,1fr) minmax(150px,45%);
+  gap:18px;
+  min-height:66px;
+}
+.gradingTimelineRow::after{
+  content:"";
+  position:absolute;
+  left:52px;
+  right:0;
+  bottom:-3px;
+  height:1px;
+  background:var(--og-border);
+  opacity:.72;
+  pointer-events:none;
+}
+.gradingTimelineRow:last-child::after{display:none;}
+.gradingTimelineLabel{
+  position:relative;
+  display:grid;
+  grid-template-columns:38px minmax(0,1fr);
+  gap:14px;
+  align-items:center;
+  min-width:0;
+  align-self:stretch;
+}
+.gradingTimelineLabel::after{
+  content:"";
+  position:absolute;
+  left:19px;
+  top:50%;
+  width:2px;
+  height:calc(100% + clamp(5px,1.4vw,7px));
+  background:var(--grading-accent);
+  transform:translateX(-50%);
+  z-index:0;
+  pointer-events:none;
+}
+.gradingTimelineRow:last-child .gradingTimelineLabel::after{display:none;}
+.gradingStepCircle{
+  position:relative;
+  z-index:1;
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--grading-accent);
+  color:var(--og-bg);
+  font-size:.94rem;
+  font-weight:800;
+  line-height:1;
+  box-shadow:none;
+}
+.gradingTimelineLabel label{color:var(--og-text);font-size:1rem;}
+.gradingTimeline-blue{--grading-accent:var(--palette-blue);}
+.gradingTimeline-green{--grading-accent:var(--palette-green);}
+.gradingTimeline-orange{--grading-accent:var(--palette-orange);}
+.gradingTimeline-red{--grading-accent:var(--palette-red);}
+.gradingTimelineRow .numberField:focus-within{
+  border-color:var(--grading-accent);
+  outline:none;
+  box-shadow:
+    inset 0 0 0 2px var(--grading-accent),
+    0 0 0 3px color-mix(in srgb,var(--grading-accent) 20%,transparent);
+}
+@media (max-width:520px){
+  .gradingTimelineRow{grid-template-columns:minmax(0,1fr) minmax(132px,42%);gap:12px;}
+  .gradingTimelineLabel{grid-template-columns:34px minmax(0,1fr);gap:10px;}
+  .gradingStepCircle{width:34px;height:34px;font-size:.88rem;}
+  .gradingTimelineLabel::after{left:17px;}
+  .gradingTimelineRow::after{left:44px;}
+}
+
+.gradingTimelineRow .numberField{
+  border-color:var(--og-border);
+}
+
+.gradingStepCircle{
+  color:var(--og-bg) !important;
+  position:relative;
+  z-index:2;
+}
+
+.gradingTimelineLabel::after{
+  z-index:0;
 }

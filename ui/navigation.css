@@ -16,7 +16,6 @@
    Edit these values before touching implementation CSS.
    ===================================================================== */
 
-
 /* ==========================================================================
    CARD 1 — INSPECTION DETAIL CONTROLS
    ========================================================================== */
@@ -93,7 +92,6 @@
     --c1-by-size-value-weight:400;
 }
 
-
 /* ==========================================================================
    CARD 2 — INSPECTION SUMMARY CONTROLS
    ========================================================================== */
@@ -146,12 +144,11 @@
     --c2-boat-name-size:var(--metric-tile-value-size);
     --c2-boat-name-weight:400;
     --c2-boat-placeholder-color:var(--palette-muted);
-    --c2-boat-divider-width:82%;
-    --c2-boat-divider-gap:2cqw;
-    --c2-boat-icon-size:9cqw;
+    --c2-boat-divider-width:var(--mini-separator-width);
+    --c2-boat-divider-gap:var(--mini-separator-gap);
+    --c2-boat-icon-size:var(--mini-separator-icon-size);
     --c2-boat-cfv-size:var(--metric-tile-label-size);
     --c2-boat-cfv-gap:.35em;
-    --c2-receipt-label-size:var(--metric-tile-label-size);
     --c2-receipt-row-gap:1.5cqw;
 
     /* Card 2 unique — vessel identity */
@@ -187,7 +184,6 @@
     --c2-metric-label-size:var(--metric-tile-label-size);
     --c2-metric-label-line-height:1.25;
 }
-
 
 /* ==========================================================================
    CARD 3 — ACTIVITY TIME SLIP CONTROLS
@@ -233,7 +229,6 @@
     --c3-button-font-size:var(--card-button-size);
 }
 
-
 /* =====================================================================
    END CARD CONTROL PANEL
    ===================================================================== */
@@ -249,28 +244,19 @@
     --card-transition-gap:2%;
 }
 
-
-
-
-/* ================================================================
-   DESIGN SYSTEM NOTE (v70)
-   Global colors, surfaces, radii, border thickness and touch-target
-   sizes live in ui/shell.css :root. Component CSS should reference
-   those tokens rather than introduce duplicate literal values.
-   ================================================================ */
-
-/* v29 Home: icon-only 20/80 progress timeline + contextual review card */
-
 #timelineContainer{
     width:20%;
     min-width:72px;
     padding:var(--screen-pad-y) 0;
+    padding-left:0 !important;
+    padding-right:0 !important;
     border-right:0;
     display:flex;
     flex-direction:column;
     justify-content:space-between;
     align-items:center;
     position:relative;
+    overflow:hidden;
 }
 
 #timelineLine,
@@ -293,7 +279,7 @@
     bottom:auto;
     height:0;
     background:var(--accent-green);
-    transition:height .9s ease;
+    transition:height .9s cubic-bezier(.22,.61,.36,1);
 }
 
 .timelineItem{
@@ -307,6 +293,8 @@
     justify-content:center;
     cursor:pointer;
     position:relative;
+    left:auto !important;
+    transform:none !important;
     z-index:2;
     -webkit-tap-highlight-color:transparent;
 }
@@ -320,7 +308,14 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    transition:border-color .3s ease,box-shadow .3s ease,background .3s ease;
+    transform:scale(1);
+    transform-origin:50% 50%;
+    will-change:transform;
+    transition:
+        transform .34s cubic-bezier(.22,.61,.36,1),
+        border-color .3s ease,
+        box-shadow .3s ease,
+        background .3s ease;
 }
 
 .timelineNodeIcon{
@@ -332,19 +327,6 @@
 }
 
 .timelineNodeIcon svg{width:100%;height:100%;fill:currentColor;}
-
-.timelineItem.active .timelineNode{
-    border-color:var(--accent-blue);
-    box-shadow:0 0 0 4px var(--accent-blue-glow);
-}
-.timelineItem.active .timelineNodeIcon{color:var(--accent-blue);}
-
-.timelineItem.complete .timelineNode{
-    border-color:var(--accent-green);
-    background:var(--accent-green-bg);
-}
-.timelineItem.complete .timelineNodeIcon{color:var(--accent-green);}
-
 
 /* Contextual card */
 #contentContainer{
@@ -369,38 +351,12 @@
     transition:transform .8s ease;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 .contentBody{
     margin:0;
     color:var(--og-muted);
     font-size:clamp(.9rem,1.7vw,1.05rem);
     line-height:1.45;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @media(max-width:620px){
     #timelineContainer{width:20%;min-width:66px;}
@@ -414,36 +370,11 @@
         bottom:calc(var(--screen-pad-y) + 27px);
         width:2px;
     }
-    
-    
-    
-    
+
     .contentBody{font-size:.82rem;}
-    
-    
-    
-    
-    
+
 }
 
-
-/* v30 temporary debug completion toggle. Wording remains unchanged. */
-
-
-
-.timelineItem.complete .timelineNode{
-  border-color:var(--accent-green);
-}
-.timelineItem.complete .timelineNodeIcon{
-  color:var(--accent-green);
-}
-.timelineItem.active.complete .timelineNode{
-  box-shadow:0 0 0 4px var(--accent-green-ring-strong);
-}
-
-
-/* v31 timeline completion model:
-   blue line = active workflow; green overlay appears only when ALL steps are complete. */
 .timelineItem.complete .timelineNode{
     border-color:var(--accent-green) !important;
     background:var(--og-bg) !important;
@@ -460,104 +391,15 @@
     color:var(--accent-blue) !important;
 }
 
-
-/* v32 home refinement */
-#timelineContainer{
-    overflow:hidden;
-}
-#timelineLine,
-#timelineProgress{
-    border-radius:var(--radius-pill);
-}
-
-
-/* v33 home balance */
-#timelineContainer{
-    padding-left:var(--screen-pad-x);
-    padding-right:0;
-}
-
-#timelineLine,
-#timelineProgress{
-    left:calc(50% + (var(--screen-pad-x) / 2));
-}
-
-.timelineItem{
-    left:calc(var(--screen-pad-x) / 2);
-}
-
-/* Selected step is always visually larger, regardless of pending/active/complete state. */
-.timelineNode{
-    transform:scale(1);
-    transform-origin:center;
-    transition:
-        transform .28s ease,
-        border-color .3s ease,
-        box-shadow .3s ease,
-        background .3s ease;
-}
-
-.timelineItem.active .timelineNode{
-    transform:scale(1.14);
-}
-
-/* Green completion overlay uses the same top/bottom bounds as the blue line.
-   Scale animation prevents it from extending past the final node. */
-#timelineProgress{
-    transform:translateX(-50%);
-    transition:height .9s cubic-bezier(.22,.61,.36,1);
-}
-
 @media(max-width:620px){
-    #timelineContainer{
-        padding-left:var(--screen-pad-x);
-    }
-
     #timelineLine,
 #timelineProgress{
         left:calc(50% + (var(--screen-pad-x) / 2));
     }
 
-    .timelineItem{
-        left:calc(var(--screen-pad-x) / 2);
-    }
-
-    .timelineItem.active .timelineNode{
-        transform:scale(1.12);
-    }
-}
-
-
-/* v34 timeline geometry:
-   JS places the line exactly through the node centres.
-   Nodes never move laterally; active emphasis scales around their own centre. */
-#timelineContainer{
-    padding-left:0 !important;
-    padding-right:0 !important;
-}
-
-.timelineItem{
-    left:auto !important;
-    transform:none !important;
-}
-
-.timelineNode{
-    transform:scale(1);
-    transform-origin:50% 50%;
-    will-change:transform;
-    transition:
-        transform .34s cubic-bezier(.22,.61,.36,1),
-        border-color .3s ease,
-        box-shadow .3s ease,
-        background .3s ease;
 }
 
 .timelineItem.active .timelineNode{
-    transform:scale(1.14);
-}
-
-.timelineItem.active.complete .timelineNode,
-.timelineItem.complete.active .timelineNode{
     transform:scale(1.14);
 }
 
@@ -568,15 +410,6 @@
         transform:scale(1.12);
     }
 }
-
-
-/* ===== v35 dashboard card refinement =====
-   Progress rows removed. Inspection Detail now presents a three-gauge
-   grade overview. Completion remains a separate user-confirmed state. */
-
-
-
-
 
 .gradeOverview{
     width:100%;
@@ -625,8 +458,6 @@
     background:var(--og-panel);
     box-shadow:inset 0 0 0 1px var(--surface-ring-light);}
 
-
-
 .gradeLegend{
     display:flex;
     align-items:center;
@@ -648,9 +479,6 @@
 
 /* Completion is green; chart colors carry grade meaning independently. */
 
-
-
-
 .previewStatus.complete .previewStatusDot::after{
     content:"";
     position:absolute;
@@ -665,9 +493,7 @@
 
 /* Actions stay side-by-side on phone and desktop. */
 
-
 @media(max-width:620px){
-    
 
     .gradeOverviewTitle{
         font-size:.68rem;
@@ -680,192 +506,50 @@
 
     .gradeDonut::after{inset:14%;}
 
-
-
-
-/* ===== v36 Inspection Detail composition pass ===== */
-
 /* Only the Inspection Detail home card uses the new natural vertical flow. */
 
-
 /* Keep the title/icon block deliberate and centered. */
-
 
 /* Grade Overview becomes its own divider:
    -------- GRADE OVERVIEW -------- */
 
-
-
-
 /* Larger gauges on roomy screens, preserving current mobile sizing. */
-
-
-
 
 /* Do not push the completion state or buttons to the bottom.
    Their position now follows the charts naturally. */
 
-
-
-
 /* Any unused card height stays below the controls instead of between sections. */
-
 
 /* Keep horizontal actions consistent. */
 
-
 /* Desktop gets a little more breathing room inside the card,
    but the content remains grouped instead of being stretched apart. */
-@media(min-width:900px){
-    
-
-    
-}
 
 /* Mobile: retain compact donut sizing and tighten the composition. */
-@media(max-width:620px){
-    
-
-    
-
-    
-
-    
-
-    
-}
-
-
-/* ===== v37 Inspection Detail parent-relative spacing ===== */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@media(max-width:620px){
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-}
-
-
-/* ===== v38 Inspection Detail structure ===== */
 
 /* Restore a simple solid rule beneath the title block. */
 
-
 /* Completion remains the first content item after the title divider. */
 
-
 /* Section headings return to simple left-aligned labels. */
-
-
-
 
 /* The card now has enough content to justify bottom-pinned actions.
    auto margin consumes only the unused space after Comments. */
 
-
-
-
 /* Keep the proportional content rhythm above the pinned action area. */
-
-
-
-
-@media(max-width:620px){
-    
-
-    
-
-    
-
-    
-
-    
-}
-
-
-/* ===== v39 Inspection comments integration ===== */
-
-
-
 
 /* Match the Section Complete body copy exactly. */
 
-
 /* A notification changes wording only; the container remains visually neutral. */
-
 
 /* The comments region now absorbs spare card height, so the action area stays pinned. */
 
-
-@media(max-width:620px){
-    
-
-    
-
-    
-}
-
-
-/* ===== v40 Inspection Summary approved overview ===== */
-
-
-
-
-
-
-
-
-.contentPage[data-step="1"] .summaryOverview{
-    width:100%;
-    margin-top:clamp(16px,5cqh,44px);
-}
-
-.contentPage[data-step="1"] .summaryOverviewTitle,
-.contentPage[data-step="1"] .grossNetTitle{
+.contentPage[data-step="1"] .summaryOverviewTitle{
     color:var(--accent-blue-label);
     font-size:clamp(.68rem,1.7cqw,.82rem);
     font-weight:800;
     letter-spacing:.06em;
     text-transform:uppercase;
-}
-
-.contentPage[data-step="1"] .summaryOverviewTitle{
-    text-align:center;
-    margin-bottom:clamp(12px,3cqh,28px);
 }
 
 .summaryMetricGrid{
@@ -921,56 +605,22 @@
     line-height:1.25;
 }
 
-
-.contentPage[data-step="1"] .summaryActionDivider{
-    margin-top:auto;
-    margin-bottom:clamp(12px,3cqh,28px);
-}
-
-
-
 @media(max-width:620px){
-    
 
-    
-
-    
-
-    .contentPage[data-step="1"] .summaryOverview{
-        margin-top:clamp(14px,4cqh,28px);
-    }
-
-    .summaryMetricGrid{gap:6px;}
+        .summaryMetricGrid{gap:6px;}
     .summaryMetric{border-radius:13px;padding:9px 4px;}
     .summaryMetricIcon{width:26px;height:26px;}
     .summaryMetric strong{font-size:clamp(.9rem,4.2cqw,1.2rem);}
     .summaryMetric > span{font-size:clamp(.56rem,2.05vw,.68rem);}
 
-
-
-    .contentPage[data-step="1"] .summaryActionDivider{
-        margin-bottom:clamp(10px,2.5cqh,20px);
     }
-
-    
-}
-
-
-/* ===== v41 cleanup pass ===== */
 
 /* Inspection Detail: centered overview heading. */
 
-
 /* Give each donut an outer color ring/glow like the navigation states. */
-
 
 /* Slightly larger mobile charts with more protected center space. */
 @media(max-width:620px){
-    
-
-    
-
-
 
 /* Inspection Summary: explicitly preserve title/footer divider lines. */
 .contentPage[data-step="1"] .summaryHeaderDivider,
@@ -982,10 +632,6 @@
 }
 
 /* The comparison is already part of Inspection Overview; no extra heading. */
-.contentPage[data-step="1"] .grossNetTitle{
-    display:none;
-}
-
 
 /* Difference text remains neutral rather than implying an error/removal. */
 .grossNetDifference strong,
@@ -993,22 +639,11 @@
     color:var(--og-muted);
 }
 
-
-/* ===== v42 grading/landing logic correction ===== */
-
 /* Remove the glow from Inspection Detail charts.
    Keep only a crisp outer tint ring to echo navigation-state rings. */
 
-
-
-/* ===== v44 donut cleanup ===== */
-
 /* Remove the outer colored ring/glow completely.
    Keep only the donut itself and a subtle inner edge. */
-
-
-
-/* ===== v45 Inspection Summary presentation ===== */
 
 /* Gross/Net numbers retain semantic colors; unit text is white. */
 .grossNetValue .unit,
@@ -1028,20 +663,10 @@
     color:var(--color-white);
 }
 
-
-
-
-
-
-
-/* ===== v46 Inspection Summary composition cleanup ===== */
-
 /* Gross/Net: semantic number color, white unit. */
 [data-summary-gross-detail] .grossNetNumber{
     color:var(--accent-blue) !important;
 }
-
-
 
 /* Composition line stays on ONE line next to the icon. */
 .grossNetDifference{
@@ -1051,15 +676,7 @@
     color:var(--color-white);
 }
 
-
 /* Keep the line fitting on smaller phones without wrapping. */
-@media(max-width:620px){
-
-
-}
-
-
-/* ===== v47 Inspection Summary corrections ===== */
 
 /* Gross/Net landed headline values must stay on ONE line. */
 [data-summary-gross-detail],
@@ -1071,9 +688,6 @@
     flex-wrap:nowrap !important;
 }
 
-
-
-
 /* Ratio line: explicit readable spacing between each semantic piece. */
 .grossNetSingleLine{
     display:flex;
@@ -1082,8 +696,6 @@
     white-space:nowrap;
     column-gap:.34em;
 }
-
-
 
 /* Keep the line usable on narrow phones without introducing line breaks. */
 @media(max-width:620px){
@@ -1101,7 +713,6 @@
     font-weight:800 !important;
 }
 
-
 /* Preserve the deliberate single-line composition with readable spacing. */
 .grossNetSingleLine{
     display:flex;
@@ -1111,15 +722,11 @@
     column-gap:.34em;
 }
 
-
-/* ===== v49 percentage color correction ===== */
-
 /* Numbers are bold and colored according to their meaning. */
 .summaryCrabPercent{
     color:var(--accent-orange) !important;
     font-weight:800 !important;
 }
-
 
 /* Labels remain regular white. */
 .summaryCrabLabel,
@@ -1134,8 +741,6 @@
     color:var(--color-white) !important;
 }
 
-
-/* ===== v51 Inspection Summary: by-size comparison ===== */
 [data-summary-premium-size],
 [data-summary-standard-size]{
     display:inline-flex !important;
@@ -1149,18 +754,6 @@
 [data-summary-premium-size] .sizePercentUnit,
 [data-summary-standard-size] .sizePercentUnit{color:var(--color-white) !important;font-weight:800;}
 
-
-
-
-
-
-@media(max-width:620px){
-
-
-}
-
-
-/* ===== v53: By Size moved from Summary to Detail ===== */
 .detailBySizeSection{
     display:block;
 }
@@ -1170,8 +763,6 @@
 }
 /* Summary intentionally keeps the freed space empty for a future feature. */
 
-
-/* ===== v54 Inspection Detail: dual By Size bars ===== */
 .detailBySizePanel{
     display:flex;
     flex-direction:column;
@@ -1250,73 +841,17 @@
     background:var(--accent-orange);
 }
 
-
-/* =====================================================================
-   v57 — Inspection Detail responsive component system
-   ---------------------------------------------------------------------
-   One card-relative design scale for phone / tablet / desktop.
-   All values below are derived from the Inspection Detail card itself.
-   Avoid adding device-specific font sizes to this component later;
-   adjust these variables instead.
-   ===================================================================== */
-
-
-
 /* ---------- Header ---------- */
-
-
-
-
-
-
-
-
-
 
 /* ---------- Section Complete ---------- */
 
-
-
-
-
-
 /* ---------- Inspection Overview heading ---------- */
-
-
-
 
 /* ---------- Donut metrics ---------- */
 
-
-
-
-
-
-
-
-
-
-
-
 /* ---------- By Size panel ---------- */
 
-
-
-
-
-
-
-
-
-
-
-
 /* ---------- Footer / actions ---------- */
-
-
-
-
-
 
 /* ---------------------------------------------------------------------
    IMPORTANT:
@@ -1325,124 +860,35 @@
    come from the shared card-relative variables above.
    --------------------------------------------------------------------- */
 @media(max-width:620px){
-    
-
-    
-
-    
-
-    
-
-
-
-
-
 
 /* ---------- Card shell ---------- */
 
-
 /* ---------- Shared header ---------- */
-
-
-
-
-
-
-
-
-
 
 /* ---------- Shared divider ---------- */
 
-
 /* ---------- Shared Step Complete ---------- */
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* ---------- Shared overview heading ---------- */
 
-
 /* ---------- Shared footer actions ---------- */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* Legacy footer divider classes are now semantic markers only. */
 .appCard .summaryActionDivider{
     margin:0 !important;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* Pending / incomplete state */
-
 
 /* Complete state */
 
-
-
-
-
-
 /* No glow/ring around Step Complete icon in either state. */
-
-
-
-/* =====================================================================
-   v76 — canonical card flow + Overview spacing
-   ===================================================================== */
 
 /* Legacy .cardPreview used justify-content:center + a generic gap.
    Shared cards now get all spacing exclusively from named master controls. */
 
-
 /* One shared gap below every Overview heading.
    This value reflects the preferred Inspection Detail spacing. */
-
-
-
-/* =====================================================================
-   v78 — metric color consistency
-   ===================================================================== */
 
 /* Summary Overview colors */
 .contentPage[data-step="1"] .summaryMetricNet .summaryMetricIcon,
@@ -1460,17 +906,7 @@
     color:var(--accent-orange) !important;
 }
 
-.contentPage[data-step="1"] .summaryMetricUnit{
-    color:var(--color-white) !important;
-}
-
 /* Detail donut unit standard */
-
-
-
-/* =====================================================================
-   v79 — percentage rendering / legacy selector correction
-   ===================================================================== */
 
 /* Internal value spans must inherit the metric value size/weight.
    Only the direct child label beneath the value uses label typography. */
@@ -1495,19 +931,6 @@
 .contentPage[data-step="1"] .summaryMetricValueCrab .summaryMetricUnit{
     color:var(--color-white) !important;
 }
-
-
-/* =====================================================================
-   v80 — canonical Summary Overview metric tiles
-   ---------------------------------------------------------------------
-   Net Pounds Landed / Number of Samples / Percentage of Crab share:
-   - padding
-   - icon size
-   - numeric value size
-   - label size
-   - internal spacing
-   Individual semantic colors remain intentionally different.
-   ===================================================================== */
 
 .contentPage[data-step="1"] .metricTile{
     box-sizing:border-box;
@@ -1562,852 +985,128 @@
 }
 
 /* Crab percent unit remains white while sharing identical value size. */
-.contentPage[data-step="1"] .metricTileValueCrab .summaryMetricUnit{
-    color:var(--color-white) !important;
-}
-
 
 /* Card 1 By Size values and Card 2 metric values intentionally share
    one canonical font-size control. */
-
-
-/* v81 compact landing comparison */
-.contentPage[data-step="1"] .summaryRadialComparison{
- --hailed-ratio:0;--gross-ratio:0;
- margin-top:var(--card-section-gap);
- display:grid;grid-template-columns:1.08fr .92fr;align-items:center;
- gap:4cqw;width:100%;
-}
-.contentPage[data-step="1"] .summaryRadialChart{
- position:relative;width:42cqw;max-width:190px;aspect-ratio:1;justify-self:center;
-}
-.contentPage[data-step="1"] .summaryRadialRing{
- position:absolute;border-radius:50%;
- background:conic-gradient(from 225deg,currentColor 0 calc(var(--ratio)*270deg),rgba(71,85,105,.26) calc(var(--ratio)*270deg) 270deg,transparent 270deg 360deg);
- -webkit-mask:radial-gradient(circle,transparent 61%,#000 62%);
- mask:radial-gradient(circle,transparent 61%,#000 62%);
-}
-.contentPage[data-step="1"] .summaryRadialRingHailed{inset:0;--ratio:var(--hailed-ratio);color:var(--accent-blue);}
-.contentPage[data-step="1"] .summaryRadialRingGross{inset:11%;--ratio:var(--gross-ratio);color:var(--accent-green);}
-.contentPage[data-step="1"] .summaryRadialCenter{
- position:absolute;inset:25%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
-}
-.contentPage[data-step="1"] .summaryRadialCenter strong{
- color:var(--accent-blue);font-size:clamp(1.12rem,5cqw,1.45rem);line-height:1;font-weight:800;
-}
-.contentPage[data-step="1"] .summaryRadialCenter>span{color:var(--accent-blue);font-size:var(--card-body-size);font-weight:700;margin-top:.5cqw;}
-.contentPage[data-step="1"] .summaryRadialCenter small{color:var(--og-text);font-size:clamp(.6rem,2.55cqw,.72rem);line-height:1.2;margin-top:1cqw;}
-.contentPage[data-step="1"] .summaryRadialLegend{display:flex;flex-direction:column;gap:7cqw;min-width:0;}
-.contentPage[data-step="1"] .summaryRadialLegendRow{display:grid;grid-template-columns:3cqw 1fr;gap:2.3cqw;align-items:start;}
-.contentPage[data-step="1"] .summaryRadialLegendDot{width:3cqw;height:3cqw;border-radius:50%;margin-top:.7cqw;}
-.contentPage[data-step="1"] .summaryRadialLegendHailed .summaryRadialLegendDot{background:var(--accent-blue);}
-.contentPage[data-step="1"] .summaryRadialLegendGross .summaryRadialLegendDot{background:var(--accent-green);}
-.contentPage[data-step="1"] .summaryRadialLegendRow>div{display:flex;flex-direction:column;gap:1.2cqw;min-width:0;}
-.contentPage[data-step="1"] .summaryRadialLegendRow>div>span{font-size:var(--card-body-size);color:var(--og-text);line-height:1.2;}
-.contentPage[data-step="1"] .summaryRadialLegendRow strong{font-size:var(--metric-tile-value-size);line-height:1.1;font-weight:800;white-space:nowrap;}
-.contentPage[data-step="1"] .summaryRadialLegendHailed strong{color:var(--accent-blue);}
-.contentPage[data-step="1"] .summaryRadialLegendGross strong{color:var(--accent-green);}
-.contentPage[data-step="1"] .summaryRadialUnit{color:var(--color-white);font-size:inherit;font-weight:inherit;}
 @container (max-width:380px){
- .contentPage[data-step="1"] .summaryRadialComparison{gap:3cqw;grid-template-columns:1fr .95fr;}
- .contentPage[data-step="1"] .summaryRadialChart{width:39cqw;}
- .contentPage[data-step="1"] .summaryRadialLegend{gap:5cqw;}
 }
-
-
-/* =====================================================================
-   v82 — compact Summary Overview copy
-   ===================================================================== */
 
 /* Radial center now reads:
    [value]
    lbs difference
 */
-.contentPage[data-step="1"] .summaryRadialCenter > span{
-    margin-top:1cqw !important;
-    color:var(--og-text) !important;
-    font-size:clamp(.68rem,2.8cqw,.80rem) !important;
-    font-weight:600 !important;
-    line-height:1.15 !important;
-    white-space:nowrap;
-}
 
 /* The old secondary radial description is no longer part of the component. */
-.contentPage[data-step="1"] .summaryRadialCenter small{
-    display:none !important;
-}
-
-
-/* =====================================================================
-   v83 — radial value standard + 8cqw section rhythm
-   ===================================================================== */
-
-.contentPage[data-step="1"] .summaryRadialCenter{
-    inset:20% !important;
-}
-
-.contentPage[data-step="1"] .summaryRadialDifferenceLine{
-    display:inline-flex;
-    align-items:baseline;
-    justify-content:center;
-    gap:1cqw;
-    white-space:nowrap;
-}
 
 /* Match Card 1 donut percentage typography. */
-.contentPage[data-step="1"] .summaryRadialDifferenceLine strong{
-    margin:0 !important;
-    color:var(--accent-blue) !important;
-    font-size:var(--detail-metric-size, clamp(.80rem,3.35cqw,.92rem)) !important;
-    line-height:1 !important;
-    font-weight:800 !important;
-}
-
-.contentPage[data-step="1"] .summaryRadialDifferenceLine span{
-    margin:0 !important;
-    color:var(--color-white) !important;
-    font-size:var(--card-body-size) !important;
-    line-height:1 !important;
-    font-weight:600 !important;
-    white-space:nowrap;
-}
-
-/* Neutralize v82's now-obsolete stacked center rule. */
-.contentPage[data-step="1"] .summaryRadialCenter > span{
-    display:none !important;
-}
-
-
-/* =====================================================================
-   v84 — radial difference copy correction
-   ---------------------------------------------------------------------
-   Center format:
-       0lbs
-       difference
-   ===================================================================== */
-
-.contentPage[data-step="1"] .summaryRadialCenter{
-    display:flex !important;
-    flex-direction:column !important;
-    align-items:center !important;
-    justify-content:center !important;
-    text-align:center !important;
-}
-
-.contentPage[data-step="1"] .summaryRadialDifferenceValue{
-    display:inline-flex;
-    align-items:baseline;
-    justify-content:center;
-    gap:0;
-    white-space:nowrap;
-    line-height:1;
-}
 
 /* Number stays on the same shared metric scale as Card 1 chart values. */
-.contentPage[data-step="1"] .summaryRadialDifferenceValue strong{
-    margin:0 !important;
-    color:var(--accent-blue) !important;
-    font-size:var(--detail-metric-size, clamp(.80rem,3.35cqw,.92rem)) !important;
-    line-height:1 !important;
-    font-weight:800 !important;
-}
 
 /* lbs is part of the value line, with no visual gap. */
-.contentPage[data-step="1"] .summaryRadialDifferenceValue span{
-    margin:0 !important;
-    color:var(--color-white) !important;
-    font-size:var(--detail-metric-size, clamp(.80rem,3.35cqw,.92rem)) !important;
-    line-height:1 !important;
-    font-weight:800 !important;
-}
 
 /* Descriptor sits centered beneath the value. */
-.contentPage[data-step="1"] .summaryRadialCenter small{
-    display:block !important;
-    margin-top:1.2cqw !important;
-    color:var(--og-text) !important;
-    font-size:clamp(.68rem,2.8cqw,.80rem) !important;
-    line-height:1.1 !important;
-    font-weight:600 !important;
-    text-align:center !important;
-}
 
-/* v83 single-line wrapper is obsolete. */
-.contentPage[data-step="1"] .summaryRadialDifferenceLine{
-    display:none !important;
-}
-
-
-/* =====================================================================
-   v85 — Summary Overview big difference focus
-   ---------------------------------------------------------------------
-   Replaces the radial comparison with a simpler information hierarchy:
-       [large difference] lbs
-       difference
-
-       Hailed Weight        Gross Lbs. Landed
-   ===================================================================== */
-
-.contentPage[data-step="1"] .summaryDifferenceFocus{
-    margin-top:var(--card-section-gap);
-    width:100%;
-    display:grid;
-    grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
-    align-items:center;
-    gap:5cqw;
-}
-
-.contentPage[data-step="1"] .summaryDifferencePrimary{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    min-width:0;
-}
-
-.contentPage[data-step="1"] .summaryDifferenceValue{
-    display:inline-flex;
-    align-items:baseline;
-    justify-content:center;
-    gap:1cqw;
-    white-space:nowrap;
-}
-
-.contentPage[data-step="1"] .summaryDifferenceValue strong{
-    margin:0;
-    color:var(--accent-blue);
-    font-size:clamp(1.55rem,7.5cqw,2.15rem);
-    line-height:1;
-    font-weight:800;
-}
-
-.contentPage[data-step="1"] .summaryDifferenceValue > span{
-    margin:0;
-    color:var(--color-white);
-    font-size:var(--card-body-size);
-    line-height:1;
-    font-weight:700;
-}
-
-.contentPage[data-step="1"] .summaryDifferencePrimary > small{
-    margin-top:1.5cqw;
-    color:var(--og-muted);
-    font-size:var(--card-body-size);
-    line-height:1.1;
-    font-weight:600;
-}
-
-.contentPage[data-step="1"] .summaryDifferenceSupport{
-    min-width:0;
-    display:flex;
-    flex-direction:column;
-    gap:5cqw;
-}
-
-.contentPage[data-step="1"] .summaryDifferenceSupportItem{
-    display:grid;
-    grid-template-columns:3cqw minmax(0,1fr);
-    align-items:start;
-    gap:2.5cqw;
-}
-
-.contentPage[data-step="1"] .summaryDifferenceDot{
-    width:3cqw;
-    height:3cqw;
-    border-radius:50%;
-    margin-top:.7cqw;
-}
-
-.contentPage[data-step="1"] .summaryDifferenceHailed .summaryDifferenceDot{
-    background:var(--accent-blue);
-}
-
-.contentPage[data-step="1"] .summaryDifferenceGross .summaryDifferenceDot{
-    background:var(--accent-green);
-}
-
-.contentPage[data-step="1"] .summaryDifferenceSupportItem > div{
-    min-width:0;
-    display:flex;
-    flex-direction:column;
-    gap:1cqw;
-}
-
-.contentPage[data-step="1"] .summaryDifferenceSupportItem > div > span{
-    color:var(--og-text);
-    font-size:var(--card-body-size);
-    line-height:1.2;
-}
-
-.contentPage[data-step="1"] .summaryDifferenceSupportItem strong{
-    font-size:var(--metric-tile-value-size);
-    line-height:1.1;
-    font-weight:800;
-    white-space:nowrap;
-}
-
-.contentPage[data-step="1"] .summaryDifferenceHailed strong{
-    color:var(--accent-blue);
-}
-
-.contentPage[data-step="1"] .summaryDifferenceGross strong{
-    color:var(--accent-green);
-}
-
-.contentPage[data-step="1"] .summaryDifferenceUnit{
-    color:var(--color-white);
-    font-size:inherit;
-    font-weight:inherit;
+@container (max-width:380px){
 }
 
 @container (max-width:380px){
-    .contentPage[data-step="1"] .summaryDifferenceFocus{
-        gap:3.5cqw;
-        grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr);
-    }
-
-    .contentPage[data-step="1"] .summaryDifferenceValue strong{
-        font-size:clamp(1.4rem,7cqw,1.9rem);
-    }
-
-    .contentPage[data-step="1"] .summaryDifferenceSupport{
-        gap:4cqw;
-    }
 }
-
-
-/* =====================================================================
-   v86 — Summary Overview big-difference composition
-   ---------------------------------------------------------------------
-   Hailed Weight                         Gross Lbs. Landed
-   [value] lbs                              [value] lbs
-
-                       [difference] lbs
-                          Difference
-   ===================================================================== */
-
-.contentPage[data-step="1"] .summaryDifferenceFocus{
-    margin-top:var(--card-section-gap);
-    width:100%;
-    display:flex !important;
-    flex-direction:column !important;
-    align-items:stretch !important;
-    gap:5cqw !important;
-}
-
-.contentPage[data-step="1"] .summaryDifferenceTop{
-    width:100%;
-    display:grid;
-    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-    gap:5cqw;
-    align-items:start;
-}
-
-.contentPage[data-step="1"] .summaryDifferenceWeight{
-    display:flex;
-    flex-direction:column;
-    gap:1.2cqw;
-    min-width:0;
-}
-
-.contentPage[data-step="1"] .summaryDifferenceHailed{
-    align-items:flex-start;
-    text-align:left;
-}
-
-.contentPage[data-step="1"] .summaryDifferenceGross{
-    align-items:flex-end;
-    text-align:right;
-}
-
-.contentPage[data-step="1"] .summaryDifferenceWeight > span{
-    color:var(--og-text);
-    font-size:var(--card-body-size);
-    line-height:1.2;
-}
-
-.contentPage[data-step="1"] .summaryDifferenceWeight strong{
-    font-size:var(--metric-tile-value-size);
-    line-height:1.1;
-    font-weight:800;
-    white-space:nowrap;
-}
-
-.contentPage[data-step="1"] .summaryDifferenceHailed strong{
-    color:var(--accent-blue);
-}
-
-.contentPage[data-step="1"] .summaryDifferenceGross strong{
-    color:var(--accent-green);
-}
-
-.contentPage[data-step="1"] .summaryDifferenceUnit{
-    color:var(--color-white);
-    font-size:inherit;
-    font-weight:inherit;
-}
-
-.contentPage[data-step="1"] .summaryDifferencePrimary{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    min-width:0;
-}
-
-.contentPage[data-step="1"] .summaryDifferenceValue{
-    display:inline-flex;
-    align-items:baseline;
-    justify-content:center;
-    gap:1cqw;
-    white-space:nowrap;
-}
-
-.contentPage[data-step="1"] .summaryDifferenceValue strong{
-    margin:0;
-    color:var(--accent-blue);
-    font-size:clamp(1.7rem,8cqw,2.3rem);
-    line-height:1;
-    font-weight:800;
-}
-
-.contentPage[data-step="1"] .summaryDifferenceValue > span{
-    margin:0;
-    color:var(--color-white);
-    font-size:var(--card-body-size);
-    line-height:1;
-    font-weight:700;
-}
-
-.contentPage[data-step="1"] .summaryDifferencePrimary > small{
-    margin-top:1.4cqw;
-    color:var(--og-muted);
-    font-size:var(--card-body-size);
-    line-height:1.1;
-    font-weight:600;
-    text-transform:none;
-}
-
-@container (max-width:380px){
-    .contentPage[data-step="1"] .summaryDifferenceFocus{
-        gap:4cqw !important;
-    }
-
-    .contentPage[data-step="1"] .summaryDifferenceTop{
-        gap:3cqw;
-    }
-
-    .contentPage[data-step="1"] .summaryDifferenceValue strong{
-        font-size:clamp(1.5rem,7.5cqw,2rem);
-    }
-}
-
-
-/* =====================================================================
-   v88 — Summary Overview spacing inherits global card rhythm
-   ===================================================================== */
 
 /* Difference Focus -> metric tiles is a major content transition,
    so it uses the shared global section gap rather than local spacing. */
-.contentPage[data-step="1"] .summaryDifferenceFocus + .summaryMetricGrid{
-    margin-top:var(--card-section-gap) !important;
-}
-
-
-/* =====================================================================
-   v92 — Summary Overview vessel identity block
-   ===================================================================== */
 
 .contentPage[data-step="1"] .summaryVesselInfo{
     margin-top:var(--card-section-gap);
-    width:100%;
-    display:flex;
-    flex-direction:column;
-    align-items:stretch;
-    gap:5cqw;
-}
 
-.contentPage[data-step="1"] .summaryVesselHero{
-    display:grid;
-    grid-template-columns:10cqw minmax(0,1fr);
-    align-items:center;
-    gap:4cqw;
-    width:100%;
-}
-
-.contentPage[data-step="1"] .summaryReceiptText{
-    min-width:0;
-    display:flex;
-    flex-direction:column;
-    gap:1cqw;
-}
-
-.contentPage[data-step="1"] .summaryReceiptText strong{
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
-    color:var(--og-text);
-    font-size:var(--metric-tile-value-size);
-    line-height:1.1;
-    font-weight:800;
 }
 
 .contentPage[data-step="1"] .summaryVesselInfo + .summaryMetricGrid{
     margin-top:var(--card-section-gap) !important;
 }
-
-
-/* =====================================================================
-   v93 — centered vessel identity layout
-   ===================================================================== */
-
-.contentPage[data-step="1"] .summaryVesselInfo{
-    margin-top:var(--card-section-gap);
-    width:100%;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:var(--card-section-gap);
-    text-align:center;
-}
-
-.contentPage[data-step="1"] .summaryVesselInfo + .summaryMetricGrid{
-    margin-top:var(--card-section-gap) !important;
-}
-
-
-
-
-/* =====================================================================
-   v100 — Fisheries Notification reuses canonical Step Complete component
-   ===================================================================== */
 
 /* By Size remains unboxed. */
 
-
 /* Fisheries status sits as the next major section. */
 
-
 /* Default state = same visual treatment as Step Complete pending state. */
-
-
-
-
-
-
-
 
 /* Triggered state mirrors Step Complete's completed-state behavior,
    but with orange as the semantic alert color. */
 
-
-
-
-
-
-
-
-
-/* =====================================================================
-   v101 — Notification above By Size / By Size panel restored
-   ===================================================================== */
-
 /* Fisheries Notification remains the same functional state component,
    but is presented without an enclosing box. */
 
-
 /* Remove box/background changes from either state; retain text/icon colors. */
-
 
 /* Preserve Step Complete-style internal alignment despite no outer box. */
 
-
 /* Restore the By Size panel box. */
-
 
 /* Notification -> By Size uses the shared major section gap. */
 
-
-
-/* =====================================================================
-   v102 — Department of Fisheries status refinement
-   ===================================================================== */
-
 /* Informational status only: no button/panel visual treatment. */
-
 
 /* Icon aligns with the TOP of the text block rather than its center. */
 
-
 /* Subtext is always muted, regardless of notification state. */
-
 
 /* Good grade: entire status reads as inactive. */
 
-
 /* Notification required: only icon + title become orange. */
 
-
 /* Ensure inherited Step Complete states can never restore a box here. */
-
-
-
-/* =====================================================================
-   v103 — Fisheries Notification final copy + persistent muted subtext
-   ===================================================================== */
-
-
-
-
-/* =====================================================================
-   v104 — Fisheries status borrows Card 2 divider/icon language
-   ===================================================================== */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* Required state: only icon + title activate in orange.
    Grade explanation remains muted. */
 
-
-
-/* =====================================================================
-   v105 — simplified Fisheries Notification, Card 2 visual language
-   ===================================================================== */
-
-
-
-
-
-
-
 /* Required state: keep icon + label unchanged; only action message turns red. */
-
-
-
-
-
-/* =====================================================================
-   v111 — canonical SVG donut system
-   ---------------------------------------------------------------------
-   True stroke geometry with rounded progress caps.
-   ===================================================================== */
-
-
 
 /* Retire legacy pseudo-element donut drawing. */
 
-
 /* SVG owns all donut geometry. */
-
 
 /* Empty track: solid muted grey, thinner than progress stroke. */
 
-
 /* Colored progress: solid metric color + true round caps. */
 
-
 /* Preserve semantic colors. */
-
-
-
 
 /* Text remains anchored to the same donut box. */
 /* Value line */
 /* Unit line */
 /* Keep the three enlarged donuts evenly distributed and scalable. */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* =====================================================================
-   v115 — CANONICAL CARD 1 SYSTEM
-   ---------------------------------------------------------------------
-   Shared controls own reusable spacing and geometry.
-   Card 1 owns only its genuinely unique visualization details.
-   ===================================================================== */
-
 /* ---------- Shared shell / section rhythm ---------- */
-
-
-
-
-
-
-
 
 /* ---------- Header / footer separator rhythm ---------- */
 
-
-
-
 /* ---------- Shared Card 1 data typography ---------- */
-
-
-
 
 /* ---------- By Size panel ---------- */
 
-
 /* ---------- By Size bars ---------- */
-
-
-
-
-
-
-
 
 /* ---------- Legend dots ---------- */
 
-
-
-
-/* ---------- SVG donut geometry ----------
-   Unique to Inspection Detail; v111 owns actual rendering. */
-
-
-
-
-
-
-
-
-
 /* Wrapper around the By Size box must also remain content-sized. */
 
-
 /* Rows cannot absorb unused vertical space inside the box. */
-
-
-
-
-
 
 /* ==========================================================================
    CARD 1 — INSPECTION DETAIL
    ========================================================================== */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* ==========================================================================
    CARD 2 — INSPECTION SUMMARY
    ========================================================================== */
-
-
-
-
-
-
-
-
-
-
-
-
 
 .contentPage[data-step="1"] .summaryMetricGrid{
     margin-top:var(--c2-section-gap) !important;
 }
 
-.contentPage[data-step="1"] .summaryMetricTile{
-    padding:var(--c2-metric-pad-y) var(--c2-metric-pad-x) !important;
-}
-
-.contentPage[data-step="1"] .summaryMetricIcon{
-    width:var(--c2-metric-icon-size) !important;
-    height:var(--c2-metric-icon-size) !important;
-}
-
-
-
-
-
-
 /* ==========================================================================
    CARD 3 — ACTIVITY TIME SLIP
    ========================================================================== */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }}}
 
@@ -2418,34 +1117,9 @@
 
 /* ---------- Card shell ---------- */
 
-
 /* ---------- Header ---------- */
 
-
-
-
-
-
-
-
-
-
 /* ---------- Step Complete ---------- */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* ---------- Detail Overview ---------- */
 .contentPage[data-step="0"] .gradeOverview{
@@ -2715,10 +1389,6 @@
     line-height:inherit !important;
 }
 
-
-
-
-
 .contentPage[data-step="0"] .sizePercentUnit{
     color:var(--color-white) !important;
 }
@@ -2757,31 +1427,6 @@
 
 /* ---------- Footer ---------- */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* =====================================================================
-   v124 — DEVELOPMENT LAYOUT HIERARCHY INSPECTOR
-   ---------------------------------------------------------------------
-   Square CSS bounds only.
-   Level 1 = major containers
-   Level 2 = component groups
-   Level 3 = individual visual/text objects
-   Uses OUTLINE so layout dimensions never change.
-   ===================================================================== */
-
 #headerHelpButton .debugToggleIcon{
     display:inline-flex;
     align-items:center;
@@ -2800,246 +1445,50 @@
     stroke-linejoin:round;
 }
 
-#headerHelpButton.active{
-    color:var(--accent-blue) !important;
-}
-
 /* Force debug bounds to remain rectangular regardless of component radius. */
-.debugLayout .debugBound,
-.debugLayout .appCard,
-.debugLayout .cardHeader,
-.debugLayout .cardHeaderIcon,
-.debugLayout .cardTitle,
-.debugLayout .cardStepStatus,
-.debugLayout .cardStepIcon,
-.debugLayout .cardStepText,
-.debugLayout .cardStepText strong,
-.debugLayout .cardStepText small,
-.debugLayout .gradeOverviewTitle,
-.debugLayout .gradeDonutGrid,
-.debugLayout .gradeMetric,
-.debugLayout .gradeDonut,
-.debugLayout .gradeDonut [data-home-percent],
-.debugLayout .gradeLegend,
-.debugLayout .fisheriesNotification,
-.debugLayout .fisheriesNotificationDivider,
-.debugLayout .fisheriesNotificationIcon,
-.debugLayout .fisheriesNotificationCopy,
-.debugLayout .fisheriesNotificationCopy strong,
-.debugLayout .fisheriesNotificationCopy small,
-.debugLayout .detailBySizePanel,
-.debugLayout .bySizeRow,
-.debugLayout .bySizeLabel,
-.debugLayout .bySizeTrack,
-.debugLayout .cardFooter,
-.debugLayout .inspectionActionDivider,
-.debugLayout .cardActions,
-.debugLayout .cardActions > button{outline-offset:-1px !important;}
 
 /* =========================
    LEVEL 1 — MAJOR CONTAINERS
    ========================= */
 
-.debugLayout .appCard{
-    outline:2px solid #ff4081 !important;
-}
-
-.debugLayout .cardHeader{
-    outline:2px solid #00e676 !important;
-}
-
-.debugLayout .cardStepStatus{
-    outline:2px solid #c6ff00 !important;
-}
-
-.debugLayout .gradeDonutGrid{outline:2px solid #00b0ff !important;}
-
-.debugLayout .fisheriesNotification{
-    outline:2px solid #e040fb !important;
-}
-
-.debugLayout .detailBySizePanel{
-    outline:2px solid #40c4ff !important;
-}
-
-.debugLayout .cardFooter{
-    outline:2px solid #ff3d00 !important;
-}
-
 /* =========================
    LEVEL 2 — COMPONENT GROUPS
    ========================= */
 
-.debugLayout .cardHeaderIcon,
-.debugLayout .cardTitle{
-    outline:1.5px solid #69f0ae !important;
-}
-
-.debugLayout .cardStepIcon,
-.debugLayout .cardStepText{
-    outline:1.5px solid #ffd740 !important;
-}
-
 /* Detail Overview is intentionally its own object. */
-.debugLayout .gradeOverviewTitle{
-    outline:2px solid #ffab00 !important;
-}
 
 /* Each grading chart group gets its own bounds. */
-.debugLayout .gradeMetric{
-    outline:1.5px solid #18ffff !important;
-}
 
 /* Fisheries internal groups. */
-.debugLayout .fisheriesNotificationDivider{
-    outline:1.5px solid #ff6e40 !important;
-}
-
-.debugLayout .fisheriesNotificationCopy{
-    outline:1.5px solid #7c4dff !important;
-}
 
 /* By-size row groups. */
-.debugLayout .bySizeRow{
-    outline:1.5px solid #536dfe !important;
-}
 
 /* Footer internal groups. */
-.debugLayout .inspectionActionDivider{
-    outline:1.5px solid #ff80ab !important;
-}
-
-.debugLayout .cardActions{
-    outline:1.5px solid #1de9b6 !important;
-}
 
 /* =========================
    LEVEL 3 — INDIVIDUAL OBJECTS
    ========================= */
 
 /* Step Complete */
-.debugLayout .cardStepText strong{
-    outline:1px solid #00e5ff !important;
-}
-
-.debugLayout .cardStepText small{
-    outline:1px solid #ff9100 !important;
-}
 
 /* Donut visual + percentage + label are separate objects. */
-.debugLayout .gradeDonut{outline:1px solid #69f0ae !important;
-    border-radius:0 !important;}
-
-.debugLayout .gradeDonut [data-home-percent]{outline:1px solid #ff5252 !important;}
-
-.debugLayout .gradeLegend{
-    outline:1px solid #ffd740 !important;
-}
 
 /* Fisheries objects */
-.debugLayout .fisheriesNotificationIcon{
-    outline:1px solid #64ffda !important;
-}
-
-.debugLayout .fisheriesNotificationCopy strong{
-    outline:1px solid #ea80fc !important;
-}
-
-.debugLayout .fisheriesNotificationCopy small{
-    outline:1px solid #ff8a80 !important;
-}
 
 /* By Size objects */
-.debugLayout .bySizeLabel{
-    outline:1px solid #b388ff !important;
-}
-
-.debugLayout .bySizeTrack{
-    outline:1px solid #b2ff59 !important;
-    border-radius:0 !important;
-}
 
 /* Footer objects */
-.debugLayout .cardActions > button{
-    outline:1px solid #e7ff00 !important;
-}
 
 /* Keep actual component styling untouched; only debug outlines are square. */
 
-
-
-
 /* ---------- Direct header children ---------- */
-
-
-
-
-/* ---------- Independent header separators ---------- */
-.contentPage[data-step="1"] .summaryHeaderDivider{
-    width:100% !important;
-    height:var(--border-thin) !important;
-    flex:0 0 auto !important;
-    background:var(--og-border) !important;
-}
-
-
-
-.contentPage[data-step="1"] .summaryHeaderDivider{
-    margin:var(--c2-header-divider-gap) 0 0 !important;
-}
-
-
-
-/* ---------- Independent footer separators ----------
-   margin-top:auto anchors the footer assembly to the bottom without
-   making the separator part of cardFooter. */
-.contentPage[data-step="1"] .summaryActionDivider{
-    width:100% !important;
-    height:var(--border-thin) !important;
-    flex:0 0 auto !important;
-    margin-left:0 !important;
-    margin-right:0 !important;
-    margin-top:auto !important;
-    background:var(--og-border) !important;
-}
-
-
-
-.contentPage[data-step="1"] .summaryActionDivider{
-    margin-bottom:var(--c2-footer-divider-gap) !important;
-}
-
-
 
 /* ---------- Footer content containers ----------
    No separator and no automatic vertical anchoring live here anymore. */
 
-
 /* ---------- Debug inspector ----------
    Header/footer content and separators now visibly report as four
    independent rectangular objects. */
-.debugLayout .inspectionHeaderDivider,
-.debugLayout .summaryHeaderDivider,
-.debugLayout .activityHeaderDivider{
-    outline:1.5px solid #18ffff !important;
-    outline-offset:-1px !important;
-}
-
-.debugLayout .inspectionActionDivider,
-.debugLayout .summaryActionDivider,
-.debugLayout .activityActionDivider{
-    outline:1.5px solid #ff80ab !important;
-    outline-offset:-1px !important;
-}
-
-.debugLayout .cardFooter{
-    outline:2px solid #ff3d00 !important;
-    outline-offset:-1px !important;
-}
-
-/* =====================================================================
-   v126 — FORMAL CARD ARCHITECTURE
-   ===================================================================== */
 
 /* ==========================================================================
    CARD 1 — CANONICAL GENERIC SKELETON
@@ -3254,6 +1703,15 @@
 }
 
 /* ==========================================================================
+   CARD 2 — INSPECTION SUMMARY
+   CANONICAL LIVE STYLE
+   --------------------------------------------------------------------------
+   v175 consolidation: redundant earlier declarations for identical Card 2
+   selectors/properties have been removed. Surviving rules below represent
+   distinct live responsibilities and should be edited through Card 2 controls
+   or within this Card 2 implementation.
+   ========================================================================== */
+/* ==========================================================================
    CARD 2 — CANONICAL GENERIC SKELETON
    ========================================================================== */
 
@@ -3261,7 +1719,7 @@
 .contentPage[data-step="1"] .cardPreview.appCard{
     container-type:inline-size !important;
     width:100% !important;
-    height:100% !important;
+    
     display:flex !important;
     flex-direction:column !important;
     justify-content:flex-start !important;
@@ -3677,36 +2135,6 @@
     color:var(--og-text) !important;
 }
 
-
-
-/* =====================================================================
-   v127 — MAIN CARD SHELL RESTORATION
-   ---------------------------------------------------------------------
-   The appCard is now an explicit first-class component in the new
-   architecture. Its background, border and radius are controlled per card.
-   ===================================================================== */
-
-.debugLayout .contentPage[data-step="0"] .appCard,
-.debugLayout .contentPage[data-step="1"] .appCard,
-.debugLayout .contentPage[data-step="2"] .appCard{
-    outline:2px solid #ff4081 !important;
-    outline-offset:-2px !important;
-}
-
-
-/* =====================================================================
-   v129 — CARD VIEWPORT + TRANSITION STACK CONTRACT
-   ---------------------------------------------------------------------
-   Restores the proven pre-refactor transition structure:
-
-   Page 1: 0
-   Page 2: 100% + gap
-   Page 3: 200% + (gap × 2)
-
-   Pages remain full-height, while the space between them is visible only
-   during card transitions. Cards themselves still own their visual shell.
-   ===================================================================== */
-
 #contentViewport{
     position:relative !important;
     height:100% !important;
@@ -3771,28 +2199,11 @@
     align-self:stretch !important;
 }
 
-
-/* =====================================================================
-   v130 — MARK COMPLETE ALIGNMENT
-   ---------------------------------------------------------------------
-   The completion-toggle icon now anchors to the top-left of its content
-   row rather than vertically centering beside multi-line text.
-   ===================================================================== */
 .contentPage[data-step="0"] .cardStepIcon,
 .contentPage[data-step="1"] .cardStepIcon,
 .contentPage[data-step="2"] .cardStepIcon{
     align-self:flex-start !important;
 }
-
-
-/* =====================================================================
-   v131 — ICON ROLE PASS
-   ---------------------------------------------------------------------
-   SVG artwork uses currentColor. Component controls continue to own size.
-   Navigation/card header icons use their existing state colors.
-   Mark Complete uses incomplete/complete checkbox assets.
-   Header developer toggle uses the terminal asset.
-   ===================================================================== */
 
 .timelineNodeIcon svg,
 .cardHeaderIcon svg,
@@ -3811,8 +2222,6 @@
     justify-content:center !important;
 }
 
-
-/* v132 — Fisheries Notification icon asset */
 .fisheriesNotificationIcon svg{
     display:block !important;
     width:100% !important;
@@ -3820,9 +2229,6 @@
     fill:currentColor !important;
     color:inherit !important;
 }
-
-
-
 
 /* Developer icon: navigation-glyph scale, touch target remains 44px. */
 #headerHelpButton{
@@ -3851,28 +2257,6 @@
     color:var(--accent-green) !important;
 }
 
-
-/* =====================================================================
-   v134 — HEADER / FOOTER DEBUG BOUNDS
-   ---------------------------------------------------------------------
-   Top-level application bars are now visible in debug mode so their
-   actual rectangular heights can be compared directly.
-   ===================================================================== */
-
-.debugLayout #appHeader{
-    outline:2px solid #00e5ff !important;
-    outline-offset:-2px !important;
-}
-
-.debugLayout #appFooter{
-    outline:2px solid #ff6d00 !important;
-    outline-offset:-2px !important;
-}
-
-
-/* =====================================================================
-   v135 — HEADER DEVELOPER ICON PLACEMENT / SCALE
-   ===================================================================== */
 #headerHelpButton{
     grid-column:3 !important;
     justify-self:end !important;
@@ -3886,11 +2270,6 @@
     height:var(--c1-header-icon-size) !important;
     flex:0 0 var(--c1-header-icon-size) !important;
 }
-
-
-/* =====================================================================
-   v136 — DONUT CAP TEST + TEMP DEBUG ICON SIZE
-   ===================================================================== */
 
 /* Test exact proportional arc geometry without round-cap extension. */
 .contentPage[data-step="0"] .gradeDonutProgress{stroke-linecap:butt !important;}
@@ -3909,24 +2288,8 @@
     height:44px !important;
 }
 
-/* v137 — clean SVG trim-path test */
 .contentPage[data-step="0"] .gradeDonutProgress{stroke-linecap:butt !important;}
 
-
-
-
-
-
-
-
-/* =====================================================================
-   v140 — CARD 1 DONUT DESIGN CONTRACT
-   ---------------------------------------------------------------------
-   Geometry owner: app/navigation.js
-   Appearance owner: this single production rule.
-   0% begins at 12 o'clock.
-   Requested percentage includes the visible contribution of round caps.
-   ===================================================================== */
 .contentPage[data-step="0"] .gradeDonutProgress{
     fill:none !important;
     stroke:currentColor !important;
@@ -3936,60 +2299,14 @@
     vector-effect:non-scaling-stroke;
 }
 
-
-/* =====================================================================
-   v141 — CARD 1 LINEAR PROGRESS DESIGN CONTRACT
-   ---------------------------------------------------------------------
-   Geometry owner: setLinearProgress() in app/navigation.js
-       0%   = zero horizontal extent
-       100% = full track width
-
-   Appearance owner: CSS
-       track thickness
-       fill thickness
-       colours
-       rounded ends
-
-   CSS border-radius remains inside the declared fill width, so rounded
-   ends do not require the cap-length compensation used by SVG arcs.
-   ===================================================================== */
 .contentPage[data-step="0"] .bySizeFill{
     box-sizing:border-box !important;
 }
 
-
-/* =====================================================================
-   v142 — CARD 1 BY SIZE VALUE TYPOGRAPHY
-   ---------------------------------------------------------------------
-   Number uses the existing premium/standard colour but regular weight,
-   matching the visual weight of the approved donut percentage values.
-   ===================================================================== */
 .contentPage[data-step="0"] [data-summary-premium-size] .sizePercentNumber,
 .contentPage[data-step="0"] [data-summary-standard-size] .sizePercentNumber{
     font-weight:var(--c1-by-size-value-weight) !important;
 }
-
-
-/* =====================================================================
-   v142 — CARD 1 DEBUG INSPECTOR OWNERSHIP
-   ===================================================================== */
-.debugLayout .inspectionActionDivider{
-    outline:1.5px solid #ff80ab !important;
-    outline-offset:-1px !important;
-}
-
-.debugLayout .cardFooter{
-    outline:2px solid #ff3d00 !important;
-    outline-offset:-1px !important;
-}
-
-
-/* =====================================================================
-   v143 — CARD 2 UNIQUE CONTENT ARCHITECTURE
-   ---------------------------------------------------------------------
-   Card 2 owns all vessel, receipt, and metric-card visual rules.
-   Generic card skeleton remains owned by the canonical Card 2 skeleton.
-   ===================================================================== */
 
 /* Overview-to-content rhythm */
 .contentPage[data-step="1"] .summaryOverview{
@@ -4016,28 +2333,6 @@
     text-align:center !important;
 }
 
-.contentPage[data-step="1"] .summaryVesselName{
-    margin:0 !important;
-    padding:0 !important;
-    font-size:var(--c2-vessel-name-size) !important;
-    line-height:1.15 !important;
-    font-weight:var(--c2-vessel-name-weight) !important;
-    color:var(--og-text) !important;
-    text-align:center !important;
-}
-
-.contentPage[data-step="1"] .summaryCfv{
-    display:flex !important;
-    align-items:baseline !important;
-    justify-content:center !important;
-    gap:var(--c2-vessel-cfv-gap) !important;
-    margin:0 !important;
-    font-size:var(--c2-vessel-cfv-size) !important;
-    line-height:1.2 !important;
-    color:var(--og-muted) !important;
-    font-weight:400 !important;
-}
-
 /* Metric grid */
 .contentPage[data-step="1"] .summaryMetricGrid{
     width:100% !important;
@@ -4046,21 +2341,6 @@
     gap:var(--c2-metric-grid-gap) !important;
     margin:var(--c2-section-gap) 0 0 !important;
     padding:0 !important;
-}
-
-.contentPage[data-step="1"] .summaryMetricCard{
-    min-width:0 !important;
-    display:flex !important;
-    flex-direction:column !important;
-    align-items:center !important;
-    justify-content:center !important;
-    gap:var(--c2-metric-content-gap) !important;
-    padding:var(--c2-metric-pad-y) var(--c2-metric-pad-x) !important;
-    border:var(--c2-metric-border) solid var(--og-border) !important;
-    border-radius:var(--c2-metric-radius) !important;
-    background:var(--og-panel-deep) !important;
-    box-shadow:none !important;
-    text-align:center !important;
 }
 
 .contentPage[data-step="1"] .summaryMetricIcon{
@@ -4087,57 +2367,16 @@
     color:var(--og-text) !important;
 }
 
-.contentPage[data-step="1"] .summaryMetricLabel{
-    margin:0 !important;
-    font-size:var(--c2-metric-label-size) !important;
-    line-height:var(--c2-metric-label-line-height) !important;
-    font-weight:400 !important;
-    color:var(--og-muted) !important;
-}
-
-
-/* =====================================================================
-   v145 — CARD 2 DEBUG HIERARCHY
-   ---------------------------------------------------------------------
-   Rectangular bounds at the level needed for layout correction.
-   ===================================================================== */
-
 /* Standalone Summary Overview title */
-.debugLayout .contentPage[data-step="1"] .summaryOverviewTitle{
-    outline:2px solid #ffab00 !important;
-    outline-offset:-1px !important;
-}
 
 /* Grade data contents container */
-.debugLayout .contentPage[data-step="1"] .summaryGradeData{
-    outline:2px solid #40c4ff !important;
-    outline-offset:-2px !important;
-}
 
 /* One box per complete grade-data item */
-.debugLayout .contentPage[data-step="1"] .summaryMetric{
-    outline:1.5px solid #536dfe !important;
-    outline-offset:-1px !important;
-}
-
-
-/* =====================================================================
-   v146 — CARD 2 VISUAL RESTORATION ON v145 STRUCTURE
-   ---------------------------------------------------------------------
-   Preserve the corrected hierarchy; restore intended horizontal layout.
-   Card 2 uses the same section-gap token philosophy as Card 1.
-   ===================================================================== */
 
 /* Summary header -> boat contents uses the standard Card 2 section gap,
    matching the Detail Overview -> chart relationship. */
-.contentPage[data-step="1"] .summaryOverviewTitle{
-    margin:0 0 var(--c2-section-gap) !important;
-}
 
 /* Standardized separation between boat contents and grade-data contents. */
-.contentPage[data-step="1"] .summaryGradeData{
-    margin-top:var(--c2-section-gap) !important;
-}
 
 /* Three metric boxes are one horizontal row with an even controlled gap. */
 .contentPage[data-step="1"] .summaryGradeData{
@@ -4161,18 +2400,6 @@
     flex:none !important;
 }
 
-
-/* =====================================================================
-   v148 — CARD 2 SPACING HIERARCHY
-   ---------------------------------------------------------------------
-   Match Card 1's hierarchy:
-   heading -> first content block = 4cqw
-   content block -> next content block = 8cqw
-
-   Boat data internal rhythm:
-   vessel/name -> 4cqw -> CFV group -> 4cqw -> receipt
-   ===================================================================== */
-
 .contentPage[data-step="1"] .summaryOverviewTitle{
     margin:0 0 4cqw !important;
 }
@@ -4181,10 +2408,6 @@
     margin-top:8cqw !important;
 }
 
-
-/* =====================================================================
-   v150 — CARD 2 BOAT DATA DESIGN CONTRACT
-   ===================================================================== */
 .contentPage[data-step="1"] .summaryBoatContents{
     width:100% !important;
     display:flex !important;
@@ -4193,9 +2416,7 @@
     gap:var(--c2-boat-block-gap) !important;
     margin:0 !important;
     padding:var(--c2-box-pad-y) var(--c2-box-pad-x) !important;
-    border:var(--c2-box-border) solid var(--og-border) !important;
-    border-radius:var(--c2-box-radius) !important;
-    background:var(--og-panel-deep) !important;
+
     box-sizing:border-box !important;
 }
 
@@ -4222,9 +2443,9 @@
 
 .contentPage[data-step="1"] .summaryBoatName{
     margin:0 !important;
-    font-size:var(--c2-boat-name-size) !important;
+    
     line-height:1.15 !important;
-    font-weight:var(--c2-boat-name-weight) !important;
+    
     color:var(--og-text) !important;
 }
 
@@ -4264,7 +2485,7 @@
     align-items:baseline !important;
     justify-content:center !important;
     gap:var(--c2-boat-cfv-gap) !important;
-    margin:0 auto !important;
+    
     font-size:var(--c2-boat-cfv-size) !important;
     line-height:1.2 !important;
     font-weight:400 !important;
@@ -4286,16 +2507,14 @@
     justify-content:center !important;
     gap:var(--c2-receipt-row-gap) !important;
     margin:0 auto !important;
-    font-size:var(--c2-boat-name-size) !important;
+    
     line-height:1.15 !important;
     font-weight:400 !important;
     white-space:nowrap !important;
 }
 
 .contentPage[data-step="1"] .summaryReceiptIcon{
-    width:1em !important;
-    height:1em !important;
-    flex:0 0 1em !important;
+
     display:flex !important;
     align-items:center !important;
     justify-content:center !important;
@@ -4308,36 +2527,7 @@
     fill:currentColor !important;
 }
 
-.contentPage[data-step="1"] [data-summary-boat-name][data-empty-state="true"],
-.contentPage[data-step="1"] [data-summary-cfv][data-empty-state="true"],
-.contentPage[data-step="1"] [data-summary-fish-receipt][data-empty-state="true"]{
-    color:var(--c2-boat-placeholder-color) !important;
-}
-
 /* Debug hierarchy */
-.debugLayout .contentPage[data-step="1"] .summaryBoatContents{
-    outline:2px solid #e040fb !important;
-    outline-offset:-2px !important;
-}
-.debugLayout .contentPage[data-step="1"] .summaryBoatIdentityBlock{
-    outline:1.5px solid #7c4dff !important;
-    outline-offset:-1px !important;
-}
-.debugLayout .contentPage[data-step="1"] .summaryBoatCfvBlock{
-    outline:1.5px solid #18ffff !important;
-    outline-offset:-1px !important;
-}
-.debugLayout .contentPage[data-step="1"] .summaryBoatReceiptBlock{
-    outline:1.5px solid #ff6e40 !important;
-    outline-offset:-1px !important;
-}
-
-
-/* =====================================================================
-   v151 — CARD 2 VISUAL-ONLY REFINEMENT
-   ---------------------------------------------------------------------
-   No structural/layout changes.
-   ===================================================================== */
 
 .contentPage[data-step="1"] .appCard{
     /* Exact muted colour used by Fisheries Notification sub-text. */
@@ -4355,21 +2545,9 @@
 }
 
 /* Boat Name matches Mark Complete font size. */
-.contentPage[data-step="1"] .summaryBoatName{
-    font-size:var(--c2-step-title-size) !important;
-}
 
 /* Fish receipt number row matches Boat Name / Mark Complete size.
    Icon remains 1em, therefore exactly follows the same type scale. */
-.contentPage[data-step="1"] .summaryReceiptValue{
-    font-size:var(--c2-step-title-size) !important;
-}
-
-.contentPage[data-step="1"] .summaryReceiptIcon{
-    width:1em !important;
-    height:1em !important;
-    flex:0 0 1em !important;
-}
 
 /* Grade-data values use their category colours. */
 .contentPage[data-step="1"] .summaryMetricValueNet{
@@ -4379,13 +2557,6 @@
 .contentPage[data-step="1"] .summaryMetricValueSamples{
     color:var(--accent-green) !important;
 }
-
-
-/* =====================================================================
-   v152 — PRECISE CARD 2 VISUAL CORRECTION
-   ---------------------------------------------------------------------
-   Requested changes only.
-   ===================================================================== */
 
 /* Boat Data is a structural parent only — not a visible card/box. */
 .contentPage[data-step="1"] .summaryBoatContents{
@@ -4415,11 +2586,6 @@
     flex:0 0 var(--c2-boat-icon-size) !important;
 }
 
-
-/* =====================================================================
-   v153 — REQUESTED CARD 2 BOAT-DATA REFINEMENTS ONLY
-   ===================================================================== */
-
 /* Structural parent: remove vertical padding so section spacing is owned
    solely by the established external 8cqw rhythm. Preserve horizontal pad. */
 .contentPage[data-step="1"] .summaryBoatContents{
@@ -4442,19 +2608,9 @@
     font-weight:inherit !important;
 }
 
-
-/* v154 — requested Boat Name text treatment only */
 .contentPage[data-step="1"] .summaryBoatName{
     font-weight:700 !important;
 }
-
-
-/* =====================================================================
-   v156 — TARGETED OFF-WHITE TEXT PASS
-   ---------------------------------------------------------------------
-   Use --og-text (#f8fafc) only on explicitly approved content.
-   No global replacement of white assignments.
-   ===================================================================== */
 
 /* ---------------- CARD 1 ---------------- */
 
@@ -4490,7 +2646,6 @@
     color:var(--og-text) !important;
 }
 
-
 /* ---------------- CARD 2 ---------------- */
 
 /* Inspection Summary title */
@@ -4515,7 +2670,6 @@
     color:var(--og-text) !important;
 }
 
-
 /* ---------------- CARD 3 ---------------- */
 
 /* Same shared content treatment as Cards 1–2 */
@@ -4523,11 +2677,6 @@
 .contentPage[data-step="2"] .cardActions > button{
     color:var(--og-text) !important;
 }
-
-
-/* =====================================================================
-   v158 — REQUESTED CARD 2 CFV RESTRUCTURE
-   ===================================================================== */
 
 /* Vessel, Boat Name, and CFV now share the same internal vertical rhythm. */
 .contentPage[data-step="1"] .summaryBoatIdentityBlock{
@@ -4544,11 +2693,99 @@
     margin:0 auto !important;
 }
 
-
-/* v158 — temporary developer toggle off-state */
 #headerHelpButton:not(.active),
 #headerHelpButton:not(.active) .debugToggleIcon,
 #headerHelpButton:not(.active) .debugToggleIcon svg{
     color:var(--palette-muted) !important;
     fill:currentColor !important;
+}
+
+.contentPage[data-step="0"] .fisheriesNotification{
+    gap:4cqw !important;
+}
+
+.contentPage[data-step="0"] .fisheriesNotificationDivider{
+    width:var(--mini-separator-width) !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:var(--mini-separator-gap) !important;
+    margin:0 auto !important;
+    padding:0 !important;
+}
+
+.contentPage[data-step="0"] .fisheriesNotificationDivider > span{
+    display:block !important;
+    height:var(--border-thin) !important;
+    flex:1 1 auto !important;
+    width:auto !important;
+    min-width:0 !important;
+    background:var(--og-border) !important;
+    border:0 !important;
+    opacity:1 !important;
+}
+
+.contentPage[data-step="0"] .fisheriesNotificationIcon{
+    width:var(--mini-separator-icon-size) !important;
+    height:var(--mini-separator-icon-size) !important;
+    flex:0 0 var(--mini-separator-icon-size) !important;
+
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+
+    margin:0 !important;
+    padding:0 !important;
+
+    border:0 !important;
+    border-radius:0 !important;
+    background:transparent !important;
+    box-shadow:none !important;
+
+    color:var(--palette-subtle) !important;
+    transform:none !important;
+}
+
+.contentPage[data-step="0"] .fisheriesNotificationIcon svg{
+    width:100% !important;
+    height:100% !important;
+    display:block !important;
+    margin:0 !important;
+    padding:0 !important;
+    fill:currentColor !important;
+    color:inherit !important;
+    transform:none !important;
+}
+
+/* Approved functional status treatment. */
+.contentPage[data-step="0"] .fisheriesNotification[data-required="true"] .fisheriesNotificationIcon{
+    color:var(--palette-orange) !important;
+}
+
+.contentPage[data-step="0"] .fisheriesNotification[data-required="true"] .fisheriesNotificationIcon svg{
+    color:inherit !important;
+    fill:currentColor !important;
+}
+
+/* Debug centerline remains diagnostic only. */
+
+#layoutDebugOverlay{
+    position:fixed;
+    inset:0;
+    z-index:2147483647;
+    pointer-events:none;
+    overflow:hidden;
+}
+
+.layoutDebugBox{
+    position:absolute;
+    box-sizing:border-box;
+    border:1.5px solid;
+    border-radius:0;
+    background:transparent;
+    pointer-events:none;
+}
+
+#headerHelpButton.active{
+    color:var(--accent-blue) !important;
 }
