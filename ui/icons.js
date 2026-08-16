@@ -44,10 +44,10 @@ async function loadSvgIcon(
 
 }
 
-async function initializeIcons(){
+async function renderIcons(root=document){
 
     const iconElements =
-        document.querySelectorAll(
+        root.querySelectorAll(
             "[data-icon]"
         );
 
@@ -57,6 +57,17 @@ async function initializeIcons(){
         iconElements
     ){
 
+        const developmentOnly=
+            element.closest("[data-development-only]");
+
+        if(
+            developmentOnly &&
+            typeof isDevelopmentMode==="function" &&
+            !isDevelopmentMode()
+        ){
+            continue;
+        }
+
         await loadSvgIcon(
             element,
             element.dataset.icon
@@ -64,6 +75,10 @@ async function initializeIcons(){
 
     }
 
+}
+
+async function initializeIcons(){
+    await renderIcons(document);
 }
 
 document.addEventListener(

@@ -18,18 +18,101 @@ function gradingFormulaDetails(key){
  }[key]||null; return {...d,formula:displayFormula,variables:vars,current:cur,currentHtml,variableValues};
 }
 function fbtn(text,key){return `<button type="button" class="resultCellButton" data-grading-formula="${key}">${text}</button>`;}
-function gradingResultsTable(){const i=appState.inspectionDetail.inputs,r=appState.inspectionDetail.results;return `<div class="resultsTableWrap"><table class="resultsTable gradingTable"><thead><tr><th>Grade</th><th>Net Lbs.<br>Graded</th><th>% of Net<br>Lbs.</th><th>% by<br>Size</th></tr></thead><tbody>
-<tr><td>Premium</td><td>${i.premium.toFixed(1)}</td><td>${fbtn(r.premiumPercent.toFixed(2)+'%','premiumPercent')}</td><td>${fbtn(r.premiumBySize.toFixed(2)+'%','premiumBySize')}</td></tr>
-<tr><td>Standard</td><td>${i.standard.toFixed(1)}</td><td>${fbtn(r.standardPercent.toFixed(2)+'%','standardPercent')}</td><td>${fbtn(r.standardBySize.toFixed(2)+'%','standardBySize')}</td></tr>
-<tr><td>Critical Weak</td><td>${i.criticalWeak.toFixed(1)}</td><td>${fbtn(r.criticalWeakPercent.toFixed(2)+'%','criticalWeakPercent')}</td><td>—</td></tr>
-<tr><td>Soft Shell</td><td>${i.softShell.toFixed(1)}</td><td>${fbtn(r.softShellPercent.toFixed(2)+'%','softShellPercent')}</td><td>—</td></tr>
-<tr><td>Dead</td><td>${i.dead.toFixed(1)}</td><td>${fbtn(r.deadPercent.toFixed(2)+'%','deadPercent')}</td><td>—</td></tr>
-<tr><td>Less than 3.74&quot;</td><td>${i.undersize.toFixed(1)}</td><td>${fbtn(r.undersizePercent.toFixed(2)+'%','undersizePercent')}</td><td>—</td></tr>
-<tr><td>Barn. / Tubeworm</td><td>${i.barnacleTubeworm.toFixed(1)}</td><td>${fbtn(r.barnacleTubewormPercent.toFixed(2)+'%','barnacleTubewormPercent')}</td><td>—</td></tr>
-<tr class="summaryRow"><td>Total Reject</td><td>${fbtn(r.totalReject.toFixed(1),'totalReject')}</td><td>${fbtn(r.rejectPercent.toFixed(2)+'%','rejectPercent')}</td><td>—</td></tr>
-<tr class="grandRow"><td>Total Net Lbs.<br>Graded</td><td>${fbtn(r.totalNetLbsGraded.toFixed(1),'totalNetLbsGraded')}</td><td>${r.percentLbsGraded.toFixed(2)}%</td><td>${r.percentBySizeTotal.toFixed(2)}%</td></tr>
-</tbody></table></div>`;}
-function renderInspectionDetailWorkspace(){setWorkspaceContent(`<div class="workspaceModule"><section class="moduleCard"><header class="moduleCardHeader"><div class="moduleCardIcon" data-icon="grading"></div><div><h2 class="moduleCardTitle">Inspection Detail</h2><p class="moduleCardSubtitle">Grade sample quality & percentages</p></div></header><div class="moduleCardBody"><div class="inputList">${gradingInputRow("Gross Lbs. Graded","grossGraded",1,"blue")}${gradingInputRow("Premium","premium",2,"green")}${gradingInputRow("Standard","standard",3,"green")}${gradingInputRow("Critical Weak","criticalWeak",4,"orange")}${gradingInputRow("Soft Shell","softShell",5,"orange")}${gradingInputRow("Dead","dead",6,"red")}${gradingInputRow('Less than 3.74"',"undersize",7,"red")}${gradingInputRow("Barn. / Tubeworm","barnacleTubeworm",8,"red")}</div><div class="moduleActions"><button type="button" class="clearButton" id="clearGrading">Clear</button></div><div class="resultsHeading dataSheetHeading"><span class="resultsHeadingIcon">◉</span><span>Dockside Grading Summary</span></div><div id="gradingLiveResults">${gradingResultsTable()}</div></div></section></div>`);if(typeof renderIcons==='function')renderIcons();bindGradingSummaryWorkspace();}
-function refreshGradingResultsOnly(){const p=document.getElementById("gradingLiveResults");if(p){p.innerHTML=gradingResultsTable();bindGradingFormulaButtons();}}
+function gradingBreakdownPercent(value,key,colorClass){
+ const safe=Math.max(0,Math.min(100,Number(value)||0));
+ return `<div class="gradingBreakdownPercent gradingBreakdown-${colorClass}">
+  ${fbtn(`${safe.toFixed(2)}%`,key)}
+  <div class="gradingBreakdownTrack" aria-hidden="true">
+   <span class="gradingBreakdownFill" style="width:${safe}%"></span>
+  </div>
+ </div>`;
+}
+
+function gradingBreakdownRow(label,weight,percent,percentKey,bySize,bySizeKey,colorClass){
+ return `<div class="gradingBreakdownRow">
+  <div class="gradingBreakdownGrade">${label}</div>
+  <div class="gradingBreakdownWeight">${Number(weight).toFixed(1)} <span>lbs</span></div>
+  <div class="gradingBreakdownNetPercent">${gradingBreakdownPercent(percent,percentKey,colorClass)}</div>
+  <div class="gradingBreakdownBySize">${bySizeKey ? fbtn(`${Number(bySize).toFixed(2)}%`,bySizeKey) : ""}</div>
+ </div>`;
+}
+
+function gradingResultsTable(){
+ const i=appState.inspectionDetail.inputs;
+ const r=appState.inspectionDetail.results;
+ const rejectHasData=r.totalReject!==0;
+ const netHasData=r.totalNetLbsGraded!==0;
+
+ return `<div class="gradingBreakdown">
+  <div class="gradingBreakdownHeader">
+   <div>Category</div>
+   <div>Net Lbs. Graded</div>
+   <div>% of Net Lbs.</div>
+   <div>% by Size</div>
+  </div>
+
+  <div class="gradingBreakdownRows">
+   ${gradingBreakdownRow("Premium",i.premium,r.premiumPercent,"premiumPercent",r.premiumBySize,"premiumBySize","premium")}
+   ${gradingBreakdownRow("Standard",i.standard,r.standardPercent,"standardPercent",r.standardBySize,"standardBySize","standard")}
+   ${gradingBreakdownRow("Critical Weak",i.criticalWeak,r.criticalWeakPercent,"criticalWeakPercent",0,null,"critical")}
+   ${gradingBreakdownRow("Soft Shell",i.softShell,r.softShellPercent,"softShellPercent",0,null,"soft")}
+   ${gradingBreakdownRow("Dead",i.dead,r.deadPercent,"deadPercent",0,null,"reject")}
+   ${gradingBreakdownRow('Less than 3.74"',i.undersize,r.undersizePercent,"undersizePercent",0,null,"reject")}
+   ${gradingBreakdownRow("Barn. / Tubeworm",i.barnacleTubeworm,r.barnacleTubewormPercent,"barnacleTubewormPercent",0,null,"reject")}
+  </div>
+ </div>
+
+ <div class="gradingTotalsPanel">
+  <div class="gradingTotalRow gradingTotalReject">
+   <div class="gradingTotalIcon gradingTotalRejectIcon${rejectHasData ? " gradingTotalIconComplete" : ""}" data-icon="${rejectHasData ? "complete" : "incomplete"}" aria-hidden="true"></div>
+   <div class="gradingTotalIdentity">
+    <div class="gradingSummaryLabel">Total Rejects Graded</div>
+    <div class="gradingTotalValue gradingRejectValue">${fbtn(`${r.totalReject.toFixed(1)} lbs`,"totalReject")}</div>
+   </div>
+   <div class="gradingTotalMetric">
+    <span class="gradingRejectPercent">${fbtn(`${r.rejectPercent.toFixed(2)}%`,"rejectPercent")}</span>
+    <span>of net lbs.</span>
+   </div>
+   <div class="gradingTotalMetric gradingTotalMetricSpacer" aria-hidden="true"></div>
+  </div>
+
+  <div class="gradingTotalsDivider" aria-hidden="true"></div>
+
+  <div class="gradingTotalRow gradingTotalNet">
+   <div class="gradingTotalIcon gradingTotalNetIcon${netHasData ? " gradingTotalIconComplete" : ""}" data-icon="${netHasData ? "complete" : "incomplete"}" aria-hidden="true"></div>
+   <div class="gradingTotalIdentity">
+    <div class="gradingSummaryLabel">Total Net Lbs. Graded</div>
+    <div class="gradingTotalValue gradingNetWeight">${fbtn(`${r.totalNetLbsGraded.toFixed(1)} lbs`,"totalNetLbsGraded")}</div>
+   </div>
+   <div class="gradingTotalMetric">
+    <span>${r.percentLbsGraded.toFixed(2)}%</span>
+    <span>of net lbs.</span>
+   </div>
+   <div class="gradingTotalMetric">
+    <span>${r.percentBySizeTotal.toFixed(2)}%</span>
+    <span>by size</span>
+   </div>
+  </div>
+ </div>`;
+}
+
+function renderInspectionDetailWorkspace(){setWorkspaceContent(`<div class="workspaceModule"><section class="moduleCard"><header class="moduleCardHeader"><div class="moduleCardIcon" data-icon="grading"></div><div><h2 class="moduleCardTitle">Inspection Detail</h2><p class="moduleCardSubtitle">Grade sample quality & percentages</p></div></header><div class="moduleCardBody"><div class="inputList">${gradingInputRow("Gross Lbs. Graded","grossGraded",1,"blue")}${gradingInputRow("Premium","premium",2,"green")}${gradingInputRow("Standard","standard",3,"green")}${gradingInputRow("Critical Weak","criticalWeak",4,"orange")}${gradingInputRow("Soft Shell","softShell",5,"orange")}${gradingInputRow("Dead","dead",6,"red")}${gradingInputRow('Less than 3.74"',"undersize",7,"red")}${gradingInputRow("Barn. / Tubeworm","barnacleTubeworm",8,"red")}</div><div class="moduleActions"><button type="button" class="clearButton" id="clearGrading">Clear</button></div><div class="resultsHeading dataSheetHeading"><span class="resultsHeadingIcon">◉</span><span>Dockside Grading Summary</span></div><div id="gradingLiveResults">${gradingResultsTable()}</div></div></section></div>`);refreshGradingSummaryIcons();bindGradingSummaryWorkspace();}
+function refreshGradingSummaryIcons(){
+ const container=document.getElementById("gradingLiveResults");
+ if(!container || typeof loadSvgIcon!=="function") return;
+
+ container.querySelectorAll(".gradingTotalIcon[data-icon]").forEach(icon=>{
+  loadSvgIcon(icon,icon.dataset.icon);
+ });
+}
+
+function refreshGradingResultsOnly(){
+ const p=document.getElementById("gradingLiveResults");
+ if(p){
+  p.innerHTML=gradingResultsTable();
+  refreshGradingSummaryIcons();
+  bindGradingFormulaButtons();
+ }
+}
 function bindGradingFormulaButtons(){document.querySelectorAll("[data-grading-formula]").forEach(b=>b.addEventListener("click",()=>showFormulaHelp(gradingFormulaDetails(b.dataset.gradingFormula),b)));}
-function bindGradingSummaryWorkspace(){document.querySelectorAll("[data-grading-input]").forEach(input=>{input.addEventListener("focus",e=>e.target.select());input.addEventListener("input",e=>{setAppNumber("inspectionDetail",e.target.dataset.gradingInput,e.target.value);refreshGradingResultsOnly();if(typeof refreshHomePreview==="function")refreshHomePreview();});});const clear=document.getElementById("clearGrading");if(clear)clear.addEventListener("click",()=>{Object.keys(appState.inspectionDetail.inputs).forEach(k=>appState.inspectionDetail.inputs[k]=0);recalculateAll();renderInspectionDetailWorkspace();});bindGradingFormulaButtons();}
+function bindGradingSummaryWorkspace(){document.querySelectorAll("[data-grading-input]").forEach(input=>{input.addEventListener("focus",e=>e.target.select());input.addEventListener("input",e=>{setAppNumberAndRefresh("inspectionDetail",e.target.dataset.gradingInput,e.target.value);refreshGradingResultsOnly();});});const clear=document.getElementById("clearGrading");if(clear)clear.addEventListener("click",()=>{commitAppStateChange(()=>{Object.keys(appState.inspectionDetail.inputs).forEach(k=>appState.inspectionDetail.inputs[k]=0);});renderInspectionDetailWorkspace();});bindGradingFormulaButtons();}

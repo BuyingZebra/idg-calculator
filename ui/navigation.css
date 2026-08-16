@@ -1,26 +1,8 @@
-/* =====================================================================
-   IDG TRAINING TOOL — CARD CONTROL PANEL
-   =====================================================================
-   RULE:
-   Each card owns its own values, even when the values currently match.
+/* Home-card, timeline, and card-preview styles.
+   Card 1/2/3 ownership is scoped by data-step; historical tweak comments were removed in v215. */
 
-   Generic skeleton on every card:
-       Card
-       Header -> Icon + Title
-       Header Separator (independent)
-       Step Complete -> Icon + Title + Body
-       Card-specific content
-       Footer Separator (independent)
-       Footer -> Buttons
-
-   Edit these values before touching implementation CSS.
-   ===================================================================== */
-
-/* ==========================================================================
-   CARD 1 — INSPECTION DETAIL CONTROLS
-   ========================================================================== */
 .contentPage[data-step="0"] .appCard{
-    /* Card shell */
+
     --c1-card-pad-x:3cqw;
     --c1-card-bg:var(--og-panel);
     --c1-card-border:var(--border-thin);
@@ -29,38 +11,32 @@
     --c1-card-pad-y:3cqw;
     --c1-section-gap:8cqw;
 
-    /* Header */
     --c1-header-gap:4cqw;
     --c1-header-icon-size:16cqw;
     --c1-header-title-size:var(--card-title-size);
     --c1-header-divider-gap:3.5cqw;
     --c1-divider-height:var(--border-thin);
 
-    /* Repeating content boxes */
     --c1-box-pad-x:4cqw;
     --c1-box-pad-y:3cqw;
     --c1-box-radius:var(--radius-control);
     --c1-box-border:var(--border-thin);
 
-    /* Step Complete */
     --c1-step-gap:3cqw;
     --c1-step-icon-size:9cqw;
     --c1-step-title-size:var(--card-step-title-size);
     --c1-step-body-size:var(--card-body-size);
     --c1-step-text-gap:1cqw;
 
-    /* Overview */
     --c1-overview-title-size:var(--card-overview-title-size);
     --c1-overview-content-gap:4cqw;
 
-    /* Footer */
     --c1-footer-divider-gap:3.5cqw;
     --c1-button-gap:3cqw;
     --c1-button-min-height:var(--touch-target-min);
     --c1-button-radius:var(--radius-control);
     --c1-button-font-size:var(--card-button-size);
 
-    /* Card 1 unique — donut charts */
     --c1-donut-size:32cqw;
     --c1-donut-track-stroke:4;
     --c1-donut-progress-stroke:6;
@@ -70,20 +46,16 @@
     --c1-legend-gap:1.5cqw;
     --c1-legend-dot-size:3cqw;
 
-    /* Card 1 unique — Fisheries */
     --c1-fisheries-divider-width:82%;
     --c1-fisheries-icon-size:9cqw;
     --c1-fisheries-gap:2cqw;
     --c1-fisheries-line-gap:3cqw;
 
-    /* Card 1 unique — shared progress appearance */
     --c1-progress-muted:var(--palette-muted);
     --c1-progress-radius:var(--radius-pill);
 
-    /* Card 1 unique — Fisheries */
     --c1-fisheries-copy-gap:1cqw;
 
-    /* Card 1 unique — By Size */
     --c1-by-size-row-gap:3cqw;
     --c1-by-size-inner-gap:1.5cqw;
     --c1-by-size-label-gap:.35em;
@@ -92,11 +64,8 @@
     --c1-by-size-value-weight:400;
 }
 
-/* ==========================================================================
-   CARD 2 — INSPECTION SUMMARY CONTROLS
-   ========================================================================== */
 .contentPage[data-step="1"] .appCard{
-    /* Card shell */
+
     --c2-card-pad-x:3cqw;
     --c2-card-bg:var(--og-panel);
     --c2-card-border:var(--border-thin);
@@ -105,45 +74,38 @@
     --c2-card-pad-y:3cqw;
     --c2-section-gap:8cqw;
 
-    /* Header */
     --c2-header-gap:4cqw;
     --c2-header-icon-size:16cqw;
     --c2-header-title-size:var(--card-title-size);
     --c2-header-divider-gap:3.5cqw;
     --c2-divider-height:var(--border-thin);
 
-    /* Repeating content boxes */
     --c2-box-pad-x:4cqw;
     --c2-box-pad-y:3cqw;
     --c2-box-radius:var(--radius-control);
     --c2-box-border:var(--border-thin);
 
-    /* Step Complete */
     --c2-step-gap:3cqw;
     --c2-step-icon-size:9cqw;
     --c2-step-title-size:var(--card-step-title-size);
     --c2-step-body-size:var(--card-body-size);
     --c2-step-text-gap:1cqw;
 
-    /* Overview */
     --c2-overview-title-size:var(--card-overview-title-size);
 
-    /* Footer */
     --c2-footer-divider-gap:3.5cqw;
     --c2-button-gap:3cqw;
     --c2-button-min-height:var(--touch-target-min);
     --c2-button-radius:var(--radius-control);
     --c2-button-font-size:var(--card-button-size);
 
-    /* Card 2 unique — overview */
     --c2-overview-content-gap:5cqw;
 
-    /* Card 2 unique — Boat Data */
     --c2-boat-block-gap:4cqw;
     --c2-boat-block-internal-gap:1.5cqw;
-    --c2-boat-name-size:var(--metric-tile-value-size);
+
     --c2-boat-name-weight:400;
-    --c2-boat-placeholder-color:var(--palette-muted);
+
     --c2-boat-divider-width:var(--mini-separator-width);
     --c2-boat-divider-gap:var(--mini-separator-gap);
     --c2-boat-icon-size:var(--mini-separator-icon-size);
@@ -151,7 +113,6 @@
     --c2-boat-cfv-gap:.35em;
     --c2-receipt-row-gap:1.5cqw;
 
-    /* Card 2 unique — vessel identity */
     --c2-vessel-gap:2cqw;
     --c2-vessel-eyebrow-size:var(--metric-tile-label-size);
     --c2-vessel-eyebrow-gap:1cqw;
@@ -163,7 +124,6 @@
     --c2-vessel-cfv-size:var(--metric-tile-label-size);
     --c2-vessel-cfv-gap:1.5cqw;
 
-    /* Card 2 unique — fish receipt */
     --c2-receipt-gap:2cqw;
     --c2-receipt-label-size:var(--metric-tile-label-size);
     --c2-receipt-icon-size:9cqw;
@@ -171,7 +131,6 @@
     --c2-receipt-value-weight:400;
     --c2-receipt-icon-gap:1.5cqw;
 
-    /* Card 2 unique — mini metric cards */
     --c2-metric-grid-gap:3cqw;
     --c2-metric-pad-x:3cqw;
     --c2-metric-pad-y:3cqw;
@@ -185,11 +144,8 @@
     --c2-metric-label-line-height:1.25;
 }
 
-/* ==========================================================================
-   CARD 3 — ACTIVITY TIME SLIP CONTROLS
-   ========================================================================== */
 .contentPage[data-step="2"] .appCard{
-    /* Card shell */
+
     --c3-card-pad-x:3cqw;
     --c3-card-bg:var(--og-panel);
     --c3-card-border:var(--border-thin);
@@ -198,30 +154,25 @@
     --c3-card-pad-y:3cqw;
     --c3-section-gap:8cqw;
 
-    /* Header */
     --c3-header-gap:4cqw;
     --c3-header-icon-size:16cqw;
     --c3-header-title-size:var(--card-title-size);
     --c3-header-divider-gap:3.5cqw;
     --c3-divider-height:var(--border-thin);
 
-    /* Repeating content boxes */
     --c3-box-pad-x:4cqw;
     --c3-box-pad-y:3cqw;
     --c3-box-radius:var(--radius-control);
     --c3-box-border:var(--border-thin);
 
-    /* Step Complete */
     --c3-step-gap:3cqw;
     --c3-step-icon-size:9cqw;
     --c3-step-title-size:var(--card-step-title-size);
     --c3-step-body-size:var(--card-body-size);
     --c3-step-text-gap:1cqw;
 
-    /* Overview */
     --c3-overview-title-size:var(--card-overview-title-size);
 
-    /* Footer */
     --c3-footer-divider-gap:3.5cqw;
     --c3-button-gap:3cqw;
     --c3-button-min-height:var(--touch-target-min);
@@ -229,27 +180,18 @@
     --c3-button-font-size:var(--card-button-size);
 }
 
-/* =====================================================================
-   END CARD CONTROL PANEL
-   ===================================================================== */
-
-/* ==========================================================================
-   CARD STACK / TRANSITION CONTROLS
-   --------------------------------------------------------------------------
-   Space physically placed between full-height card pages.
-   The navigation JS uses each page's actual offsetTop, so this gap is
-   automatically visible while transitioning from one card to another.
-   ========================================================================== */
 #contentContainer{
     --card-transition-gap:2%;
+    padding:var(--screen-pad-y) var(--screen-pad-x);
+    min-height:0;
+    display:flex;
 }
 
 #timelineContainer{
-    width:20%;
-    min-width:72px;
+
     padding:var(--screen-pad-y) 0;
-    padding-left:0 !important;
-    padding-right:0 !important;
+    padding-left:0 ;
+    padding-right:0 ;
     border-right:0;
     display:flex;
     flex-direction:column;
@@ -262,12 +204,11 @@
 #timelineLine,
 #timelineProgress{
     position:absolute;
-    left:50%;
+
     transform:translateX(-50%);
-    top:0;
-    bottom:auto;
+
     height:0;
-    width:3px;
+
     border-radius:var(--radius-pill);
     pointer-events:none;
 }
@@ -283,8 +224,7 @@
 }
 
 .timelineItem{
-    width:64px;
-    height:64px;
+
     padding:0;
     border:0;
     background:transparent;
@@ -293,15 +233,14 @@
     justify-content:center;
     cursor:pointer;
     position:relative;
-    left:auto !important;
-    transform:none !important;
+    left:auto ;
+    transform:none ;
     z-index:2;
     -webkit-tap-highlight-color:transparent;
 }
 
 .timelineNode{
-    width:48px;
-    height:48px;
+
     border:3px solid var(--og-border);
     border-radius:50%;
     background:var(--og-bg);
@@ -319,44 +258,13 @@
 }
 
 .timelineNodeIcon{
-    width:25px;
-    height:25px;
+
     display:flex;
     color:var(--og-subtle);
     transition:color .3s ease;
 }
 
 .timelineNodeIcon svg{width:100%;height:100%;fill:currentColor;}
-
-/* Contextual card */
-#contentContainer{
-    width:80%;
-    padding:var(--screen-pad-y) var(--screen-pad-x);
-    min-height:0;
-    display:flex;
-}
-
-#contentViewport{
-    width:100%;
-    height:100%;
-    overflow:hidden;
-    position:relative;
-}
-
-#contentTrack{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    transition:transform .8s ease;
-}
-
-.contentBody{
-    margin:0;
-    color:var(--og-muted);
-    font-size:clamp(.9rem,1.7vw,1.05rem);
-    line-height:1.45;
-}
 
 @media(max-width:620px){
     #timelineContainer{width:20%;min-width:66px;}
@@ -371,24 +279,22 @@
         width:2px;
     }
 
-    .contentBody{font-size:.82rem;}
-
 }
 
 .timelineItem.complete .timelineNode{
-    border-color:var(--accent-green) !important;
-    background:var(--og-bg) !important;
-    box-shadow:0 0 0 4px var(--accent-green-ring) !important;
+    border-color:var(--accent-green) ;
+    background:var(--og-bg) ;
+    box-shadow:0 0 0 4px var(--accent-green-ring) ;
 }
 .timelineItem.complete .timelineNodeIcon{
-    color:var(--accent-green) !important;
+    color:var(--accent-green) ;
 }
 .timelineItem.active:not(.complete) .timelineNode{
-    border-color:var(--accent-blue) !important;
-    box-shadow:0 0 0 4px var(--accent-blue-glow) !important;
+    border-color:var(--accent-blue) ;
+    box-shadow:0 0 0 4px var(--accent-blue-glow) ;
 }
 .timelineItem.active:not(.complete) .timelineNodeIcon{
-    color:var(--accent-blue) !important;
+    color:var(--accent-blue) ;
 }
 
 @media(max-width:620px){
@@ -477,22 +383,6 @@
     box-shadow:0 0 0 3px color-mix(in srgb,var(--metric-color) 15%,transparent);
 }
 
-/* Completion is green; chart colors carry grade meaning independently. */
-
-.previewStatus.complete .previewStatusDot::after{
-    content:"";
-    position:absolute;
-    width:5px;
-    height:3px;
-    left:2px;
-    top:2px;
-    border-left:2px solid var(--color-white);
-    border-bottom:2px solid var(--color-white);
-    transform:rotate(-45deg);
-}
-
-/* Actions stay side-by-side on phone and desktop. */
-
 @media(max-width:620px){
 
     .gradeOverviewTitle{
@@ -506,44 +396,6 @@
 
     .gradeDonut::after{inset:14%;}
 
-/* Only the Inspection Detail home card uses the new natural vertical flow. */
-
-/* Keep the title/icon block deliberate and centered. */
-
-/* Grade Overview becomes its own divider:
-   -------- GRADE OVERVIEW -------- */
-
-/* Larger gauges on roomy screens, preserving current mobile sizing. */
-
-/* Do not push the completion state or buttons to the bottom.
-   Their position now follows the charts naturally. */
-
-/* Any unused card height stays below the controls instead of between sections. */
-
-/* Keep horizontal actions consistent. */
-
-/* Desktop gets a little more breathing room inside the card,
-   but the content remains grouped instead of being stretched apart. */
-
-/* Mobile: retain compact donut sizing and tighten the composition. */
-
-/* Restore a simple solid rule beneath the title block. */
-
-/* Completion remains the first content item after the title divider. */
-
-/* Section headings return to simple left-aligned labels. */
-
-/* The card now has enough content to justify bottom-pinned actions.
-   auto margin consumes only the unused space after Comments. */
-
-/* Keep the proportional content rhythm above the pinned action area. */
-
-/* Match the Section Complete body copy exactly. */
-
-/* A notification changes wording only; the container remains visually neutral. */
-
-/* The comments region now absorbs spare card height, so the action area stays pinned. */
-
 .contentPage[data-step="1"] .summaryOverviewTitle{
     color:var(--accent-blue-label);
     font-size:clamp(.68rem,1.7cqw,.82rem);
@@ -555,17 +407,15 @@
 .summaryMetricGrid{
     display:grid;
     grid-template-columns:repeat(3,minmax(0,1fr));
-    gap:clamp(8px,2cqw,18px);
+
 }
 
 .summaryMetric{
     min-width:0;
     border:var(--border-thin) solid var(--og-border);
-    border-radius:16px;
+
     background:rgba(15,23,42,.24);
-    padding:
-        clamp(10px,2cqh,18px)
-        clamp(6px,1.4cqw,14px);
+
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -574,8 +424,7 @@
 }
 
 .summaryMetricIcon{
-    width:clamp(28px,5cqw,48px);
-    height:clamp(28px,5cqw,48px);
+
     display:flex;
     align-items:center;
     justify-content:center;
@@ -589,11 +438,11 @@
 }
 
 .summaryMetricSamples .summaryMetricIcon{color:#a855f7;}
-.summaryMetricGross .summaryMetricIcon{color:var(--accent-blue);}
+
 .summaryMetricNet .summaryMetricIcon{color:var(--accent-green);}
 
 .summaryMetric strong{
-    font-size:clamp(1.05rem,4cqw,1.7rem);
+
     line-height:1.05;
     color:var(--og-text);
 }
@@ -601,11 +450,9 @@
 .summaryMetric > span{
     margin-top:clamp(5px,1cqh,9px);
     color:var(--og-muted);
-    font-size:clamp(.64rem,1.55cqw,.82rem);
+
     line-height:1.25;
 }
-
-@media(max-width:620px){
 
         .summaryMetricGrid{gap:6px;}
     .summaryMetric{border-radius:13px;padding:9px 4px;}
@@ -613,16 +460,6 @@
     .summaryMetric strong{font-size:clamp(.9rem,4.2cqw,1.2rem);}
     .summaryMetric > span{font-size:clamp(.56rem,2.05vw,.68rem);}
 
-    }
-
-/* Inspection Detail: centered overview heading. */
-
-/* Give each donut an outer color ring/glow like the navigation states. */
-
-/* Slightly larger mobile charts with more protected center space. */
-@media(max-width:620px){
-
-/* Inspection Summary: explicitly preserve title/footer divider lines. */
 .contentPage[data-step="1"] .summaryHeaderDivider,
 .contentPage[data-step="1"] .summaryActionDivider{
     display:block;
@@ -631,137 +468,33 @@
     background:var(--og-border);
 }
 
-/* The comparison is already part of Inspection Overview; no extra heading. */
-
-/* Difference text remains neutral rather than implying an error/removal. */
-.grossNetDifference strong,
-.grossNetDifference span{
-    color:var(--og-muted);
-}
-
-/* Remove the glow from Inspection Detail charts.
-   Keep only a crisp outer tint ring to echo navigation-state rings. */
-
-/* Remove the outer colored ring/glow completely.
-   Keep only the donut itself and a subtle inner edge. */
-
-/* Gross/Net numbers retain semantic colors; unit text is white. */
-.grossNetValue .unit,
-.grossNetValue small,
-.grossNetValue .grossNetUnit{
-    color:var(--color-white) !important;
-}
-
-/* Existing markup keeps the number's semantic color while forcing a
-   separately rendered "lbs" token to white. */
-.grossNetValue{
-    white-space:nowrap;
-}
-
-/* Summary explanation: icon/supporting copy white, Percent Crab orange. */
-.grossNetDifference{
-    color:var(--color-white);
-}
-
-/* Gross/Net: semantic number color, white unit. */
-[data-summary-gross-detail] .grossNetNumber{
-    color:var(--accent-blue) !important;
-}
-
-/* Composition line stays on ONE line next to the icon. */
-.grossNetDifference{
-    display:flex;
-    align-items:center;
-    gap:clamp(9px,1.8cqw,14px);
-    color:var(--color-white);
-}
-
-/* Keep the line fitting on smaller phones without wrapping. */
-
-/* Gross/Net landed headline values must stay on ONE line. */
 [data-summary-gross-detail],
 [data-summary-net-detail]{
     display:inline-flex !important;
     align-items:baseline;
-    gap:.22em;
+
     white-space:nowrap !important;
     flex-wrap:nowrap !important;
 }
-
-/* Ratio line: explicit readable spacing between each semantic piece. */
-.grossNetSingleLine{
-    display:flex;
-    align-items:baseline;
-    flex-wrap:nowrap;
-    white-space:nowrap;
-    column-gap:.34em;
-}
-
-/* Keep the line usable on narrow phones without introducing line breaks. */
-@media(max-width:620px){
 
     [data-summary-gross-detail],
 [data-summary-net-detail]{
         gap:.18em;
     }
-}
-
-/* Both percentages carry equal visual weight. */
-.summaryCrabPercent,
-.summaryDebrisPercent{
-    color:var(--accent-orange) !important;
-    font-weight:800 !important;
-}
-
-/* Preserve the deliberate single-line composition with readable spacing. */
-.grossNetSingleLine{
-    display:flex;
-    align-items:baseline;
-    flex-wrap:nowrap;
-    white-space:nowrap;
-    column-gap:.34em;
-}
-
-/* Numbers are bold and colored according to their meaning. */
-.summaryCrabPercent{
-    color:var(--accent-orange) !important;
-    font-weight:800 !important;
-}
-
-/* Labels remain regular white. */
-.summaryCrabLabel,
-.summaryDebrisLabel{
-    color:var(--color-white) !important;
-    font-weight:400 !important;
-}
-
-/* Preserve white units beside the colored Gross/Net values. */
-[data-summary-gross-detail] .grossNetUnit,
-[data-summary-net-detail] .grossNetUnit{
-    color:var(--color-white) !important;
-}
 
 [data-summary-premium-size],
 [data-summary-standard-size]{
-    display:inline-flex !important;
-    align-items:baseline;
-    gap:.10em;
-    white-space:nowrap !important;
+
     flex-wrap:nowrap !important;
 }
-[data-summary-premium-size] .sizePercentNumber{color:var(--accent-blue) !important;font-weight:800;}
-[data-summary-standard-size] .sizePercentNumber{color:var(--accent-orange) !important;font-weight:800;}
-[data-summary-premium-size] .sizePercentUnit,
-[data-summary-standard-size] .sizePercentUnit{color:var(--color-white) !important;font-weight:800;}
 
 .detailBySizeSection{
     display:block;
 }
 .detailBySizePanel{
     width:100%;
-    box-sizing:border-box;
+
 }
-/* Summary intentionally keeps the freed space empty for a future feature. */
 
 .detailBySizePanel{
     display:flex;
@@ -822,7 +555,7 @@
     height:clamp(8px,1.5cqh,12px);
     overflow:hidden;
     border-radius:var(--radius-pill);
-    /* Muted remainder matches the navigation icon ring/border tone. */
+
     background:var(--og-border, #475569);
 }
 
@@ -841,80 +574,26 @@
     background:var(--accent-orange);
 }
 
-/* ---------- Header ---------- */
-
-/* ---------- Section Complete ---------- */
-
-/* ---------- Inspection Overview heading ---------- */
-
-/* ---------- Donut metrics ---------- */
-
-/* ---------- By Size panel ---------- */
-
-/* ---------- Footer / actions ---------- */
-
-/* ---------------------------------------------------------------------
-   IMPORTANT:
-   Neutralize older phone-only Inspection Detail sizing patches.
-   Layout may adapt elsewhere, but this card's component sizes must
-   come from the shared card-relative variables above.
-   --------------------------------------------------------------------- */
-@media(max-width:620px){
-
-/* ---------- Card shell ---------- */
-
-/* ---------- Shared header ---------- */
-
-/* ---------- Shared divider ---------- */
-
-/* ---------- Shared Step Complete ---------- */
-
-/* ---------- Shared overview heading ---------- */
-
-/* ---------- Shared footer actions ---------- */
-
-/* Legacy footer divider classes are now semantic markers only. */
-.appCard .summaryActionDivider{
-    margin:0 !important;
-}
-
-/* Pending / incomplete state */
-
-/* Complete state */
-
-/* No glow/ring around Step Complete icon in either state. */
-
-/* Legacy .cardPreview used justify-content:center + a generic gap.
-   Shared cards now get all spacing exclusively from named master controls. */
-
-/* One shared gap below every Overview heading.
-   This value reflects the preferred Inspection Detail spacing. */
-
-/* Summary Overview colors */
 .contentPage[data-step="1"] .summaryMetricNet .summaryMetricIcon,
 .contentPage[data-step="1"] .summaryMetricValueNet{
-    color:var(--accent-blue) !important;
+    color:var(--accent-blue);
 }
 
 .contentPage[data-step="1"] .summaryMetricSamples .summaryMetricIcon,
 .contentPage[data-step="1"] .summaryMetricValueSamples{
-    color:var(--accent-green) !important;
+    color:var(--accent-green);
 }
 
 .contentPage[data-step="1"] .summaryMetricCrab .summaryMetricIcon,
 .contentPage[data-step="1"] .summaryMetricValueCrab .summaryMetricNumber{
-    color:var(--accent-orange) !important;
+    color:var(--accent-orange);
 }
 
-/* Detail donut unit standard */
-
-/* Internal value spans must inherit the metric value size/weight.
-   Only the direct child label beneath the value uses label typography. */
 .contentPage[data-step="1"] .summaryMetricValue,
 .contentPage[data-step="1"] .summaryMetricValue > span{
-    font-size:inherit !important;
-    font-weight:inherit !important;
-    line-height:inherit !important;
+    font-size:inherit;
+    font-weight:inherit;
+    line-height:inherit;
 }
 
 .contentPage[data-step="1"] .summaryMetricValueCrab{
@@ -925,29 +604,29 @@
 }
 
 .contentPage[data-step="1"] .summaryMetricValueCrab .summaryMetricNumber{
-    color:var(--accent-orange) !important;
+    color:var(--accent-orange);
 }
 
 .contentPage[data-step="1"] .summaryMetricValueCrab .summaryMetricUnit{
-    color:var(--color-white) !important;
+    color:var(--color-white);
 }
 
 .contentPage[data-step="1"] .metricTile{
     box-sizing:border-box;
     padding:
         var(--metric-tile-pad-y)
-        var(--metric-tile-pad-x) !important;
+        var(--metric-tile-pad-x);
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
-    gap:var(--metric-tile-content-gap) !important;
+    gap:var(--metric-tile-content-gap);
     text-align:center;
 }
 
 .contentPage[data-step="1"] .metricTileIcon{
-    width:var(--metric-tile-icon-size) !important;
-    height:var(--metric-tile-icon-size) !important;
+    width:var(--metric-tile-icon-size);
+    height:var(--metric-tile-icon-size);
     flex:0 0 var(--metric-tile-icon-size);
     display:flex;
     align-items:center;
@@ -962,58 +641,26 @@
 }
 
 .contentPage[data-step="1"] .metricTileValue{
-    margin:0 !important;
-    font-size:var(--metric-tile-value-size) !important;
-    line-height:1.1 !important;
-    font-weight:800 !important;
+    margin:0;
+    font-size:var(--metric-tile-value-size);
+    line-height:1.1;
+    font-weight:800;
     white-space:nowrap;
 }
 
 .contentPage[data-step="1"] .metricTileValue > span{
-    font-size:inherit !important;
-    line-height:inherit !important;
-    font-weight:inherit !important;
+    font-size:inherit;
+    line-height:inherit;
+    font-weight:inherit;
 }
 
-/* Only the direct child text label beneath the value uses label sizing. */
 .contentPage[data-step="1"] .metricTile > span{
-    margin:0 !important;
-    font-size:var(--metric-tile-label-size) !important;
+    margin:0;
+    font-size:var(--metric-tile-label-size);
     line-height:1.2;
     color:var(--og-muted);
     text-align:center;
 }
-
-/* Crab percent unit remains white while sharing identical value size. */
-
-/* Card 1 By Size values and Card 2 metric values intentionally share
-   one canonical font-size control. */
-@container (max-width:380px){
-}
-
-/* Radial center now reads:
-   [value]
-   lbs difference
-*/
-
-/* The old secondary radial description is no longer part of the component. */
-
-/* Match Card 1 donut percentage typography. */
-
-/* Number stays on the same shared metric scale as Card 1 chart values. */
-
-/* lbs is part of the value line, with no visual gap. */
-
-/* Descriptor sits centered beneath the value. */
-
-@container (max-width:380px){
-}
-
-@container (max-width:380px){
-}
-
-/* Difference Focus -> metric tiles is a major content transition,
-   so it uses the shared global section gap rather than local spacing. */
 
 .contentPage[data-step="1"] .summaryVesselInfo{
     margin-top:var(--card-section-gap);
@@ -1021,1188 +668,885 @@
 }
 
 .contentPage[data-step="1"] .summaryVesselInfo + .summaryMetricGrid{
-    margin-top:var(--card-section-gap) !important;
+    margin-top:var(--card-section-gap);
 }
-
-/* By Size remains unboxed. */
-
-/* Fisheries status sits as the next major section. */
-
-/* Default state = same visual treatment as Step Complete pending state. */
-
-/* Triggered state mirrors Step Complete's completed-state behavior,
-   but with orange as the semantic alert color. */
-
-/* Fisheries Notification remains the same functional state component,
-   but is presented without an enclosing box. */
-
-/* Remove box/background changes from either state; retain text/icon colors. */
-
-/* Preserve Step Complete-style internal alignment despite no outer box. */
-
-/* Restore the By Size panel box. */
-
-/* Notification -> By Size uses the shared major section gap. */
-
-/* Informational status only: no button/panel visual treatment. */
-
-/* Icon aligns with the TOP of the text block rather than its center. */
-
-/* Subtext is always muted, regardless of notification state. */
-
-/* Good grade: entire status reads as inactive. */
-
-/* Notification required: only icon + title become orange. */
-
-/* Ensure inherited Step Complete states can never restore a box here. */
-
-/* Required state: only icon + title activate in orange.
-   Grade explanation remains muted. */
-
-/* Required state: keep icon + label unchanged; only action message turns red. */
-
-/* Retire legacy pseudo-element donut drawing. */
-
-/* SVG owns all donut geometry. */
-
-/* Empty track: solid muted grey, thinner than progress stroke. */
-
-/* Colored progress: solid metric color + true round caps. */
-
-/* Preserve semantic colors. */
-
-/* Text remains anchored to the same donut box. */
-/* Value line */
-/* Unit line */
-/* Keep the three enlarged donuts evenly distributed and scalable. */
-
-/* ---------- Shared shell / section rhythm ---------- */
-
-/* ---------- Header / footer separator rhythm ---------- */
-
-/* ---------- Shared Card 1 data typography ---------- */
-
-/* ---------- By Size panel ---------- */
-
-/* ---------- By Size bars ---------- */
-
-/* ---------- Legend dots ---------- */
-
-/* Wrapper around the By Size box must also remain content-sized. */
-
-/* Rows cannot absorb unused vertical space inside the box. */
-
-/* ==========================================================================
-   CARD 1 — INSPECTION DETAIL
-   ========================================================================== */
-
-/* ==========================================================================
-   CARD 2 — INSPECTION SUMMARY
-   ========================================================================== */
 
 .contentPage[data-step="1"] .summaryMetricGrid{
-    margin-top:var(--c2-section-gap) !important;
+    margin-top:var(--c2-section-gap);
 }
 
-/* ==========================================================================
-   CARD 3 — ACTIVITY TIME SLIP
-   ========================================================================== */
+}
 
-}}}
-
-/* ==========================================================================
-   CARD 1 — INSPECTION DETAIL
-   SINGLE SOURCE OF TRUTH
-   ========================================================================== */
-
-/* ---------- Card shell ---------- */
-
-/* ---------- Header ---------- */
-
-/* ---------- Step Complete ---------- */
-
-/* ---------- Detail Overview ---------- */
 .contentPage[data-step="0"] .gradeOverview{
-    width:100% !important;
-    flex:0 0 auto !important;
-    margin:var(--c1-section-gap) 0 0 !important;
+    width:100%;
+    flex:0 0 auto;
+    margin:var(--c1-section-gap) 0 0;
 }
 
 .contentPage[data-step="0"] .gradeOverviewTitle{
-    width:100% !important;
-    margin:0 0 var(--c1-overview-content-gap) !important;
-    color:var(--accent-blue-label) !important;
-    font-size:var(--c1-overview-title-size) !important;
-    font-weight:800 !important;
-    line-height:1.2 !important;
-    letter-spacing:.06em !important;
-    text-transform:uppercase !important;
-    text-align:center !important;
+    width:100%;
+    margin:0 0 var(--c1-overview-content-gap);
+    color:var(--accent-blue-label);
+    font-size:var(--c1-overview-title-size);
+    font-weight:800;
+    line-height:1.2;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    text-align:center;
 }
 
-/* ---------- Donut chart system ---------- */
-.contentPage[data-step="0"] .gradeDonutGrid{width:100% !important;
-    display:grid !important;
-    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
-    gap:var(--c1-donut-grid-gap) !important;
-    align-items:start !important;}
+.contentPage[data-step="0"] .gradeDonutGrid{width:100%;
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:var(--c1-donut-grid-gap);
+    align-items:start;}
 
 .contentPage[data-step="0"] .gradeMetric{
     --metric-color:var(--accent-blue);
-    min-width:0 !important;
-    display:flex !important;
-    flex-direction:column !important;
-    align-items:center !important;
-    gap:var(--c1-chart-label-gap) !important;
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:var(--c1-chart-label-gap);
 }
 
 .contentPage[data-step="0"] .gradeMetricPremium{ --metric-color:var(--accent-blue); }
 .contentPage[data-step="0"] .gradeMetricStandard{ --metric-color:var(--accent-orange); }
 .contentPage[data-step="0"] .gradeMetricReject{ --metric-color:var(--accent-red); }
 
-.contentPage[data-step="0"] .gradeDonut{position:relative !important;
-    width:var(--c1-donut-size) !important;
-    height:var(--c1-donut-size) !important;
-    min-width:var(--c1-donut-size) !important;
-    min-height:var(--c1-donut-size) !important;
-    aspect-ratio:1 / 1 !important;
-    margin-inline:auto !important;
-    background:none !important;
-    border:0 !important;
-    border-radius:50% !important;
-    box-shadow:none !important;
-    overflow:visible !important;
-    color:var(--metric-color) !important;}
+.contentPage[data-step="0"] .gradeDonut{position:relative;
+    width:var(--c1-donut-size);
+    height:var(--c1-donut-size);
+    min-width:var(--c1-donut-size);
+    min-height:var(--c1-donut-size);
+    aspect-ratio:1 / 1;
+    margin-inline:auto;
+    background:none;
+    border:0;
+    border-radius:50%;
+    box-shadow:none;
+    overflow:visible ;
+    color:var(--metric-color);}
 
 .contentPage[data-step="0"] .gradeDonut::before,
-.contentPage[data-step="0"] .gradeDonut::after{content:none !important;
-    display:none !important;}
+.contentPage[data-step="0"] .gradeDonut::after{content:none;
+    display:none;}
 
-.contentPage[data-step="0"] .gradeDonutSvg{position:absolute !important;
-    inset:0 !important;
-    width:100% !important;
-    height:100% !important;
-    display:block !important;
-    overflow:visible !important;
-    transform-origin:50% 50% !important;}
+.contentPage[data-step="0"] .gradeDonutSvg{position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    display:block;
+    overflow:visible ;
+    transform-origin:50% 50%;}
 
-.contentPage[data-step="0"] .gradeDonutTrack{fill:none !important;
-    stroke:var(--c1-progress-muted) !important;
-    stroke-width:var(--c1-donut-track-stroke) !important;
+.contentPage[data-step="0"] .gradeDonutTrack{fill:none;
+    stroke:var(--c1-progress-muted);
+    stroke-width:var(--c1-donut-track-stroke);
     vector-effect:non-scaling-stroke;}
 
-.contentPage[data-step="0"] .gradeDonutProgress{fill:none !important;
-    stroke:currentColor !important;
-    stroke-width:var(--c1-donut-progress-stroke) !important;
-    stroke-linecap:butt !important;
-    vector-effect:non-scaling-stroke;}
-
-.contentPage[data-step="0"] .gradeDonut [data-home-percent]{position:absolute !important;
-    inset:0 !important;
-    width:100% !important;
-    height:100% !important;
-    max-width:none !important;
-    display:flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-    gap:0 !important;
-    margin:0 !important;
-    padding:0 !important;
-    color:var(--metric-color) !important;
-    font-size:var(--c1-donut-value-size) !important;
-    font-weight:400 !important;
+.contentPage[data-step="0"] .gradeDonut [data-home-percent]{position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    max-width:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:0;
+    margin:0;
+    padding:0;
+    color:var(--metric-color);
+    font-size:var(--c1-donut-value-size);
+    font-weight:400;
     font-variant-numeric:tabular-nums;
-    line-height:1 !important;
-    text-align:center !important;
-    white-space:nowrap !important;
+    line-height:1;
+    text-align:center;
+    white-space:nowrap;
     pointer-events:none;
     z-index:3;}
 
 .contentPage[data-step="0"] .donutPercentNumber{
-    display:inline !important;
-    color:inherit !important;
-    font:inherit !important;
-    line-height:1 !important;
+    display:inline;
+    color:inherit;
+    font:inherit;
+    line-height:1;
 }
 
 .contentPage[data-step="0"] .donutPercentUnit{
-    display:inline !important;
-    color:var(--color-white) !important;
-    font:inherit !important;
-    line-height:1 !important;
+    display:inline;
+    color:var(--color-white);
+    font:inherit;
+    line-height:1;
 }
 
 .contentPage[data-step="0"] .gradeLegend{
-    display:flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-    gap:var(--c1-legend-gap) !important;
-    color:var(--og-text) !important;
-    font-size:var(--metric-tile-value-size) !important;
-    line-height:1.2 !important;
-    white-space:nowrap !important;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:var(--c1-legend-gap);
+
+    font-size:var(--metric-tile-value-size);
+    line-height:1.2;
+    white-space:nowrap;
 }
 
 .contentPage[data-step="0"] .gradeLegendDot{
-    width:var(--c1-legend-dot-size) !important;
-    height:var(--c1-legend-dot-size) !important;
-    flex:0 0 var(--c1-legend-dot-size) !important;
-    border-radius:50% !important;
-    background:var(--metric-color) !important;
-    box-shadow:none !important;
-    filter:none !important;
-    outline:none !important;
+    width:var(--c1-legend-dot-size);
+    height:var(--c1-legend-dot-size);
+    flex:0 0 var(--c1-legend-dot-size);
+    border-radius:50%;
+    background:var(--metric-color);
+    box-shadow:none;
+    filter:none;
+    outline:none;
 }
 
-/* ---------- Fisheries Notification ---------- */
 .contentPage[data-step="0"] .fisheriesNotification{
-    width:100% !important;
-    flex:0 0 auto !important;
-    display:flex !important;
-    flex-direction:column !important;
-    align-items:center !important;
-    gap:var(--c1-fisheries-gap) !important;
+    width:100%;
+    flex:0 0 auto;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
 
-    margin:var(--c1-section-gap) 0 0 !important;
-    padding:0 !important;
-    border:0 !important;
-    background:transparent !important;
-    box-shadow:none !important;
-    text-align:center !important;
+    margin:var(--c1-section-gap) 0 0;
+    padding:0;
+    border:0;
+    background:transparent;
+    box-shadow:none;
+    text-align:center;
 }
 
 .contentPage[data-step="0"] .fisheriesNotificationDivider{
-    width:var(--c1-fisheries-divider-width) !important;
-    display:grid !important;
-    grid-template-columns:minmax(0,1fr) var(--c1-fisheries-icon-size) minmax(0,1fr) !important;
-    align-items:center !important;
-    gap:var(--c1-fisheries-line-gap) !important;
-}
 
-.contentPage[data-step="0"] .fisheriesNotificationDivider > span{
-    display:block !important;
-    height:var(--border-thin) !important;
-    background:var(--og-border) !important;
-}
+    grid-template-columns:minmax(0,1fr) var(--c1-fisheries-icon-size) minmax(0,1fr);
 
-.contentPage[data-step="0"] .fisheriesNotificationIcon{
-    width:var(--c1-fisheries-icon-size) !important;
-    height:var(--c1-fisheries-icon-size) !important;
-    display:flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-    color:var(--accent-blue) !important;
-}
-
-.contentPage[data-step="0"] .fisheriesNotificationIcon svg{
-    width:100% !important;
-    height:100% !important;
-    fill:currentColor !important;
-    color:currentColor !important;
 }
 
 .contentPage[data-step="0"] .fisheriesNotificationCopy{
-    min-width:0 !important;
-    display:flex !important;
-    flex-direction:column !important;
-    align-items:center !important;
-    gap:var(--c1-fisheries-copy-gap) !important;
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:var(--c1-fisheries-copy-gap);
 }
 
 .contentPage[data-step="0"] .fisheriesNotificationCopy strong{
-    color:var(--og-muted) !important;
-    font-size:var(--metric-tile-label-size) !important;
-    font-weight:700 !important;
-    line-height:1.1 !important;
-    letter-spacing:.02em !important;
+
+    font-size:var(--metric-tile-label-size);
+    font-weight:700;
+    line-height:1.1;
+    letter-spacing:.02em;
 }
 
 .contentPage[data-step="0"] .fisheriesNotificationCopy small{
-    color:var(--palette-muted) !important;
-    font-size:var(--metric-tile-label-size) !important;
-    line-height:1.25 !important;
+    color:var(--palette-muted);
+    font-size:var(--metric-tile-label-size);
+    line-height:1.25;
 }
 
 .contentPage[data-step="0"] .fisheriesNotification[data-required="true"] .fisheriesNotificationCopy small{
-    color:var(--og-text) !important;
-    font-weight:700 !important;
+    color:var(--og-text);
+    font-weight:700;
 }
 
-/* ---------- By Size ---------- */
 .contentPage[data-step="0"] .inspectionComments.detailBySizeSection{
-    width:100% !important;
-    flex:0 0 auto !important;
-    min-height:0 !important;
-    height:auto !important;
-    margin:var(--c1-section-gap) 0 0 !important;
-    align-self:stretch !important;
+    width:100%;
+    flex:0 0 auto;
+    min-height:0;
+    height:auto;
+    margin:var(--c1-section-gap) 0 0;
+    align-self:stretch;
 }
 
 .contentPage[data-step="0"] .detailBySizePanel{
-    width:100% !important;
-    flex:0 0 auto !important;
-    min-height:0 !important;
-    height:auto !important;
+    width:100%;
+    flex:0 0 auto;
+    min-height:0;
+    height:auto;
 
-    display:flex !important;
-    flex-direction:column !important;
-    align-items:stretch !important;
-    justify-content:flex-start !important;
-    gap:var(--c1-by-size-row-gap) !important;
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    justify-content:flex-start;
+    gap:var(--c1-by-size-row-gap);
 
-    padding:var(--c1-box-pad-y) var(--c1-box-pad-x) !important;
+    padding:var(--c1-box-pad-y) var(--c1-box-pad-x);
 
-    border:var(--border-thin) solid var(--og-border) !important;
-    border-radius:var(--c1-box-radius) !important;
-    background:var(--og-panel-deep) !important;
-    box-shadow:none !important;
-    box-sizing:border-box !important;
+    border:var(--border-thin) solid var(--og-border);
+    border-radius:var(--c1-box-radius);
+    background:var(--og-panel-deep);
+    box-shadow:none;
+    box-sizing:border-box;
 }
 
 .contentPage[data-step="0"] .bySizeRow{
-    width:100% !important;
-    flex:0 0 auto !important;
-    display:flex !important;
-    flex-direction:column !important;
-    gap:var(--c1-by-size-inner-gap) !important;
-    margin:0 !important;
+    width:100%;
+    flex:0 0 auto;
+    display:flex;
+    flex-direction:column;
+    gap:var(--c1-by-size-inner-gap);
+    margin:0;
 }
 
 .contentPage[data-step="0"] .bySizeLabel{
-    display:flex !important;
-    align-items:baseline !important;
-    gap:var(--c1-by-size-label-gap) !important;
-    color:var(--color-white) !important;
-    font-size:var(--metric-tile-value-size) !important;
-    line-height:1.2 !important;
-    white-space:nowrap !important;
+    display:flex;
+    align-items:baseline;
+    gap:var(--c1-by-size-label-gap);
+    color:var(--color-white);
+    font-size:var(--metric-tile-value-size);
+    line-height:1.2;
+    white-space:nowrap;
 }
 
 .contentPage[data-step="0"] .bySizeLabel > span{
-    color:var(--color-white) !important;
-    font-weight:400 !important;
+    color:var(--color-white);
+    font-weight:400;
 }
 
 .contentPage[data-step="0"] .bySizeLabel strong,
 .contentPage[data-step="0"] .bySizeLabel strong span{
-    font-size:inherit !important;
-    line-height:inherit !important;
+    font-size:inherit;
+    line-height:inherit;
 }
 
 .contentPage[data-step="0"] .sizePercentUnit{
-    color:var(--color-white) !important;
+    color:var(--color-white);
 }
 
 .contentPage[data-step="0"] .bySizeTrack{
-    position:relative !important;
-    width:100% !important;
-    height:var(--c1-progress-track-height) !important;
-    overflow:visible !important;
-    border-radius:var(--c1-progress-radius) !important;
-    background:var(--c1-progress-muted) !important;
-    box-shadow:none !important;
+    position:relative;
+    width:100%;
+    height:var(--c1-progress-track-height);
+    overflow:visible ;
+    border-radius:var(--c1-progress-radius);
+    background:var(--c1-progress-muted);
+    box-shadow:none;
 }
 
 .contentPage[data-step="0"] .bySizeFill{
-    position:absolute !important;
-    left:0 !important;
-    top:50% !important;
-    bottom:auto !important;
-    height:var(--c1-progress-fill-height) !important;
+    position:absolute;
+    left:0;
+    top:50%;
+    bottom:auto;
+    height:var(--c1-progress-fill-height);
     width:0;
-    transform:translateY(-50%) !important;
-    border-radius:var(--c1-progress-radius) !important;
-    background-image:none !important;
-    box-shadow:none !important;
+    transform:translateY(-50%) ;
+    border-radius:var(--c1-progress-radius);
+    background-image:none;
+    box-shadow:none;
     transition:width .35s ease;
 }
 
 .contentPage[data-step="0"] .bySizePremiumFill{
-    background-color:var(--accent-blue) !important;
+    background-color:var(--accent-blue);
 }
 
 .contentPage[data-step="0"] .bySizeStandardFill{
-    background-color:var(--accent-orange) !important;
-}
-
-/* ---------- Footer ---------- */
-
-#headerHelpButton .debugToggleIcon{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    width:100%;
-    height:100%;
+    background-color:var(--accent-orange);
 }
 
 #headerHelpButton .debugToggleIcon svg{
-    width:1.15em;
-    height:1.15em;
-    fill:none;
-    stroke:currentColor;
+
     stroke-width:1.8;
     stroke-linecap:round;
     stroke-linejoin:round;
 }
 
-/* Force debug bounds to remain rectangular regardless of component radius. */
-
-/* =========================
-   LEVEL 1 — MAJOR CONTAINERS
-   ========================= */
-
-/* =========================
-   LEVEL 2 — COMPONENT GROUPS
-   ========================= */
-
-/* Detail Overview is intentionally its own object. */
-
-/* Each grading chart group gets its own bounds. */
-
-/* Fisheries internal groups. */
-
-/* By-size row groups. */
-
-/* Footer internal groups. */
-
-/* =========================
-   LEVEL 3 — INDIVIDUAL OBJECTS
-   ========================= */
-
-/* Step Complete */
-
-/* Donut visual + percentage + label are separate objects. */
-
-/* Fisheries objects */
-
-/* By Size objects */
-
-/* Footer objects */
-
-/* Keep actual component styling untouched; only debug outlines are square. */
-
-/* ---------- Direct header children ---------- */
-
-/* ---------- Footer content containers ----------
-   No separator and no automatic vertical anchoring live here anymore. */
-
-/* ---------- Debug inspector ----------
-   Header/footer content and separators now visibly report as four
-   independent rectangular objects. */
-
-/* ==========================================================================
-   CARD 1 — CANONICAL GENERIC SKELETON
-   ========================================================================== */
-
-/* Card */
 .contentPage[data-step="0"] .cardPreview.appCard{
-    container-type:inline-size !important;
-    width:100% !important;
-    height:100% !important;
-    display:flex !important;
-    flex-direction:column !important;
-    justify-content:flex-start !important;
-    gap:0 !important;
-    padding:var(--c1-card-pad-y) var(--c1-card-pad-x) !important;
-    box-sizing:border-box !important;
-    background:var(--c1-card-bg) !important;
-    border:var(--c1-card-border) solid var(--c1-card-border-color) !important;
-    border-radius:var(--c1-card-radius) !important;
-    overflow:hidden !important;
+    container-type:inline-size;
+    width:100%;
+    height:100%;
+    min-height:100%;
+    align-self:stretch;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    gap:0;
+    padding:var(--c1-card-pad-y) var(--c1-card-pad-x);
+    box-sizing:border-box;
+    background:var(--c1-card-bg);
+    border:var(--c1-card-border) solid var(--c1-card-border-color);
+    border-radius:var(--c1-card-radius);
+    overflow:hidden ;
 
 }
 
-/* Header content */
 .contentPage[data-step="0"] .previewHero.cardHeader{
-    width:100% !important;
-    flex:0 0 auto !important;
-    display:flex !important;
-    flex-direction:column !important;
-    align-items:center !important;
-    justify-content:center !important;
-    gap:var(--c1-header-gap) !important;
-    margin:0 !important;
-    padding:0 !important;
-    text-align:center !important;
+    width:100%;
+    flex:0 0 auto;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:var(--c1-header-gap);
+    margin:0;
+    padding:0;
+    text-align:center;
 }
 
 .contentPage[data-step="0"] .cardHeaderIcon{
-    width:var(--c1-header-icon-size) !important;
-    height:var(--c1-header-icon-size) !important;
-    flex:0 0 var(--c1-header-icon-size) !important;
-    display:flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-    color:var(--accent-blue) !important;
-}
-
-.contentPage[data-step="0"] .cardHeaderIcon svg{
-    width:100% !important;
-    height:100% !important;
-    fill:currentColor !important;
-    color:currentColor !important;
+    width:var(--c1-header-icon-size);
+    height:var(--c1-header-icon-size);
+    flex:0 0 var(--c1-header-icon-size);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--accent-blue);
+}.contentPage[data-step="0"] .cardHeaderIcon svg,
+.contentPage[data-step="1"] .cardHeaderIcon svg{
+    width:100%;
+    height:100%;
+    fill:currentColor;
+    color:currentColor;
 }
 
 .contentPage[data-step="0"] .cardTitle{
-    flex:0 0 auto !important;
-    margin:0 !important;
-    padding:0 !important;
-    font-size:var(--c1-header-title-size) !important;
-    line-height:1.08 !important;
-    text-align:center !important;
+    flex:0 0 auto;
+    margin:0;
+    padding:0;
+    font-size:var(--c1-header-title-size);
+    line-height:1.08;
+    text-align:center;
 }
 
-/* Header separator — independent sibling */
 .contentPage[data-step="0"] .inspectionHeaderDivider{
-    width:100% !important;
-    height:var(--c1-divider-height) !important;
-    flex:0 0 auto !important;
-    margin:var(--c1-header-divider-gap) 0 0 !important;
-    background:var(--og-border) !important;
+    width:100%;
+    height:var(--c1-divider-height);
+    flex:0 0 auto;
+    margin:var(--c1-header-divider-gap) 0 0;
+    background:var(--og-border);
 }
 
-/* Step Complete */
 .contentPage[data-step="0"] .previewStatus.cardStepStatus{
-    width:100% !important;
-    flex:0 0 auto !important;
-    min-height:0 !important;
-    height:auto !important;
-    max-height:none !important;
+    width:100%;
+    flex:0 0 auto;
+    min-height:0;
+    height:auto;
+    max-height:none;
 
-    display:flex !important;
-    align-items:center !important;
-    justify-content:flex-start !important;
-    gap:var(--c1-step-gap) !important;
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    gap:var(--c1-step-gap);
 
-    margin:var(--c1-section-gap) 0 0 !important;
-    padding:var(--c1-box-pad-y) var(--c1-box-pad-x) !important;
+    margin:var(--c1-section-gap) 0 0;
+    padding:var(--c1-box-pad-y) var(--c1-box-pad-x);
 
-    border:var(--c1-box-border) solid var(--og-border) !important;
-    border-radius:var(--c1-box-radius) !important;
-    background:var(--og-panel-deep) !important;
-    color:var(--og-text) !important;
-    box-sizing:border-box !important;
-    text-align:left !important;
+    border:var(--c1-box-border) solid var(--og-border);
+    border-radius:var(--c1-box-radius);
+    background:var(--og-panel-deep);
+    color:var(--og-text);
+    box-sizing:border-box;
+    text-align:left;
     cursor:pointer;
 }
 
 .contentPage[data-step="0"] .cardStepIcon{
-    width:var(--c1-step-icon-size) !important;
-    height:var(--c1-step-icon-size) !important;
-    flex:0 0 var(--c1-step-icon-size) !important;
-    display:flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-    color:var(--og-subtle) !important;
-    background:transparent !important;
-    border:0 !important;
-    border-radius:0 !important;
-    box-shadow:none !important;
-}
-
-.contentPage[data-step="0"] .cardStepIcon svg{
-    width:100% !important;
-    height:100% !important;
-    fill:currentColor !important;
-    color:currentColor !important;
-}
-
-.contentPage[data-step="0"] .cardStepText{
-    min-width:0 !important;
-    display:flex !important;
-    flex-direction:column !important;
-    align-items:flex-start !important;
-    justify-content:center !important;
-    text-align:left !important;
+    width:var(--c1-step-icon-size);
+    height:var(--c1-step-icon-size);
+    flex:0 0 var(--c1-step-icon-size);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--og-subtle);
+    background:transparent;
+    border:0;
+    border-radius:0;
+    box-shadow:none;
+}.contentPage[data-step="0"] .cardStepIcon svg,
+.contentPage[data-step="1"] .cardStepIcon svg{
+    width:100%;
+    height:100%;
+    fill:currentColor;
+    color:currentColor;
+}.contentPage[data-step="0"] .cardStepText,
+.contentPage[data-step="1"] .cardStepText{
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:center;
+    text-align:left;
 }
 
 .contentPage[data-step="0"] .cardStepText strong{
-    margin:0 !important;
-    font-size:var(--c1-step-title-size) !important;
-    line-height:1.22 !important;
-    color:var(--og-text) !important;
+    margin:0;
+    font-size:var(--c1-step-title-size);
+    line-height:1.22;
+    color:var(--og-text);
 }
 
 .contentPage[data-step="0"] .cardStepText small{
-    margin:var(--c1-step-text-gap) 0 0 !important;
-    font-size:var(--c1-step-body-size) !important;
-    line-height:1.35 !important;
-    color:var(--og-muted) !important;
+    margin:var(--c1-step-text-gap) 0 0;
+    font-size:var(--c1-step-body-size);
+    line-height:1.35;
+    color:var(--og-muted);
+}.contentPage[data-step="0"] .cardStepStatus.complete,
+.contentPage[data-step="1"] .cardStepStatus.complete{
+    border-color:var(--accent-green);
+    background:var(--accent-green-bg-strong);
+}.contentPage[data-step="0"] .cardStepStatus.complete .cardStepIcon,
+.contentPage[data-step="1"] .cardStepStatus.complete .cardStepIcon{
+    color:var(--accent-green);
+}.contentPage[data-step="0"] .cardStepStatus.complete .cardStepText strong,
+.contentPage[data-step="1"] .cardStepStatus.complete .cardStepText strong{
+    color:var(--accent-green-light);
 }
 
-.contentPage[data-step="0"] .cardStepStatus.complete{
-    border-color:var(--accent-green) !important;
-    background:var(--accent-green-bg-strong) !important;
-}
-
-.contentPage[data-step="0"] .cardStepStatus.complete .cardStepIcon{
-    color:var(--accent-green) !important;
-}
-
-.contentPage[data-step="0"] .cardStepStatus.complete .cardStepText strong{
-    color:var(--accent-green-light) !important;
-}
-
-/* Generic overview heading */
 .contentPage[data-step="0"] .cardOverviewTitle{
-    font-size:var(--c1-overview-title-size) !important;
-    line-height:1.2 !important;
-    text-align:center !important;
+    font-size:var(--c1-overview-title-size);
+    line-height:1.2;
+    text-align:center;
 }
 
-/* Footer separator — independent sibling and bottom anchor */
 .contentPage[data-step="0"] .inspectionActionDivider{
-    width:100% !important;
-    height:var(--c1-divider-height) !important;
-    flex:0 0 auto !important;
-    margin-top:auto !important;
-    margin-right:0 !important;
-    margin-bottom:var(--c1-footer-divider-gap) !important;
-    margin-left:0 !important;
-    background:var(--og-border) !important;
-}
-
-/* Footer content */
-.contentPage[data-step="0"] .cardFooter{
-    width:100% !important;
-    flex:0 0 auto !important;
-    display:flex !important;
-    flex-direction:column !important;
-    margin:0 !important;
-    padding:0 !important;
+    width:100%;
+    height:var(--c1-divider-height);
+    flex:0 0 auto;
+    margin-top:auto;
+    margin-right:0;
+    margin-bottom:var(--c1-footer-divider-gap);
+    margin-left:0;
+    background:var(--og-border);
+}.contentPage[data-step="0"] .cardFooter,
+.contentPage[data-step="1"] .cardFooter{
+    width:100%;
+    flex:0 0 auto;
+    display:flex;
+    flex-direction:column;
+    margin:0;
+    padding:0;
 }
 
 .contentPage[data-step="0"] .previewActions.cardActions{
-    width:100% !important;
-    flex:0 0 auto !important;
-    display:grid !important;
-    grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
-    gap:var(--c1-button-gap) !important;
-    margin:0 !important;
+    width:100%;
+    flex:0 0 auto;
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    gap:var(--c1-button-gap);
+    margin:0;
 }
 
 .contentPage[data-step="0"] .cardActions > button{
-    min-height:var(--c1-button-min-height) !important;
-    border-radius:var(--c1-button-radius) !important;
-    font-size:var(--c1-button-font-size) !important;
-    font-family:inherit !important;
-    font-weight:700 !important;
+    min-height:var(--c1-button-min-height);
+    border-radius:var(--c1-button-radius);
+    font-size:var(--c1-button-font-size);
+    font-family:inherit;
+    font-weight:700;
     cursor:pointer;
+}.contentPage[data-step="0"] .cardPrimaryAction,
+.contentPage[data-step="1"] .cardPrimaryAction{
+    border:var(--border-thin) solid var(--accent-blue);
+    background:var(--accent-blue-strong);
+    color:var(--color-white);
+}.contentPage[data-step="0"] .cardSecondaryAction,
+.contentPage[data-step="1"] .cardSecondaryAction{
+    border:var(--border-thin) solid var(--og-border);
+    background:transparent;
+    color:var(--og-text);
 }
 
-.contentPage[data-step="0"] .cardPrimaryAction{
-    border:var(--border-thin) solid var(--accent-blue) !important;
-    background:var(--accent-blue-strong) !important;
-    color:var(--color-white) !important;
-}
-
-.contentPage[data-step="0"] .cardSecondaryAction{
-    border:var(--border-thin) solid var(--og-border) !important;
-    background:transparent !important;
-    color:var(--og-text) !important;
-}
-
-/* ==========================================================================
-   CARD 2 — INSPECTION SUMMARY
-   CANONICAL LIVE STYLE
-   --------------------------------------------------------------------------
-   v175 consolidation: redundant earlier declarations for identical Card 2
-   selectors/properties have been removed. Surviving rules below represent
-   distinct live responsibilities and should be edited through Card 2 controls
-   or within this Card 2 implementation.
-   ========================================================================== */
-/* ==========================================================================
-   CARD 2 — CANONICAL GENERIC SKELETON
-   ========================================================================== */
-
-/* Card */
 .contentPage[data-step="1"] .cardPreview.appCard{
-    container-type:inline-size !important;
-    width:100% !important;
-    
-    display:flex !important;
-    flex-direction:column !important;
-    justify-content:flex-start !important;
-    gap:0 !important;
-    padding:var(--c2-card-pad-y) var(--c2-card-pad-x) !important;
-    box-sizing:border-box !important;
-    background:var(--c2-card-bg) !important;
-    border:var(--c2-card-border) solid var(--c2-card-border-color) !important;
-    border-radius:var(--c2-card-radius) !important;
-    overflow:hidden !important;
+    container-type:inline-size;
+    width:100%;
+    height:100%;
+    min-height:100%;
+    align-self:stretch;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    gap:0;
+    padding:var(--c2-card-pad-y) var(--c2-card-pad-x);
+    box-sizing:border-box;
+    background:var(--c2-card-bg);
+    border:var(--c2-card-border) solid var(--c2-card-border-color);
+    border-radius:var(--c2-card-radius);
+    overflow:hidden ;
 
 }
 
-/* Header content */
 .contentPage[data-step="1"] .previewHero.cardHeader{
-    width:100% !important;
-    flex:0 0 auto !important;
-    display:flex !important;
-    flex-direction:column !important;
-    align-items:center !important;
-    justify-content:center !important;
-    gap:var(--c2-header-gap) !important;
-    margin:0 !important;
-    padding:0 !important;
-    text-align:center !important;
+    width:100%;
+    flex:0 0 auto;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:var(--c2-header-gap);
+    margin:0;
+    padding:0;
+    text-align:center;
 }
 
 .contentPage[data-step="1"] .cardHeaderIcon{
-    width:var(--c2-header-icon-size) !important;
-    height:var(--c2-header-icon-size) !important;
-    flex:0 0 var(--c2-header-icon-size) !important;
-    display:flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-    color:var(--accent-blue) !important;
-}
-
-.contentPage[data-step="1"] .cardHeaderIcon svg{
-    width:100% !important;
-    height:100% !important;
-    fill:currentColor !important;
-    color:currentColor !important;
+    width:var(--c2-header-icon-size);
+    height:var(--c2-header-icon-size);
+    flex:0 0 var(--c2-header-icon-size);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--accent-blue);
 }
 
 .contentPage[data-step="1"] .cardTitle{
-    flex:0 0 auto !important;
-    margin:0 !important;
-    padding:0 !important;
-    font-size:var(--c2-header-title-size) !important;
-    line-height:1.08 !important;
-    text-align:center !important;
+    flex:0 0 auto;
+    margin:0;
+    padding:0;
+    font-size:var(--c2-header-title-size);
+    line-height:1.08;
+    text-align:center;
 }
 
-/* Header separator — independent sibling */
 .contentPage[data-step="1"] .summaryHeaderDivider{
-    width:100% !important;
-    height:var(--c2-divider-height) !important;
-    flex:0 0 auto !important;
-    margin:var(--c2-header-divider-gap) 0 0 !important;
-    background:var(--og-border) !important;
+    width:100%;
+    height:var(--c2-divider-height);
+    flex:0 0 auto;
+    margin:var(--c2-header-divider-gap) 0 0;
+    background:var(--og-border);
 }
 
-/* Step Complete */
 .contentPage[data-step="1"] .previewStatus.cardStepStatus{
-    width:100% !important;
-    flex:0 0 auto !important;
-    min-height:0 !important;
-    height:auto !important;
-    max-height:none !important;
+    width:100%;
+    flex:0 0 auto;
+    min-height:0;
+    height:auto;
+    max-height:none;
 
-    display:flex !important;
-    align-items:center !important;
-    justify-content:flex-start !important;
-    gap:var(--c2-step-gap) !important;
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    gap:var(--c2-step-gap);
 
-    margin:var(--c2-section-gap) 0 0 !important;
-    padding:var(--c2-box-pad-y) var(--c2-box-pad-x) !important;
+    margin:var(--c2-section-gap) 0 0;
+    padding:var(--c2-box-pad-y) var(--c2-box-pad-x);
 
-    border:var(--c2-box-border) solid var(--og-border) !important;
-    border-radius:var(--c2-box-radius) !important;
-    background:var(--og-panel-deep) !important;
-    color:var(--og-text) !important;
-    box-sizing:border-box !important;
-    text-align:left !important;
+    border:var(--c2-box-border) solid var(--og-border);
+    border-radius:var(--c2-box-radius);
+    background:var(--og-panel-deep);
+    color:var(--og-text);
+    box-sizing:border-box;
+    text-align:left;
     cursor:pointer;
 }
 
 .contentPage[data-step="1"] .cardStepIcon{
-    width:var(--c2-step-icon-size) !important;
-    height:var(--c2-step-icon-size) !important;
-    flex:0 0 var(--c2-step-icon-size) !important;
-    display:flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-    color:var(--og-subtle) !important;
-    background:transparent !important;
-    border:0 !important;
-    border-radius:0 !important;
-    box-shadow:none !important;
-}
-
-.contentPage[data-step="1"] .cardStepIcon svg{
-    width:100% !important;
-    height:100% !important;
-    fill:currentColor !important;
-    color:currentColor !important;
-}
-
-.contentPage[data-step="1"] .cardStepText{
-    min-width:0 !important;
-    display:flex !important;
-    flex-direction:column !important;
-    align-items:flex-start !important;
-    justify-content:center !important;
-    text-align:left !important;
+    width:var(--c2-step-icon-size);
+    height:var(--c2-step-icon-size);
+    flex:0 0 var(--c2-step-icon-size);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--og-subtle);
+    background:transparent;
+    border:0;
+    border-radius:0;
+    box-shadow:none;
 }
 
 .contentPage[data-step="1"] .cardStepText strong{
-    margin:0 !important;
-    font-size:var(--c2-step-title-size) !important;
-    line-height:1.22 !important;
-    color:var(--og-text) !important;
+    margin:0;
+    font-size:var(--c2-step-title-size);
+    line-height:1.22;
+    color:var(--og-text);
 }
 
 .contentPage[data-step="1"] .cardStepText small{
-    margin:var(--c2-step-text-gap) 0 0 !important;
-    font-size:var(--c2-step-body-size) !important;
-    line-height:1.35 !important;
-    color:var(--og-muted) !important;
+    margin:var(--c2-step-text-gap) 0 0;
+    font-size:var(--c2-step-body-size);
+    line-height:1.35;
+    color:var(--og-muted);
 }
 
-.contentPage[data-step="1"] .cardStepStatus.complete{
-    border-color:var(--accent-green) !important;
-    background:var(--accent-green-bg-strong) !important;
-}
-
-.contentPage[data-step="1"] .cardStepStatus.complete .cardStepIcon{
-    color:var(--accent-green) !important;
-}
-
-.contentPage[data-step="1"] .cardStepStatus.complete .cardStepText strong{
-    color:var(--accent-green-light) !important;
-}
-
-/* Generic overview heading */
 .contentPage[data-step="1"] .cardOverviewTitle{
-    font-size:var(--c2-overview-title-size) !important;
-    line-height:1.2 !important;
-    text-align:center !important;
+    font-size:var(--c2-overview-title-size);
+    line-height:1.2;
+    text-align:center;
 }
 
-/* Footer separator — independent sibling and bottom anchor */
 .contentPage[data-step="1"] .summaryActionDivider{
-    width:100% !important;
-    height:var(--c2-divider-height) !important;
-    flex:0 0 auto !important;
-    margin-top:auto !important;
-    margin-right:0 !important;
-    margin-bottom:var(--c2-footer-divider-gap) !important;
-    margin-left:0 !important;
-    background:var(--og-border) !important;
-}
-
-/* Footer content */
-.contentPage[data-step="1"] .cardFooter{
-    width:100% !important;
-    flex:0 0 auto !important;
-    display:flex !important;
-    flex-direction:column !important;
-    margin:0 !important;
-    padding:0 !important;
+    width:100%;
+    height:var(--c2-divider-height);
+    flex:0 0 auto;
+    margin-top:auto;
+    margin-right:0;
+    margin-bottom:var(--c2-footer-divider-gap);
+    margin-left:0;
+    background:var(--og-border);
 }
 
 .contentPage[data-step="1"] .previewActions.cardActions{
-    width:100% !important;
-    flex:0 0 auto !important;
-    display:grid !important;
-    grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
-    gap:var(--c2-button-gap) !important;
-    margin:0 !important;
+    width:100%;
+    flex:0 0 auto;
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    gap:var(--c2-button-gap);
+    margin:0;
 }
 
 .contentPage[data-step="1"] .cardActions > button{
-    min-height:var(--c2-button-min-height) !important;
-    border-radius:var(--c2-button-radius) !important;
-    font-size:var(--c2-button-font-size) !important;
-    font-family:inherit !important;
-    font-weight:700 !important;
+    min-height:var(--c2-button-min-height);
+    border-radius:var(--c2-button-radius);
+    font-size:var(--c2-button-font-size);
+    font-family:inherit;
+    font-weight:700;
     cursor:pointer;
 }
 
-.contentPage[data-step="1"] .cardPrimaryAction{
-    border:var(--border-thin) solid var(--accent-blue) !important;
-    background:var(--accent-blue-strong) !important;
-    color:var(--color-white) !important;
-}
-
-.contentPage[data-step="1"] .cardSecondaryAction{
-    border:var(--border-thin) solid var(--og-border) !important;
-    background:transparent !important;
-    color:var(--og-text) !important;
-}
-
-/* ==========================================================================
-   CARD 3 — CANONICAL GENERIC SKELETON
-   ========================================================================== */
-
-/* Card */
 .contentPage[data-step="2"] .cardPreview.appCard{
-    container-type:inline-size !important;
-    width:100% !important;
-    height:100% !important;
-    display:flex !important;
-    flex-direction:column !important;
-    justify-content:flex-start !important;
-    gap:0 !important;
-    padding:var(--c3-card-pad-y) var(--c3-card-pad-x) !important;
-    box-sizing:border-box !important;
-    background:var(--c3-card-bg) !important;
-    border:var(--c3-card-border) solid var(--c3-card-border-color) !important;
-    border-radius:var(--c3-card-radius) !important;
-    overflow:hidden !important;
+    container-type:inline-size;
+    width:100%;
+    height:100%;
+    min-height:100%;
+    align-self:stretch;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    gap:0;
+    padding:var(--c3-card-pad-y) var(--c3-card-pad-x);
+    box-sizing:border-box;
+    background:var(--c3-card-bg);
+    border:var(--c3-card-border) solid var(--c3-card-border-color);
+    border-radius:var(--c3-card-radius);
+    overflow:hidden ;
 
 }
 
-/* Header content */
 .contentPage[data-step="2"] .previewHero.cardHeader{
-    width:100% !important;
-    flex:0 0 auto !important;
-    display:flex !important;
-    flex-direction:column !important;
-    align-items:center !important;
-    justify-content:center !important;
-    gap:var(--c3-header-gap) !important;
-    margin:0 !important;
-    padding:0 !important;
-    text-align:center !important;
+    width:100%;
+    flex:0 0 auto;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:var(--c3-header-gap);
+    margin:0;
+    padding:0;
+    text-align:center;
 }
 
 .contentPage[data-step="2"] .cardHeaderIcon{
-    width:var(--c3-header-icon-size) !important;
-    height:var(--c3-header-icon-size) !important;
-    flex:0 0 var(--c3-header-icon-size) !important;
-    display:flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-    color:var(--accent-blue) !important;
+    width:var(--c3-header-icon-size);
+    height:var(--c3-header-icon-size);
+    flex:0 0 var(--c3-header-icon-size);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--accent-blue);
 }
 
 .contentPage[data-step="2"] .cardHeaderIcon svg{
-    width:100% !important;
-    height:100% !important;
-    fill:currentColor !important;
-    color:currentColor !important;
+    width:100%;
+    height:100%;
+    fill:currentColor;
+    color:currentColor;
 }
 
 .contentPage[data-step="2"] .cardTitle{
-    flex:0 0 auto !important;
-    margin:0 !important;
-    padding:0 !important;
-    font-size:var(--c3-header-title-size) !important;
-    line-height:1.08 !important;
-    text-align:center !important;
+    flex:0 0 auto;
+    margin:0;
+    padding:0;
+    font-size:var(--c3-header-title-size);
+    line-height:1.08;
+    text-align:center;
 }
 
-/* Header separator — independent sibling */
 .contentPage[data-step="2"] .activityHeaderDivider{
-    width:100% !important;
-    height:var(--c3-divider-height) !important;
-    flex:0 0 auto !important;
-    margin:var(--c3-header-divider-gap) 0 0 !important;
-    background:var(--og-border) !important;
+    width:100%;
+    height:var(--c3-divider-height);
+    flex:0 0 auto;
+    margin:var(--c3-header-divider-gap) 0 0;
+    background:var(--og-border);
 }
 
-/* Step Complete */
 .contentPage[data-step="2"] .previewStatus.cardStepStatus{
-    width:100% !important;
-    flex:0 0 auto !important;
-    min-height:0 !important;
-    height:auto !important;
-    max-height:none !important;
+    width:100%;
+    flex:0 0 auto;
+    min-height:0;
+    height:auto;
+    max-height:none;
 
-    display:flex !important;
-    align-items:center !important;
-    justify-content:flex-start !important;
-    gap:var(--c3-step-gap) !important;
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    gap:var(--c3-step-gap);
 
-    margin:var(--c3-section-gap) 0 0 !important;
-    padding:var(--c3-box-pad-y) var(--c3-box-pad-x) !important;
+    margin:var(--c3-section-gap) 0 0;
+    padding:var(--c3-box-pad-y) var(--c3-box-pad-x);
 
-    border:var(--c3-box-border) solid var(--og-border) !important;
-    border-radius:var(--c3-box-radius) !important;
-    background:var(--og-panel-deep) !important;
-    color:var(--og-text) !important;
-    box-sizing:border-box !important;
-    text-align:left !important;
+    border:var(--c3-box-border) solid var(--og-border);
+    border-radius:var(--c3-box-radius);
+    background:var(--og-panel-deep);
+    color:var(--og-text);
+    box-sizing:border-box;
+    text-align:left;
     cursor:pointer;
 }
 
 .contentPage[data-step="2"] .cardStepIcon{
-    width:var(--c3-step-icon-size) !important;
-    height:var(--c3-step-icon-size) !important;
-    flex:0 0 var(--c3-step-icon-size) !important;
-    display:flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-    color:var(--og-subtle) !important;
-    background:transparent !important;
-    border:0 !important;
-    border-radius:0 !important;
-    box-shadow:none !important;
+    width:var(--c3-step-icon-size);
+    height:var(--c3-step-icon-size);
+    flex:0 0 var(--c3-step-icon-size);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--og-subtle);
+    background:transparent;
+    border:0;
+    border-radius:0;
+    box-shadow:none;
 }
 
 .contentPage[data-step="2"] .cardStepIcon svg{
-    width:100% !important;
-    height:100% !important;
-    fill:currentColor !important;
-    color:currentColor !important;
+    width:100%;
+    height:100%;
+    fill:currentColor;
+    color:currentColor;
 }
 
 .contentPage[data-step="2"] .cardStepText{
-    min-width:0 !important;
-    display:flex !important;
-    flex-direction:column !important;
-    align-items:flex-start !important;
-    justify-content:center !important;
-    text-align:left !important;
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:center;
+    text-align:left;
 }
 
 .contentPage[data-step="2"] .cardStepText strong{
-    margin:0 !important;
-    font-size:var(--c3-step-title-size) !important;
-    line-height:1.22 !important;
-    color:var(--og-text) !important;
+    margin:0;
+    font-size:var(--c3-step-title-size);
+    line-height:1.22;
+    color:var(--og-text);
 }
 
 .contentPage[data-step="2"] .cardStepText small{
-    margin:var(--c3-step-text-gap) 0 0 !important;
-    font-size:var(--c3-step-body-size) !important;
-    line-height:1.35 !important;
-    color:var(--og-muted) !important;
+    margin:var(--c3-step-text-gap) 0 0;
+    font-size:var(--c3-step-body-size);
+    line-height:1.35;
+    color:var(--og-muted);
 }
 
 .contentPage[data-step="2"] .cardStepStatus.complete{
-    border-color:var(--accent-green) !important;
-    background:var(--accent-green-bg-strong) !important;
+    border-color:var(--accent-green) ;
+    background:var(--accent-green-bg-strong) ;
 }
 
 .contentPage[data-step="2"] .cardStepStatus.complete .cardStepIcon{
-    color:var(--accent-green) !important;
+    color:var(--accent-green) ;
 }
 
 .contentPage[data-step="2"] .cardStepStatus.complete .cardStepText strong{
-    color:var(--accent-green-light) !important;
+    color:var(--accent-green-light) ;
 }
 
-/* Generic overview heading */
 .contentPage[data-step="2"] .cardOverviewTitle{
-    font-size:var(--c3-overview-title-size) !important;
-    line-height:1.2 !important;
-    text-align:center !important;
+    font-size:var(--c3-overview-title-size);
+    line-height:1.2;
+    text-align:center;
 }
 
-/* Footer separator — independent sibling and bottom anchor */
 .contentPage[data-step="2"] .activityActionDivider{
-    width:100% !important;
-    height:var(--c3-divider-height) !important;
-    flex:0 0 auto !important;
-    margin-top:auto !important;
-    margin-right:0 !important;
-    margin-bottom:var(--c3-footer-divider-gap) !important;
-    margin-left:0 !important;
-    background:var(--og-border) !important;
+    width:100%;
+    height:var(--c3-divider-height);
+    flex:0 0 auto;
+    margin-top:auto;
+    margin-right:0;
+    margin-bottom:var(--c3-footer-divider-gap);
+    margin-left:0;
+    background:var(--og-border);
 }
 
-/* Footer content */
 .contentPage[data-step="2"] .cardFooter{
-    width:100% !important;
-    flex:0 0 auto !important;
-    display:flex !important;
-    flex-direction:column !important;
-    margin:0 !important;
-    padding:0 !important;
+    width:100%;
+    flex:0 0 auto;
+    display:flex;
+    flex-direction:column;
+    margin:0;
+    padding:0;
 }
 
 .contentPage[data-step="2"] .previewActions.cardActions{
-    width:100% !important;
-    flex:0 0 auto !important;
-    display:grid !important;
-    grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
-    gap:var(--c3-button-gap) !important;
-    margin:0 !important;
+    width:100%;
+    flex:0 0 auto;
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    gap:var(--c3-button-gap);
+    margin:0;
 }
 
 .contentPage[data-step="2"] .cardActions > button{
-    min-height:var(--c3-button-min-height) !important;
-    border-radius:var(--c3-button-radius) !important;
-    font-size:var(--c3-button-font-size) !important;
-    font-family:inherit !important;
-    font-weight:700 !important;
+    min-height:var(--c3-button-min-height);
+    border-radius:var(--c3-button-radius);
+    font-size:var(--c3-button-font-size);
+    font-family:inherit;
+    font-weight:700;
     cursor:pointer;
 }
 
 .contentPage[data-step="2"] .cardPrimaryAction{
-    border:var(--border-thin) solid var(--accent-blue) !important;
-    background:var(--accent-blue-strong) !important;
-    color:var(--color-white) !important;
+    border:var(--border-thin) solid var(--accent-blue);
+    background:var(--accent-blue-strong);
+    color:var(--color-white);
 }
 
 .contentPage[data-step="2"] .cardSecondaryAction{
-    border:var(--border-thin) solid var(--og-border) !important;
-    background:transparent !important;
-    color:var(--og-text) !important;
+    border:var(--border-thin) solid var(--og-border);
+    background:transparent;
+    color:var(--og-text);
 }
 
 #contentViewport{
-    position:relative !important;
-    height:100% !important;
-    min-height:0 !important;
-    overflow:hidden !important;
+    position:relative;
+    width:100%;
+    height:100%;
+    min-height:0;
+    overflow:hidden;
 }
 
 #contentTrack{
-    position:absolute !important;
-    inset:0 !important;
-    width:100% !important;
-    height:100% !important;
-    min-height:0 !important;
-    display:block !important;
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    min-height:0;
+    display:block;
+    transition:transform .8s ease;
 }
 
-/* Full-height page frames */
 .contentPage{
-    position:absolute !important;
-    left:0 !important;
-    width:100% !important;
-    height:100% !important;
-    min-height:100% !important;
-    box-sizing:border-box !important;
+    position:absolute;
+    left:0;
+    width:100%;
+    height:100%;
+    min-height:100%;
+    box-sizing:border-box;
 
-    /* Page is geometry only; visual shell belongs to .appCard. */
-    background:transparent !important;
-    border:0 !important;
-    border-radius:0 !important;
-    overflow:visible !important;
+    background:transparent;
+    border:0;
+    border-radius:0;
+    overflow:visible;
 }
 
-/* Explicit vertical stack with controlled inter-card spacing */
 .contentPage[data-step="0"]{
-    top:0 !important;
+    top:0;
 }
 
 .contentPage[data-step="1"]{
-    top:calc(100% + var(--card-transition-gap)) !important;
+    top:calc(100% + var(--card-transition-gap));
 }
 
 .contentPage[data-step="2"]{
-    top:calc(200% + (var(--card-transition-gap) * 2)) !important;
-}
-
-/* Cards fill their page frames */
-.contentPage[data-step="0"] .cardPreview.appCard{
-    height:100% !important;
-    min-height:100% !important;
-    align-self:stretch !important;
-}
-
-.contentPage[data-step="1"] .cardPreview.appCard{
-    height:100% !important;
-    min-height:100% !important;
-    align-self:stretch !important;
-}
-
-.contentPage[data-step="2"] .cardPreview.appCard{
-    height:100% !important;
-    min-height:100% !important;
-    align-self:stretch !important;
+    top:calc(200% + (var(--card-transition-gap) * 2));
 }
 
 .contentPage[data-step="0"] .cardStepIcon,
 .contentPage[data-step="1"] .cardStepIcon,
 .contentPage[data-step="2"] .cardStepIcon{
-    align-self:flex-start !important;
+    align-self:flex-start;
 }
 
 .timelineNodeIcon svg,
@@ -2230,15 +1574,12 @@
     color:inherit !important;
 }
 
-/* Developer icon: navigation-glyph scale, touch target remains 44px. */
 #headerHelpButton{
     color:var(--og-subtle) !important;
 }
 
 #headerHelpButton .debugToggleIcon{
-    width:var(--app-bar-icon-size) !important;
-    height:var(--app-bar-icon-size) !important;
-    flex:0 0 var(--app-bar-icon-size) !important;
+
     display:flex !important;
     align-items:center !important;
     justify-content:center !important;
@@ -2246,15 +1587,10 @@
 
 #headerHelpButton .debugToggleIcon svg{
     display:block !important;
-    width:100% !important;
-    height:100% !important;
+
     fill:currentColor !important;
     color:currentColor !important;
     stroke:none !important;
-}
-
-#headerHelpButton.active{
-    color:var(--accent-green) !important;
 }
 
 #headerHelpButton{
@@ -2266,18 +1602,6 @@
 }
 
 #headerHelpButton .debugToggleIcon{
-    width:var(--c1-header-icon-size) !important;
-    height:var(--c1-header-icon-size) !important;
-    flex:0 0 var(--c1-header-icon-size) !important;
-}
-
-/* Test exact proportional arc geometry without round-cap extension. */
-.contentPage[data-step="0"] .gradeDonutProgress{stroke-linecap:butt !important;}
-
-/* Temporary developer tool.
-   Intentionally hard-coded and NOT linked to Card 1 controls.
-   44px matches the current rendered scale of the card title icon. */
-#headerHelpButton .debugToggleIcon{
     width:44px !important;
     height:44px !important;
     flex:0 0 44px !important;
@@ -2288,410 +1612,316 @@
     height:44px !important;
 }
 
-.contentPage[data-step="0"] .gradeDonutProgress{stroke-linecap:butt !important;}
-
 .contentPage[data-step="0"] .gradeDonutProgress{
-    fill:none !important;
-    stroke:currentColor !important;
-    stroke-width:var(--c1-donut-progress-stroke) !important;
-    stroke-linecap:round !important;
-    stroke-linejoin:round !important;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:var(--c1-donut-progress-stroke);
+    stroke-linecap:round;
+    stroke-linejoin:round;
     vector-effect:non-scaling-stroke;
 }
 
 .contentPage[data-step="0"] .bySizeFill{
-    box-sizing:border-box !important;
+    box-sizing:border-box;
 }
 
 .contentPage[data-step="0"] [data-summary-premium-size] .sizePercentNumber,
 .contentPage[data-step="0"] [data-summary-standard-size] .sizePercentNumber{
-    font-weight:var(--c1-by-size-value-weight) !important;
+    font-weight:var(--c1-by-size-value-weight);
 }
 
-/* Overview-to-content rhythm */
 .contentPage[data-step="1"] .summaryOverview{
-    width:100% !important;
-    flex:0 0 auto !important;
-    margin:var(--c2-section-gap) 0 0 !important;
-    padding:0 !important;
+    width:100%;
+    flex:0 0 auto;
+    margin:var(--c2-section-gap) 0 0;
+    padding:0;
 }
 
 .contentPage[data-step="1"] .summaryOverviewTitle,
 .contentPage[data-step="1"] .cardOverviewTitle{
-    margin:0 0 var(--c2-overview-content-gap) !important;
+    margin:0 0 var(--c2-overview-content-gap);
 }
 
-/* Vessel identity */
 .contentPage[data-step="1"] .summaryVesselInfo{
-    width:100% !important;
-    display:flex !important;
-    flex-direction:column !important;
-    align-items:center !important;
-    gap:var(--c2-vessel-gap) !important;
-    margin:0 !important;
-    padding:0 !important;
-    text-align:center !important;
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:var(--c2-vessel-gap);
+    margin:0;
+    padding:0;
+    text-align:center;
 }
 
-/* Metric grid */
 .contentPage[data-step="1"] .summaryMetricGrid{
-    width:100% !important;
-    display:grid !important;
-    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
-    gap:var(--c2-metric-grid-gap) !important;
-    margin:var(--c2-section-gap) 0 0 !important;
-    padding:0 !important;
+    width:100%;
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:var(--c2-metric-grid-gap);
+    margin:var(--c2-section-gap) 0 0;
+    padding:0;
 }
 
 .contentPage[data-step="1"] .summaryMetricIcon{
-    width:var(--c2-metric-icon-size) !important;
-    height:var(--c2-metric-icon-size) !important;
-    flex:0 0 var(--c2-metric-icon-size) !important;
-    display:flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-    color:var(--accent-blue) !important;
+    width:var(--c2-metric-icon-size);
+    height:var(--c2-metric-icon-size);
+    flex:0 0 var(--c2-metric-icon-size);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--accent-blue);
 }
 
 .contentPage[data-step="1"] .summaryMetricIcon svg{
-    width:100% !important;
-    height:100% !important;
-    fill:currentColor !important;
+    width:100%;
+    height:100%;
+    fill:currentColor;
 }
 
 .contentPage[data-step="1"] .summaryMetricValue{
-    margin:0 !important;
-    font-size:var(--c2-metric-value-size) !important;
-    line-height:1.1 !important;
-    font-weight:var(--c2-metric-value-weight) !important;
-    color:var(--og-text) !important;
+    margin:0;
+    font-size:var(--c2-metric-value-size);
+    line-height:1.1;
+    font-weight:var(--c2-metric-value-weight);
+    color:var(--og-text);
 }
 
-/* Standalone Summary Overview title */
-
-/* Grade data contents container */
-
-/* One box per complete grade-data item */
-
-/* Summary header -> boat contents uses the standard Card 2 section gap,
-   matching the Detail Overview -> chart relationship. */
-
-/* Standardized separation between boat contents and grade-data contents. */
-
-/* Three metric boxes are one horizontal row with an even controlled gap. */
 .contentPage[data-step="1"] .summaryGradeData{
-    display:grid !important;
-    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
-    grid-auto-flow:column !important;
-    gap:var(--c2-metric-grid-gap) !important;
-    align-items:stretch !important;
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    grid-auto-flow:column;
+    gap:var(--c2-metric-grid-gap);
+    align-items:stretch;
+    margin-top:8cqw;
 }
 
 .contentPage[data-step="1"] .summaryMetric{
-    width:auto !important;
-    min-width:0 !important;
-    height:100% !important;
-    margin:0 !important;
+    width:auto;
+    min-width:0;
+    height:100%;
+    margin:0;
 }
 
-/* Prevent old generic metric-tile rules from forcing full-row stacking. */
 .contentPage[data-step="1"] .summaryGradeData > .summaryMetric{
-    grid-column:auto !important;
-    flex:none !important;
+    grid-column:auto;
+    flex:none;
 }
 
 .contentPage[data-step="1"] .summaryOverviewTitle{
-    margin:0 0 4cqw !important;
+    margin:0 0 4cqw;
 }
 
-.contentPage[data-step="1"] .summaryGradeData{
-    margin-top:8cqw !important;
-}
 
 .contentPage[data-step="1"] .summaryBoatContents{
-    width:100% !important;
-    display:flex !important;
-    flex-direction:column !important;
-    align-items:stretch !important;
-    gap:var(--c2-boat-block-gap) !important;
-    margin:0 !important;
-    padding:var(--c2-box-pad-y) var(--c2-box-pad-x) !important;
-
-    box-sizing:border-box !important;
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    gap:var(--c2-boat-block-gap);
+    margin:0;
+    padding:0 var(--c2-box-pad-x);
+    border:0;
+    border-radius:0;
+    background:transparent;
+    box-shadow:none;
+    box-sizing:border-box;
 }
 
 .contentPage[data-step="1"] .summaryBoatBlock{
-    width:100% !important;
-    display:flex !important;
-    flex-direction:column !important;
-    align-items:center !important;
-    justify-content:center !important;
-    gap:var(--c2-boat-block-internal-gap) !important;
-    margin:0 !important;
-    padding:0 !important;
-    text-align:center !important;
-    box-sizing:border-box !important;
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:var(--c2-boat-block-internal-gap);
+    margin:0;
+    padding:0;
+    text-align:center;
+    box-sizing:border-box;
 }
 
 .contentPage[data-step="1"] .summaryVesselEyebrow{
-    margin:0 !important;
-    font-size:var(--c2-vessel-eyebrow-size) !important;
-    line-height:1.2 !important;
-    font-weight:400 !important;
-    color:var(--og-muted) !important;
+    margin:0;
+    font-size:var(--c2-vessel-eyebrow-size);
+    line-height:1.2;
+    font-weight:400;
+    color:var(--og-muted);
 }
 
 .contentPage[data-step="1"] .summaryBoatName{
-    margin:0 !important;
-    
-    line-height:1.15 !important;
-    
-    color:var(--og-text) !important;
+    margin:0;
+    color:var(--og-text);
+    font-size:var(--c2-boat-icon-size);
+    font-weight:700;
+    line-height:1.15;
 }
 
 .contentPage[data-step="1"] .summaryVesselDivider{
-    width:var(--c2-boat-divider-width) !important;
-    display:flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-    gap:var(--c2-boat-divider-gap) !important;
-    margin:0 auto !important;
+    width:var(--c2-boat-divider-width);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:var(--c2-boat-divider-gap);
+    margin:0 auto;
 }
 
 .contentPage[data-step="1"] .summaryVesselDivider > span{
-    height:var(--border-thin) !important;
-    flex:1 1 auto !important;
-    background:var(--og-border) !important;
+    height:var(--border-thin);
+    flex:1 1 auto;
+    background:var(--og-border);
 }
 
 .contentPage[data-step="1"] .summaryVesselIcon{
-    width:var(--c2-boat-icon-size) !important;
-    height:var(--c2-boat-icon-size) !important;
-    flex:0 0 var(--c2-boat-icon-size) !important;
-    display:flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-    color:var(--accent-blue) !important;
+    width:var(--c2-boat-icon-size);
+    height:var(--c2-boat-icon-size);
+    flex:0 0 var(--c2-boat-icon-size);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--accent-blue);
 }
 
 .contentPage[data-step="1"] .summaryVesselIcon svg{
-    width:100% !important;
-    height:100% !important;
-    fill:currentColor !important;
+    width:100%;
+    height:100%;
+    fill:currentColor;
 }
 
 .contentPage[data-step="1"] .summaryVesselCfv{
-    display:inline-flex !important;
-    align-items:baseline !important;
-    justify-content:center !important;
-    gap:var(--c2-boat-cfv-gap) !important;
-    
-    font-size:var(--c2-boat-cfv-size) !important;
-    line-height:1.2 !important;
-    font-weight:400 !important;
-    color:var(--og-text) !important;
-    white-space:nowrap !important;
+    display:inline-flex;
+    align-items:baseline;
+    justify-content:center;
+    gap:var(--c2-boat-cfv-gap);
+    margin:0 auto;
+    color:var(--og-text);
+    font-size:var(--c2-boat-cfv-size);
+    font-weight:400;
+    line-height:1.2;
+    white-space:nowrap;
 }
 
 .contentPage[data-step="1"] .summaryReceiptLabel{
-    margin:0 !important;
-    font-size:var(--c2-receipt-label-size) !important;
-    line-height:1.2 !important;
-    font-weight:400 !important;
-    color:var(--og-muted) !important;
+    margin:0;
+    font-size:var(--c2-receipt-label-size);
+    line-height:1.2;
+    font-weight:400;
+    color:var(--og-muted);
 }
 
 .contentPage[data-step="1"] .summaryReceiptValue{
-    display:inline-flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-    gap:var(--c2-receipt-row-gap) !important;
-    margin:0 auto !important;
-    
-    line-height:1.15 !important;
-    font-weight:400 !important;
-    white-space:nowrap !important;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:var(--c2-receipt-row-gap);
+    margin:0 auto;
+    font-size:var(--c2-boat-icon-size);
+    font-weight:400;
+    line-height:1.15;
+    white-space:nowrap;
 }
 
 .contentPage[data-step="1"] .summaryReceiptIcon{
-
-    display:flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-    color:var(--accent-blue) !important;
+    width:var(--c2-boat-icon-size);
+    height:var(--c2-boat-icon-size);
+    flex:0 0 var(--c2-boat-icon-size);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--accent-blue);
 }
 
 .contentPage[data-step="1"] .summaryReceiptIcon svg{
-    width:100% !important;
-    height:100% !important;
-    fill:currentColor !important;
+    width:100%;
+    height:100%;
+    fill:currentColor;
 }
 
-/* Debug hierarchy */
-
 .contentPage[data-step="1"] .appCard{
-    /* Exact muted colour used by Fisheries Notification sub-text. */
+
     --c2-boat-placeholder-color:var(--palette-muted);
 
-    /* Boat Name and Fish Receipt value intentionally match Mark Complete. */
     --c2-boat-name-size:var(--c2-step-title-size);
 }
 
-/* Default placeholder values */
 .contentPage[data-step="1"] [data-summary-boat-name][data-empty-state="true"],
 .contentPage[data-step="1"] [data-summary-cfv][data-empty-state="true"],
 .contentPage[data-step="1"] [data-summary-fish-receipt][data-empty-state="true"]{
-    color:var(--c2-boat-placeholder-color) !important;
+    color:var(--c2-boat-placeholder-color);
 }
 
-/* Boat Name matches Mark Complete font size. */
-
-/* Fish receipt number row matches Boat Name / Mark Complete size.
-   Icon remains 1em, therefore exactly follows the same type scale. */
-
-/* Grade-data values use their category colours. */
 .contentPage[data-step="1"] .summaryMetricValueNet{
-    color:var(--accent-blue) !important;
+    color:var(--accent-blue);
 }
 
 .contentPage[data-step="1"] .summaryMetricValueSamples{
-    color:var(--accent-green) !important;
+    color:var(--accent-green);
 }
 
-/* Boat Data is a structural parent only — not a visible card/box. */
-.contentPage[data-step="1"] .summaryBoatContents{
-    border:0 !important;
-    border-radius:0 !important;
-    background:transparent !important;
-    box-shadow:none !important;
-}
 
-/* Use one shared visual scale for:
-   - Boat Name
-   - mini separator icon
-   - Fish Receipt icon
-   - Fish Receipt value
-*/
-.contentPage[data-step="1"] .summaryBoatName{
-    font-size:var(--c2-boat-icon-size) !important;
-}
 
-.contentPage[data-step="1"] .summaryReceiptValue{
-    font-size:var(--c2-boat-icon-size) !important;
-}
 
-.contentPage[data-step="1"] .summaryReceiptIcon{
-    width:var(--c2-boat-icon-size) !important;
-    height:var(--c2-boat-icon-size) !important;
-    flex:0 0 var(--c2-boat-icon-size) !important;
-}
 
-/* Structural parent: remove vertical padding so section spacing is owned
-   solely by the established external 8cqw rhythm. Preserve horizontal pad. */
-.contentPage[data-step="1"] .summaryBoatContents{
-    padding-top:0 !important;
-    padding-bottom:0 !important;
-}
 
-/* VESSEL and FISH RECEIPT NUMBER match Fisheries Notification heading:
-   muted heading colour and bold weight. */
 .contentPage[data-step="1"] .summaryVesselEyebrow,
 .contentPage[data-step="1"] .summaryReceiptLabel{
-    color:var(--og-muted) !important;
-    font-weight:700 !important;
+    color:var(--og-muted);
+    font-weight:700;
 }
 
-/* CFV value uses exactly the same type scale as the CFV label itself. */
 .contentPage[data-step="1"] .summaryVesselCfv > b{
-    font-size:inherit !important;
-    line-height:inherit !important;
-    font-weight:inherit !important;
+    font-size:inherit;
+    line-height:inherit;
+    font-weight:inherit;
+}
+.contentPage[data-step="0"] .cardTitle,
+.contentPage[data-step="1"] .cardTitle{
+    color:var(--og-text);
 }
 
-.contentPage[data-step="1"] .summaryBoatName{
-    font-weight:700 !important;
-}
-
-/* ---------------- CARD 1 ---------------- */
-
-/* Inspection Detail title */
-.contentPage[data-step="0"] .cardTitle{
-    color:var(--og-text) !important;
-}
-
-/* Percentage symbol everywhere on Card 1 */
 .contentPage[data-step="0"] .donutPercentUnit,
 .contentPage[data-step="0"] .sizePercentUnit{
-    color:var(--og-text) !important;
+    color:var(--og-text);
 }
 
-/* Premium / Standard / Rejects labels */
 .contentPage[data-step="0"] .gradeLegend{
-    color:var(--og-text) !important;
+    color:var(--og-text);
 }
 
-/* Fisheries Notification heading */
 .contentPage[data-step="0"] .fisheriesNotificationCopy strong{
-    color:var(--og-text) !important;
+    color:var(--og-text);
 }
 
-/* By Size Premium / By Size Standard text */
 .contentPage[data-step="0"] .bySizeLabel,
 .contentPage[data-step="0"] .bySizeLabel > span{
-    color:var(--og-text) !important;
+    color:var(--og-text);
+}.contentPage[data-step="0"] .cardActions > button,
+.contentPage[data-step="1"] .cardActions > button{
+    color:var(--og-text);
 }
 
-/* Edit Form / Review Form */
-.contentPage[data-step="0"] .cardActions > button{
-    color:var(--og-text) !important;
-}
-
-/* ---------------- CARD 2 ---------------- */
-
-/* Inspection Summary title */
-.contentPage[data-step="1"] .cardTitle{
-    color:var(--og-text) !important;
-}
-
-/* Vessel / CFV / Fish Receipt Number headings */
 .contentPage[data-step="1"] .summaryVesselEyebrow,
 .contentPage[data-step="1"] .summaryVesselCfvLabel,
 .contentPage[data-step="1"] .summaryReceiptLabel{
-    color:var(--og-text) !important;
+    color:var(--og-text);
 }
 
-/* Percentage symbol */
 .contentPage[data-step="1"] .summaryMetricUnit{
-    color:var(--og-text) !important;
+    color:var(--og-text);
 }
 
-/* Edit Form / Review Form */
-.contentPage[data-step="1"] .cardActions > button{
-    color:var(--og-text) !important;
-}
-
-/* ---------------- CARD 3 ---------------- */
-
-/* Same shared content treatment as Cards 1–2 */
 .contentPage[data-step="2"] .cardTitle,
 .contentPage[data-step="2"] .cardActions > button{
-    color:var(--og-text) !important;
+    color:var(--og-text);
 }
 
-/* Vessel, Boat Name, and CFV now share the same internal vertical rhythm. */
 .contentPage[data-step="1"] .summaryBoatIdentityBlock{
-    gap:var(--c2-boat-block-internal-gap) !important;
+    gap:var(--c2-boat-block-internal-gap);
 }
 
-/* Middle Boat Data block is separator/icon only. */
 .contentPage[data-step="1"] .summaryBoatCfvBlock{
-    gap:0 !important;
+    gap:0;
 }
 
-/* CFV remains one centred visual item under Boat Name. */
-.contentPage[data-step="1"] .summaryVesselCfv{
-    margin:0 auto !important;
-}
 
 #headerHelpButton:not(.active),
 #headerHelpButton:not(.active) .debugToggleIcon,
@@ -2701,73 +1931,70 @@
 }
 
 .contentPage[data-step="0"] .fisheriesNotification{
-    gap:4cqw !important;
+    gap:4cqw;
 }
 
 .contentPage[data-step="0"] .fisheriesNotificationDivider{
-    width:var(--mini-separator-width) !important;
-    display:flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-    gap:var(--mini-separator-gap) !important;
-    margin:0 auto !important;
-    padding:0 !important;
+    width:var(--mini-separator-width);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:var(--mini-separator-gap);
+    margin:0 auto;
+    padding:0;
 }
 
 .contentPage[data-step="0"] .fisheriesNotificationDivider > span{
-    display:block !important;
-    height:var(--border-thin) !important;
-    flex:1 1 auto !important;
-    width:auto !important;
-    min-width:0 !important;
-    background:var(--og-border) !important;
-    border:0 !important;
+    display:block;
+    height:var(--border-thin);
+    flex:1 1 auto;
+    width:auto;
+    min-width:0;
+    background:var(--og-border);
+    border:0;
     opacity:1 !important;
 }
 
 .contentPage[data-step="0"] .fisheriesNotificationIcon{
-    width:var(--mini-separator-icon-size) !important;
-    height:var(--mini-separator-icon-size) !important;
-    flex:0 0 var(--mini-separator-icon-size) !important;
+    width:var(--mini-separator-icon-size);
+    height:var(--mini-separator-icon-size);
+    flex:0 0 var(--mini-separator-icon-size);
 
-    display:flex !important;
-    align-items:center !important;
-    justify-content:center !important;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-    margin:0 !important;
-    padding:0 !important;
+    margin:0;
+    padding:0;
 
-    border:0 !important;
-    border-radius:0 !important;
-    background:transparent !important;
-    box-shadow:none !important;
+    border:0;
+    border-radius:0;
+    background:transparent;
+    box-shadow:none;
 
-    color:var(--palette-subtle) !important;
+    color:var(--palette-subtle);
     transform:none !important;
 }
 
 .contentPage[data-step="0"] .fisheriesNotificationIcon svg{
-    width:100% !important;
-    height:100% !important;
-    display:block !important;
-    margin:0 !important;
-    padding:0 !important;
-    fill:currentColor !important;
-    color:inherit !important;
+    width:100%;
+    height:100%;
+    display:block;
+    margin:0;
+    padding:0;
+    fill:currentColor;
+    color:inherit;
     transform:none !important;
 }
 
-/* Approved functional status treatment. */
 .contentPage[data-step="0"] .fisheriesNotification[data-required="true"] .fisheriesNotificationIcon{
-    color:var(--palette-orange) !important;
+    color:var(--palette-orange);
 }
 
 .contentPage[data-step="0"] .fisheriesNotification[data-required="true"] .fisheriesNotificationIcon svg{
-    color:inherit !important;
-    fill:currentColor !important;
+    color:inherit;
+    fill:currentColor;
 }
-
-/* Debug centerline remains diagnostic only. */
 
 #layoutDebugOverlay{
     position:fixed;

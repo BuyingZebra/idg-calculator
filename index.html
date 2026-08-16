@@ -32,7 +32,7 @@ aria-label="Back">
 </button>
 
 <button
-id="headerHelpButton"
+id="headerHelpButton" data-development-only
 type="button"
 aria-label="Toggle layout debug outlines"
 aria-pressed="false"
@@ -209,7 +209,7 @@ title="Toggle layout debug outlines">
                             <div class="summaryBoatBlock summaryBoatCfvBlock">
                                 <div class="summaryVesselDivider" aria-hidden="true">
                                     <span></span>
-                                    <div class="summaryVesselIcon" data-icon="inspection"></div>
+                                    <div class="summaryVesselIcon" data-icon="anchor"></div>
                                     <span></span>
                                 </div>
                             </div>
@@ -217,7 +217,7 @@ title="Toggle layout debug outlines">
                             <div class="summaryBoatBlock summaryBoatReceiptBlock">
                                 <span class="summaryReceiptLabel">FISH RECEIPT NUMBER</span>
                                 <div class="summaryReceiptValue">
-                                    <div class="summaryReceiptIcon" data-icon="grading" aria-hidden="true"></div>
+                                    <div class="summaryReceiptIcon" data-icon="receipt" aria-hidden="true"></div>
                                     <strong data-summary-fish-receipt data-empty-state="true">1234567</strong>
                                 </div>
                             </div>
@@ -323,10 +323,11 @@ Select a card to load a workspace.
 
 <script src="./modules/inspection-detail/inspection-detail.math.js"></script>
 <script src="./modules/inspection-summary/inspection-summary.math.js"></script>
-<script src="./app/state.js"></script>
+<script src="./app/config.js"></script>
+    <script src="./app/state.js"></script>
 <script src="./ui/formula-helper.js"></script>
 <script src="./modules/inspection-detail/inspection-detail.js"></script>
-<script src="./data/vessels/atlantic-vessel-directory.js"></script>
+
 <script src="./modules/inspection-summary/inspection-summary.js"></script>
 <script src="./modules/activity-slip/activity-slip.js"></script>
 <script src="./ui/icons.js"></script>

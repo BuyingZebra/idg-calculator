@@ -38,7 +38,9 @@ function showFormulaHelp(details, trigger){
         activeFormulaTrigger.classList.add("formulaSelected");
     }
 
-    document.getElementById("formulaDialogTitle").textContent=details.title || "Calculation";
+    const formulaTitle=document.getElementById("formulaDialogTitle");
+    formulaTitle.hidden=false;
+    formulaTitle.textContent=details.title || "Calculation";
     const parts=[];
     if(details.formula) parts.push(`<p class="formulaEquation">${colorizeFormulaText(details.formula)}</p>`);
     if(details.variables) parts.push(`<div class="formulaVariables">${renderVariableDefinitions(details.variables)}</div>`);
@@ -66,13 +68,11 @@ function showReviewOverlay(step){
         activeFormulaTrigger=null;
     }
 
-    let title="Review Form";
+    let title="";
     let body="";
 
     if(step===0){
-        title="Inspection Detail";
         body=`<div class="reviewOnlyResults">
-            <div class="resultsHeading dataSheetHeading"><span class="resultsHeadingIcon">◉</span><span>Dockside Grading Summary</span></div>
             ${gradingResultsTable()}
         </div>`;
     }else if(step===1){
@@ -84,8 +84,24 @@ function showReviewOverlay(step){
         body=`<div class="reviewOnlyResults activityResults">${workActivitySheet(computed)}${returnTravelSheet(computed)}</div>`;
     }
 
-    document.getElementById("formulaDialogTitle").textContent=title;
+    const reviewTitle=document.getElementById("formulaDialogTitle");
+    reviewTitle.textContent="";
+    reviewTitle.hidden=true;
     document.getElementById("formulaDialogBody").innerHTML=body;
+
+    /* Review is read-only: calculation/helper controls are display values here,
+       not interactive shortcuts into the formula helper. */
+    dialog.querySelectorAll(".resultCellButton").forEach(button=>{
+        button.disabled=true;
+        button.tabIndex=-1;
+        button.setAttribute("aria-disabled","true");
+    });
+
+    /* Review content is injected after the normal workspace icon pass.
+       Load any local SVG placeholders in the newly-created review markup. */
+    if(typeof loadSvgIcon==="function"){
+        dialog.querySelectorAll("[data-icon]").forEach(el=>loadSvgIcon(el,el.dataset.icon));
+    }
 
     dialog.classList.add("reviewDialogMode");
     dialog.classList.remove("formulaClosing");

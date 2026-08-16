@@ -15,91 +15,78 @@ return {...d,formula:displayFormula,variables:vars,current:cur,currentHtml,varia
 function ibtn(text,key){return `<button type="button" class="resultCellButton" data-inspection-formula="${key}">${text}</button>`;}
 function inspectionResultsTable(){
  const i=appState.inspectionSummary.inputs,r=appState.inspectionSummary.results;
- const header=`<thead><tr><th>Category<br>&nbsp;</th><th>Results<br>&nbsp;</th></tr></thead>`;
- const samplingPlan=`<div class="inspectionDataSheet"><div class="resultsHeading dataSheetHeading"><span class="resultsHeadingIcon">◉</span><span>Sampling Plan</span></div><div class="resultsTableWrap"><table class="resultsTable inspectionResultsTable">${header}<tbody>
- <tr><td>Total Number of Pans</td><td>${i.totalPans.toFixed(0)}</td></tr>
- <tr><td>Average Weight / Pan</td><td>${ibtn(r.averagePanWeight.toFixed(1)+' lbs','averagePanWeight')}</td></tr>
- <tr><td>Actual / Hailed Weight (lbs)</td><td>${i.hailedWeight.toFixed(1)} lbs</td></tr>
- <tr><td># Samples from Sampling Plan</td><td>${ibtn(r.numberOfSamples,'numberOfSamples')}</td></tr>
+ const header=`<thead><tr><th>Category</th><th>Results</th></tr></thead>`;
+ const samplingPlan=`<div class="inspectionDataSheet inspectionDataSheet-sampling"><div class="resultsHeading dataSheetHeading"><span class="resultsHeadingIcon" aria-hidden="true">◉</span><span>Sampling Plan</span></div><div class="resultsTableWrap"><table class="resultsTable inspectionResultsTable">${header}<tbody>
+ <tr><td>Total Number of Pans</td><td class="inspectionResultValue">${i.totalPans.toFixed(0)}</td></tr>
+ <tr><td>Average Weight / Pan</td><td class="inspectionResultValue">${ibtn(r.averagePanWeight.toFixed(1)+' lbs','averagePanWeight')}</td></tr>
+ <tr><td>Actual / Hailed Weight (lbs)</td><td class="inspectionResultValue">${i.hailedWeight.toFixed(1)} lbs</td></tr>
+ <tr><td># Samples from Sampling Plan</td><td class="inspectionResultValue">${ibtn(r.numberOfSamples,'numberOfSamples')}</td></tr>
  </tbody></table></div></div>`;
- const landedPounds=`<div class="inspectionDataSheet"><div class="resultsHeading dataSheetHeading"><span class="resultsHeadingIcon">◉</span><span>Landed Pounds Summary</span></div><div class="resultsTableWrap"><table class="resultsTable inspectionResultsTable">${header}<tbody>
- <tr><td>Gross Pounds Landed</td><td>${i.grossLanded.toFixed(1)} lbs</td></tr>
- <tr><td>Percentage of Crab</td><td>${ibtn(r.percentCrab.toFixed(2)+'%','percentCrab')}</td></tr>
- <tr><td>Net Pounds Landed</td><td>${ibtn(r.netPoundsLanded.toFixed(0)+' lbs','netPoundsLanded')}</td></tr>
- <tr><td>Barnacle Weight</td><td>${ibtn(r.barnacleWeight.toFixed(0)+' lbs','barnacleWeight')}</td></tr>
- <tr><td>Net Pounds (Less Barnacles)</td><td>${ibtn(r.netPoundsLessBarnacles.toFixed(0)+' lbs','netPoundsLessBarnacles')}</td></tr>
+ const landedPounds=`<div class="inspectionDataSheet inspectionDataSheet-landed"><div class="resultsHeading dataSheetHeading"><span class="resultsHeadingIcon" aria-hidden="true">◉</span><span>Landed Pounds Summary</span></div><div class="resultsTableWrap"><table class="resultsTable inspectionResultsTable">${header}<tbody>
+ <tr><td>Gross Pounds Landed</td><td class="inspectionResultValue">${i.grossLanded.toFixed(1)} lbs</td></tr>
+ <tr><td>Percentage of Crab</td><td class="inspectionResultValue">${ibtn(r.percentCrab.toFixed(2)+'%','percentCrab')}</td></tr>
+ <tr><td>Net Pounds Landed</td><td class="inspectionResultValue">${ibtn(r.netPoundsLanded.toFixed(0)+' lbs','netPoundsLanded')}</td></tr>
+ <tr><td>Barnacle Weight</td><td class="inspectionResultValue">${ibtn(r.barnacleWeight.toFixed(0)+' lbs','barnacleWeight')}</td></tr>
+ <tr><td>Net Pounds (Less Barnacles)</td><td class="inspectionResultValue">${ibtn(r.netPoundsLessBarnacles.toFixed(0)+' lbs','netPoundsLessBarnacles')}</td></tr>
  </tbody></table></div></div>`;
  return samplingPlan+landedPounds;
 }
 
-function inspectionEscape(value){
- return String(value ?? "")
-  .replaceAll("&","&amp;")
-  .replaceAll("<","&lt;")
-  .replaceAll(">","&gt;")
-  .replaceAll('"',"&quot;");
+function inspectionEscape(value){return String(value??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;");}
+function inspectionTextRow(label,key,placeholder="",options={}){
+ const value=appState.inspectionSummary.inputs[key]||"";
+ const mode=options.inputMode?` inputmode="${options.inputMode}"`:"";
+ const cap=options.autocapitalize?` autocapitalize="${options.autocapitalize}"`:"";
+ const spell=options.spellcheck===false?` spellcheck="false"`:"";
+ const required=!String(value).trim();
+ return `<div class="formRow inspectionIdentityRow"><label for="inspection-${key}">${label}<span class="requiredMarker${required ? "" : " complete"}" aria-hidden="true">*</span></label><span class="activitySelectField inspectionIdentityField"><input id="inspection-${key}" type="text" autocomplete="off"${mode}${cap}${spell} placeholder="${inspectionEscape(placeholder)}" value="${inspectionEscape(value)}" data-inspection-text="${key}"></span></div>`;
 }
-
-function inspectionVesselDirectory(){
- return Array.isArray(window.ATLANTIC_VESSEL_DIRECTORY)
-  ? window.ATLANTIC_VESSEL_DIRECTORY
-  : [];
-}
-
-function inspectionVesselDatalist(){
- return `<datalist id="inspectionVesselOptions">
-  ${inspectionVesselDirectory().map(vessel=>
-   `<option value="${inspectionEscape(vessel.name)}" label="Official No. ${inspectionEscape(vessel.officialNumber)}"></option>`
-  ).join("")}
- </datalist>`;
-}
-
-function inspectionVesselRow(){
- const value=appState.inspectionSummary.inputs.boatName || "";
- return `<div class="formRow inspectionVesselRow">
-  <label for="inspectionBoatName">Boat Name</label>
-  <span class="activitySelectField activitySearchField inspectionVesselSearchField">
-   <input
-    id="inspectionBoatName"
-    type="text"
-    list="inspectionVesselOptions"
-    autocomplete="off"
-    spellcheck="false"
-    placeholder="Search vessel"
-    value="${inspectionEscape(value)}">
+function inspectionTimelineInputRow(label,key,step,unit="lbs"){
+ const value=appState.inspectionSummary.inputs[key];
+ const display=key==="totalPans" ? Number(value).toFixed(0) : Number(value).toFixed(1);
+ const stepValue=key==="totalPans" ? "1" : "0.1";
+ const unitMarkup=unit ? `<span class="fieldUnit">${unit}</span>` : "";
+ return `<div class="formRow gradingTimelineRow inspectionTimelineRow gradingTimeline-blue" data-inspection-step="${step}">
+  <div class="gradingTimelineLabel">
+   <span class="gradingStepCircle">${step}</span>
+   <label for="inspection-${key}">${label}</label>
+  </div>
+  <span class="numberField">
+   <input id="inspection-${key}" type="number" inputmode="decimal" min="0" step="${stepValue}" value="${display}" data-inspection-input="${key}">
+   ${unitMarkup}
   </span>
  </div>`;
 }
 
-function inspectionResolveVessel(name){
- const normalized=String(name || "").trim().toLocaleLowerCase();
- if(!normalized) return null;
- return inspectionVesselDirectory().find(
-  vessel=>String(vessel.name || "").trim().toLocaleLowerCase()===normalized
- ) || null;
+function renderInspectionSummaryWorkspace(){
+ setWorkspaceContent(`<div class="workspaceModule inspectionModule"><section class="moduleCard"><header class="moduleCardHeader"><div><h2 class="moduleCardTitle">Inspection Summary</h2><p class="moduleCardSubtitle">Sampling plan & landed pounds summary</p></div></header><div class="moduleCardBody"><section class="vesselInfoPanel">
+ <div class="vesselInfoHeader">
+  <div class="vesselInfoIcon" data-icon="anchor" aria-hidden="true"></div>
+  <div>
+   <h3>Vessel Information</h3>
+   <p>Enter vessel details for this landing</p>
+  </div>
+ </div>
+ <div class="vesselInfoFields">
+  ${inspectionTextRow("Boat Name","boatName","Type vessel name...",{autocapitalize:"words"})}
+  <div class="vesselFieldHint">Start typing to see your saved vessels <span>0 / 100</span></div>
+  ${inspectionTextRow("CFV / VRN","cfv","Enter CFV or VRN number...",{inputMode:"numeric",spellcheck:false})}
+  <div class="vesselFieldHint">Start typing to see your saved vessels <span>0 / 20</span></div>
+  ${inspectionTextRow("Fish Receipt Number","fishReceiptNumber","Enter fish receipt number...",{inputMode:"numeric",spellcheck:false})}
+  <div class="vesselFieldHint">Unique to this landing (not saved) <span>0 / 20</span></div>
+ </div>
+ <div class="vesselInfoNotice">
+  <div class="vesselInfoNoticeIcon" data-icon="info" aria-hidden="true"></div>
+  <div>Vessel name and CFV / VRN will be saved to your library for faster entry next time.</div>
+ </div>
+</section><div class="inputList inspectionOperationalInputs inspectionTimelineInputs">${inspectionTimelineInputRow("Gross Pounds Landed","grossLanded",1,"lbs")}${inspectionTimelineInputRow("Total # of Pans","totalPans",2,"")}${inspectionTimelineInputRow("Actual / Hailed Weight","hailedWeight",3,"lbs")}</div><div class="moduleActions"><button type="button" class="clearButton" id="clearInspection">Clear</button></div><div id="inspectionLiveResults" class="inspectionResults">${inspectionResultsTable()}</div></div></section></div>`);
+ if(typeof renderIcons==='function')renderIcons();bindInspectionWorkspace();
 }
-
-function renderInspectionSummaryWorkspace(){setWorkspaceContent(`<div class="workspaceModule inspectionModule"><section class="moduleCard"><header class="moduleCardHeader"><div class="moduleCardIcon" data-icon="inspection"></div><div><h2 class="moduleCardTitle">Inspection Summary</h2><p class="moduleCardSubtitle">Sampling plan & landed pounds summary</p></div></header><div class="moduleCardBody">${inspectionVesselDatalist()}<div class="inputList">${inspectionVesselRow()}${inspectionInputRow("Gross Pounds Landed","grossLanded")}${inspectionInputRow("Total # of Pans","totalPans",0,"")}${inspectionInputRow("Actual / Hailed Weight","hailedWeight")}</div><div class="moduleActions"><button type="button" class="clearButton" id="clearInspection">Clear</button></div><div id="inspectionLiveResults" class="inspectionResults">${inspectionResultsTable()}</div></div></section></div>`);if(typeof renderIcons==='function')renderIcons();bindInspectionWorkspace();}
 function bindInspectionFormulaButtons(){document.querySelectorAll("[data-inspection-formula]").forEach(b=>b.addEventListener("click",()=>showFormulaHelp(inspectionFormulaDetails(b.dataset.inspectionFormula),b)));}
 function refreshInspectionResultsOnly(){const p=document.getElementById("inspectionLiveResults");if(p){p.innerHTML=inspectionResultsTable();bindInspectionFormulaButtons();}}
-function bindInspectionWorkspace(){document.querySelectorAll("[data-inspection-input]").forEach(input=>{input.addEventListener("focus",e=>e.target.select());input.addEventListener("input",e=>{setAppNumber("inspectionSummary",e.target.dataset.inspectionInput,e.target.value);refreshInspectionResultsOnly();if(typeof refreshHomePreview==="function")refreshHomePreview();});});
-const boatInput=document.getElementById("inspectionBoatName");
-if(boatInput){
- const applyVesselSelection=()=>{
-  const vessel=inspectionResolveVessel(boatInput.value);
-  if(vessel){
-   appState.inspectionSummary.inputs.boatName=vessel.name;
-   appState.inspectionSummary.inputs.vesselOfficialNumber=vessel.officialNumber || "";
-   boatInput.value=vessel.name;
-  }else{
-   appState.inspectionSummary.inputs.boatName="";
-   appState.inspectionSummary.inputs.vesselOfficialNumber="";
-  }
-  if(typeof refreshHomePreview==="function")refreshHomePreview();
- };
-
- boatInput.addEventListener("input",applyVesselSelection);
- boatInput.addEventListener("change",applyVesselSelection);
+function bindInspectionWorkspace(){
+ document.querySelectorAll("[data-inspection-input]").forEach(input=>{input.addEventListener("focus",e=>e.target.select());input.addEventListener("input",e=>{setAppNumberAndRefresh("inspectionSummary",e.target.dataset.inspectionInput,e.target.value);refreshInspectionResultsOnly();});});
+ document.querySelectorAll("[data-inspection-text]").forEach(input=>{input.addEventListener("input",e=>{const key=e.target.dataset.inspectionText;commitAppStateChange(()=>{appState.inspectionSummary.inputs[key]=e.target.value;});const marker=e.target.closest(".inspectionIdentityRow")?.querySelector(".requiredMarker");if(marker){marker.classList.toggle("complete",Boolean(e.target.value.trim()));}});});
+ const clear=document.getElementById("clearInspection");if(clear)clear.addEventListener("click",()=>{commitAppStateChange(()=>{appState.inspectionSummary.inputs.boatName="";appState.inspectionSummary.inputs.cfv="";appState.inspectionSummary.inputs.fishReceiptNumber="";["grossLanded","totalPans","hailedWeight"].forEach(k=>appState.inspectionSummary.inputs[k]=0);});renderInspectionSummaryWorkspace();});
+ bindInspectionFormulaButtons();
 }
-
-const clear=document.getElementById("clearInspection");if(clear)clear.addEventListener("click",()=>{appState.inspectionSummary.inputs.boatName="";appState.inspectionSummary.inputs.vesselOfficialNumber="";Object.keys(appState.inspectionSummary.inputs).forEach(k=>appState.inspectionSummary.inputs[k]=0);recalculateAll();if(typeof refreshHomePreview==="function")refreshHomePreview();renderInspectionSummaryWorkspace();});bindInspectionFormulaButtons();}

@@ -120,10 +120,7 @@
   /* Shared component geometry */
   --card-step-radius:var(--radius-control);
   --card-button-radius:var(--radius-control);
-}
-
-:root{
-    /* Outer screen spacing is viewport-relative so the composition scales
+/* Outer screen spacing is viewport-relative so the composition scales
        with available screen size rather than a fixed device pixel count. */
     --screen-pad-x:2.5vw;
     --screen-pad-y:1.25vh;
@@ -186,16 +183,16 @@ body{
 
 #headerBackButton,
 #headerHelpButton{
+    width:var(--app-bar-control-size);
+    height:var(--app-bar-control-size);
     border:none;
     background:none;
+    color:var(--og-text);
     font-size:24px;
     font-weight:600;
     display:flex;
     align-items:center;
     justify-content:center;
-
-    width:var(--app-bar-control-size);
-    height:var(--app-bar-control-size);
 }
 
 #headerBackButton{
@@ -290,16 +287,7 @@ body{
 }
 body,#appShell{color:var(--og-text);}
 #appHeader,#appFooter{background:var(--og-bg);color:var(--og-text);}
-#headerBackButton,
-#headerHelpButton{color:var(--og-text);
-    width:var(--app-bar-control-size);
-    height:var(--app-bar-control-size);
-}
 
-#appHeader,
-#appFooter{
-    flex-shrink:0;
-}
 
 #headerBackButton{
     grid-column:1;

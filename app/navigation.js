@@ -137,6 +137,20 @@ function setLayoutDebugEnabled(enabled){
 function initializeLayoutDebugToggle(){
     const button=document.getElementById("headerHelpButton");
     if(!button) return;
+
+    const developmentMode=
+        typeof isDevelopmentMode==="function"
+            ? isDevelopmentMode()
+            : false;
+
+    button.hidden=!developmentMode;
+    button.style.display=developmentMode ? "" : "none";
+
+    if(!developmentMode){
+        setLayoutDebugEnabled(false);
+        return;
+    }
+
     button.addEventListener("click",()=>setLayoutDebugEnabled(!layoutDebugInspector.enabled));
 }
 
@@ -268,8 +282,6 @@ function setWorkspaceContent(content){
     workspaceContent.innerHTML = content;
 }
 
-
-
 /* ===== Timeline navigation ===== */
 
 let currentStep = 0;
@@ -334,7 +346,6 @@ function updateTimelineCompletionOverlay(){
     progress.style.height=allComplete ? `${fullHeight}px` : "0px";
 }
 
-
 function initializeTimeline(){
     const items = document.querySelectorAll(".timelineItem");
 
@@ -365,7 +376,7 @@ window.addEventListener("orientationchange",()=>{
 
 /* ===== Preview-card navigation ===== */
 
-const completedSteps = new Set();
+/* Completion state is owned by app/state.js. */
 
 function updateCompletionUI(){
     document.querySelectorAll("[data-complete-step]").forEach(control=>{
@@ -392,7 +403,6 @@ function updateCompletionUI(){
 
     requestAnimationFrame(updateTimelineGeometry);
 }
-
 
 /* ===== SVG percentage arc rendering =====
    v140 production geometry:
@@ -565,7 +575,7 @@ function refreshInspectionSummaryPreview(){
     const results=appState.inspectionSummary.results || {};
 
     const samples=Math.max(0,Number(results.numberOfSamples || 0));
-    const net=Math.max(0,Number(results.netPoundsLanded || 0));
+    const net=Math.max(0,Number(results.netPoundsLessBarnacles || 0));
     const percentCrab=Math.max(0,Math.min(100,Number(results.percentCrab || 0)));
 
     const setText=(selector,value)=>{
@@ -573,30 +583,9 @@ function refreshInspectionSummaryPreview(){
         if(el) el.textContent=value;
     };
 
-    const vesselSource =
-        appState?.landingInformation?.inputs ||
-        appState?.landingInfo?.inputs ||
-        appState?.inspectionSummary?.inputs ||
-        {};
-    const boatName =
-        vesselSource.boatName ??
-        vesselSource.vesselName ??
-        vesselSource.boat ??
-        appState?.boatName ??
-        appState?.vesselName ??
-        "";
-    const cfv =
-        vesselSource.cfv ??
-        vesselSource.cfvNumber ??
-        vesselSource.vesselNumber ??
-        appState?.cfv ??
-        "";
-    const fishReceipt =
-        vesselSource.fishReceipt ??
-        vesselSource.fishReceiptNumber ??
-        vesselSource.receiptNumber ??
-        appState?.fishReceipt ??
-        "";
+    const boatName=String(inputs.boatName || "");
+    const cfv=String(inputs.cfv || "");
+    const fishReceipt=String(inputs.fishReceiptNumber || "");
 
     setText("[data-summary-boat-name]", boatName || "Boat Name");
     document.querySelector("[data-summary-boat-name]")?.toggleAttribute("data-empty-state", !boatName);
@@ -642,6 +631,24 @@ function initializeContent(){
             }else{
                 completedSteps.add(step);
             }
+
+            /* Completion is an approval gate for downstream calculations.
+               Recalculate only after the user deliberately changes approval. */
+            if(typeof recalculateAll==="function"){
+                recalculateAll();
+            }
+            if(typeof refreshHomePreview==="function"){
+                refreshHomePreview();
+            }
+            if(
+                step===0 &&
+                typeof currentWorkspace!=="undefined" &&
+                currentWorkspace===1 &&
+                typeof refreshInspectionResultsOnly==="function"
+            ){
+                refreshInspectionResultsOnly();
+            }
+
             updateCompletionUI();
         });
     });
