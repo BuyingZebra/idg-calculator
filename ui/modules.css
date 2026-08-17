@@ -18,9 +18,9 @@
   border-color:var(--palette-green);
   outline:none;
   box-shadow:
-    inset 0 0 0 2px #00c968,
-    0 0 0 3px rgba(0,201,104,.20),
-    0 0 12px rgba(0,201,104,.32);
+    inset 0 0 0 2px var(--palette-green),
+    0 0 0 3px var(--focus-green-ring),
+    0 0 12px var(--focus-green-glow);
 }
 .numberField input{width:100%;min-width:0;border:0;outline:0;background:transparent;color:var(--og-text);padding:0 5px 0 15px;font:inherit;font-size:1.05rem;}
 .fieldUnit{padding-right:14px;white-space:nowrap;color:var(--og-muted);}
@@ -39,7 +39,7 @@
 .resultCellButton:hover,.resultCellButton:focus-visible{text-decoration:underline;text-underline-offset:3px;}
 .sectionLabel{margin:24px 0 9px;font-size:.92rem;font-weight:750;text-transform:uppercase;letter-spacing:.04em;color:var(--og-muted);}
 
-.formulaDialog{width:min(90vw,560px);max-height:82vh;overflow:auto;border:1px solid var(--og-border);border-radius:18px;background:var(--og-panel);color:var(--og-text);padding:0;box-shadow:0 18px 60px rgba(0,0,0,.18);position:fixed;top:50%;left:50%;right:auto;bottom:auto;margin:0;}
+.formulaDialog{width:min(90vw,560px);max-height:82vh;overflow:auto;border:1px solid var(--og-border);border-radius:18px;background:var(--og-panel);color:var(--og-text);padding:0;box-shadow:0 18px 60px var(--shadow-dialog);position:fixed;top:50%;left:50%;right:auto;bottom:auto;margin:0;}
 .formulaDialogHeader{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;background:transparent;}
 .formulaDialogHeader h3{margin:0;font-size:1.25rem;line-height:1.2;}
 .formulaDialogClose{border:0;background:transparent;color:var(--og-muted);font-size:30px;line-height:1;cursor:pointer;padding:0 2px;}
@@ -236,7 +236,7 @@
 }
 .activitySelectField:focus-within{
   border-color:var(--palette-green);
-  box-shadow:inset 0 0 0 2px #00c968,0 0 0 3px rgba(0,201,104,.20),0 0 12px rgba(0,201,104,.32);
+  box-shadow:inset 0 0 0 2px var(--palette-green),0 0 0 3px var(--focus-green-ring),0 0 12px var(--focus-green-glow);
 }
 .activitySelectField select{
   width:100%;
@@ -248,7 +248,7 @@
   padding:0 14px;
   font:inherit;
 }
-.activitySelectField option{color:#111;background:#fff;}
+.activitySelectField option{color:var(--option-text);background:var(--color-white);}
 .activityRoutePreview{
   margin-top:clamp(10px,2vw,14px);
   display:grid;
@@ -326,7 +326,7 @@
 }
 .activitySwitch input:checked + .activitySwitchTrack .activitySwitchThumb{
   transform:translateX(26px);
-  background:#00c968;
+  background:var(--palette-green);
 }
 
 .activityDataSheet + .activityDataSheet{
@@ -465,7 +465,7 @@
 
 .moduleCardIcon,
 .resultsHeadingIcon{
-  color:#3b82f6;
+  color:var(--accent-blue-deep);
 }
 .moduleCardIcon svg,
 .resultsHeadingIcon svg{
@@ -697,7 +697,7 @@
     width:100%;
     height:3px;
     border-radius:999px;
-    background:rgba(148,163,184,.20);
+    background:var(--progress-track);
 }
 
 .gradingBreakdownFill{
@@ -714,23 +714,23 @@
 }
 
 .gradingBreakdown-premium{
-    color:#4fc66a;
+    color:var(--grade-green);
 }
 
 .gradingBreakdown-standard{
-    color:#4fc66a;
+    color:var(--grade-green);
 }
 
 .gradingBreakdown-critical{
-    color:#ff9f1c;
+    color:var(--grade-orange);
 }
 
 .gradingBreakdown-soft{
-    color:#ffb21c;
+    color:var(--grade-orange-soft);
 }
 
 .gradingBreakdown-reject{
-    color:#ff484f;
+    color:var(--grade-red);
 }
 
 @media (prefers-reduced-motion:reduce){
@@ -791,7 +791,7 @@
 }
 
 .gradingTotalIconComplete{
-    color:#55d66b;
+    color:var(--status-success);
 }
 
 .gradingTotalMetricSpacer{
@@ -820,7 +820,7 @@
 
 .gradingNetWeight,
 .gradingTotalNet .gradingTotalMetric > span:first-child{
-    color:#3b82f6;
+    color:var(--accent-blue-deep);
 }
 
 .gradingTotalMetric{
@@ -1033,7 +1033,7 @@
     padding:10px 11px;
     border:1px solid var(--accent-blue);
     border-radius:8px;
-    background:rgba(96,165,250,.07);
+    background:var(--surface-blue-soft);
     color:var(--og-text);
     font-size:.7rem;
     line-height:1.25;

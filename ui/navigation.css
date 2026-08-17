@@ -3,39 +3,12 @@
 
 .contentPage[data-step="0"] .appCard{
 
-    --c1-card-pad-x:3cqw;
-    --c1-card-bg:var(--og-panel);
-    --c1-card-border:var(--border-thin);
-    --c1-card-border-color:var(--og-border);
-    --c1-card-radius:var(--radius-card);
-    --c1-card-pad-y:3cqw;
-    --c1-section-gap:8cqw;
 
-    --c1-header-gap:4cqw;
-    --c1-header-icon-size:16cqw;
-    --c1-header-title-size:var(--card-title-size);
-    --c1-header-divider-gap:3.5cqw;
-    --c1-divider-height:var(--border-thin);
 
-    --c1-box-pad-x:4cqw;
-    --c1-box-pad-y:3cqw;
-    --c1-box-radius:var(--radius-control);
-    --c1-box-border:var(--border-thin);
 
-    --c1-step-gap:3cqw;
-    --c1-step-icon-size:9cqw;
-    --c1-step-title-size:var(--card-step-title-size);
-    --c1-step-body-size:var(--card-body-size);
-    --c1-step-text-gap:1cqw;
 
-    --c1-overview-title-size:var(--card-overview-title-size);
     --c1-overview-content-gap:4cqw;
 
-    --c1-footer-divider-gap:3.5cqw;
-    --c1-button-gap:3cqw;
-    --c1-button-min-height:var(--touch-target-min);
-    --c1-button-radius:var(--radius-control);
-    --c1-button-font-size:var(--card-button-size);
 
     --c1-donut-size:32cqw;
     --c1-donut-track-stroke:4;
@@ -45,12 +18,7 @@
     --c1-chart-label-gap:3cqw;
     --c1-legend-gap:1.5cqw;
     --c1-legend-dot-size:3cqw;
-
-    --c1-fisheries-divider-width:82%;
     --c1-fisheries-icon-size:9cqw;
-    --c1-fisheries-gap:2cqw;
-    --c1-fisheries-line-gap:3cqw;
-
     --c1-progress-muted:var(--palette-muted);
     --c1-progress-radius:var(--radius-pill);
 
@@ -66,46 +34,16 @@
 
 .contentPage[data-step="1"] .appCard{
 
-    --c2-card-pad-x:3cqw;
-    --c2-card-bg:var(--og-panel);
-    --c2-card-border:var(--border-thin);
-    --c2-card-border-color:var(--og-border);
-    --c2-card-radius:var(--radius-card);
-    --c2-card-pad-y:3cqw;
-    --c2-section-gap:8cqw;
 
-    --c2-header-gap:4cqw;
-    --c2-header-icon-size:16cqw;
-    --c2-header-title-size:var(--card-title-size);
-    --c2-header-divider-gap:3.5cqw;
-    --c2-divider-height:var(--border-thin);
 
-    --c2-box-pad-x:4cqw;
-    --c2-box-pad-y:3cqw;
-    --c2-box-radius:var(--radius-control);
-    --c2-box-border:var(--border-thin);
 
-    --c2-step-gap:3cqw;
-    --c2-step-icon-size:9cqw;
-    --c2-step-title-size:var(--card-step-title-size);
-    --c2-step-body-size:var(--card-body-size);
-    --c2-step-text-gap:1cqw;
 
-    --c2-overview-title-size:var(--card-overview-title-size);
 
-    --c2-footer-divider-gap:3.5cqw;
-    --c2-button-gap:3cqw;
-    --c2-button-min-height:var(--touch-target-min);
-    --c2-button-radius:var(--radius-control);
-    --c2-button-font-size:var(--card-button-size);
 
     --c2-overview-content-gap:5cqw;
 
     --c2-boat-block-gap:4cqw;
     --c2-boat-block-internal-gap:1.5cqw;
-
-    --c2-boat-name-weight:400;
-
     --c2-boat-divider-width:var(--mini-separator-width);
     --c2-boat-divider-gap:var(--mini-separator-gap);
     --c2-boat-icon-size:var(--mini-separator-icon-size);
@@ -115,69 +53,216 @@
 
     --c2-vessel-gap:2cqw;
     --c2-vessel-eyebrow-size:var(--metric-tile-label-size);
-    --c2-vessel-eyebrow-gap:1cqw;
-    --c2-vessel-name-size:var(--metric-tile-value-size);
-    --c2-vessel-name-weight:400;
-    --c2-vessel-divider-width:82%;
-    --c2-vessel-divider-gap:2cqw;
-    --c2-vessel-icon-size:9cqw;
-    --c2-vessel-cfv-size:var(--metric-tile-label-size);
-    --c2-vessel-cfv-gap:1.5cqw;
-
-    --c2-receipt-gap:2cqw;
     --c2-receipt-label-size:var(--metric-tile-label-size);
-    --c2-receipt-icon-size:9cqw;
-    --c2-receipt-value-size:var(--metric-tile-value-size);
-    --c2-receipt-value-weight:400;
-    --c2-receipt-icon-gap:1.5cqw;
-
     --c2-metric-grid-gap:3cqw;
-    --c2-metric-pad-x:3cqw;
-    --c2-metric-pad-y:3cqw;
-    --c2-metric-radius:var(--radius-control);
-    --c2-metric-border:var(--border-thin);
     --c2-metric-icon-size:9cqw;
-    --c2-metric-content-gap:1.5cqw;
     --c2-metric-value-size:var(--metric-tile-value-size);
     --c2-metric-value-weight:400;
-    --c2-metric-label-size:var(--metric-tile-label-size);
-    --c2-metric-label-line-height:1.25;
 }
 
-.contentPage[data-step="2"] .appCard{
 
-    --c3-card-pad-x:3cqw;
-    --c3-card-bg:var(--og-panel);
-    --c3-card-border:var(--border-thin);
-    --c3-card-border-color:var(--og-border);
-    --c3-card-radius:var(--radius-card);
-    --c3-card-pad-y:3cqw;
-    --c3-section-gap:8cqw;
 
-    --c3-header-gap:4cqw;
-    --c3-header-icon-size:16cqw;
-    --c3-header-title-size:var(--card-title-size);
-    --c3-header-divider-gap:3.5cqw;
-    --c3-divider-height:var(--border-thin);
 
-    --c3-box-pad-x:4cqw;
-    --c3-box-pad-y:3cqw;
-    --c3-box-radius:var(--radius-control);
-    --c3-box-border:var(--border-thin);
+/* ==========================================================================
+   SHARED CARD COMPONENT SYSTEM
+   One implementation for Cards 1, 2, and 3. Card-specific rules below this
+   block are reserved for genuinely unique card content only.
+   ========================================================================== */
+.cardPreview.appCard{
+    container-type:inline-size;
+    width:100%;
+    height:100%;
+    min-height:100%;
+    align-self:stretch;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    gap:0;
+    padding:var(--card-pad-y) var(--card-pad-x);
+    box-sizing:border-box;
+    background:var(--card-surface);
+    border:var(--border-thin) solid var(--card-border-color);
+    border-radius:var(--radius-card);
+    overflow:hidden;
+}
 
-    --c3-step-gap:3cqw;
-    --c3-step-icon-size:9cqw;
-    --c3-step-title-size:var(--card-step-title-size);
-    --c3-step-body-size:var(--card-body-size);
-    --c3-step-text-gap:1cqw;
+.previewHero.cardHeader{
+    width:100%;
+    flex:0 0 auto;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:var(--card-header-gap);
+    margin:0;
+    padding:0;
+    text-align:center;
+}
 
-    --c3-overview-title-size:var(--card-overview-title-size);
+.cardHeaderIcon{
+    width:var(--card-header-icon-size);
+    height:var(--card-header-icon-size);
+    flex:0 0 var(--card-header-icon-size);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--accent-blue);
+}
 
-    --c3-footer-divider-gap:3.5cqw;
-    --c3-button-gap:3cqw;
-    --c3-button-min-height:var(--touch-target-min);
-    --c3-button-radius:var(--radius-control);
-    --c3-button-font-size:var(--card-button-size);
+.cardHeaderIcon svg,
+.cardStepIcon svg{
+    width:100%;
+    height:100%;
+    fill:currentColor;
+    color:currentColor;
+}
+
+.cardTitle{
+    flex:0 0 auto;
+    margin:0;
+    padding:0;
+    color:var(--text-primary);
+    font-size:var(--card-title-size);
+    line-height:1.08;
+    text-align:center;
+}
+
+.inspectionHeaderDivider,
+.summaryHeaderDivider,
+.activityHeaderDivider{
+    width:100%;
+    height:var(--border-thin);
+    flex:0 0 auto;
+    margin:var(--card-divider-gap) 0 0;
+    background:var(--border-default);
+}
+
+.previewStatus.cardStepStatus{
+    width:100%;
+    flex:0 0 auto;
+    min-height:0;
+    height:auto;
+    max-height:none;
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    gap:var(--card-step-gap);
+    margin:var(--card-section-gap) 0 0;
+    padding:var(--content-box-pad-y) var(--content-box-pad-x);
+    border:var(--border-thin) solid var(--border-default);
+    border-radius:var(--card-step-radius);
+    background:var(--surface-card-deep);
+    color:var(--text-primary);
+    box-sizing:border-box;
+    text-align:left;
+    cursor:pointer;
+}
+
+.cardStepIcon{
+    width:var(--card-step-icon-size);
+    height:var(--card-step-icon-size);
+    flex:0 0 var(--card-step-icon-size);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--text-subtle);
+    background:transparent;
+    border:0;
+    border-radius:0;
+    box-shadow:none;
+}
+
+.cardStepText{
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:center;
+    text-align:left;
+}
+
+.cardStepText strong{
+    margin:0;
+    color:var(--text-primary);
+    font-size:var(--card-step-title-size);
+    line-height:1.22;
+}
+
+.cardStepText small{
+    margin:var(--card-step-text-gap) 0 0;
+    color:var(--text-muted);
+    font-size:var(--card-body-size);
+    line-height:1.35;
+}
+
+/* Shared completion state: this fixes Card 2 by eliminating cascade-order drift. */
+.cardStepStatus.complete{
+    border-color:var(--state-complete);
+    background:var(--state-complete-surface);
+}
+
+.cardStepStatus.complete .cardStepIcon,
+.cardStepStatus.complete .cardStepText strong{
+    color:var(--state-complete);
+}
+
+.cardOverviewTitle{
+    font-size:var(--card-overview-title-size);
+    line-height:1.2;
+    text-align:center;
+}
+
+.inspectionActionDivider,
+.summaryActionDivider,
+.activityActionDivider{
+    width:100%;
+    height:var(--border-thin);
+    flex:0 0 auto;
+    margin-top:auto;
+    margin-right:0;
+    margin-bottom:var(--card-divider-gap);
+    margin-left:0;
+    background:var(--border-default);
+}
+
+.cardFooter{
+    width:100%;
+    flex:0 0 auto;
+    display:flex;
+    flex-direction:column;
+    margin:0;
+    padding:0;
+}
+
+.previewActions.cardActions{
+    width:100%;
+    flex:0 0 auto;
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    gap:var(--card-button-gap);
+    margin:0;
+}
+
+.cardActions > button{
+    min-height:var(--card-button-min-height);
+    border-radius:var(--card-button-radius);
+    color:var(--text-primary);
+    font-size:var(--card-button-size);
+    font-family:inherit;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.cardPrimaryAction{
+    border:var(--border-thin) solid var(--accent-blue);
+    background:var(--accent-blue);
+    color:var(--color-white);
+}
+
+.cardSecondaryAction{
+    border:var(--border-thin) solid var(--border-default);
+    background:transparent;
+    color:var(--text-primary);
 }
 
 #contentContainer{
@@ -414,7 +499,7 @@
     min-width:0;
     border:var(--border-thin) solid var(--og-border);
 
-    background:rgba(15,23,42,.24);
+    background:var(--surface-metric);
 
     display:flex;
     flex-direction:column;
@@ -437,7 +522,7 @@
     fill:currentColor;
 }
 
-.summaryMetricSamples .summaryMetricIcon{color:#a855f7;}
+.summaryMetricSamples .summaryMetricIcon{color:var(--accent-purple);}
 
 .summaryMetricNet .summaryMetricIcon{color:var(--accent-green);}
 
@@ -556,7 +641,7 @@
     overflow:hidden;
     border-radius:var(--radius-pill);
 
-    background:var(--og-border, #475569);
+    background:var(--og-border, var(--border-default));
 }
 
 .bySizeFill{
@@ -672,7 +757,7 @@
 }
 
 .contentPage[data-step="1"] .summaryMetricGrid{
-    margin-top:var(--c2-section-gap);
+    margin-top:var(--card-section-gap);
 }
 
 }
@@ -680,14 +765,14 @@
 .contentPage[data-step="0"] .gradeOverview{
     width:100%;
     flex:0 0 auto;
-    margin:var(--c1-section-gap) 0 0;
+    margin:var(--card-section-gap) 0 0;
 }
 
 .contentPage[data-step="0"] .gradeOverviewTitle{
     width:100%;
     margin:0 0 var(--c1-overview-content-gap);
     color:var(--accent-blue-label);
-    font-size:var(--c1-overview-title-size);
+    font-size:var(--card-overview-title-size);
     font-weight:800;
     line-height:1.2;
     letter-spacing:.06em;
@@ -809,7 +894,7 @@
     flex-direction:column;
     align-items:center;
 
-    margin:var(--c1-section-gap) 0 0;
+    margin:var(--card-section-gap) 0 0;
     padding:0;
     border:0;
     background:transparent;
@@ -855,7 +940,7 @@
     flex:0 0 auto;
     min-height:0;
     height:auto;
-    margin:var(--c1-section-gap) 0 0;
+    margin:var(--card-section-gap) 0 0;
     align-self:stretch;
 }
 
@@ -871,10 +956,10 @@
     justify-content:flex-start;
     gap:var(--c1-by-size-row-gap);
 
-    padding:var(--c1-box-pad-y) var(--c1-box-pad-x);
+    padding:var(--content-box-pad-y) var(--content-box-pad-x);
 
     border:var(--border-thin) solid var(--og-border);
-    border-radius:var(--c1-box-radius);
+    border-radius:var(--radius-control);
     background:var(--og-panel-deep);
     box-shadow:none;
     box-sizing:border-box;
@@ -953,552 +1038,6 @@
     stroke-linejoin:round;
 }
 
-.contentPage[data-step="0"] .cardPreview.appCard{
-    container-type:inline-size;
-    width:100%;
-    height:100%;
-    min-height:100%;
-    align-self:stretch;
-
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-start;
-    gap:0;
-    padding:var(--c1-card-pad-y) var(--c1-card-pad-x);
-    box-sizing:border-box;
-    background:var(--c1-card-bg);
-    border:var(--c1-card-border) solid var(--c1-card-border-color);
-    border-radius:var(--c1-card-radius);
-    overflow:hidden ;
-
-}
-
-.contentPage[data-step="0"] .previewHero.cardHeader{
-    width:100%;
-    flex:0 0 auto;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:var(--c1-header-gap);
-    margin:0;
-    padding:0;
-    text-align:center;
-}
-
-.contentPage[data-step="0"] .cardHeaderIcon{
-    width:var(--c1-header-icon-size);
-    height:var(--c1-header-icon-size);
-    flex:0 0 var(--c1-header-icon-size);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:var(--accent-blue);
-}.contentPage[data-step="0"] .cardHeaderIcon svg,
-.contentPage[data-step="1"] .cardHeaderIcon svg{
-    width:100%;
-    height:100%;
-    fill:currentColor;
-    color:currentColor;
-}
-
-.contentPage[data-step="0"] .cardTitle{
-    flex:0 0 auto;
-    margin:0;
-    padding:0;
-    font-size:var(--c1-header-title-size);
-    line-height:1.08;
-    text-align:center;
-}
-
-.contentPage[data-step="0"] .inspectionHeaderDivider{
-    width:100%;
-    height:var(--c1-divider-height);
-    flex:0 0 auto;
-    margin:var(--c1-header-divider-gap) 0 0;
-    background:var(--og-border);
-}
-
-.contentPage[data-step="0"] .previewStatus.cardStepStatus{
-    width:100%;
-    flex:0 0 auto;
-    min-height:0;
-    height:auto;
-    max-height:none;
-
-    display:flex;
-    align-items:center;
-    justify-content:flex-start;
-    gap:var(--c1-step-gap);
-
-    margin:var(--c1-section-gap) 0 0;
-    padding:var(--c1-box-pad-y) var(--c1-box-pad-x);
-
-    border:var(--c1-box-border) solid var(--og-border);
-    border-radius:var(--c1-box-radius);
-    background:var(--og-panel-deep);
-    color:var(--og-text);
-    box-sizing:border-box;
-    text-align:left;
-    cursor:pointer;
-}
-
-.contentPage[data-step="0"] .cardStepIcon{
-    width:var(--c1-step-icon-size);
-    height:var(--c1-step-icon-size);
-    flex:0 0 var(--c1-step-icon-size);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:var(--og-subtle);
-    background:transparent;
-    border:0;
-    border-radius:0;
-    box-shadow:none;
-}.contentPage[data-step="0"] .cardStepIcon svg,
-.contentPage[data-step="1"] .cardStepIcon svg{
-    width:100%;
-    height:100%;
-    fill:currentColor;
-    color:currentColor;
-}.contentPage[data-step="0"] .cardStepText,
-.contentPage[data-step="1"] .cardStepText{
-    min-width:0;
-    display:flex;
-    flex-direction:column;
-    align-items:flex-start;
-    justify-content:center;
-    text-align:left;
-}
-
-.contentPage[data-step="0"] .cardStepText strong{
-    margin:0;
-    font-size:var(--c1-step-title-size);
-    line-height:1.22;
-    color:var(--og-text);
-}
-
-.contentPage[data-step="0"] .cardStepText small{
-    margin:var(--c1-step-text-gap) 0 0;
-    font-size:var(--c1-step-body-size);
-    line-height:1.35;
-    color:var(--og-muted);
-}.contentPage[data-step="0"] .cardStepStatus.complete,
-.contentPage[data-step="1"] .cardStepStatus.complete{
-    border-color:var(--accent-green);
-    background:var(--accent-green-bg-strong);
-}.contentPage[data-step="0"] .cardStepStatus.complete .cardStepIcon,
-.contentPage[data-step="1"] .cardStepStatus.complete .cardStepIcon{
-    color:var(--accent-green);
-}.contentPage[data-step="0"] .cardStepStatus.complete .cardStepText strong,
-.contentPage[data-step="1"] .cardStepStatus.complete .cardStepText strong{
-    color:var(--accent-green-light);
-}
-
-.contentPage[data-step="0"] .cardOverviewTitle{
-    font-size:var(--c1-overview-title-size);
-    line-height:1.2;
-    text-align:center;
-}
-
-.contentPage[data-step="0"] .inspectionActionDivider{
-    width:100%;
-    height:var(--c1-divider-height);
-    flex:0 0 auto;
-    margin-top:auto;
-    margin-right:0;
-    margin-bottom:var(--c1-footer-divider-gap);
-    margin-left:0;
-    background:var(--og-border);
-}.contentPage[data-step="0"] .cardFooter,
-.contentPage[data-step="1"] .cardFooter{
-    width:100%;
-    flex:0 0 auto;
-    display:flex;
-    flex-direction:column;
-    margin:0;
-    padding:0;
-}
-
-.contentPage[data-step="0"] .previewActions.cardActions{
-    width:100%;
-    flex:0 0 auto;
-    display:grid;
-    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-    gap:var(--c1-button-gap);
-    margin:0;
-}
-
-.contentPage[data-step="0"] .cardActions > button{
-    min-height:var(--c1-button-min-height);
-    border-radius:var(--c1-button-radius);
-    font-size:var(--c1-button-font-size);
-    font-family:inherit;
-    font-weight:700;
-    cursor:pointer;
-}.contentPage[data-step="0"] .cardPrimaryAction,
-.contentPage[data-step="1"] .cardPrimaryAction{
-    border:var(--border-thin) solid var(--accent-blue);
-    background:var(--accent-blue-strong);
-    color:var(--color-white);
-}.contentPage[data-step="0"] .cardSecondaryAction,
-.contentPage[data-step="1"] .cardSecondaryAction{
-    border:var(--border-thin) solid var(--og-border);
-    background:transparent;
-    color:var(--og-text);
-}
-
-.contentPage[data-step="1"] .cardPreview.appCard{
-    container-type:inline-size;
-    width:100%;
-    height:100%;
-    min-height:100%;
-    align-self:stretch;
-
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-start;
-    gap:0;
-    padding:var(--c2-card-pad-y) var(--c2-card-pad-x);
-    box-sizing:border-box;
-    background:var(--c2-card-bg);
-    border:var(--c2-card-border) solid var(--c2-card-border-color);
-    border-radius:var(--c2-card-radius);
-    overflow:hidden ;
-
-}
-
-.contentPage[data-step="1"] .previewHero.cardHeader{
-    width:100%;
-    flex:0 0 auto;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:var(--c2-header-gap);
-    margin:0;
-    padding:0;
-    text-align:center;
-}
-
-.contentPage[data-step="1"] .cardHeaderIcon{
-    width:var(--c2-header-icon-size);
-    height:var(--c2-header-icon-size);
-    flex:0 0 var(--c2-header-icon-size);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:var(--accent-blue);
-}
-
-.contentPage[data-step="1"] .cardTitle{
-    flex:0 0 auto;
-    margin:0;
-    padding:0;
-    font-size:var(--c2-header-title-size);
-    line-height:1.08;
-    text-align:center;
-}
-
-.contentPage[data-step="1"] .summaryHeaderDivider{
-    width:100%;
-    height:var(--c2-divider-height);
-    flex:0 0 auto;
-    margin:var(--c2-header-divider-gap) 0 0;
-    background:var(--og-border);
-}
-
-.contentPage[data-step="1"] .previewStatus.cardStepStatus{
-    width:100%;
-    flex:0 0 auto;
-    min-height:0;
-    height:auto;
-    max-height:none;
-
-    display:flex;
-    align-items:center;
-    justify-content:flex-start;
-    gap:var(--c2-step-gap);
-
-    margin:var(--c2-section-gap) 0 0;
-    padding:var(--c2-box-pad-y) var(--c2-box-pad-x);
-
-    border:var(--c2-box-border) solid var(--og-border);
-    border-radius:var(--c2-box-radius);
-    background:var(--og-panel-deep);
-    color:var(--og-text);
-    box-sizing:border-box;
-    text-align:left;
-    cursor:pointer;
-}
-
-.contentPage[data-step="1"] .cardStepIcon{
-    width:var(--c2-step-icon-size);
-    height:var(--c2-step-icon-size);
-    flex:0 0 var(--c2-step-icon-size);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:var(--og-subtle);
-    background:transparent;
-    border:0;
-    border-radius:0;
-    box-shadow:none;
-}
-
-.contentPage[data-step="1"] .cardStepText strong{
-    margin:0;
-    font-size:var(--c2-step-title-size);
-    line-height:1.22;
-    color:var(--og-text);
-}
-
-.contentPage[data-step="1"] .cardStepText small{
-    margin:var(--c2-step-text-gap) 0 0;
-    font-size:var(--c2-step-body-size);
-    line-height:1.35;
-    color:var(--og-muted);
-}
-
-.contentPage[data-step="1"] .cardOverviewTitle{
-    font-size:var(--c2-overview-title-size);
-    line-height:1.2;
-    text-align:center;
-}
-
-.contentPage[data-step="1"] .summaryActionDivider{
-    width:100%;
-    height:var(--c2-divider-height);
-    flex:0 0 auto;
-    margin-top:auto;
-    margin-right:0;
-    margin-bottom:var(--c2-footer-divider-gap);
-    margin-left:0;
-    background:var(--og-border);
-}
-
-.contentPage[data-step="1"] .previewActions.cardActions{
-    width:100%;
-    flex:0 0 auto;
-    display:grid;
-    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-    gap:var(--c2-button-gap);
-    margin:0;
-}
-
-.contentPage[data-step="1"] .cardActions > button{
-    min-height:var(--c2-button-min-height);
-    border-radius:var(--c2-button-radius);
-    font-size:var(--c2-button-font-size);
-    font-family:inherit;
-    font-weight:700;
-    cursor:pointer;
-}
-
-.contentPage[data-step="2"] .cardPreview.appCard{
-    container-type:inline-size;
-    width:100%;
-    height:100%;
-    min-height:100%;
-    align-self:stretch;
-
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-start;
-    gap:0;
-    padding:var(--c3-card-pad-y) var(--c3-card-pad-x);
-    box-sizing:border-box;
-    background:var(--c3-card-bg);
-    border:var(--c3-card-border) solid var(--c3-card-border-color);
-    border-radius:var(--c3-card-radius);
-    overflow:hidden ;
-
-}
-
-.contentPage[data-step="2"] .previewHero.cardHeader{
-    width:100%;
-    flex:0 0 auto;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:var(--c3-header-gap);
-    margin:0;
-    padding:0;
-    text-align:center;
-}
-
-.contentPage[data-step="2"] .cardHeaderIcon{
-    width:var(--c3-header-icon-size);
-    height:var(--c3-header-icon-size);
-    flex:0 0 var(--c3-header-icon-size);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:var(--accent-blue);
-}
-
-.contentPage[data-step="2"] .cardHeaderIcon svg{
-    width:100%;
-    height:100%;
-    fill:currentColor;
-    color:currentColor;
-}
-
-.contentPage[data-step="2"] .cardTitle{
-    flex:0 0 auto;
-    margin:0;
-    padding:0;
-    font-size:var(--c3-header-title-size);
-    line-height:1.08;
-    text-align:center;
-}
-
-.contentPage[data-step="2"] .activityHeaderDivider{
-    width:100%;
-    height:var(--c3-divider-height);
-    flex:0 0 auto;
-    margin:var(--c3-header-divider-gap) 0 0;
-    background:var(--og-border);
-}
-
-.contentPage[data-step="2"] .previewStatus.cardStepStatus{
-    width:100%;
-    flex:0 0 auto;
-    min-height:0;
-    height:auto;
-    max-height:none;
-
-    display:flex;
-    align-items:center;
-    justify-content:flex-start;
-    gap:var(--c3-step-gap);
-
-    margin:var(--c3-section-gap) 0 0;
-    padding:var(--c3-box-pad-y) var(--c3-box-pad-x);
-
-    border:var(--c3-box-border) solid var(--og-border);
-    border-radius:var(--c3-box-radius);
-    background:var(--og-panel-deep);
-    color:var(--og-text);
-    box-sizing:border-box;
-    text-align:left;
-    cursor:pointer;
-}
-
-.contentPage[data-step="2"] .cardStepIcon{
-    width:var(--c3-step-icon-size);
-    height:var(--c3-step-icon-size);
-    flex:0 0 var(--c3-step-icon-size);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:var(--og-subtle);
-    background:transparent;
-    border:0;
-    border-radius:0;
-    box-shadow:none;
-}
-
-.contentPage[data-step="2"] .cardStepIcon svg{
-    width:100%;
-    height:100%;
-    fill:currentColor;
-    color:currentColor;
-}
-
-.contentPage[data-step="2"] .cardStepText{
-    min-width:0;
-    display:flex;
-    flex-direction:column;
-    align-items:flex-start;
-    justify-content:center;
-    text-align:left;
-}
-
-.contentPage[data-step="2"] .cardStepText strong{
-    margin:0;
-    font-size:var(--c3-step-title-size);
-    line-height:1.22;
-    color:var(--og-text);
-}
-
-.contentPage[data-step="2"] .cardStepText small{
-    margin:var(--c3-step-text-gap) 0 0;
-    font-size:var(--c3-step-body-size);
-    line-height:1.35;
-    color:var(--og-muted);
-}
-
-.contentPage[data-step="2"] .cardStepStatus.complete{
-    border-color:var(--accent-green) ;
-    background:var(--accent-green-bg-strong) ;
-}
-
-.contentPage[data-step="2"] .cardStepStatus.complete .cardStepIcon{
-    color:var(--accent-green) ;
-}
-
-.contentPage[data-step="2"] .cardStepStatus.complete .cardStepText strong{
-    color:var(--accent-green-light) ;
-}
-
-.contentPage[data-step="2"] .cardOverviewTitle{
-    font-size:var(--c3-overview-title-size);
-    line-height:1.2;
-    text-align:center;
-}
-
-.contentPage[data-step="2"] .activityActionDivider{
-    width:100%;
-    height:var(--c3-divider-height);
-    flex:0 0 auto;
-    margin-top:auto;
-    margin-right:0;
-    margin-bottom:var(--c3-footer-divider-gap);
-    margin-left:0;
-    background:var(--og-border);
-}
-
-.contentPage[data-step="2"] .cardFooter{
-    width:100%;
-    flex:0 0 auto;
-    display:flex;
-    flex-direction:column;
-    margin:0;
-    padding:0;
-}
-
-.contentPage[data-step="2"] .previewActions.cardActions{
-    width:100%;
-    flex:0 0 auto;
-    display:grid;
-    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-    gap:var(--c3-button-gap);
-    margin:0;
-}
-
-.contentPage[data-step="2"] .cardActions > button{
-    min-height:var(--c3-button-min-height);
-    border-radius:var(--c3-button-radius);
-    font-size:var(--c3-button-font-size);
-    font-family:inherit;
-    font-weight:700;
-    cursor:pointer;
-}
-
-.contentPage[data-step="2"] .cardPrimaryAction{
-    border:var(--border-thin) solid var(--accent-blue);
-    background:var(--accent-blue-strong);
-    color:var(--color-white);
-}
-
-.contentPage[data-step="2"] .cardSecondaryAction{
-    border:var(--border-thin) solid var(--og-border);
-    background:transparent;
-    color:var(--og-text);
-}
-
 #contentViewport{
     position:relative;
     width:100%;
@@ -1541,12 +1080,6 @@
 
 .contentPage[data-step="2"]{
     top:calc(200% + (var(--card-transition-gap) * 2));
-}
-
-.contentPage[data-step="0"] .cardStepIcon,
-.contentPage[data-step="1"] .cardStepIcon,
-.contentPage[data-step="2"] .cardStepIcon{
-    align-self:flex-start;
 }
 
 .timelineNodeIcon svg,
@@ -1633,7 +1166,7 @@
 .contentPage[data-step="1"] .summaryOverview{
     width:100%;
     flex:0 0 auto;
-    margin:var(--c2-section-gap) 0 0;
+    margin:var(--card-section-gap) 0 0;
     padding:0;
 }
 
@@ -1658,7 +1191,7 @@
     display:grid;
     grid-template-columns:repeat(3,minmax(0,1fr));
     gap:var(--c2-metric-grid-gap);
-    margin:var(--c2-section-gap) 0 0;
+    margin:var(--card-section-gap) 0 0;
     padding:0;
 }
 
@@ -1719,7 +1252,7 @@
     align-items:stretch;
     gap:var(--c2-boat-block-gap);
     margin:0;
-    padding:0 var(--c2-box-pad-x);
+    padding:0 var(--content-box-pad-x);
     border:0;
     border-radius:0;
     background:transparent;
@@ -1839,8 +1372,6 @@
 .contentPage[data-step="1"] .appCard{
 
     --c2-boat-placeholder-color:var(--palette-muted);
-
-    --c2-boat-name-size:var(--c2-step-title-size);
 }
 
 .contentPage[data-step="1"] [data-summary-boat-name][data-empty-state="true"],
@@ -1873,10 +1404,6 @@
     line-height:inherit;
     font-weight:inherit;
 }
-.contentPage[data-step="0"] .cardTitle,
-.contentPage[data-step="1"] .cardTitle{
-    color:var(--og-text);
-}
 
 .contentPage[data-step="0"] .donutPercentUnit,
 .contentPage[data-step="0"] .sizePercentUnit{
@@ -1894,9 +1421,6 @@
 .contentPage[data-step="0"] .bySizeLabel,
 .contentPage[data-step="0"] .bySizeLabel > span{
     color:var(--og-text);
-}.contentPage[data-step="0"] .cardActions > button,
-.contentPage[data-step="1"] .cardActions > button{
-    color:var(--og-text);
 }
 
 .contentPage[data-step="1"] .summaryVesselEyebrow,
@@ -1906,11 +1430,6 @@
 }
 
 .contentPage[data-step="1"] .summaryMetricUnit{
-    color:var(--og-text);
-}
-
-.contentPage[data-step="2"] .cardTitle,
-.contentPage[data-step="2"] .cardActions > button{
     color:var(--og-text);
 }
 

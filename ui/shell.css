@@ -29,6 +29,22 @@
   --palette-muted:rgba(148,158,173,.62);
   --palette-subtle:#94a3b8;
 
+  /* Semantic colour ownership: raw colour values live here, not in components. */
+  --accent-purple:#a855f7;
+  --accent-blue-deep:#3b82f6;
+  --grade-green:#4fc66a;
+  --grade-orange:#ff9f1c;
+  --grade-orange-soft:#ffb21c;
+  --grade-red:#ff484f;
+  --status-success:#55d66b;
+  --surface-metric:rgba(15,23,42,.24);
+  --surface-blue-soft:rgba(96,165,250,.07);
+  --focus-green-ring:rgba(0,201,104,.20);
+  --focus-green-glow:rgba(0,201,104,.32);
+  --progress-track:rgba(148,163,184,.20);
+  --shadow-dialog:rgba(0,0,0,.18);
+  --option-text:#111;
+
   --og-bg:#0f172a;
   --og-panel:#1e293b;
   --og-panel-deep:#182235;
@@ -41,13 +57,21 @@
   --og-muted:var(--palette-muted);
   --og-subtle:var(--palette-subtle);
   --og-danger:var(--palette-red);
+  --surface-card:var(--og-panel);
+  --surface-card-deep:var(--og-panel-deep);
+  --border-default:var(--og-border);
+  --text-primary:var(--og-text);
+  --text-muted:var(--og-muted);
+  --text-subtle:var(--og-subtle);
+  --card-surface:var(--surface-card);
+  --card-border-color:var(--border-default);
+  --state-complete:var(--palette-green);
+  --state-complete-surface:rgba(0,201,104,.10);
 
   /* Semantic accent colours */
   --accent-blue:var(--palette-blue);
-  --accent-blue-strong:var(--palette-blue);
   --accent-blue-label:var(--palette-blue);
   --accent-green:var(--palette-green);
-  --accent-green-light:var(--palette-green);
   --accent-orange:var(--palette-orange);
   --accent-orange-alt:var(--palette-orange);
   --accent-red:var(--palette-red);
@@ -55,17 +79,9 @@
 
   /* Transparent state/surface colours */
   --accent-blue-glow:rgba(96,165,250,.15);
-  --accent-green-bg:rgba(0,201,104,.08);
-  --accent-green-bg-strong:rgba(0,201,104,.10);
   --accent-green-ring:rgba(0,201,104,.12);
-  --accent-green-ring-strong:rgba(0,201,104,.14);
-  --surface-overlay:rgba(15,23,42,.28);
-  --surface-overlay-light:rgba(15,23,42,.20);
   --surface-ring:rgba(148,163,184,.12);
   --surface-ring-light:rgba(148,163,184,.08);
-  --warning-border:rgba(245,158,11,.72);
-  --warning-bg:rgba(245,158,11,.08);
-
   /* Shared geometry */
   --radius-card:18px;
   --radius-control:14px;
@@ -79,12 +95,10 @@
   --card-pad-x:3cqw;
   --card-pad-y:3cqw;
   --card-section-gap:8cqw;
-  --card-overview-content-gap:4cqw;
   --card-header-gap:4cqw;
 
   /* Shared card typography */
   --card-title-size:clamp(1.70rem,7.2cqw,2rem);
-  --card-subtitle-size:clamp(.92rem,3.9cqw,1.02rem);
   --card-step-title-size:clamp(.95rem,4cqw,1.05rem);
   --card-body-size:clamp(.84rem,3.45cqw,.94rem);
   --card-overview-title-size:clamp(.86rem,3.55cqw,.98rem);
@@ -94,6 +108,7 @@
   --card-header-icon-size:16cqw;
   --card-step-icon-size:9cqw;
   --card-step-gap:3cqw;
+  --card-step-text-gap:1cqw;
   --card-button-gap:3cqw;
   --card-button-min-height:var(--touch-target-min);
 
