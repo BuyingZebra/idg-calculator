@@ -19,16 +19,16 @@
     --c1-legend-gap:1.5cqw;
     --c1-legend-dot-size:3cqw;
     --c1-fisheries-icon-size:9cqw;
-    --c1-progress-muted:var(--palette-muted);
-    --c1-progress-radius:var(--radius-pill);
+    --c1-progress-muted:var(--progress-track-color);
+    --c1-progress-radius:var(--progress-radius);
 
     --c1-fisheries-copy-gap:1cqw;
 
     --c1-by-size-row-gap:3cqw;
     --c1-by-size-inner-gap:1.5cqw;
     --c1-by-size-label-gap:.35em;
-    --c1-progress-track-height:1.35cqw;
-    --c1-progress-fill-height:2cqw;
+    --c1-progress-track-height:var(--card-progress-track-height);
+    --c1-progress-fill-height:var(--card-progress-fill-height);
     --c1-by-size-value-weight:400;
 }
 
@@ -198,7 +198,7 @@
 /* Shared completion state: this fixes Card 2 by eliminating cascade-order drift. */
 .cardStepStatus.complete{
     border-color:var(--state-complete);
-    background:var(--state-complete-surface);
+    background:var(--state-overlay-green);
 }
 
 .cardStepStatus.complete .cardStepIcon,
@@ -256,7 +256,7 @@
 .cardPrimaryAction{
     border:var(--border-thin) solid var(--accent-blue);
     background:var(--accent-blue);
-    color:var(--color-white);
+    color:var(--text-primary);
 }
 
 .cardSecondaryAction{
@@ -326,7 +326,7 @@
 
 .timelineNode{
 
-    border:3px solid var(--og-border);
+    border:3px solid var(--border-table);
     border-radius:50%;
     background:var(--og-bg);
     display:flex;
@@ -369,14 +369,14 @@
 .timelineItem.complete .timelineNode{
     border-color:var(--accent-green) ;
     background:var(--og-bg) ;
-    box-shadow:0 0 0 4px var(--accent-green-ring) ;
+    box-shadow:0 0 0 4px var(--ring-green) ;
 }
 .timelineItem.complete .timelineNodeIcon{
     color:var(--accent-green) ;
 }
 .timelineItem.active:not(.complete) .timelineNode{
     border-color:var(--accent-blue) ;
-    box-shadow:0 0 0 4px var(--accent-blue-glow) ;
+    box-shadow:0 0 0 4px var(--ring-blue) ;
 }
 .timelineItem.active:not(.complete) .timelineNodeIcon{
     color:var(--accent-blue) ;
@@ -440,14 +440,14 @@
     display:grid;
     place-items:center;
     position:relative;
-    box-shadow:inset 0 0 0 1px var(--surface-ring);}
+    box-shadow:inset 0 0 0 1px var(--ring-muted);}
 
 .gradeDonut::after{content:"";
     position:absolute;
     inset:13%;
     border-radius:50%;
-    background:var(--og-panel);
-    box-shadow:inset 0 0 0 1px var(--surface-ring-light);}
+    background:var(--surface-card);
+    box-shadow:inset 0 0 0 1px var(--ring-muted-light);}
 
 .gradeLegend{
     display:flex;
@@ -497,9 +497,9 @@
 
 .summaryMetric{
     min-width:0;
-    border:var(--border-thin) solid var(--og-border);
+    border:var(--border-thin) solid var(--border-table);
 
-    background:var(--surface-metric);
+    background:var(--surface-card-deep);
 
     display:flex;
     flex-direction:column;
@@ -522,7 +522,7 @@
     fill:currentColor;
 }
 
-.summaryMetricSamples .summaryMetricIcon{color:var(--accent-purple);}
+.summaryMetricSamples .summaryMetricIcon{color:var(--palette-green);}
 
 .summaryMetricNet .summaryMetricIcon{color:var(--accent-green);}
 
@@ -550,7 +550,7 @@
     display:block;
     width:100%;
     height:var(--border-thin);
-    background:var(--og-border);
+    background:var(--border-table);
 }
 
 [data-summary-gross-detail],
@@ -601,12 +601,12 @@
     display:flex;
     align-items:baseline;
     gap:.35em;
-    color:var(--color-white);
+    color:var(--text-primary);
     white-space:nowrap;
 }
 
 .bySizeLabel > span{
-    color:var(--color-white);
+    color:var(--text-primary);
     font-weight:400;
 }
 
@@ -630,7 +630,7 @@
 
 [data-summary-premium-size] .sizePercentUnit,
 [data-summary-standard-size] .sizePercentUnit{
-    color:var(--color-white) !important;
+    color:var(--text-primary) !important;
     font-weight:800;
 }
 
@@ -693,7 +693,7 @@
 }
 
 .contentPage[data-step="1"] .summaryMetricValueCrab .summaryMetricUnit{
-    color:var(--color-white);
+    color:var(--text-primary);
 }
 
 .contentPage[data-step="1"] .metricTile{
@@ -860,7 +860,7 @@
 
 .contentPage[data-step="0"] .donutPercentUnit{
     display:inline;
-    color:var(--color-white);
+    color:var(--text-primary);
     font:inherit;
     line-height:1;
 }
@@ -958,9 +958,9 @@
 
     padding:var(--content-box-pad-y) var(--content-box-pad-x);
 
-    border:var(--border-thin) solid var(--og-border);
+    border:var(--border-thin) solid var(--border-table);
     border-radius:var(--radius-control);
-    background:var(--og-panel-deep);
+    background:var(--surface-card-deep);
     box-shadow:none;
     box-sizing:border-box;
 }
@@ -978,14 +978,14 @@
     display:flex;
     align-items:baseline;
     gap:var(--c1-by-size-label-gap);
-    color:var(--color-white);
+    color:var(--text-primary);
     font-size:var(--metric-tile-value-size);
     line-height:1.2;
     white-space:nowrap;
 }
 
 .contentPage[data-step="0"] .bySizeLabel > span{
-    color:var(--color-white);
+    color:var(--text-primary);
     font-weight:400;
 }
 
@@ -996,7 +996,7 @@
 }
 
 .contentPage[data-step="0"] .sizePercentUnit{
-    color:var(--color-white);
+    color:var(--text-primary);
 }
 
 .contentPage[data-step="0"] .bySizeTrack{
@@ -1301,7 +1301,7 @@
 .contentPage[data-step="1"] .summaryVesselDivider > span{
     height:var(--border-thin);
     flex:1 1 auto;
-    background:var(--og-border);
+    background:var(--border-table);
 }
 
 .contentPage[data-step="1"] .summaryVesselIcon{
@@ -1469,7 +1469,7 @@
     flex:1 1 auto;
     width:auto;
     min-width:0;
-    background:var(--og-border);
+    background:var(--border-table);
     border:0;
     opacity:1 !important;
 }
@@ -1534,4 +1534,31 @@
 
 #headerHelpButton.active{
     color:var(--accent-blue) !important;
+}
+
+
+/* ==========================================================================
+   SHARED CARD FOOTER ACTION COLORS
+   Edit = blue primary action, Review = green companion action.
+   ========================================================================== */
+.cardPrimaryAction{
+    background:var(--palette-blue);
+    border-color:var(--palette-blue);
+    color:var(--text-primary);
+}
+
+.cardSecondaryAction{
+    background:var(--palette-green);
+    border-color:var(--palette-green);
+    color:var(--text-primary);
+}
+
+.cardPrimaryAction:hover,
+.cardPrimaryAction:focus-visible{
+    border-color:var(--palette-blue);
+}
+
+.cardSecondaryAction:hover,
+.cardSecondaryAction:focus-visible{
+    border-color:var(--palette-green);
 }

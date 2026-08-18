@@ -29,44 +29,58 @@
   --palette-muted:rgba(148,158,173,.62);
   --palette-subtle:#94a3b8;
 
+  /* Derived semantic opacity variants */
+  --state-overlay-green:color-mix(in srgb,var(--palette-green) 12%,transparent);
+  --state-overlay-blue:color-mix(in srgb,var(--palette-blue) 12%,transparent);
+  --focus-ring-green:color-mix(in srgb,var(--palette-green) 20%,transparent);
+  --focus-glow-green:color-mix(in srgb,var(--palette-green) 32%,transparent);
+  --ring-green:color-mix(in srgb,var(--palette-green) 12%,transparent);
+  --ring-blue:color-mix(in srgb,var(--palette-blue) 12%,transparent);
+  --ring-muted:color-mix(in srgb,var(--palette-subtle) 12%,transparent);
+  --ring-muted-light:color-mix(in srgb,var(--palette-subtle) 8%,transparent);
+
+  /* Shared linear progress-bar colour/radius with context-scaled geometry */
+  --progress-track-color:var(--palette-muted);
+  --progress-radius:var(--radius-pill);
+
+  --card-progress-track-height:4px;
+  --card-progress-fill-height:8px;
+
+  --sheet-progress-track-height:3px;
+  --sheet-progress-fill-height:6px;
+
   /* Semantic colour ownership: raw colour values live here, not in components. */
-  --accent-purple:#a855f7;
-  --accent-blue-deep:#3b82f6;
-  --grade-green:#4fc66a;
-  --grade-orange:#ff9f1c;
-  --grade-orange-soft:#ffb21c;
-  --grade-red:#ff484f;
-  --status-success:#55d66b;
-  --surface-metric:rgba(15,23,42,.24);
-  --surface-blue-soft:rgba(96,165,250,.07);
-  --focus-green-ring:rgba(0,201,104,.20);
-  --focus-green-glow:rgba(0,201,104,.32);
-  --progress-track:rgba(148,163,184,.20);
-  --shadow-dialog:rgba(0,0,0,.18);
-  --option-text:#111;
+  --accent-blue-deep:var(--palette-blue);
+  --grade-green:var(--palette-green);
+  --grade-orange:var(--palette-orange);
+  --grade-orange-soft:var(--palette-orange);
+  --grade-red:var(--palette-red);
+  --status-success:var(--palette-green);
 
   --og-bg:#0f172a;
   --og-panel:#1e293b;
   --og-panel-deep:#182235;
   --og-input:#334155;
   --og-header:#273449;
-  --og-row:#202c3f;
-  --og-row-alt:#263347;
   --og-border:#475569;
   --og-text:#f8fafc;
   --og-muted:var(--palette-muted);
   --og-subtle:var(--palette-subtle);
   --og-danger:var(--palette-red);
+  /* Canonical application design tokens */
+  --surface-app:var(--og-bg);
   --surface-card:var(--og-panel);
   --surface-card-deep:var(--og-panel-deep);
+  --surface-input:var(--og-input);
+  --surface-table-header:var(--og-header);
   --border-default:var(--og-border);
+  --border-table:var(--og-border);
   --text-primary:var(--og-text);
   --text-muted:var(--og-muted);
   --text-subtle:var(--og-subtle);
   --card-surface:var(--surface-card);
   --card-border-color:var(--border-default);
   --state-complete:var(--palette-green);
-  --state-complete-surface:rgba(0,201,104,.10);
 
   /* Semantic accent colours */
   --accent-blue:var(--palette-blue);
@@ -75,13 +89,9 @@
   --accent-orange:var(--palette-orange);
   --accent-orange-alt:var(--palette-orange);
   --accent-red:var(--palette-red);
-  --color-white:#fff;
+  --color-white:var(--og-text);
 
   /* Transparent state/surface colours */
-  --accent-blue-glow:rgba(96,165,250,.15);
-  --accent-green-ring:rgba(0,201,104,.12);
-  --surface-ring:rgba(148,163,184,.12);
-  --surface-ring-light:rgba(148,163,184,.08);
   /* Shared geometry */
   --radius-card:18px;
   --radius-control:14px;
@@ -169,7 +179,7 @@ body{
         "Noto Sans",
         sans-serif;
 
-    background:var(--og-bg);
+    background:var(--surface-app);
 }
 
 #appShell{
@@ -202,7 +212,7 @@ body{
     height:var(--app-bar-control-size);
     border:none;
     background:none;
-    color:var(--og-text);
+    color:var(--text-primary);
     font-size:24px;
     font-weight:600;
     display:flex;
@@ -262,7 +272,7 @@ body{
     width:100%;
     height:100%;
 
-    background:var(--og-panel);
+    background:var(--surface-card);
 
     border:1px solid var(--og-border);
 
@@ -300,8 +310,8 @@ body{
     text-align:center;
     max-width:80%;
 }
-body,#appShell{color:var(--og-text);}
-#appHeader,#appFooter{background:var(--og-bg);color:var(--og-text);}
+body,#appShell{color:var(--text-primary);}
+#appHeader,#appFooter{background:var(--surface-app);color:var(--text-primary);}
 
 
 #headerBackButton{

@@ -4,49 +4,49 @@
 #workspaceContent{align-items:stretch;justify-content:flex-start;}
 .workspaceModule{width:100%;margin:0;display:flex;flex-direction:column;gap:0;}
 .moduleCard{width:100%;border:0;background:transparent;border-radius:0;overflow:visible;}
-.moduleCardHeader{display:flex;align-items:center;position:relative;justify-content:center;text-align:center;border-bottom:1px solid var(--og-border);background:var(--og-header);}
+.moduleCardHeader{display:flex;align-items:center;position:relative;justify-content:center;text-align:center;border-bottom:1px solid var(--border-table);background:var(--surface-table-header);}
 .moduleCardIcon{display:flex;align-items:center;justify-content:center;flex:0 0 auto;margin-left:0;}
 .moduleCardIcon svg{width:100%;height:100%;}
 .moduleCardTitle{margin:0;line-height:1.15;}
 .moduleCardSubtitle{margin:4px 0 0;color:var(--og-muted);}
-.moduleCardBody{background:var(--og-panel);}
+.moduleCardBody{background:var(--surface-card);}
 .inputList{display:flex;flex-direction:column;gap:clamp(5px,1.4vw,7px);}
 .formRow{display:grid;align-items:center;}
 .formRow label{font-size:1rem;color:var(--og-muted);}
-.numberField{display:flex;align-items:center;border:1px solid var(--og-border);background:var(--og-input);overflow:hidden;}
+.numberField{display:flex;align-items:center;border:1px solid var(--border-table);background:var(--og-input);overflow:hidden;}
 .numberField:focus-within{
   border-color:var(--palette-green);
   outline:none;
   box-shadow:
     inset 0 0 0 2px var(--palette-green),
-    0 0 0 3px var(--focus-green-ring),
-    0 0 12px var(--focus-green-glow);
+    0 0 0 3px var(--focus-ring-green),
+    0 0 12px var(--focus-glow-green);
 }
 .numberField input{width:100%;min-width:0;border:0;outline:0;background:transparent;color:var(--og-text);padding:0 5px 0 15px;font:inherit;font-size:1.05rem;}
 .fieldUnit{padding-right:14px;white-space:nowrap;color:var(--og-muted);}
-.moduleActions{display:flex;justify-content:center;margin-top:clamp(14px,2.5vw,20px);padding-bottom:clamp(16px,3vw,24px);border-bottom:1px solid var(--og-border);}
+.moduleActions{display:flex;justify-content:center;margin-top:clamp(14px,2.5vw,20px);padding-bottom:clamp(16px,3vw,24px);border-bottom:1px solid var(--border-table);}
 .clearButton{width:min(46%,240px);min-width:150px;border:1px solid var(--og-danger);border-radius:18px;background:var(--og-danger);color:var(--og-text);padding:10px 18px;font:inherit;font-weight:650;text-align:center;cursor:pointer;}
 .resultsHeading{display:flex;align-items:center;gap:10px;margin:28px 0 14px;font-size:1.15rem;font-weight:750;}
 .resultsHeadingIcon{font-size:1.35rem;line-height:1;}
-.resultsTableWrap{border:1px solid var(--og-border);border-radius:18px;overflow:hidden;background:var(--og-panel-deep);}
+.resultsTableWrap{border:1px solid var(--border-table);border-radius:18px;overflow:hidden;background:var(--surface-card-deep);}
 .resultsTable{width:100%;border-collapse:collapse;table-layout:fixed;color:var(--og-text);}
-.resultsTable th,.resultsTable td{border-right:1px solid var(--og-border);border-bottom:1px solid var(--og-border);text-align:left;vertical-align:middle;}
+.resultsTable th,.resultsTable td{border-right:1px solid var(--border-table);border-bottom:1px solid var(--border-table);text-align:left;vertical-align:middle;}
 .resultsTable th:last-child,.resultsTable td:last-child{border-right:0;}
 .resultsTable tr:last-child td{border-bottom:0;}
-.resultsTable thead th{background:var(--og-header);font-weight:750;vertical-align:middle;}
+.resultsTable thead th{background:var(--surface-table-header);font-weight:750;vertical-align:middle;}
 
 .resultCellButton{width:100%;border:0;background:transparent;color:inherit;padding:0;font:inherit;text-align:left;cursor:pointer;text-decoration:none;}
 .resultCellButton:hover,.resultCellButton:focus-visible{text-decoration:underline;text-underline-offset:3px;}
 .sectionLabel{margin:24px 0 9px;font-size:.92rem;font-weight:750;text-transform:uppercase;letter-spacing:.04em;color:var(--og-muted);}
 
-.formulaDialog{width:min(90vw,560px);max-height:82vh;overflow:auto;border:1px solid var(--og-border);border-radius:18px;background:var(--og-panel);color:var(--og-text);padding:0;box-shadow:0 18px 60px var(--shadow-dialog);position:fixed;top:50%;left:50%;right:auto;bottom:auto;margin:0;}
+.formulaDialog{width:min(90vw,560px);max-height:82vh;overflow:auto;border:1px solid var(--border-table);border-radius:18px;background:var(--surface-card);color:var(--og-text);padding:0;box-shadow:none;position:fixed;top:50%;left:50%;right:auto;bottom:auto;margin:0;}
 .formulaDialogHeader{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;background:transparent;}
 .formulaDialogHeader h3{margin:0;font-size:1.25rem;line-height:1.2;}
 .formulaDialogClose{border:0;background:transparent;color:var(--og-muted);font-size:30px;line-height:1;cursor:pointer;padding:0 2px;}
 .formulaDialogBody{line-height:1.55;font-size:1rem;}
 .formulaEquation{font-size:1.22rem;margin:0 0 24px;}
 .formulaVariables{margin:0 0 24px;white-space:pre-line;}
-.formulaCurrent{margin:0 0 22px;padding-top:16px;border-top:1px solid var(--og-border);}
+.formulaCurrent{margin:0 0 22px;padding-top:16px;border-top:1px solid var(--border-table);}
 .formulaNote{margin:0;}
 
 @media(max-width:620px){
@@ -76,8 +76,8 @@
 
 .moduleCardHeader,.moduleCardBody{color:var(--og-text);}
 .numberField input::placeholder{color:var(--og-subtle);}
-.resultsTable tbody tr td{background:var(--og-row);}
-.resultsTable tbody tr:nth-child(even) td{background:var(--og-row-alt);}
+.resultsTable tbody tr td{background:var(--surface-card-deep);}
+.resultsTable tbody tr:nth-child(even) td{background:var(--surface-card-deep);}
 
 
 .inspectionDataSheet .sectionLabel{
@@ -219,7 +219,7 @@
 .activitySection + .activitySection{
   margin-top:clamp(20px,4vw,34px);
   padding-top:clamp(18px,3vw,26px);
-  border-top:1px solid var(--og-border);
+  border-top:1px solid var(--border-table);
 }
 .activitySectionLabel{
   margin:0 0 clamp(8px,1.8vw,12px);
@@ -229,14 +229,14 @@
 
   display:flex;
   align-items:center;
-  border:1px solid var(--og-border);
+  border:1px solid var(--border-table);
   border-radius:18px;
   background:var(--og-input);
   overflow:hidden;
 }
 .activitySelectField:focus-within{
   border-color:var(--palette-green);
-  box-shadow:inset 0 0 0 2px var(--palette-green),0 0 0 3px var(--focus-green-ring),0 0 12px var(--focus-green-glow);
+  box-shadow:inset 0 0 0 2px var(--palette-green),0 0 0 3px var(--focus-ring-green),0 0 12px var(--focus-glow-green);
 }
 .activitySelectField select{
   width:100%;
@@ -248,15 +248,15 @@
   padding:0 14px;
   font:inherit;
 }
-.activitySelectField option{color:var(--option-text);background:var(--color-white);}
+.activitySelectField option{color:var(--surface-app);background:var(--text-primary);}
 .activityRoutePreview{
   margin-top:clamp(10px,2vw,14px);
   display:grid;
   grid-template-columns:1fr 1fr;
-  border:1px solid var(--og-border);
+  border:1px solid var(--border-table);
   border-radius:18px;
   overflow:hidden;
-  background:var(--og-panel-deep);
+  background:var(--surface-card-deep);
 }
 .activityRoutePreview>div{
 
@@ -266,7 +266,7 @@
   align-items:center;
   text-align:center;
 }
-.activityRoutePreview>div+div{border-left:1px solid var(--og-border);}
+.activityRoutePreview>div+div{border-left:1px solid var(--border-table);}
 .activityRoutePreview span{font-size:.82rem;color:var(--og-muted);}
 .activityRoutePreview strong{font-size:1rem;color:var(--og-text);}
 
@@ -289,7 +289,7 @@
   text-align:center;
 }
 
-.activityActionDivider{color:var(--og-border);}
+.activityActionDivider{color:var(--border-table);}
 
 .activitySwitch{
   position:relative;
@@ -306,7 +306,7 @@
 .activitySwitchTrack{
   position:absolute;
   inset:0;
-  border:1px solid var(--og-border);
+  border:1px solid var(--border-table);
   border-radius:18px;
   background:var(--og-input);
   transition:background .25s ease,border-color .25s ease;
@@ -432,7 +432,7 @@
   margin-top:clamp(20px,4vw,34px);
   padding-top:clamp(18px,3vw,26px);
   padding-bottom:0;
-  border-top:1px solid var(--og-border);
+  border-top:1px solid var(--border-table);
   border-bottom:0;
 }
 
@@ -450,7 +450,7 @@
 .activityReturnSection{
   margin-top:clamp(20px,4vw,34px);
   padding-top:clamp(18px,3vw,26px);
-  border-top:1px solid var(--og-border);
+  border-top:1px solid var(--border-table);
   box-shadow:none;
 }
 
@@ -519,7 +519,7 @@
   right:0;
   bottom:-3px;
   height:1px;
-  background:var(--og-border);
+  background:var(--border-table);
   opacity:.72;
   pointer-events:none;
 }
@@ -579,7 +579,7 @@
 }
 
 .gradingTimelineRow .numberField{
-  border-color:var(--og-border);
+  border-color:var(--border-table);
 }
 
 .gradingTimelineLabel::after{
@@ -592,10 +592,10 @@
 
 .gradingBreakdown{
     margin-top:0;
-    border:1px solid var(--og-border);
+    border:1px solid var(--border-table);
     border-radius:18px;
     overflow:hidden;
-    background:var(--og-panel-deep);
+    background:var(--surface-card-deep);
 }
 
 .gradingBreakdownHeader,
@@ -609,8 +609,8 @@
 .gradingBreakdownHeader{
     min-height:48px;
     padding:7px 16px;
-    border-bottom:1px solid var(--og-border);
-    background:var(--og-header);
+    border-bottom:1px solid var(--border-table);
+    background:var(--surface-table-header);
     color:var(--og-muted);
     font-size:.76rem;
     font-weight:500;
@@ -646,7 +646,7 @@
 .gradingBreakdownRow{
     min-height:48px;
     padding:7px 16px;
-    border-bottom:1px solid var(--og-border);
+    border-bottom:1px solid var(--border-table);
     color:var(--og-text);
     font-size:.76rem;
 }
@@ -695,9 +695,11 @@
 .gradingBreakdownTrack{
     position:relative;
     width:100%;
-    height:3px;
-    border-radius:999px;
-    background:var(--progress-track);
+    height:var(--sheet-progress-track-height);
+    overflow:visible;
+    border-radius:var(--progress-radius);
+    background:var(--progress-track-color);
+    box-shadow:none;
 }
 
 .gradingBreakdownFill{
@@ -705,12 +707,15 @@
     left:0;
     top:50%;
     width:0;
-    height:6px;
+    height:var(--sheet-progress-fill-height);
     min-width:0;
-    border-radius:999px;
+    border-radius:var(--progress-radius);
     background:currentColor;
+    background-image:none;
+    box-shadow:none;
     transform:translateY(-50%);
-    transition:width .18s ease;
+    transform-origin:left center;
+    transition:width .35s ease;
 }
 
 .gradingBreakdown-premium{
@@ -741,10 +746,10 @@
 
 .gradingTotalsPanel{
     margin-top:14px;
-    border:1px solid var(--og-border);
+    border:1px solid var(--border-table);
     border-radius:16px;
     overflow:hidden;
-    background:var(--og-panel-deep);
+    background:var(--surface-card-deep);
 }
 
 .gradingTotalRow{
@@ -762,7 +767,7 @@
 .gradingTotalsDivider{
     height:1px;
     margin:0 16px;
-    background:var(--og-border);
+    background:var(--border-table);
 }
 
 .gradingTotalIdentity{
@@ -909,7 +914,7 @@
     bottom:0;
     left:calc(16px + (100% - 80px) * .302631579);
     width:1px;
-    background:var(--og-border);
+    background:var(--border-table);
     pointer-events:none;
 }
 
@@ -922,9 +927,9 @@
 .vesselInfoPanel{
     margin:0 0 18px;
     padding:14px;
-    border:1px solid var(--og-border);
+    border:1px solid var(--border-table);
     border-radius:16px;
-    background:var(--og-panel-deep);
+    background:var(--surface-card-deep);
 }
 
 .vesselInfoHeader{
@@ -991,7 +996,7 @@
 .vesselInfoPanel .inspectionIdentityField{
     width:100%;
     height:42px;
-    border:1px solid var(--og-border);
+    border:1px solid var(--border-table);
     border-radius:8px;
     background:var(--og-input);
     overflow:hidden;
@@ -1033,7 +1038,7 @@
     padding:10px 11px;
     border:1px solid var(--accent-blue);
     border-radius:8px;
-    background:var(--surface-blue-soft);
+    background:var(--state-overlay-blue);
     color:var(--og-text);
     font-size:.7rem;
     line-height:1.25;
@@ -1056,7 +1061,7 @@
 }
 
 .inspectionOperationalInputs .numberField{
-    border-color:var(--og-border);
+    border-color:var(--border-table);
 }
 
 .inspectionOperationalInputs .numberField:focus-within{
@@ -1158,13 +1163,13 @@
 
 .inspectionDataSheet .resultsTableWrap{
     border-radius:18px;
-    background:var(--og-panel-deep);
+    background:var(--surface-card-deep);
 }
 
 .inspectionResultsTable thead th{
     height:48px;
     padding:7px 16px;
-    background:var(--og-header);
+    background:var(--surface-table-header);
     color:var(--og-muted);
     font-size:.76rem;
     font-weight:500;
@@ -1182,14 +1187,14 @@
 .inspectionResultsTable tbody td{
     height:48px;
     padding:7px 16px;
-    background:var(--og-panel-deep);
+    background:var(--surface-card-deep);
     font-size:.76rem;
     font-weight:500;
     line-height:1.2;
 }
 
 .inspectionResultsTable tbody tr:nth-child(even) td{
-    background:var(--og-panel-deep);
+    background:var(--surface-card-deep);
 }
 
 .inspectionResultsTable td:first-child{

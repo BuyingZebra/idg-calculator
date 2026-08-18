@@ -1,4 +1,4 @@
-const APP_VERSION = "216.0.0";
+const APP_VERSION = "221.0.0";
 const CACHE_NAME = `idg-training-${APP_VERSION}`;
 const PRECACHE_URLS = [
   "./index.html",
