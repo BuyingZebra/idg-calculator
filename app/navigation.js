@@ -7,50 +7,7 @@ const layoutDebugInspector={
     enabled:false,
     overlay:null,
     frame:0,
-    selectors:[
-        "#appHeader",
-        "#timelineContainer",
-        "#contentViewport",
-        ".contentPage.active .appCard",
-        ".contentPage.active .cardHeader",
-        ".contentPage.active .cardHeaderIcon",
-        ".contentPage.active .cardTitle",
-        ".contentPage.active .cardDivider",
-        ".contentPage.active .cardStepStatus",
-        ".contentPage.active .cardStepIcon",
-        ".contentPage.active .cardStepText",
-        ".contentPage.active .gradeOverview",
-        ".contentPage.active .gradeOverviewTitle",
-        ".contentPage.active .gradeDonutGrid",
-        ".contentPage.active .gradeMetric",
-        ".contentPage.active .gradeDonut",
-        ".contentPage.active .gradeLegend",
-        ".contentPage.active .fisheriesNotification",
-        ".contentPage.active .fisheriesNotificationDivider",
-        ".contentPage.active .fisheriesNotificationCopy",
-        ".contentPage.active .detailBySizeSection",
-        ".contentPage.active .detailBySizePanel",
-        ".contentPage.active .bySizeRow",
-        ".contentPage.active .bySizeLabel",
-        ".contentPage.active .bySizeTrack",
-        ".contentPage.active .summaryOverview",
-        ".contentPage.active .summaryVesselInfo",
-        ".contentPage.active .summaryVesselIdentity",
-        ".contentPage.active .summaryReceiptInfo",
-        ".contentPage.active .summaryMetricGrid",
-        ".contentPage.active .summaryMetric",
-        ".contentPage.active .cardFooter",
-        ".contentPage.active .cardActions",
-        ".contentPage.active .cardActions > button",
-        "#workspaceContent .moduleCard",
-        "#workspaceContent .moduleCardHeader",
-        "#workspaceContent .moduleCardBody",
-        "#workspaceContent .inputList",
-        "#workspaceContent .formRow",
-        "#workspaceContent .numberField",
-        "#workspaceContent .resultsHeading",
-        "#workspaceContent .resultsTableWrap"
-    ],
+    selector:'.contentPage.active [data-card-region]',
     colors:[
         "#ff1744","#00e5ff","#76ff03","#ff9100","#d500f9",
         "#ffff00","#00b0ff","#ff4081","#00e676","#651fff",
@@ -77,34 +34,38 @@ function drawLayoutDebugOverlay(){
 
     const viewportWidth=window.innerWidth;
     const viewportHeight=window.innerHeight;
-    const seen=new Set();
     let colorIndex=0;
 
-    layoutDebugInspector.selectors.forEach(selector=>{
-        document.querySelectorAll(selector).forEach(element=>{
-            if(seen.has(element)) return;
-            seen.add(element);
+    document.querySelectorAll(layoutDebugInspector.selector).forEach(element=>{
+        const rect=element.getBoundingClientRect();
+        if(
+            rect.width<=0 ||
+            rect.height<=0 ||
+            rect.right<0 ||
+            rect.bottom<0 ||
+            rect.left>viewportWidth ||
+            rect.top>viewportHeight
+        ) return;
 
-            const rect=element.getBoundingClientRect();
-            if(
-                rect.width<=0 ||
-                rect.height<=0 ||
-                rect.right<0 ||
-                rect.bottom<0 ||
-                rect.left>viewportWidth ||
-                rect.top>viewportHeight
-            ) return;
+        const color=layoutDebugInspector.colors[colorIndex % layoutDebugInspector.colors.length];
+        const region=element.dataset.cardRegion || "region";
+        const box=document.createElement("div");
+        box.className="layoutDebugBox";
+        box.dataset.region=region;
+        box.style.left=`${rect.left}px`;
+        box.style.top=`${rect.top}px`;
+        box.style.width=`${rect.width}px`;
+        box.style.height=`${rect.height}px`;
+        box.style.borderColor=color;
+        box.style.setProperty("--layout-debug-color",color);
 
-            const box=document.createElement("div");
-            box.className="layoutDebugBox";
-            box.style.left=`${rect.left}px`;
-            box.style.top=`${rect.top}px`;
-            box.style.width=`${rect.width}px`;
-            box.style.height=`${rect.height}px`;
-            box.style.borderColor=layoutDebugInspector.colors[colorIndex % layoutDebugInspector.colors.length];
-            overlay.appendChild(box);
-            colorIndex++;
-        });
+        const label=document.createElement("span");
+        label.className="layoutDebugLabel";
+        if(region==="card") label.classList.add("layoutDebugLabelCard");
+        label.textContent=element.dataset.debugLabel || `Card · ${region}`;
+        box.appendChild(label);
+        overlay.appendChild(box);
+        colorIndex++;
     });
 
     layoutDebugInspector.frame=requestAnimationFrame(drawLayoutDebugOverlay);
@@ -138,19 +99,8 @@ function initializeLayoutDebugToggle(){
     const button=document.getElementById("headerHelpButton");
     if(!button) return;
 
-    const developmentMode=
-        typeof isDevelopmentMode==="function"
-            ? isDevelopmentMode()
-            : false;
-
-    button.hidden=!developmentMode;
-    button.style.display=developmentMode ? "" : "none";
-
-    if(!developmentMode){
-        setLayoutDebugEnabled(false);
-        return;
-    }
-
+    button.hidden=false;
+    button.style.display="";
     button.addEventListener("click",()=>setLayoutDebugEnabled(!layoutDebugInspector.enabled));
 }
 
@@ -605,6 +555,7 @@ function refreshInspectionSummaryPreview(){
 function refreshHomePreview(){
     refreshInspectionDetailPreview();
     refreshInspectionSummaryPreview();
+    if(typeof refreshActivitySlipPreview==="function")refreshActivitySlipPreview();
 }
 
 function initializeContent(){

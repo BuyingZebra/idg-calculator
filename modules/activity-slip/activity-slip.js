@@ -248,6 +248,59 @@ function activityRenderResults(){
     }
 }
 
+
+function activityCompactDuration(minutes){const mins=Math.max(0,Math.round(Number(minutes)||0));if(mins<60)return `${mins} min`;const h=Math.floor(mins/60),m=mins%60;return m?`${h} hr ${m} min`:`${h} hr`;}
+function setActivityDurationValue(selector,minutes,hasEntry){
+ const totalMinutes=Math.max(0,Math.round(Number(minutes)||0));
+ const hours=Math.floor(totalMinutes/60);
+ const remainingMinutes=totalMinutes%60;
+ document.querySelectorAll(selector).forEach(el=>{
+  el.dataset.emptyState=String(!hasEntry);
+  if(!hasEntry){
+   el.textContent='No Entry Yet';
+   return;
+  }
+  const parts=[];
+  if(hours>0){
+   parts.push(`<span class="activityDurationNumber">${hours}</span> <span class="activityDurationUnit">hr</span>`);
+  }
+  if(remainingMinutes>0||hours===0){
+   parts.push(`<span class="activityDurationNumber">${remainingMinutes}</span> <span class="activityDurationUnit">min</span>`);
+  }
+  el.innerHTML=parts.join(' ');
+ });
+}
+function refreshActivitySlipPreview(){
+ const c=activityComputed();
+ const inboundTravel=c.inbound?Math.max(0,Number(c.inbound.time)||0):0;
+ const returnTravel=activityState.returnTravel.enabled&&c.returnRoute?Math.max(0,Number(c.returnRoute.time)||0):0;
+ const wait=Math.max(0,Number(c.wait)||0);
+ const inspection=Math.max(0,Number(c.inspectionTotal)||0);
+ const travel=inboundTravel+returnTravel;
+ const total=travel+wait+inspection;
+ const hasTravel=Boolean(c.inbound)||(activityState.returnTravel.enabled&&Boolean(c.returnRoute));
+ const hasWait=c.arrival!==null&&c.inspectionStart!==null;
+ const hasInspection=c.inspectionStart!==null&&c.inspectionEnd!==null;
+ const hasTotal=hasTravel||hasWait||hasInspection;
+ const set=(s,v)=>document.querySelectorAll(s).forEach(el=>el.textContent=v);
+ const setEmptyState=(s,empty)=>document.querySelectorAll(s).forEach(el=>el.dataset.emptyState=String(empty));
+ set('[data-activity-origin]',activityState.work.origin||'Home Port');
+ setEmptyState('[data-activity-origin]',!activityState.work.origin);
+ set('[data-activity-destination]',activityState.work.destination||'Work Site');
+ setEmptyState('[data-activity-destination]',!activityState.work.destination);
+ set('[data-activity-distance]',c.inbound?`${c.inbound.distance} km`:'0 km');
+ setEmptyState('[data-activity-distance]',!c.inbound);
+ setActivityDurationValue('[data-activity-travel-time]',travel,hasTravel);
+ setEmptyState('.activityTravelTimeRow',!hasTravel);
+ setActivityDurationValue('[data-activity-wait-time]',wait,hasWait);
+ setEmptyState('.activityWaitTimeRow',!hasWait);
+ setActivityDurationValue('[data-activity-inspection-time]',inspection,hasInspection);
+ setEmptyState('.activityInspectionTimeRow',!hasInspection);
+ set('[data-activity-total-time]',hasTotal?activityCompactDuration(total):'0 hr 0 min');
+ setEmptyState('.activityTotalValue',!hasTotal);
+ if(typeof renderIcons==='function')renderIcons();
+}
+
 function renderActivitySlipWorkspace(){
     if(!activityTravelData){
         setWorkspaceContent(`
@@ -377,10 +430,12 @@ function bindActivitySlipWorkspace(){
         el.addEventListener("change",()=>{
             handler(el.value);
             activityRenderResults();
+            refreshActivitySlipPreview();
         });
         el.addEventListener("input",()=>{
             handler(el.value);
             activityRenderResults();
+            refreshActivitySlipPreview();
         });
     };
 
@@ -407,6 +462,7 @@ function bindActivitySlipWorkspace(){
             }
 
             renderActivitySlipWorkspace();
+            refreshActivitySlipPreview();
         });
     }
 
@@ -417,6 +473,9 @@ function bindActivitySlipWorkspace(){
             activityState.work.inspectionStart="";
             activityState.work.inspectionEnd="";
             renderActivitySlipWorkspace();
+            refreshActivitySlipPreview();
         });
     }
+
+    refreshActivitySlipPreview();
 }

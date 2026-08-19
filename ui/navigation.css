@@ -2,12 +2,17 @@
    Card 1/2/3 ownership is scoped by data-step; historical tweak comments were removed in v215. */
 
 .contentPage[data-step="0"] .appCard{
-
-
-
-
-
-    --c1-overview-content-gap:4cqw;
+    /* Card 1 top-level structure controls.
+       Each token owns one relationship between adjacent named regions. */
+    --c1-gap-header-to-header-separator:4cqw;
+    --c1-gap-header-separator-to-body-1:var(--card-header-status-gap);
+    --c1-gap-body-1-to-overview:var(--card-section-gap);
+    --c1-gap-overview-to-body-2:var(--card-overview-content-gap);
+    --c1-gap-body-2-to-body-3:4cqw;
+    --c1-gap-body-3-to-body-4:4cqw;
+    --c1-gap-body-4-to-body-5:4cqw;
+    --c1-gap-body-5-to-footer-separator:auto;
+    --c1-gap-footer-separator-to-footer:4cqw;
 
 
     --c1-donut-size:32cqw;
@@ -32,6 +37,54 @@
     --c1-by-size-value-weight:400;
 }
 
+.contentPage[data-step="0"] .card1Structure > [data-card-region]{
+    flex:0 0 auto;
+    box-sizing:border-box;
+}
+
+.contentPage[data-step="0"] .card1Header{
+    margin:0;
+}
+
+.contentPage[data-step="0"] .card1HeaderSeparator{
+    margin:var(--c1-gap-header-to-header-separator) 0 0;
+}
+
+.contentPage[data-step="0"] .card1Body1{
+    margin:var(--c1-gap-header-separator-to-body-1) 0 0;
+}
+
+.contentPage[data-step="0"] .card1Overview{
+    margin:var(--c1-gap-body-1-to-overview) 0 0;
+}
+
+.contentPage[data-step="0"] .card1Body2{
+    margin:var(--c1-gap-overview-to-body-2) 0 0;
+}
+
+.contentPage[data-step="0"] .card1Body3{
+    margin:var(--c1-gap-body-2-to-body-3) auto 0;
+}
+
+.contentPage[data-step="0"] .card1Body4{
+    margin:var(--c1-gap-body-3-to-body-4) 0 0;
+}
+
+.contentPage[data-step="0"] .card1Body5{
+    margin:var(--c1-gap-body-4-to-body-5) 0 0;
+}
+
+.contentPage[data-step="0"] .card1FooterSeparator{
+    margin:
+        var(--c1-gap-body-5-to-footer-separator)
+        0
+        var(--c1-gap-footer-separator-to-footer);
+}
+
+.contentPage[data-step="0"] .card1Footer{
+    margin:0;
+}
+
 .contentPage[data-step="1"] .appCard{
 
 
@@ -40,7 +93,19 @@
 
 
 
-    --c2-overview-content-gap:5cqw;
+    /* Card 2 top-level structure controls.
+       These mirror Card 1 so shared regions keep the same rhythm. */
+    --c2-gap-header-to-header-separator:4cqw;
+    --c2-gap-header-separator-to-body-1:4cqw;
+    --c2-gap-body-1-to-overview:8cqw;
+    --c2-gap-overview-to-body-2:4cqw;
+    --c2-gap-body-2-to-body-3:4cqw;
+    --c2-gap-body-3-to-body-4:4cqw;
+    --c2-gap-body-4-to-body-5:4cqw;
+    --c2-gap-body-5-to-footer-separator:auto;
+    --c2-gap-footer-separator-to-footer:4cqw;
+    --c2-structured-body-pad-x:var(--content-box-pad-x);
+    --c2-overview-content-gap:var(--card-overview-content-gap);
 
     --c2-boat-block-gap:4cqw;
     --c2-boat-block-internal-gap:1.5cqw;
@@ -58,6 +123,134 @@
     --c2-metric-icon-size:9cqw;
     --c2-metric-value-size:var(--metric-tile-value-size);
     --c2-metric-value-weight:400;
+}
+
+.contentPage[data-step="1"] .card2Structure > [data-card-region]{
+    width:100%;
+    flex:0 0 auto;
+    box-sizing:border-box;
+}
+
+.contentPage[data-step="1"] .card2Structure > .card2Header{
+    margin:0;
+}
+
+.contentPage[data-step="1"] .card2Structure > .card2HeaderSeparator{
+    margin:var(--c2-gap-header-to-header-separator) 0 0;
+}
+
+.contentPage[data-step="1"] .card2Structure > .card2Body1{
+    margin:var(--c2-gap-header-separator-to-body-1) 0 0;
+}
+
+.contentPage[data-step="1"] .card2Structure > .card2Overview{
+    margin:var(--c2-gap-body-1-to-overview) 0 0;
+}
+
+.contentPage[data-step="1"] .card2Structure > .card2Overview .summaryOverviewTitle{
+    margin:0;
+}
+
+.contentPage[data-step="1"] .card2Structure > .card2Body2{
+    margin:var(--c2-gap-overview-to-body-2) 0 0;
+    padding-inline:var(--c2-structured-body-pad-x);
+}
+
+.contentPage[data-step="1"] .card2Structure > .card2Body3{
+    margin:var(--c2-gap-body-2-to-body-3) 0 0;
+    padding-inline:var(--c2-structured-body-pad-x);
+}
+
+.contentPage[data-step="1"] .card2Structure > .card2Body4{
+    margin:var(--c2-gap-body-3-to-body-4) 0 0;
+    padding-inline:var(--c2-structured-body-pad-x);
+}
+
+.contentPage[data-step="1"] .card2Structure > .card2Body5{
+    margin:var(--c2-gap-body-4-to-body-5) 0 0;
+}
+
+.contentPage[data-step="1"] .card2Structure > .card2FooterSeparator{
+    margin:
+        var(--c2-gap-body-5-to-footer-separator)
+        0
+        var(--c2-gap-footer-separator-to-footer);
+}
+
+.contentPage[data-step="1"] .card2Structure > .card2Footer{
+    margin:0;
+}
+
+.contentPage[data-step="2"] .appCard{
+    /* Card 3 top-level structure controls.
+       Body 3/4/5 separate the three formerly grouped route/time regions. */
+    --c3-gap-header-to-header-separator:4cqw;
+    --c3-gap-header-separator-to-body-1:4cqw;
+    --c3-gap-body-1-to-overview:8cqw;
+    --c3-gap-overview-to-body-2:4cqw;
+    --c3-gap-body-2-to-body-3:0cqw;
+    --c3-gap-body-3-to-body-4:0cqw;
+    --c3-gap-body-4-to-body-5:4cqw;
+    --c3-gap-body-5-to-body-6:4cqw;
+    --c3-gap-body-6-to-footer-separator:auto;
+    --c3-gap-footer-separator-to-footer:4cqw;
+}
+
+.contentPage[data-step="2"] .card3Structure > [data-card-region]{
+    width:100%;
+    flex:0 0 auto;
+    box-sizing:border-box;
+}
+
+.contentPage[data-step="2"] .card3Structure > .card3Header{
+    margin:0;
+}
+
+.contentPage[data-step="2"] .card3Structure > .card3HeaderSeparator{
+    margin:var(--c3-gap-header-to-header-separator) 0 0;
+}
+
+.contentPage[data-step="2"] .card3Structure > .card3Body1{
+    margin:var(--c3-gap-header-separator-to-body-1) 0 0;
+}
+
+.contentPage[data-step="2"] .card3Structure > .card3Overview{
+    margin:var(--c3-gap-body-1-to-overview) 0 0;
+}
+
+.contentPage[data-step="2"] .card3Structure > .card3Overview .activityOverviewTitle{
+    margin:0;
+}
+
+.contentPage[data-step="2"] .card3Structure > .card3Body2{
+    margin:var(--c3-gap-overview-to-body-2) 0 0;
+}
+
+.contentPage[data-step="2"] .card3Structure > .card3Body3{
+    margin:var(--c3-gap-body-2-to-body-3) 0 0;
+}
+
+.contentPage[data-step="2"] .card3Structure > .card3Body4{
+    margin:var(--c3-gap-body-3-to-body-4) 0 0;
+}
+
+.contentPage[data-step="2"] .card3Structure > .card3Body5{
+    margin:var(--c3-gap-body-4-to-body-5) 0 0;
+}
+
+.contentPage[data-step="2"] .card3Structure > .card3Body6{
+    margin:var(--c3-gap-body-5-to-body-6) 0 0;
+}
+
+.contentPage[data-step="2"] .card3Structure > .card3FooterSeparator{
+    margin:
+        var(--c3-gap-body-6-to-footer-separator)
+        0
+        var(--c3-gap-footer-separator-to-footer);
+}
+
+.contentPage[data-step="2"] .card3Structure > .card3Footer{
+    margin:0;
 }
 
 
@@ -147,7 +340,7 @@
     align-items:center;
     justify-content:flex-start;
     gap:var(--card-step-gap);
-    margin:var(--card-section-gap) 0 0;
+    margin:var(--card-header-status-gap) 0 0;
     padding:var(--content-box-pad-y) var(--content-box-pad-x);
     border:var(--border-thin) solid var(--border-default);
     border-radius:var(--card-step-radius);
@@ -207,8 +400,13 @@
 }
 
 .cardOverviewTitle{
+    width:100%;
+    color:var(--accent-blue-label);
     font-size:var(--card-overview-title-size);
     line-height:1.2;
+    font-weight:800;
+    letter-spacing:.06em;
+    text-transform:uppercase;
     text-align:center;
 }
 
@@ -483,7 +681,7 @@
 
 .contentPage[data-step="1"] .summaryOverviewTitle{
     color:var(--accent-blue-label);
-    font-size:clamp(.68rem,1.7cqw,.82rem);
+    font-size:var(--card-overview-title-size);
     font-weight:800;
     letter-spacing:.06em;
     text-transform:uppercase;
@@ -762,15 +960,14 @@
 
 }
 
-.contentPage[data-step="0"] .gradeOverview{
+.contentPage[data-step="0"] .card1Overview{
     width:100%;
     flex:0 0 auto;
-    margin:var(--card-section-gap) 0 0;
 }
 
 .contentPage[data-step="0"] .gradeOverviewTitle{
     width:100%;
-    margin:0 0 var(--c1-overview-content-gap);
+    margin:0;
     color:var(--accent-blue-label);
     font-size:var(--card-overview-title-size);
     font-weight:800;
@@ -781,6 +978,7 @@
 }
 
 .contentPage[data-step="0"] .gradeDonutGrid{width:100%;
+    flex:0 0 auto;
     display:grid;
     grid-template-columns:repeat(3,minmax(0,1fr));
     gap:var(--c1-donut-grid-gap);
@@ -887,33 +1085,23 @@
     outline:none;
 }
 
-.contentPage[data-step="0"] .fisheriesNotification{
-    width:100%;
-    flex:0 0 auto;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-
-    margin:var(--card-section-gap) 0 0;
-    padding:0;
-    border:0;
-    background:transparent;
-    box-shadow:none;
-    text-align:center;
-}
-
 .contentPage[data-step="0"] .fisheriesNotificationDivider{
-
-    grid-template-columns:minmax(0,1fr) var(--c1-fisheries-icon-size) minmax(0,1fr);
-
+    flex:0 0 auto;
 }
 
 .contentPage[data-step="0"] .fisheriesNotificationCopy{
+    width:100%;
+    flex:0 0 auto;
     min-width:0;
     display:flex;
     flex-direction:column;
     align-items:center;
     gap:var(--c1-fisheries-copy-gap);
+    padding:0;
+    border:0;
+    background:transparent;
+    box-shadow:none;
+    text-align:center;
 }
 
 .contentPage[data-step="0"] .fisheriesNotificationCopy strong{
@@ -930,7 +1118,7 @@
     line-height:1.25;
 }
 
-.contentPage[data-step="0"] .fisheriesNotification[data-required="true"] .fisheriesNotificationCopy small{
+.contentPage[data-step="0"] .card1Body4[data-required="true"] small{
     color:var(--og-text);
     font-weight:700;
 }
@@ -940,7 +1128,6 @@
     flex:0 0 auto;
     min-height:0;
     height:auto;
-    margin:var(--card-section-gap) 0 0;
     align-self:stretch;
 }
 
@@ -1135,14 +1322,14 @@
 }
 
 #headerHelpButton .debugToggleIcon{
-    width:44px !important;
-    height:44px !important;
-    flex:0 0 44px !important;
+    width:var(--app-bar-icon-size) !important;
+    height:var(--app-bar-icon-size) !important;
+    flex:0 0 var(--app-bar-icon-size) !important;
 }
 
 #headerHelpButton .debugToggleIcon svg{
-    width:44px !important;
-    height:44px !important;
+    width:var(--app-bar-icon-size) !important;
+    height:var(--app-bar-icon-size) !important;
 }
 
 .contentPage[data-step="0"] .gradeDonutProgress{
@@ -1241,7 +1428,7 @@
 }
 
 .contentPage[data-step="1"] .summaryOverviewTitle{
-    margin:0 0 4cqw;
+    margin:0 0 var(--card-overview-content-gap);
 }
 
 
@@ -1449,17 +1636,12 @@
     fill:currentColor !important;
 }
 
-.contentPage[data-step="0"] .fisheriesNotification{
-    gap:4cqw;
-}
-
 .contentPage[data-step="0"] .fisheriesNotificationDivider{
     width:var(--mini-separator-width);
     display:flex;
     align-items:center;
     justify-content:center;
     gap:var(--mini-separator-gap);
-    margin:0 auto;
     padding:0;
 }
 
@@ -1506,11 +1688,11 @@
     transform:none !important;
 }
 
-.contentPage[data-step="0"] .fisheriesNotification[data-required="true"] .fisheriesNotificationIcon{
+.contentPage[data-step="0"] .card1Body3:has(+ .card1Body4[data-required="true"]) .fisheriesNotificationIcon{
     color:var(--palette-orange);
 }
 
-.contentPage[data-step="0"] .fisheriesNotification[data-required="true"] .fisheriesNotificationIcon svg{
+.contentPage[data-step="0"] .card1Body3:has(+ .card1Body4[data-required="true"]) .fisheriesNotificationIcon svg{
     color:inherit;
     fill:currentColor;
 }
@@ -1530,6 +1712,29 @@
     border-radius:0;
     background:transparent;
     pointer-events:none;
+}
+
+.layoutDebugLabel{
+    position:absolute;
+    top:0;
+    left:0;
+    max-width:calc(100% - 2px);
+    padding:.2em .45em;
+    transform:translateY(-100%);
+    border:1px solid var(--layout-debug-color);
+    border-radius:3px 3px 0 0;
+    background:color-mix(in srgb,var(--surface-app) 88%,transparent);
+    color:var(--layout-debug-color);
+    font:700 clamp(.55rem,2.2cqw,.68rem)/1.15 "Inter","Noto Sans",sans-serif;
+    letter-spacing:.02em;
+    white-space:nowrap;
+}
+
+.layoutDebugLabelCard{
+    right:0;
+    left:auto;
+    transform:none;
+    border-radius:0 0 0 3px;
 }
 
 #headerHelpButton.active{
@@ -1561,4 +1766,272 @@
 .cardSecondaryAction:hover,
 .cardSecondaryAction:focus-visible{
     border-color:var(--palette-green);
+}
+
+/* CARD 3 — approved read-only route and total-time content. */
+.contentPage[data-step="2"] .activityOverview{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    gap:0;
+    margin:var(--card-section-gap) 0 0;
+}
+
+.contentPage[data-step="2"] .activityOverviewTitle{
+    margin:0 0 var(--card-overview-content-gap);
+}
+
+.contentPage[data-step="2"] .activityRouteSummary{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:2.5cqw;
+}
+
+.contentPage[data-step="2"] .activityRouteLocations{
+    width:100%;
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    gap:8cqw;
+}
+
+.contentPage[data-step="2"] .activityRouteLocation{
+    width:max-content;
+    max-width:100%;
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:1cqw;
+    text-align:center;
+}
+
+.contentPage[data-step="2"] .activityRouteOrigin{
+    justify-self:center;
+}
+
+.contentPage[data-step="2"] .activityRouteDestination{
+    justify-self:center;
+}
+
+.contentPage[data-step="2"] .activityRouteLocation small,
+.contentPage[data-step="2"] .activityMileage small,
+.contentPage[data-step="2"] .activityTotalTime > small{
+    color:var(--text-primary);
+    font-size:var(--metric-tile-label-size);
+    line-height:1.2;
+    font-weight:800;
+}
+
+.contentPage[data-step="2"] .activityRouteLocation strong{
+    max-width:100%;
+    color:var(--text-primary);
+    font-size:var(--card-step-title-size);
+    line-height:1.15;
+    font-weight:400;
+    overflow-wrap:anywhere;
+}
+
+.contentPage[data-step="2"] .activityRouteLine{
+    --activity-route-icon-size:var(--mini-separator-icon-size);
+    --activity-route-mask-size:calc(var(--activity-route-icon-size) + 3cqw);
+    width:100%;
+    display:grid;
+    grid-template-columns:var(--activity-route-mask-size) minmax(0,1fr) var(--activity-route-mask-size) minmax(0,1fr) var(--activity-route-mask-size);
+    align-items:center;
+    color:var(--accent-blue);
+}
+
+.contentPage[data-step="2"] .activityRouteIconMask{
+    width:var(--activity-route-mask-size);
+    height:var(--activity-route-mask-size);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    background:var(--card-surface);
+    overflow:hidden;
+}
+
+.contentPage[data-step="2"] .activityRouteMarkerDestination{
+    color:var(--accent-green);
+}
+
+.contentPage[data-step="2"] .activityRouteIconMask > i{
+    width:var(--activity-route-icon-size);
+    height:var(--activity-route-icon-size);
+    flex:0 0 var(--activity-route-icon-size);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-style:normal;
+    transform-origin:50% 50%;
+}
+
+.contentPage[data-step="2"] .activityRouteTruck{
+    color:var(--accent-blue);
+}
+
+.contentPage[data-step="2"] .activityRouteIconMask > i svg{
+    display:block;
+    width:100%;
+    height:100%;
+    fill:currentColor;
+}
+
+.contentPage[data-step="2"] .activityRouteDash{
+    min-width:0;
+    border-top:.45cqw dashed var(--palette-subtle);
+}
+
+.contentPage[data-step="2"] .activityMileage{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:1cqw;
+    text-align:center;
+}
+
+.contentPage[data-step="2"] .activityMileage small{
+    color:var(--text-primary);
+}
+
+.contentPage[data-step="2"] .activityMileage strong{
+    color:var(--text-primary);
+    font-size:var(--card-step-title-size);
+    line-height:1.15;
+    font-weight:400;
+}
+
+.contentPage[data-step="2"] .activityRouteLocation strong[data-empty-state="true"],
+.contentPage[data-step="2"] .activityMileage strong[data-empty-state="true"],
+.contentPage[data-step="2"] .activityTotalValue[data-empty-state="true"]{
+    color:var(--palette-muted);
+}
+
+.contentPage[data-step="2"] .activityTimeBreakdown{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    margin-top:var(--card-section-gap);
+    overflow:hidden;
+    border:var(--border-thin) solid var(--border-table);
+    border-radius:var(--radius-control);
+    background:var(--surface-card-deep);
+}
+
+.contentPage[data-step="2"] .activityTimeRow{
+    width:100%;
+    min-width:0;
+    display:grid;
+    grid-template-columns:var(--mini-separator-icon-size) minmax(0,1fr) max-content;
+    align-items:center;
+    gap:2.5cqw;
+    padding:2.5cqw var(--content-box-pad-x);
+    box-sizing:border-box;
+}
+
+.contentPage[data-step="2"] .activityTimeRow + .activityTimeRow{
+    border-top:var(--border-thin) solid var(--border-table);
+}
+
+.contentPage[data-step="2"] .activityTimeRow i{
+    width:var(--mini-separator-icon-size);
+    height:var(--mini-separator-icon-size);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:inherit;
+    font-style:normal;
+}
+
+.contentPage[data-step="2"] .activityTimeRow i svg{
+    width:100%;
+    height:100%;
+    fill:currentColor;
+}
+
+.contentPage[data-step="2"] .activityTimeRow small{
+    min-width:0;
+    color:var(--text-primary);
+    font-size:var(--metric-tile-value-size);
+    line-height:1.2;
+    font-weight:400;
+}
+
+.contentPage[data-step="2"] .activityTimeRow strong{
+    color:inherit;
+    font-size:var(--card-body-size);
+    line-height:1.2;
+    font-weight:400;
+    white-space:nowrap;
+}
+
+.contentPage[data-step="2"] .activityDurationUnit{
+    color:var(--text-primary);
+}
+
+.contentPage[data-step="2"] .activityTravelTimeRow{
+    color:var(--accent-blue);
+}
+
+.contentPage[data-step="2"] .activityWaitTimeRow{
+    color:var(--accent-orange);
+}
+
+.contentPage[data-step="2"] .activityInspectionTimeRow{
+    color:var(--accent-green);
+}
+
+.contentPage[data-step="2"] .activityTimeRow strong[data-empty-state="true"]{
+    color:var(--palette-muted);
+}
+
+.contentPage[data-step="2"] .activityTotalTime{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:1.5cqw;
+    margin-top:var(--card-section-gap);
+    text-align:center;
+}
+
+.contentPage[data-step="2"] .activityTotalTime > small{
+    color:var(--text-primary);
+}
+
+.contentPage[data-step="2"] .activityTotalValue{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:2cqw;
+    color:var(--text-primary);
+    font-size:var(--mini-separator-icon-size);
+    line-height:1;
+}
+
+.contentPage[data-step="2"] .activityTotalValue i{
+    width:var(--mini-separator-icon-size);
+    height:var(--mini-separator-icon-size);
+    flex:0 0 var(--mini-separator-icon-size);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--accent-blue);
+    font-style:normal;
+}
+
+.contentPage[data-step="2"] .activityTotalValue i svg{
+    width:100%;
+    height:100%;
+    fill:currentColor;
+}
+
+.contentPage[data-step="2"] .activityTotalValue strong{
+    color:inherit;
+    font-size:inherit;
+    line-height:inherit;
+    font-weight:700;
 }

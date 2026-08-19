@@ -105,6 +105,7 @@
   --card-pad-x:3cqw;
   --card-pad-y:3cqw;
   --card-section-gap:8cqw;
+  --card-header-status-gap:4cqw;
   --card-header-gap:4cqw;
 
   /* Shared card typography */
@@ -112,6 +113,7 @@
   --card-step-title-size:clamp(.95rem,4cqw,1.05rem);
   --card-body-size:clamp(.84rem,3.45cqw,.94rem);
   --card-overview-title-size:clamp(.86rem,3.55cqw,.98rem);
+  --card-overview-content-gap:4cqw;
   --card-button-size:clamp(.92rem,3.8cqw,1.02rem);
 
   /* Shared component sizing */

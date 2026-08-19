@@ -32,7 +32,7 @@ aria-label="Back">
 </button>
 
 <button
-id="headerHelpButton" data-development-only
+id="headerHelpButton"
 type="button"
 aria-label="Toggle layout debug outlines"
 aria-pressed="false"
@@ -70,15 +70,22 @@ title="Toggle layout debug outlines">
         <div id="contentTrack">
 
             <div class="contentPage active" data-step="0">
-                <div class="cardPreview appCard">
-                    <div class="previewHero cardHeader">
+                <div class="cardPreview appCard card1Structure" data-card-region="card" data-debug-label="C1 · Card">
+                    <header class="previewHero cardHeader card1Header" data-card-region="header" data-debug-label="C1 · Card Header">
                         <div class="contentIcon cardHeaderIcon" data-icon="grading"></div>
                         <h2 class="contentTitle cardTitle">Inspection Detail</h2>
-                    </div>
+                    </header>
 
-                    <div class="previewDivider cardDivider inspectionHeaderDivider"></div>
+                    <div class="previewDivider cardDivider inspectionHeaderDivider card1HeaderSeparator"
+                         data-card-region="header-separator"
+                         data-debug-label="C1 · Header Separator"></div>
 
-                    <button class="previewStatus cardStepStatus pending" type="button" data-complete-step="0" aria-pressed="false">
+                    <button class="previewStatus cardStepStatus pending card1Body1"
+                            type="button"
+                            data-complete-step="0"
+                            data-card-region="body-1"
+                            data-debug-label="C1 · Card Body 1"
+                            aria-pressed="false">
                         <span class="previewStatusIcon cardStepIcon" data-icon="incomplete" aria-hidden="true"></span>
                         <span class="previewStatusText cardStepText">
                             <strong>Mark Complete</strong>
@@ -86,66 +93,80 @@ title="Toggle layout debug outlines">
                         </span>
                     </button>
 
-                    <section class="gradeOverview" aria-label="Inspection overview">
+                    <section class="card1Overview"
+                             data-card-region="overview"
+                             data-debug-label="C1 · Card Overview"
+                             aria-label="Inspection overview heading">
                         <div class="gradeOverviewTitle cardOverviewTitle">Detail Overview</div>
-                        <div class="gradeDonutGrid">
-                            <div class="gradeMetric gradeMetricPremium">
-                                <div class="gradeDonut" data-home-donut="premium">
-                                    <svg class="gradeDonutSvg" viewBox="0 0 100 100" aria-hidden="true">
-                                        <circle class="gradeDonutTrack" cx="50" cy="50" r="44"></circle>
-                                        <path class="gradeDonutProgress" data-home-progress="premium" d=""></path>
-                                    </svg>
-                                    <span data-home-percent="premium">0.00%</span>
-                                </div>
-                                <div class="gradeLegend"><span class="gradeLegendDot"></span><span>Premium</span></div>
+                    </section>
+
+                    <section class="gradeDonutGrid card1Body2"
+                             data-card-region="body-2"
+                             data-debug-label="C1 · Card Body 2"
+                             aria-label="Grade charts and labels">
+                        <div class="gradeMetric gradeMetricPremium">
+                            <div class="gradeDonut" data-home-donut="premium">
+                                <svg class="gradeDonutSvg" viewBox="0 0 100 100" aria-hidden="true">
+                                    <circle class="gradeDonutTrack" cx="50" cy="50" r="44"></circle>
+                                    <path class="gradeDonutProgress" data-home-progress="premium" d=""></path>
+                                </svg>
+                                <span data-home-percent="premium">0.00%</span>
                             </div>
-                            <div class="gradeMetric gradeMetricStandard">
-                                <div class="gradeDonut" data-home-donut="standard">
-                                    <svg class="gradeDonutSvg" viewBox="0 0 100 100" aria-hidden="true">
-                                        <circle class="gradeDonutTrack" cx="50" cy="50" r="44"></circle>
-                                        <path class="gradeDonutProgress" data-home-progress="standard" d=""></path>
-                                    </svg>
-                                    <span data-home-percent="standard">0.00%</span>
-                                </div>
-                                <div class="gradeLegend"><span class="gradeLegendDot"></span><span>Standard</span></div>
+                            <div class="gradeLegend"><span class="gradeLegendDot"></span><span>Premium</span></div>
+                        </div>
+                        <div class="gradeMetric gradeMetricStandard">
+                            <div class="gradeDonut" data-home-donut="standard">
+                                <svg class="gradeDonutSvg" viewBox="0 0 100 100" aria-hidden="true">
+                                    <circle class="gradeDonutTrack" cx="50" cy="50" r="44"></circle>
+                                    <path class="gradeDonutProgress" data-home-progress="standard" d=""></path>
+                                </svg>
+                                <span data-home-percent="standard">0.00%</span>
                             </div>
-                            <div class="gradeMetric gradeMetricReject">
-                                <div class="gradeDonut" data-home-donut="reject">
-                                    <svg class="gradeDonutSvg" viewBox="0 0 100 100" aria-hidden="true">
-                                        <circle class="gradeDonutTrack" cx="50" cy="50" r="44"></circle>
-                                        <path class="gradeDonutProgress" data-home-progress="reject" d=""></path>
-                                    </svg>
-                                    <span data-home-percent="reject">0.00%</span>
-                                </div>
-                                <div class="gradeLegend"><span class="gradeLegendDot"></span><span>Rejects</span></div>
+                            <div class="gradeLegend"><span class="gradeLegendDot"></span><span>Standard</span></div>
+                        </div>
+                        <div class="gradeMetric gradeMetricReject">
+                            <div class="gradeDonut" data-home-donut="reject">
+                                <svg class="gradeDonutSvg" viewBox="0 0 100 100" aria-hidden="true">
+                                    <circle class="gradeDonutTrack" cx="50" cy="50" r="44"></circle>
+                                    <path class="gradeDonutProgress" data-home-progress="reject" d=""></path>
+                                </svg>
+                                <span data-home-percent="reject">0.00%</span>
                             </div>
+                            <div class="gradeLegend"><span class="gradeLegendDot"></span><span>Rejects</span></div>
                         </div>
                     </section>
 
-                    <div class="fisheriesNotification"
-                         data-fisheries-notification
-                         data-required="false"
-                         role="status"
-                         aria-label="Fisheries notification status">
-                        <div class="fisheriesNotificationDivider" aria-hidden="true">
-                            <span></span>
-                            <div class="fisheriesNotificationIcon" data-icon="fisheries-notification" aria-hidden="true"></div>
-                            <span></span>
-                        </div>
-                        <div class="fisheriesNotificationCopy">
-                            <strong data-fisheries-notification-title>FISHERIES NOTIFICATION</strong>
-                            <small data-fisheries-notification-text>No notification is required</small>
-                        </div>
-                    </div>
+                    <section class="fisheriesNotificationDivider card1Body3"
+                             data-card-region="body-3"
+                             data-debug-label="C1 · Card Body 3"
+                             aria-hidden="true">
+                        <span aria-hidden="true"></span>
+                        <div class="fisheriesNotificationIcon" data-icon="fisheries-notification" aria-hidden="true"></div>
+                        <span aria-hidden="true"></span>
+                    </section>
 
-                    <section class="inspectionComments detailBySizeSection" aria-label="Premium versus standard by size">
+                    <section class="fisheriesNotificationCopy card1Body4"
+                             data-fisheries-notification
+                             data-required="false"
+                             data-card-region="body-4"
+                             data-debug-label="C1 · Card Body 4"
+                             role="status"
+                             aria-label="Fisheries notification status">
+                        <strong data-fisheries-notification-title>FISHERIES NOTIFICATION</strong>
+                        <small data-fisheries-notification-text>No notification is required</small>
+                    </section>
+
+                    <section class="inspectionComments detailBySizeSection card1Body5"
+                             data-card-region="body-5"
+                             data-debug-label="C1 · Card Body 5"
+                             aria-label="Premium versus standard by size">
                         <div class="detailBySizePanel">
                             <div class="bySizeRow bySizePremiumRow">
                                 <div class="bySizeLabel">
                                     <span>By Size Premium:</span>
                                     <strong data-summary-premium-size><span class="sizePercentNumber">0.00</span><span class="sizePercentUnit">%</span></strong>
                                 </div>
-                        
+
                                 <div class="bySizeTrack" aria-label="By Size Premium">
                                     <div class="bySizeFill bySizePremiumFill" data-summary-premium-bar></div>
                                 </div>
@@ -165,27 +186,38 @@ title="Toggle layout debug outlines">
 
                     
 
-                    <div class="previewDivider cardDivider inspectionActionDivider"></div>
+                    <div class="previewDivider cardDivider inspectionActionDivider card1FooterSeparator"
+                         data-card-region="footer-separator"
+                         data-debug-label="C1 · Footer Separator"></div>
 
-                    <div class="cardFooter">
+                    <footer class="cardFooter card1Footer"
+                            data-card-region="footer"
+                            data-debug-label="C1 · Card Footer">
                         <div class="previewActions cardActions">
-                        <button class="previewPrimary cardPrimaryAction" type="button" data-open-step="0">Edit Form</button>
-                        <button class="previewSecondary cardSecondaryAction" type="button" data-review-step="0">Review Form</button>
-                    </div>
-                    </div>
+                            <button class="previewPrimary cardPrimaryAction" type="button" data-open-step="0">Edit Form</button>
+                            <button class="previewSecondary cardSecondaryAction" type="button" data-review-step="0">Review Form</button>
+                        </div>
+                    </footer>
                 </div>
             </div>
 
             <div class="contentPage" data-step="1">
-                <div class="cardPreview appCard">
-                    <div class="previewHero cardHeader">
+                <div class="cardPreview appCard card2Structure" data-card-region="card" data-debug-label="C2 · Card">
+                    <header class="previewHero cardHeader card2Header" data-card-region="header" data-debug-label="C2 · Card Header">
                         <div class="contentIcon cardHeaderIcon" data-icon="inspection"></div>
                         <h2 class="contentTitle cardTitle">Inspection Summary</h2>
-                    </div>
+                    </header>
 
-<div class="previewDivider cardDivider summaryHeaderDivider"></div>
+                    <div class="previewDivider cardDivider summaryHeaderDivider card2HeaderSeparator"
+                         data-card-region="header-separator"
+                         data-debug-label="C2 · Header Separator"></div>
 
-                    <button class="previewStatus cardStepStatus pending" type="button" data-complete-step="1" aria-pressed="false">
+                    <button class="previewStatus cardStepStatus pending card2Body1"
+                            type="button"
+                            data-complete-step="1"
+                            data-card-region="body-1"
+                            data-debug-label="C2 · Card Body 1"
+                            aria-pressed="false">
                         <span class="previewStatusIcon cardStepIcon" data-icon="incomplete" aria-hidden="true"></span>
                         <span class="previewStatusText cardStepText">
                             <strong>Mark Complete</strong>
@@ -193,77 +225,102 @@ title="Toggle layout debug outlines">
                         </span>
                     </button>
 
-                    <section class="summaryOverview" aria-label="Inspection overview">
+                    <section class="card2Overview"
+                             data-card-region="overview"
+                             data-debug-label="C2 · Card Overview"
+                             aria-label="Inspection summary overview heading">
                         <div class="summaryOverviewTitle cardOverviewTitle">Summary Overview</div>
+                    </section>
 
-                        <div class="summaryBoatContents" aria-label="Boat contents">
-                            <div class="summaryBoatBlock summaryBoatIdentityBlock">
-                                <span class="summaryVesselEyebrow">VESSEL</span>
-                                <strong class="summaryBoatName" data-summary-boat-name data-empty-state="true">O. S. C. Mariner</strong>
-                                <div class="summaryVesselCfv">
-                                    <span class="summaryVesselCfvLabel">CFV</span>
-                                    <b data-summary-cfv data-empty-state="true">123456</b>
-                                </div>
-                            </div>
-
-                            <div class="summaryBoatBlock summaryBoatCfvBlock">
-                                <div class="summaryVesselDivider" aria-hidden="true">
-                                    <span></span>
-                                    <div class="summaryVesselIcon" data-icon="anchor"></div>
-                                    <span></span>
-                                </div>
-                            </div>
-
-                            <div class="summaryBoatBlock summaryBoatReceiptBlock">
-                                <span class="summaryReceiptLabel">FISH RECEIPT NUMBER</span>
-                                <div class="summaryReceiptValue">
-                                    <div class="summaryReceiptIcon" data-icon="receipt" aria-hidden="true"></div>
-                                    <strong data-summary-fish-receipt data-empty-state="true">1234567</strong>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="summaryGradeData" aria-label="Grade data contents">
-                            <div class="summaryMetric metricTile summaryMetricNet">
-                                <div class="summaryMetricIcon metricTileIcon" data-icon="inspection"></div>
-                                <strong class="summaryMetricValue metricTileValue summaryMetricValueNet" data-summary-net-landed>0</strong>
-                                <span>Net Lbs. Less<br>Barnacles</span>
-                            </div>
-
-                            <div class="summaryMetric metricTile summaryMetricSamples">
-                                <div class="summaryMetricIcon metricTileIcon" data-icon="grading"></div>
-                                <strong class="summaryMetricValue metricTileValue summaryMetricValueSamples" data-summary-samples>2</strong>
-                                <span>Number of<br>Samples</span>
-                            </div>
-
-                            <div class="summaryMetric metricTile summaryMetricCrab">
-                                <div class="summaryMetricIcon metricTileIcon" data-icon="activity"></div>
-                                <strong class="summaryMetricValue metricTileValue summaryMetricValueCrab" data-summary-crab-percent><span class="summaryMetricNumber">0.00</span><span class="summaryMetricUnit">%</span></strong>
-                                <span>Percentage<br>of Crab</span>
-                            </div>
+                    <section class="summaryBoatBlock summaryBoatIdentityBlock card2Body2"
+                             data-card-region="body-2"
+                             data-debug-label="C2 · Card Body 2"
+                             aria-label="Vessel, boat name, and CFV number">
+                        <span class="summaryVesselEyebrow">VESSEL</span>
+                        <strong class="summaryBoatName" data-summary-boat-name data-empty-state="true">O. S. C. Mariner</strong>
+                        <div class="summaryVesselCfv">
+                            <span class="summaryVesselCfvLabel">CFV</span>
+                            <b data-summary-cfv data-empty-state="true">123456</b>
                         </div>
                     </section>
 
-                    <div class="previewDivider cardDivider summaryActionDivider"></div>
+                    <section class="summaryBoatBlock summaryBoatCfvBlock card2Body3"
+                             data-card-region="body-3"
+                             data-debug-label="C2 · Card Body 3"
+                             aria-hidden="true">
+                        <div class="summaryVesselDivider">
+                            <span></span>
+                            <div class="summaryVesselIcon" data-icon="anchor"></div>
+                            <span></span>
+                        </div>
+                    </section>
 
-                    <div class="cardFooter">
+                    <section class="summaryBoatBlock summaryBoatReceiptBlock card2Body4"
+                             data-card-region="body-4"
+                             data-debug-label="C2 · Card Body 4"
+                             aria-label="Fish receipt number">
+                        <span class="summaryReceiptLabel">FISH RECEIPT NUMBER</span>
+                        <div class="summaryReceiptValue">
+                            <div class="summaryReceiptIcon" data-icon="receipt" aria-hidden="true"></div>
+                            <strong data-summary-fish-receipt data-empty-state="true">1234567</strong>
+                        </div>
+                    </section>
+
+                    <section class="summaryGradeData card2Body5"
+                             data-card-region="body-5"
+                             data-debug-label="C2 · Card Body 5"
+                             aria-label="Grade data contents">
+                        <div class="summaryMetric metricTile summaryMetricNet">
+                            <div class="summaryMetricIcon metricTileIcon" data-icon="inspection"></div>
+                            <strong class="summaryMetricValue metricTileValue summaryMetricValueNet" data-summary-net-landed>0</strong>
+                            <span>Net Lbs. Less<br>Barnacles</span>
+                        </div>
+
+                        <div class="summaryMetric metricTile summaryMetricSamples">
+                            <div class="summaryMetricIcon metricTileIcon" data-icon="grading"></div>
+                            <strong class="summaryMetricValue metricTileValue summaryMetricValueSamples" data-summary-samples>2</strong>
+                            <span>Number of<br>Samples</span>
+                        </div>
+
+                        <div class="summaryMetric metricTile summaryMetricCrab">
+                            <div class="summaryMetricIcon metricTileIcon" data-icon="activity"></div>
+                            <strong class="summaryMetricValue metricTileValue summaryMetricValueCrab" data-summary-crab-percent><span class="summaryMetricNumber">0.00</span><span class="summaryMetricUnit">%</span></strong>
+                            <span>Percentage<br>of Crab</span>
+                        </div>
+                    </section>
+
+                    <div class="previewDivider cardDivider summaryActionDivider card2FooterSeparator"
+                         data-card-region="footer-separator"
+                         data-debug-label="C2 · Footer Separator"></div>
+
+                    <footer class="cardFooter card2Footer"
+                            data-card-region="footer"
+                            data-debug-label="C2 · Card Footer">
                         <div class="previewActions cardActions">
-                        <button class="previewPrimary cardPrimaryAction" type="button" data-open-step="1">Edit Form</button>
-                        <button class="previewSecondary cardSecondaryAction" type="button" data-review-step="1">Review Form</button>
-                    </div>
-                    </div>
+                            <button class="previewPrimary cardPrimaryAction" type="button" data-open-step="1">Edit Form</button>
+                            <button class="previewSecondary cardSecondaryAction" type="button" data-review-step="1">Review Form</button>
+                        </div>
+                    </footer>
                 </div>
             </div>
 
             <div class="contentPage" data-step="2">
-                <div class="cardPreview appCard">
-                    <div class="previewHero cardHeader">
+                <div class="cardPreview appCard card3Structure" data-card-region="card" data-debug-label="C3 · Card">
+                    <header class="previewHero cardHeader card3Header" data-card-region="header" data-debug-label="C3 · Card Header">
                         <div class="contentIcon cardHeaderIcon" data-icon="activity"></div>
                         <h2 class="contentTitle cardTitle">Activity Slip</h2>
-                    </div>
+                    </header>
 
-<div class="previewDivider cardDivider activityHeaderDivider"></div>
-                    <button class="previewStatus cardStepStatus pending" type="button" data-complete-step="2" aria-pressed="false">
+                    <div class="previewDivider cardDivider activityHeaderDivider card3HeaderSeparator"
+                         data-card-region="header-separator"
+                         data-debug-label="C3 · Header Separator"></div>
+
+                    <button class="previewStatus cardStepStatus pending card3Body1"
+                            type="button"
+                            data-complete-step="2"
+                            data-card-region="body-1"
+                            data-debug-label="C3 · Card Body 1"
+                            aria-pressed="false">
                         <span class="previewStatusIcon cardStepIcon" data-icon="incomplete" aria-hidden="true"></span>
                         <span class="previewStatusText cardStepText">
                             <strong>Mark Complete</strong>
@@ -271,14 +328,84 @@ title="Toggle layout debug outlines">
                         </span>
                     </button>
 
-                    <div class="previewDivider cardDivider activityActionDivider"></div>
+                    <section class="card3Overview"
+                             data-card-region="overview"
+                             data-debug-label="C3 · Card Overview"
+                             aria-label="Time-log overview heading">
+                        <div class="activityOverviewTitle cardOverviewTitle">TIME-LOG OVERVIEW</div>
+                    </section>
 
-                    <div class="cardFooter">
+                    <section class="activityRouteLocations card3Body2"
+                             data-card-region="body-2"
+                             data-debug-label="C3 · Card Body 2"
+                             aria-label="Origin and destination">
+                        <div class="activityRouteLocation activityRouteOrigin"><small>ORIGIN</small><strong data-activity-origin data-empty-state="true">Home Port</strong></div>
+                        <div class="activityRouteLocation activityRouteDestination"><small>DESTINATION</small><strong data-activity-destination data-empty-state="true">Work Site</strong></div>
+                    </section>
+
+                    <section class="activityRouteLine card3Body3"
+                             data-card-region="body-3"
+                             data-debug-label="C3 · Card Body 3"
+                             aria-hidden="true">
+                        <span class="activityRouteIconMask activityRouteMarkerOrigin"><i data-icon="location-on"></i></span>
+                        <span class="activityRouteDash"></span>
+                        <span class="activityRouteIconMask activityRouteTruck"><i data-icon="local-shipping"></i></span>
+                        <span class="activityRouteDash"></span>
+                        <span class="activityRouteIconMask activityRouteMarkerDestination"><i data-icon="location-on"></i></span>
+                    </section>
+
+                    <section class="activityMileage card3Body4"
+                             data-card-region="body-4"
+                             data-debug-label="C3 · Card Body 4"
+                             aria-label="Mileage">
+                        <small>MILEAGE</small>
+                        <strong data-activity-distance data-empty-state="true">0 km</strong>
+                    </section>
+
+                    <section class="activityTimeBreakdown card3Body5"
+                             data-card-region="body-5"
+                             data-debug-label="C3 · Card Body 5"
+                             aria-label="Estimated time breakdown">
+                        <div class="activityTimeRow activityTravelTimeRow" data-empty-state="true">
+                            <i data-icon="timer" aria-hidden="true"></i>
+                            <small>Travel Time</small>
+                            <strong data-activity-travel-time data-empty-state="true">No Entry Yet</strong>
+                        </div>
+                        <div class="activityTimeRow activityWaitTimeRow" data-empty-state="true">
+                            <i data-icon="timer" aria-hidden="true"></i>
+                            <small>Wait Time</small>
+                            <strong data-activity-wait-time data-empty-state="true">No Entry Yet</strong>
+                        </div>
+                        <div class="activityTimeRow activityInspectionTimeRow" data-empty-state="true">
+                            <i data-icon="timer" aria-hidden="true"></i>
+                            <small>Inspection Time</small>
+                            <strong data-activity-inspection-time data-empty-state="true">No Entry Yet</strong>
+                        </div>
+                    </section>
+
+                    <section class="activityTotalTime card3Body6"
+                             data-card-region="body-6"
+                             data-debug-label="C3 · Card Body 6"
+                             aria-label="Total time">
+                        <small>TOTAL TIME</small>
+                        <div class="activityTotalValue" data-empty-state="true">
+                            <i data-icon="timer" aria-hidden="true"></i>
+                            <strong data-activity-total-time>0 hr 0 min</strong>
+                        </div>
+                    </section>
+
+                    <div class="previewDivider cardDivider activityActionDivider card3FooterSeparator"
+                         data-card-region="footer-separator"
+                         data-debug-label="C3 · Footer Separator"></div>
+
+                    <footer class="cardFooter card3Footer"
+                            data-card-region="footer"
+                            data-debug-label="C3 · Card Footer">
                         <div class="previewActions cardActions">
-                        <button class="previewPrimary cardPrimaryAction" type="button" data-open-step="2">Edit Form</button>
-                        <button class="previewSecondary cardSecondaryAction" type="button" data-review-step="2">Review Form</button>
-                    </div>
-                    </div>
+                            <button class="previewPrimary cardPrimaryAction" type="button" data-open-step="2">Edit Form</button>
+                            <button class="previewSecondary cardSecondaryAction" type="button" data-review-step="2">Review Form</button>
+                        </div>
+                    </footer>
                 </div>
             </div>
 
@@ -335,10 +462,98 @@ Select a card to load a workspace.
 
 <script>
 if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
-        navigator.serviceWorker.register("./service-worker.js", { scope: "./" })
-            .then(registration => console.log("Offline service worker ready:", registration.scope))
-            .catch(error => console.error("Service worker registration failed:", error));
+    const APP_UPDATE_CHECK_INTERVAL_MS=60 * 60 * 1000;
+    const APP_UPDATE_LAST_CHECK_KEY="idg-app-update-last-check";
+
+    let appServiceWorkerRegistration=null;
+    let appUpdateCheckInFlight=false;
+    let updateReloadPending=false;
+    let updateReloadStarted=false;
+
+    const activityWorkspaceIsOpen=()=>
+        document.getElementById("pageTrack")?.style.transform==="translateX(-50%)";
+
+    const reloadForAppUpdateWhenSafe=()=>{
+        if(
+            !updateReloadPending ||
+            updateReloadStarted ||
+            activityWorkspaceIsOpen()
+        ) return;
+
+        updateReloadStarted=true;
+        window.location.reload();
+    };
+
+    const lastSuccessfulUpdateCheck=()=>{
+        try{
+            return Number(localStorage.getItem(APP_UPDATE_LAST_CHECK_KEY) || 0);
+        }catch(error){
+            return 0;
+        }
+    };
+
+    const rememberSuccessfulUpdateCheck=()=>{
+        try{
+            localStorage.setItem(APP_UPDATE_LAST_CHECK_KEY,String(Date.now()));
+        }catch(error){
+            console.warn("Unable to remember app update check:",error);
+        }
+    };
+
+    const checkForAppUpdate=async()=>{
+        if(
+            !appServiceWorkerRegistration ||
+            appUpdateCheckInFlight ||
+            !navigator.onLine ||
+            Date.now() - lastSuccessfulUpdateCheck() < APP_UPDATE_CHECK_INTERVAL_MS
+        ) return;
+
+        appUpdateCheckInFlight=true;
+        try{
+            await appServiceWorkerRegistration.update();
+            rememberSuccessfulUpdateCheck();
+        }catch(error){
+            console.warn("App update check deferred:",error);
+        }finally{
+            appUpdateCheckInFlight=false;
+        }
+    };
+
+    navigator.serviceWorker.addEventListener("controllerchange",()=>{
+        updateReloadPending=true;
+        reloadForAppUpdateWhenSafe();
+    });
+
+    window.addEventListener("load",async()=>{
+        try{
+            appServiceWorkerRegistration=await navigator.serviceWorker.register(
+                "./service-worker.js",
+                {
+                    scope:"./",
+                    updateViaCache:"none"
+                }
+            );
+
+            document.getElementById("headerBackButton")?.addEventListener(
+                "click",
+                ()=>setTimeout(reloadForAppUpdateWhenSafe,0)
+            );
+
+            console.log("Offline service worker ready:",appServiceWorkerRegistration.scope);
+            await checkForAppUpdate();
+        }catch(error){
+            console.error("Service worker registration failed:",error);
+        }
+    });
+
+    document.addEventListener("visibilitychange",()=>{
+        if(document.visibilityState!=="visible") return;
+        reloadForAppUpdateWhenSafe();
+        void checkForAppUpdate();
+    });
+
+    window.addEventListener("online",()=>{
+        void checkForAppUpdate();
     });
 }
 </script>

@@ -1,4 +1,4 @@
-const APP_VERSION = "221.0.0";
+const APP_VERSION = "241.0.0";
 const CACHE_NAME = `idg-training-${APP_VERSION}`;
 const PRECACHE_URLS = [
   "./index.html",
@@ -17,6 +17,7 @@ const PRECACHE_URLS = [
   "./assets/icons/app-512.png",
   "./assets/icons/grading.svg",
   "./assets/icons/inspection.svg",
+  "./assets/icons/debug.svg",
   "./data/travel/travel-matrix.json",
   "./modules/activity-slip/activity-slip.js",
   "./modules/inspection-detail/inspection-detail.js",
@@ -31,13 +32,26 @@ const PRECACHE_URLS = [
   "./ui/shell.css",
   "./assets/icons/receipt.svg",
   "./assets/icons/anchor.svg",
-  "./assets/icons/info.svg"
+  "./assets/icons/info.svg",
+  "./assets/icons/local-shipping.svg",
+  "./assets/icons/location-on.svg",
+  "./assets/icons/timer.svg"
 ];
 
 self.addEventListener("install", event => {
   event.waitUntil((async () => {
     const cache = await caches.open(CACHE_NAME);
-    const results = await Promise.allSettled(PRECACHE_URLS.map(url => cache.add(url)));
+    const results = await Promise.allSettled(PRECACHE_URLS.map(async url => {
+      const request = new Request(
+        new URL(url, self.location.href),
+        { cache: "reload" }
+      );
+      const response = await fetch(request);
+      if(!response.ok){
+        throw new Error(`Unable to fetch ${url}: ${response.status}`);
+      }
+      await cache.put(request, response);
+    }));
     const failures = results
       .map((result, index) => ({ result, url: PRECACHE_URLS[index] }))
       .filter(item => item.result.status === "rejected");
